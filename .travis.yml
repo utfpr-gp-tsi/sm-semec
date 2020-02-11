@@ -1,0 +1,42 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=fcccb2678486786b2076f6a4744683837be23b89bcff990be727793a449b1447
+
+sudo: required
+
+language: bash
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.4.2
+
+services:
+  - docker
+
+before_install:
+  - docker run --rm -v $(pwd):/app composer install
+  - sudo chown -R $USER:$USER ./
+  - cp .env.travis .env
+  - cp docker-compose.travis.yml docker-compose.yml
+  - cp Dockerfile.travis Dockerfile
+  - docker-compose up -d
+  - docker-compose ps
+  - docker-compose exec app php artisan key:generate
+  - docker-compose exec app php artisan config:cache
+  - docker-compose exec app php artisan cache:clear
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  - sleep 15
+
+script:
+  - docker-compose exec app php artisan migrate
+  - docker-compose exec app php artisan db:seed
+  - docker-compose exec app vendor/bin/phpcs --standard=phpcs.xml ./
+  - docker-compose exec app vendor/bin/phpmd ./ text phpmd.xml
+  - docker-compose exec app vendor/bin/phpstan analyse -c phpstan.neon
+  - docker-compose exec app ./vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+
+after_script:
+  - sudp mkdir /var/www
+  - sudo cp -r . /var/www/
+  - export CC_TEST_REPORTER_ID=fcccb2678486786b2076f6a4744683837be23b89bcff990be727793a449b1447 && ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT
