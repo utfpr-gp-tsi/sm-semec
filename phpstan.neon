@@ -10,5 +10,5 @@ parameters:
     - app/Exceptions/Handler.php
     - app/Http/Kernel.php
     - app/Http/Middleware/CheckForMaintenanceMode.php
+    - app/Http/Controllers/Auth/LoginController.php
   checkMissingIterableValueType: false
-

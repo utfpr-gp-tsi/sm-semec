@@ -5,6 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\MessageBag;
+use Illuminate\Http\Request;
+use Auth;
+use  App\Http\Controllers\Auth\Hash;
+use App\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller
 {
@@ -27,11 +34,20 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
+    public function login(Request $request)
+    {
+        $userData = array(
+            'email'  => $request->get('email'),
+            'password' => $request->get('password'),
+        );
+
+        if (!Auth::attempt($userData)) {
+            return redirect('/login')->with('fail', 'Usuário ou senha incorretas.');
+        }
+            return redirect('/home')->with('success', 'Login efetuado com sucesso.');
+    }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

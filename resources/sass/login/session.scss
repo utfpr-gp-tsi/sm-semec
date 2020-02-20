@@ -1,2 +1,10 @@
 //Tabler
-@import 'vendor/assets/css/tabler';
+@import './resources/vendor/assets/css/tabler';
+
+.card-main{
+	margin-top: 140px;
+}
+
+.card-form{
+	width: 390px;
+}
