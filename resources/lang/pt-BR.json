@@ -30,5 +30,11 @@
     "Reset Password Notification": "Notificação de redefinição de senha",
     "All rights reserved.": "Todos os direitos reservados.",
     "Login to your account": "Faça login na sua conta",
-    "I forgot password": "Esqueceu a senha?"
+    "I forgot password": "Esqueceu a senha?",
+    "New Password" : "Nova Senha",
+    "Enter your email address and your password will be reset and emailed to you.": " Digite seu endereço de e-mail e enviaremos um link para redefinição.",
+    "Forget it,": " Lembrou?",
+    "send me back": "Me envie de volta",
+    "to the sign in screen.": "para a tela de login."
+
 }
