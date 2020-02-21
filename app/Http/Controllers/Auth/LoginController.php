@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
 use Auth;
-use  App\Http\Controllers\Auth\Hash;
+use App\Http\Controllers\Auth\Hash;
 use App\User;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -24,7 +24,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
     use AuthenticatesUsers;
 
     /**
@@ -45,7 +45,8 @@ class LoginController extends Controller
         if (!Auth::attempt($userData)) {
             return redirect('/login')->with('fail', 'Usuário ou senha incorretas.');
         }
-            return redirect('/home')->with('success', 'Login efetuado com sucesso.');
+
+        return redirect('/home')->with('success', 'Login efetuado com sucesso.');
     }
 
     public function __construct()
