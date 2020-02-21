@@ -7,7 +7,7 @@
 /build
 /public/css
 /public/js
-/ṕublic/images
+/public/images
 .env
 .env.backup
 .phpunit.result.cache

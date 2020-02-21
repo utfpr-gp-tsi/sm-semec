@@ -20,19 +20,19 @@
 <body class="">
   <div class="page ">
    <div class="page-single ">
-    <div class="container card-form">
+    <div class="container">
       <div class="row">
 
-        <div class="col col-login mx-auto card-main">
+        <div class="col col-login mx-auto">
 
           <div class="text-center mb-3 ">
            <img src="{{ asset('images/logo.png') }}" class="h-8" alt="">
          </div>
-   
+
           @include('shared/_flash')
-          
+
           @yield('content')
-    
+
         </div>
       </div>
      </div>

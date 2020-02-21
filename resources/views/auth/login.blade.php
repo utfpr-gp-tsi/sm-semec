@@ -8,7 +8,7 @@
     @csrf
 
     <div class="card-body p-4">
-  
+
       <div class="card-title">{{ __('Login to your account')}}</div>
       <div class="form-group">
         <label class="form-label">{{ __('E-Mail Address')}}</label>
@@ -22,16 +22,16 @@
     <div class="form-group">
         <label class="custom-control custom-checkbox">
           <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-          <span class="form-check-label remember" for="remember">
+          <span class="form-check-label remember ml-1" for="remember">
             {{ __('Remember Me')}}
         </span>
-        
+
     </label>
     </div>
     <div class="form-footer">
         <button type="submit" class="btn btn-primary btn-block">{{ __('Login')}}</button>
           @if (Route::has('password.request'))
-        <a class="btn btn-link" href="{{ route('password.request') }}"> {{ __('Forgot Your Password?') }} </a>
+        <a class="btn-link float-right" href="{{ route('password.request') }}"> {{ __('Forgot Your Password?') }} </a>
          @endif
     </div>
     </div>
