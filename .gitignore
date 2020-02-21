@@ -19,3 +19,5 @@ yarn-error.log
 .pnp.js
 .pnp
 .yarn/*
+/cypress/videos
+/cypress/screenshot
