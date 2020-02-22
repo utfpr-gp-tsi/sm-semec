@@ -1,23 +1,43 @@
-/node_modules
+##
+# PHP
+################
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
 /public/hot
 /public/storage
 /storage/*.key
 /vendor
 /report
 /build
+
+##
+# ASSETS
+################
 /public/css
 /public/js
 /public/images
-.env
-.env.backup
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
+
+##
+# NPM
+################
+/node_modules
+/v8-compile-cache-0
 npm-debug.log
+
+##
+# YARN
+################
 yarn-error.log
 .yarn-meta
 .pnp.js
 .pnp
 .yarn/*
+
+##
+# CYPRESS
+################
 /cypress/videos
 /cypress/screenshot
