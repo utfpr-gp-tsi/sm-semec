@@ -16,9 +16,7 @@ Homestead.yaml
 ##
 # ASSETS
 ################
-/public/css
-/public/js
-/public/images
+/public/assets/*
 
 ##
 # NPM
@@ -41,3 +39,8 @@ yarn-error.log
 ################
 /cypress/videos
 /cypress/screenshot
+
+##
+# Others
+################
+.DS_Store

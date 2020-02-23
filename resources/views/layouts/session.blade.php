@@ -13,7 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/login/session.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/tabler/css/tabler.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/login/session.css') }}" rel="stylesheet">
   </head>
 
   <body class="">
@@ -25,7 +26,7 @@
             <div class="col col-login mx-auto">
 
               <div class="text-center mb-3 ">
-                <img src="{{ asset('images/logo.png') }}" class="h-8" alt="">
+                <img src="{{ asset('assets/images/logo.png') }}" class="h-8" alt="">
               </div>
 
               @include('shared/_flash')
