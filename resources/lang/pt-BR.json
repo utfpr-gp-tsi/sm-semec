@@ -31,10 +31,10 @@
     "All rights reserved.": "Todos os direitos reservados.",
     "Login to your account": "Faça login na sua conta",
     "I forgot password": "Esqueceu a senha?",
+    "Enter your email address and your password will be reset and emailed to you." : " Digite seu endereço de email e um link para redefinir sua senha será enviado para ele.",
+    "Forget it," : "Esqueça,",
+    "send me back" : "me envie de volta",
+    "to the sign in screen." : "para a rela de login",
     "New Password" : "Nova Senha",
-    "Enter your email address and your password will be reset and emailed to you.": " Digite seu endereço de e-mail e enviaremos um link para redefinição.",
-    "Forget it,": " Lembrou?",
-    "send me back": "Me envie de volta",
-    "to the sign in screen.": "para a tela de login."
-
+    "Confirm Password" : "Confirme a senha"
 }
