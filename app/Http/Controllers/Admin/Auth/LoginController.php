@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -43,14 +43,15 @@ class LoginController extends Controller
         );
 
         if (!Auth::attempt($userData)) {
-            return redirect('/login')->with('fail', 'Usuário ou senha incorretas.');
+            return redirect('admin/login')->with('fail', 'Usuário ou senha incorretas.');
         }
 
-        return redirect('/admin/')->with('success', 'Login efetuado com sucesso.');
+        return redirect('admin/')->with('success', 'Login efetuado com sucesso.');
     }
 
-    public function __construct()
+    public function logout()
     {
-        $this->middleware('guest')->except('logout');
+        Auth::logout();
+        return redirect('admin/');
     }
 }

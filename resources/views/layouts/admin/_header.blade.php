@@ -1,38 +1,31 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ ('SM_SEMEC') }}
+<div class="container-fluid fixed-top header py-4">
+  <div class="d-flex">
+    <a class="header-brand ml-5" href="">
+      <img src="{{ asset('assets/images/brasao.png') }}" class="header-brand-img " alt="logo-semec"> 
+    </a>    
+    <div class="d-flex order-lg-2 ml-auto">
+      <div class="dropdown">
+        <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+          <span class="avatar" style=""></span>
+
+          <span class="ml-2 d-none d-lg-block">
+            <span class="text-default">  {{ Auth::user()->name }}</span>
+            <small class="text-muted d-block mt-1">  {{ Auth::user()->email }}</small>
+          </span>
         </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+          <a class="dropdown-item" href=""> <i class="dropdown-icon far fa-user"></i>  Meu Perfil </a>      
+          <a class="dropdown-item" rel="nofollow" data-method="delete" href="{{ route('logout') }}" id="logout">
+            <i class="dropdown-icon fas fa-sign-out-alt"></i>
+            {{ __('Logout') }}
+          </a>   
+        </div>
+      </div>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-        
-                    <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                      
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
+      <a href="#" class="header-toggler d-lg-none d-md-none ml-3" data-toggle="collapse" data-target="#headerMenuCollapse" aria-expanded="true">
+        <i class= "header-toggler-icon"></i>
+      </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" id="logout">
-                                        {{ __('Logout') }}
-                                </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                            </div>
-                    </li>
-                </ul>
-                
-            </div>
     </div>
-</nav>
+  </div>
+</div>

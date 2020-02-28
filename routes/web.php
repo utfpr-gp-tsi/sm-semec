@@ -12,10 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+	return view('home/index');
 });
 
-Auth::routes();
+Route::namespace('Admin')->group(function () {
+	Route::prefix('admin')->group(function () {
+		Route::get('/', [ 'as' => 'index' , 'uses' => 'HomeController@index']);
+		Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/login/signOut', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']); //
+	});
+});
