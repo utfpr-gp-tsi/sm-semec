@@ -1,5 +1,5 @@
 @extends('layouts.session')
-@section('title', 'SM-SEMEC')
+@section('title', 'SEMEC | Login')
 
 
 @section('content')

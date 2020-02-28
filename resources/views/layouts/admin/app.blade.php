@@ -9,6 +9,9 @@
 
      <title>@yield('title')</title>
 
+     <!--Icons-->
+     <script src="https://kit.fontawesome.com/826671e166.js" crossorigin="anonymous"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -17,30 +20,42 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/tabler/css/tabler.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/home/home.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-      
+ <div id="app" class="page">
+  <div class="page-main">
+    <div class="container-fluid m-0">
+      <div class="row">
+
         @include('layouts/admin/_header')
 
-    <main class="py-4">
-            @yield('content')
+        @include('layouts/admin/_sidebar')
 
-    <div class="container"> <!--start dashboard-->
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
-                              @include('shared/_flash')
+        <div class="col-md-9 col-lg-10">
+          <nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item active" aria-current="page">Página inicial</li></ol></nav>
 
-                    <div class="card-body">
-                </div>
+          <div class="card" id="main-card">
+            <div class="card-header">
+              <h1 class="page-title mb-3">
+                Dashboard
+              </h1>
             </div>
-        </div>
-    </div> <!--end dashboard-->
+            
+            <div class="card-body">
+              <div>
+                @include('shared/_flash')
+              </div>
+            </div>
 
-    </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
 </div>
 </body>
 </html>
