@@ -1,5 +1,5 @@
 @extends('layouts.session')
-@section('title', 'SM-SEMEC | Modificar Senha')
+@section('title', 'Modificar Senha')
 
 @section('content')
 

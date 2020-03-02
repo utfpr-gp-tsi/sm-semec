@@ -1,10 +1,10 @@
 @extends('layouts.session')
-@section('title', 'SM-SEMEC | Esqueceu senha')
+@section('title', 'Esqueceu senha')
 
 @section('content')
-              
+
 <form class="card" method="POST" action="{{ route('password.email') }}">
-  @csrf                                
+  @csrf
     <div class="card-body p-6">
       <div class="card-title">
           {{ __('Reset Password') }}
@@ -27,5 +27,5 @@
   </div>
 </form>
 <div class="text-center text-muted">{{ __('Forget it,')}} <a href="{{ route('login') }}">{{ __('send me back') }}</a> {{ __('to the sign in screen.')}} </div>
-         
+
 @endsection
