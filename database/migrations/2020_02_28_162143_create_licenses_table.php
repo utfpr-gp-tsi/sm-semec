@@ -20,10 +20,10 @@ class CreateLicensesTable extends Migration
             $table->date('finish date');
             $table->string('license type');
             $table->date('days');
-            $table->bigInteger('server_id')->unsigned()->index()->default(1);
-            $table->foreign('server_id')
+            $table->bigInteger('servant_id')->unsigned()->index()->default(1);
+            $table->foreign('servant_id')
                     ->references('id')
-                    ->on('servers')
+                    ->on('servants')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();

@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Server extends Model
+class Servant extends Model
 {
     /**
     * @var array
     */
     protected $fillable = [
-        'server',
+        'servant',
         'registration',
         'birth',
         'natural from',
@@ -32,7 +32,7 @@ class Server extends Model
     */
     public function dependents()
     {
-        return $this->hasMany(Dependent::class, 'server_id');
+        return $this->hasMany(Dependent::class, 'servant_id');
     }
 
     /**
@@ -40,7 +40,7 @@ class Server extends Model
     */
     public function contracts()
     {
-        return $this->hasMany(Contract::class, 'server_id');
+        return $this->hasMany(Contract::class, 'servant_id');
     }
 
     /**
@@ -48,6 +48,6 @@ class Server extends Model
     */
     public function licenses()
     {
-        return $this->hasMany(License::class, 'server_id');
+        return $this->hasMany(License::class, 'servant_id');
     }
 }

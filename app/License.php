@@ -15,14 +15,14 @@ class License extends Model
         'finish date',
         'license type',
         'days',
-        'server_id',
+        'servant_id',
     ];
 
     /**
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
-    public function servers()
+    public function servants()
     {
-        return $this->belongsTo(Server::class, 'server_id');
+        return $this->belongsTo(Servant::class, 'servant_id');
     }
 }

@@ -23,6 +23,6 @@ class Act extends Model
     */
     public function contracts()
     {
-        return $this->hasMany(Contract::class, 'server_id');
+        return $this->hasMany(Contract::class, 'servant_id');
     }
 }

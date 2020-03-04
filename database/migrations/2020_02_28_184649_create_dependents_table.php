@@ -21,10 +21,10 @@ class CreateDependentsTable extends Migration
             $table->string('degree');
             $table->char('study');
             $table->string('works');
-            $table->bigInteger('server_id')->unsigned()->index()->default(1);
-            $table->foreign('server_id')
+            $table->bigInteger('servant_id')->unsigned()->index()->default(1);
+            $table->foreign('servant_id')
                     ->references('id')
-                    ->on('servers')
+                    ->on('servants')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();
