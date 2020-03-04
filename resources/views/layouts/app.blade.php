@@ -20,7 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
-  </head> 
+  </head>
   <body>
     <div class="page">
       <div class="page-single">
