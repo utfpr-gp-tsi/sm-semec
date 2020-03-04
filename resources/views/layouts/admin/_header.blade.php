@@ -1,7 +1,7 @@
 <div class="fixed-top header py-4">
   <div class="container-fluid">
     <div class="d-flex">
-
+      
       <a class="header-brand" href="./index.html">
         <img src="{{ asset('assets/images/brasao-prefeitura.png') }}" class="header-brand-img" alt="tabler logo">
       </a>
@@ -15,24 +15,22 @@
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
             <span class="avatar" style="background-image: url({{ asset('assets/images/default/default-user.png') }})"></span>
             <span class="ml-2 d-none d-lg-block">
-              <span class="text-default">Jane Pearson</span>
-              <small class="text-muted d-block mt-1">Administrator</small>
+              <span class="text-default">  {{ Auth::user()->name }}</span>
+            <small class="text-muted d-block mt-1">  {{ Auth::user()->email }}</small>
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-            <a class="dropdown-item" href="#">
-              <i class="dropdown-icon far fa-user"></i>Profile
-            </a>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="dropdown-icon fas fa-sign-out-alt"></i>Sign out
-            </a>
+            <a class="dropdown-item" href=""> <i class="dropdown-icon far fa-user"></i>  Meu Perfil </a>      
+          <a class="dropdown-item" rel="nofollow" data-method="delete" href="{{ route('logout') }}" id="logout">
+            <i class="dropdown-icon fas fa-sign-out-alt"></i>
+            {{ __('Logout') }}
+          </a>   
           </div>
         </div>
       </div>
 
-      <a href="#" class="header-toggler d-md-none ml-3" data-toggle="collapse" data-target="#sidebarMenuCollapse" aria-expanded="true">
-        <span class="header-toggler-icon"></span>
+      <a href="#" class="header-toggler d-lg-none d-md-none ml-3" data-toggle="collapse" data-target="#headerMenuCollapse" aria-expanded="true">
+        <i class= "header-toggler-icon"></i>
       </a>
     </div>
   </div>

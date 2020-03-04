@@ -16,7 +16,7 @@
       <span class="icon mr-2">
         <i class="fas fa-user-plus"></i>
       </span>
-      Cadastrar
+      Servidores
     </a>
   </div>
 </div>

@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', 'SEMEC | Dashboard')
+@section('title', 'Dashboard')
 
 @section('content')
 @endsection

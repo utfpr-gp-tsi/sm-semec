@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-     <title>@yield('title')</title>
+     
+    <title>@include('shared/_full_title')</title>
 
      <!--Icons-->
      <script src="https://kit.fontawesome.com/826671e166.js" crossorigin="anonymous"></script>
@@ -42,9 +43,13 @@
             <div class="card" id="main-card">
               <div class="card-header">
                 <h1 class="page-title mb-3">
+                    Dashboard
                 </h1>
               </div>
               <div class="card-body">
+                 <div>
+                @include('shared/_flash')
+              </div>
               </div>
             </div>
           </div>
