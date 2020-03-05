@@ -17,6 +17,9 @@ Homestead.yaml
 # ASSETS
 ################
 /public/assets/*
+/public/css/*
+/public/js/*
+/public/images/*
 
 ##
 # NPM

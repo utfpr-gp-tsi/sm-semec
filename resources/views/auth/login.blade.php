@@ -1,6 +1,5 @@
 @extends('layouts.session')
 @section('title', 'Login')
-
 @section('content')
 
 <form class="card" action="{{route('login')}}" method="POST">

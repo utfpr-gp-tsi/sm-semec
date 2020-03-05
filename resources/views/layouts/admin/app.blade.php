@@ -1,4 +1,4 @@
-    <!doctype html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -7,40 +7,55 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-     <title>@yield('title')</title>
+     
+    <title>@include('shared/_full_title')</title>
+
+     <!--Icons-->
+     <script src="https://kit.fontawesome.com/826671e166.js" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery-3.2.1.min.js') }}" defer></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
+    <script src="{{ asset('assets/js/admin/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/tabler/css/tabler-dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/admin/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-      
-        @include('layouts/admin/_header')
+  <div id="app" class="page">
+    <div class="page-main">
 
-    <main class="py-4">
-            @yield('content')
+      <div class="container-fluid m-0">
+        <div class="row">
 
-    <div class="container"> <!--start dashboard-->
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
-                              @include('shared/_flash')
+          @include('layouts/admin/_header')
+          @include('layouts/admin/_sidebar')
 
-                    <div class="card-body">
-                </div>
+          <div class="col-md-9 col-lg-10">
+
+            @include('layouts/admin/_breadcrumbs')
+
+            <div class="card" id="main-card">
+              <div class="card-header">
+                <h1 class="page-title mb-3">
+                    Dashboard
+                </h1>
+              </div>
+              <div class="card-body">
+                 <div>
+                @include('shared/_flash')
+              </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div> <!--end dashboard-->
-
-    </main>
-</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
