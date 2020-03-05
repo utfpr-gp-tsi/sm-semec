@@ -6,11 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Act extends Model
 {
+        /**
+    * @var array
+    */
     protected $fillable = [
-    	'act' , 'start' , 'validaty' , 'number' , 'time' , 'contract_id' , 
+        'act',
+        'start',
+        'validaty',
+        'number',
+        'time',
+        'contract_id',
     ];
-
-     //public function contracts(){
-    	//rturn $this->hasMany(Contract::class,'server_id');
-    //}
+    
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class, 'server_id');
+    }
 }

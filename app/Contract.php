@@ -6,11 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contract extends Model
 {
+        /**
+    * @var array
+    */
     protected $fillable = [
-        'registration' , 'admission' , 'termination' , 'secretary' , 'place' , 'role' , 'server_id , '
+        'registration',
+        'admission',
+        'termination',
+        'secretary',
+        'place',
+        'role',
+        'server_id ',
     ];
 
-    public function servers(){
-    	return $this->belongsTo(Servers::class,'server_id');
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+    public function servers()
+    {
+        return $this->belongsTo(Server::class, 'server_id');
     }
 }

@@ -21,7 +21,7 @@ class CreateContractsTable extends Migration
             $table->string('secretary');
             $table->string('place');
             $table->string('role');
-            $table->integer('server_id')->unsigned()->index()->default(1);
+            $table->bigInteger('server_id')->unsigned()->index()->default(1);
             $table->foreign('server_id')
                     ->references('id')
                     ->on('servers')

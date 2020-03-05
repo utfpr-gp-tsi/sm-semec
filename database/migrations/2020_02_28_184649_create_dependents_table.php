@@ -17,11 +17,11 @@ class CreateDependentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->date('birth');
-            $table->number('age');
+            $table->integer('age');
             $table->string('degree');
             $table->char('study');
             $table->string('works');
-            $table->integer('server_id')->unsigned()->index()->default(1);
+            $table->bigInteger('server_id')->unsigned()->index()->default(1);
             $table->foreign('server_id')
                     ->references('id')
                     ->on('servers')

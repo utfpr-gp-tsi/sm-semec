@@ -18,9 +18,9 @@ class CreateLicensesTable extends Migration
             $table->integer('registration');
             $table->date('start date');
             $table->date('finish date');
-            $table->bigIncrements('license type');
+            $table->string('license type');
             $table->date('days');
-            $table->integer('server_id')->unsigned()->index()->default(1);
+            $table->bigInteger('server_id')->unsigned()->index()->default(1);
             $table->foreign('server_id')
                     ->references('id')
                     ->on('servers')

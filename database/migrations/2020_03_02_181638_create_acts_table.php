@@ -20,7 +20,7 @@ class CreateActsTable extends Migration
             $table->string('validaty');
             $table->integer('number');
             $table->string('time');
-            $table->integer('contract_id')->unsigned()->index()->default(1);
+            $table->bigInteger('contract_id')->unsigned()->index()->default(1);
             $table->foreign('contract_id')
                     ->references('id')
                     ->on('contracts')
