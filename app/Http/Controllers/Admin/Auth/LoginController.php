@@ -46,12 +46,12 @@ class LoginController extends Controller
             return redirect('admin/login')->with('fail', 'Usuário ou senha incorretas.');
         }
 
-        return redirect('admin/')->with('success', 'Login efetuado com sucesso.');
+        return redirect('admin')->with('success', 'Login efetuado com sucesso.');
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('admin/');
+        return redirect('admin');
     }
 }
