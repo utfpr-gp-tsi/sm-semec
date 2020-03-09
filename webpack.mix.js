@@ -15,7 +15,8 @@ mix.js('resources/js/app.js', 'public/assets/js')
    .js('resources/js/admin/app.js', 'public/assets/js/admin')
    .sass('resources/sass/app.scss', 'public/assets/css')
    .sass('resources/sass/login/session.scss', 'public/assets/css/login')
-   .sass('resources/sass/admin/app.scss', 'public/assets/css/admin');
+   .sass('resources/sass/admin/app.scss', 'public/assets/css/admin')
+   .sass('resources/sass/admin/edit.scss', 'public/assets/css/admin');
 
 mix.copyDirectory('resources/vendor/assets', 'public/assets/vendor');
 mix.copyDirectory('resources/images', 'public/assets/images');

@@ -5,7 +5,7 @@
       Administrativo
     </span>
 
-    <a class="list-group-item list-group-item-action active" aria-current="page" href="">
+    <a class="list-group-item list-group-item-action active" aria-current="page" href="/admin">
       <span class="icon mr-2">
         <i class="fas fa-home"></i>
       </span>
