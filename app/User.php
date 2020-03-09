@@ -52,18 +52,4 @@ class User extends Authenticatable
         $dados['password'] = $user->password;
         $user->update($dados);
   }
-
-  public function updatePassword($id)
-    {  
-       $user = User::find($id);
-       $request = Request();
-       $dados = $request->all();
-       if ($dados['password'] != null) {
-        $dados['password'] = Hash::make($dados['password']);
-        $user->update($dados);
-    }
-
-        $dados['password'] = $user->password;
-        $user->update($dados);
-  }
 }
