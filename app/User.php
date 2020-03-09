@@ -39,17 +39,14 @@ class User extends Authenticatable
     ];
 
     public function updateProfile($id)
-    {  
-       $user = User::find($id);
-       $request = Request();
-
-       $dados = $request->all();
-       if ($dados['password'] != null) {
-        $dados['password'] = Hash::make($dados['password']);
+    {
+        $user = User::find($id);
+        $request = Request();
+        $dados = $request->all();
+        if ($dados['password'] != null) {
+            $dados['password'] = Hash::make($dados['password']);
+            $user->update($dados);
+        }$dados['password'] = $user->password;
         $user->update($dados);
     }
-
-        $dados['password'] = $user->password;
-        $user->update($dados);
-  }
 }

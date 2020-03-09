@@ -25,7 +25,7 @@ Route::get('/login/signOut', ['as' => 'logout', 'uses' => 'Auth\LoginController@
 	Route::post('/edit/{id}/update', ['as' => 'profile.update', 'uses' => 'AdminController@update']);
 
 	Route::get('/password/{id}/edit', ['as' => 'password', 'uses' => 'AdminController@edit']); 
-	Route::post('/update/{id}/password', ['as' => 'password.update', 'uses' => 'AdminController@update_password']); 
+	Route::post('/update/{id}/password', ['as' => 'password.update', 'uses' => 'AdminController@updatePassword']); 
 
 
 });

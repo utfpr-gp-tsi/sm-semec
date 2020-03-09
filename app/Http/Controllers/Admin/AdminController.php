@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-Use App\User;
+use App\User;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -75,40 +75,34 @@ class AdminController extends Controller
         $user = User::find($id);
         $request = Request();
         $password = $request->input('password');
-         $dados = $request->all();
-        if(Hash::check($dados['password'], $user->password)){
+        $dados = $request->all();
+        if (Hash::check($dados['password'], $user->password)) {
             $user->updateProfile($id);
-        return redirect()->route('edit',[$user])->with('success', 'Perfil atualizado com sucesso');
+            return redirect()->route('edit', [$user])->with('success', 'Perfil atualizado com sucesso');
         }
-        return redirect()->route('edit', [$user])->with('fail','Senha atual incorreta');
-
+        return redirect()->route('edit', [$user])->with('fail', 'Senha atual incorreta');
     }
 
-     public function update_password(Request $request, $id)
+    public function updatePassword(Request $request, $id)
     {
         $this->validate($request, [
           'password' => 'required|min:6|confirmed',
           'password_confirmation' => 'required|min:6',
         ]);
 
-
-        $current_password = $request->input('current_password');
-
-        $password_confirm = $request->input('password_confirmation');
+        $currentPassword = $request->input('current_password');
+        $passwordConfirm = $request->input('password_confirmation');
         $user = User::find($id);
         $password = $request->input('password');
-        $dados = $request->all();
         
-        if(Hash::check($current_password, $user->password)){
-           
-            if($password == $password_confirm){
-               $user->updateProfile($id);
-               return redirect()->route('password', [$user])->with('success', 'Senha alterada com sucesso');
-           }
-       }
-       return redirect()->route('password', [$user])->with('fail','As senhas não correspondem');
+        if (Hash::check($currentPassword, $user->password)) {
+            if ($password == $passwordConfirm) {
+                $user->updateProfile($id);
+                 return redirect()->route('password', [$user])->with('success', 'Senha alterada com sucesso');
+            }
+        }
+        return redirect()->route('password', [$user])->with('fail', 'As senhas não correspondem');
     }
-
 
     /**
      * Remove the specified resource from storage.
