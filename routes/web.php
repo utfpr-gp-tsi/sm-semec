@@ -21,10 +21,10 @@ Route::namespace('Admin')->group(function () {
 		Auth::routes(['register' => false]);
 
 Route::get('/login/signOut', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']); 
-	Route::get('/edit/{id}', ['as' => 'edit', 'uses' => 'AdminController@index']); 
+	Route::get('/edit/{id}', ['as' => 'edit', 'uses' => 'AdminController@edit']); 
 	Route::post('/edit/{id}/update', ['as' => 'profile.update', 'uses' => 'AdminController@update']);
 
-	Route::get('/password/{id}/edit', ['as' => 'password', 'uses' => 'AdminController@edit']); 
+	Route::get('/password/{id}/edit', ['as' => 'password', 'uses' => 'AdminController@editPassword']); 
 	Route::post('/update/{id}/password', ['as' => 'password.update', 'uses' => 'AdminController@updatePassword']); 
 
 

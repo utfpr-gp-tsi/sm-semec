@@ -10,54 +10,25 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view("admin.profile.edit");
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function show($id)
+
+    public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.profile.edit', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+   * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function editPassword($id)
     {
         $user = User::find($id);
         return view('admin.profile.edit_password', compact('user'));
@@ -68,13 +39,12 @@ class AdminController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+     * @return  \Illuminate\Http\RedirectResponse.
+         */
     public function update(Request $request, $id)
     {
         $user = User::find($id);
         $request = Request();
-        $password = $request->input('password');
         $dados = $request->all();
         if (Hash::check($dados['password'], $user->password)) {
             $user->updateProfile($id);
@@ -82,7 +52,13 @@ class AdminController extends Controller
         }
         return redirect()->route('edit', [$user])->with('fail', 'Senha atual incorreta');
     }
-
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return  \Illuminate\Http\RedirectResponse.
+         */
     public function updatePassword(Request $request, $id)
     {
         $this->validate($request, [
@@ -102,16 +78,5 @@ class AdminController extends Controller
             }
         }
         return redirect()->route('password', [$user])->with('fail', 'As senhas não correspondem');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
