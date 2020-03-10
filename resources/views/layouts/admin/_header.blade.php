@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="d-flex">
       <a class="header-brand" href="./index.html">
-        <img src="{{ asset('assets/images/brasao-prefeitura.png') }}" class="header-brand-img" alt="tabler logo"> 
+        <img src="{{ asset('assets/images/brasao-prefeitura.png') }}" class="header-brand-img" alt="tabler logo">
       </a>
       <span class="d-lg-block mt-1 text-muted font-weight-bold">
         SEMEC
@@ -17,10 +17,10 @@
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-            <a class="dropdown-item" href="{{route('edit', Auth::user()->id)}}"> <i class="dropdown-icon far fa-user"></i>  Meu Perfil </a>      
-            <a class="dropdown-item" href="{{route('password', Auth::user()->id)}}"> <i class="dropdown-icon fas fa-unlock-alt"></i>Alterar Senha</a>
+            <a class="dropdown-item" href="{{route('profile.edit')}}"> <i class="dropdown-icon far fa-user"></i>  Meu Perfil </a>
+            <a class="dropdown-item" href="{{route('password.edit')}}"> <i class="dropdown-icon fas fa-unlock-alt"></i>Alterar Senha</a>
             <a class="dropdown-item" rel="nofollow" data-method="delete" href="{{ route('logout') }}" id="logout"> <i class="dropdown-icon fas fa-sign-out-alt"></i> {{__('Logout') }}
-            </a>   
+            </a>
           </div>
         </div>
       </div>
