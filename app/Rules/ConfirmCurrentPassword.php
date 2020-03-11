@@ -8,9 +8,15 @@ use Illuminate\Support\Facades\Hash;
 class ConfirmCurrentPassword implements Rule
 {
     /**
+     *
+     * @var  string $password
+     */
+    private $password;
+    /**
      * Create a new rule instance.
      *
      * @return void
+     * @param  mixed $password
      */
     public function __construct($password)
     {
@@ -23,6 +29,8 @@ class ConfirmCurrentPassword implements Rule
      * @param  string  $attribute
      * @param  mixed  $value
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD)
      */
     public function passes($attribute, $value)
     {

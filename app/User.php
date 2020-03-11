@@ -37,18 +37,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function updateProfile($data)
-    {
-        #$user = User::find($id);
-        #$request = Request();
-        #$dados = $request->all();
-        #if ($dados['password'] != null) {
-        #    $dados['password'] = Hash::make($dados['password']);
-        #    $user->update($dados);
-        #}$dados['password'] = $user->password;
-        #$user->update($dados);
-
-
-    }
 }

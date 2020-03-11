@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\ConfirmCurrentPassword;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Auth\Authenticatable;
 
-class ProfileController extends Controller
+class ProfileController extends AppController
 {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
 
@@ -28,8 +29,7 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return  \Illuminate\Http\RedirectResponse.
+     * @return  \Illuminate\View\View.
          */
     public function update(Request $request)
     {
@@ -41,23 +41,21 @@ class ProfileController extends Controller
             'name' => 'required',
             'email' => 'required|email',
         ]);
-
+        
         $user->fill($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
             return view('admin.profile.edit', compact('user'))->withErrors($validator);
-            /* return redirect()->route('profile.edit')->withErrors($validator); */
-        } else {
-            $user->save();
-            return redirect()->route('profile.edit')->with('success', 'Perfil atualizado com sucesso');
         }
+
+        $user->save();
+        return redirect()->route('profile.edit')->with('success', 'Perfil atualizado com sucesso');
     }
 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
    * @return \Illuminate\View\View
      */
     public function editPassword()
@@ -65,12 +63,10 @@ class ProfileController extends Controller
         return view('admin.profile.edit_password');
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return  \Illuminate\Http\RedirectResponse.
      */
     public function updatePassword(Request $request)
@@ -79,8 +75,8 @@ class ProfileController extends Controller
 
         $this->validate($request, [
             'current_password' => new ConfirmCurrentPassword($user->password),
-            'password' => 'required|min:6|confirmed',
-            'password_confirmation' => 'required|min:6',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|min:6|confirmed',
         ]);
 
         $password = $request->input('password');
@@ -89,5 +85,4 @@ class ProfileController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Senha alterada com sucesso');
     }
-
 }
