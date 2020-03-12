@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-     
+
     <title>@include('shared/_full_title')</title>
 
      <!--Icons-->
@@ -25,14 +25,13 @@
     <!-- Styles -->
     <link href="{{ asset('assets/vendor/tabler/css/tabler-dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/admin/edit.css') }}" rel="stylesheet">
 </head>
 <body>
   <div id="app" class="page">
     <div class="page-main">
       <div class="container-fluid m-0">
         <div class="row">
-          
+
           @include('layouts/admin/_header')
           @include('layouts/admin/_sidebar')
 
