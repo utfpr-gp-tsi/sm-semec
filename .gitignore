@@ -41,7 +41,7 @@ yarn-error.log
 # CYPRESS
 ################
 /cypress/videos
-/cypress/screenshot
+/cypress/screenshots
 
 ##
 # Others

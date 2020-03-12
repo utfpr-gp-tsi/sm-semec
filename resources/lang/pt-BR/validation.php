@@ -148,6 +148,9 @@ return [
 
     'attributes' => [
         'password' => 'senha',
+        'name' => 'nome',
+        'Current Password' => 'Senha Atual',
+        'password_confirmation' => 'senha'
     ],
 
 ];

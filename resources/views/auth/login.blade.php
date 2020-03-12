@@ -10,7 +10,7 @@
       <div class="card-title">{{ __('Login to your account')}}</div>
       <div class="form-group">
         <label class="form-label">{{ __('E-Mail Address')}}</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Email">
+        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Email" autofocus="">
     </div>
 
     <div class="form-group">
