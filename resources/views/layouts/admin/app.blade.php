@@ -43,13 +43,16 @@
             <div class="card" id="main-card">
               <div class="card-header">
                 <h1 class="page-title mb-3">
-                    Dashboard
+                    @yield('title')
                 </h1>
+                 
               </div>
               <div class="card-body">
                  <div>
                 @include('shared/_flash')
               </div>
+              @yield('content')
+
               </div>
             </div>
           </div>

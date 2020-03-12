@@ -18,8 +18,16 @@ Route::get('/', function () {
 Route::namespace('Admin')->group(function () {
 	Route::prefix('admin')->group(function () {
 		Route::get('/', [ 'as' => 'index' , 'uses' => 'HomeController@index']);
-		Auth::routes(['register' => false]);
+	Auth::routes(['register' => false]);
+	Route::get('/registerUsers', ['as' => 'register', 'uses' => 'UsersController@index']);
+	Route::post('/registerUsers/save', ['as' => 'users.register', 'uses' => 'UsersController@store']);
+
+
 
 Route::get('/login/signOut', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']); //
 	});
+
+
 });
+
+
