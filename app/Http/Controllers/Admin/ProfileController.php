@@ -52,7 +52,6 @@ class ProfileController extends AppController
         return redirect()->route('profile.edit')->with('success', 'Perfil atualizado com sucesso');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -69,14 +68,15 @@ class ProfileController extends AppController
      * @param  \Illuminate\Http\Request  $request
      * @return  \Illuminate\Http\RedirectResponse.
      */
+    
     public function updatePassword(Request $request)
     {
         $user = User::find(\Auth::user()->id);
 
         $this->validate($request, [
             'current_password' => new ConfirmCurrentPassword($user->password),
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6',
         ]);
 
         $password = $request->input('password');
