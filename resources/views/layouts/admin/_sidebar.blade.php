@@ -5,7 +5,7 @@
       Administrativo
     </span>
 
-    <a class="list-group-item list-group-item-action active" aria-current="page" href="">
+    <a class="list-group-item list-group-item-action active" aria-current="page" href="/admin">
       <span class="icon mr-2">
         <i class="fas fa-home"></i>
       </span>
@@ -17,6 +17,12 @@
         <i class="fas fa-user-plus"></i>
       </span>
       Servidores
+    </a>
+    <a class="list-group-item list-group-item-action" href="/admin/users">
+      <span class="icon mr-2">
+        <i class="fas fa-user-plus"></i>
+      </span>
+      Administradores
     </a>
   </div>
 </div>

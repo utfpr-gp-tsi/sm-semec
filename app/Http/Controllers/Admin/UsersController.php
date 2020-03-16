@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 
 use Illuminate\Http\Request;
 use Hash;
 
-class UsersController extends Controller
+class UsersController extends AppController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,8 @@ class UsersController extends Controller
      */
     public function index()
     {  
-        return view('admin.users.register');
+        $users = User::latest()->paginate(5);
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -25,7 +26,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(array $user)
+    public function create()
     {
        
         return view('admin.users.register');
@@ -71,9 +72,11 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -107,8 +110,11 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
-    {
-        //
+    public function destroy($id)
+    {   
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('users')->with('success', 'Administrador removido com sucesso.');
     }
 }

@@ -12,4 +12,6 @@ parameters:
     - app/Http/Middleware/CheckForMaintenanceMode.php
     - app/Http/Controllers/Auth/LoginController.php
     - app/Http/Controllers/Admin/Auth/LoginController.php
+    - app/User.php
+    - app/Http/Controllers/Admin/ProfileController.php
   checkMissingIterableValueType: false

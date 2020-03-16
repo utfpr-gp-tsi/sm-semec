@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-     
+
     <title>@include('shared/_full_title')</title>
 
      <!--Icons-->
@@ -29,7 +29,6 @@
 <body>
   <div id="app" class="page">
     <div class="page-main">
-
       <div class="container-fluid m-0">
         <div class="row">
 
@@ -43,7 +42,7 @@
             <div class="card" id="main-card">
               <div class="card-header">
                 <h1 class="page-title mb-3">
-                    @yield('title')
+                  @yield('title')
                 </h1>
                  
               </div>
@@ -54,11 +53,15 @@
               @yield('content')
 
               </div>
+
+                 
+              
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </body>
 </html>
