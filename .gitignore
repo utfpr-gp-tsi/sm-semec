@@ -47,3 +47,4 @@ yarn-error.log
 # Others
 ################
 .DS_Store
+ vendor/bin/phpcs
