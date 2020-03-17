@@ -10,6 +10,7 @@ use App\Rules\ConfirmCurrentPassword;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Str;
 
 class ProfileController extends AppController
 {
@@ -40,12 +41,23 @@ class ProfileController extends AppController
             'current_password' => new ConfirmCurrentPassword($user->password),
             'name' => 'required',
             'email' => 'required|email',
+            'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
         
         $user->fill($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
             return view('admin.profile.edit', compact('user'))->withErrors($validator);
+        }
+
+        if ($request->hasFile('image') && $request->file('image')->isvalid()) {
+            $name = Str::slug($user->id . $user->name, '-');
+
+            $extension = $request->image->extension();
+            $nameFile = "{$name}.{$extension}";
+
+            $user->image = $nameFile;
+            $request->image->storeAs('images', $nameFile);
         }
 
         $user->save();

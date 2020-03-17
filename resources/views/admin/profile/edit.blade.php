@@ -33,7 +33,7 @@
     <div class="col-sm-4">
       @component('components.form.input_image_preview',['field' => 'image',
 							'label' => 'Clique na imagem para alterá-la',
-							'asset' => asset('assets/images/default/default-user.png'),
+							'asset' => asset('/images/'.auth()->user()->image),
 							'model' => 'user']) @endcomponent
     </div>
   </div>
