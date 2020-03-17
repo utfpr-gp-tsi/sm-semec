@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Http\Controllers\AppController;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Hash;
 
@@ -16,7 +16,7 @@ class UsersController extends AppController
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
+    {
         $users = User::latest()->paginate(5);
         return view('admin.users.index', compact('users'));
     }
@@ -30,7 +30,6 @@ class UsersController extends AppController
     {
        
         return view('admin.users.register');
-        
     }
 
     /**
@@ -42,17 +41,16 @@ class UsersController extends AppController
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required |email|unique:users,email',
+            'name' => 'required',
+            'email' => 'required |email|unique:users,email',
             'image' => 'nullable',
-            'password'=>'required',
+            'password' => 'required',
         ]);
 
         $user = new User([
-           'name' =>$request->get('name'),
-           'email' =>$request->get('email'),
-          // 'image' => $request->get('image'),
-           'password'=>$request->get('password'),
+           'name' => $request->get('name'),
+           'email' => $request->get('email'),
+           'password' => $request->get('password'),
            
 
         ]);
@@ -61,10 +59,9 @@ class UsersController extends AppController
           $users['password'] = Hash::make($users['password']);
          
  
-    $user->save();
-       return redirect('/admin');
-       
-}
+        $user->save();
+        return redirect('/admin/users');
+    }
 
     /**
      * Display the specified resource.
@@ -85,9 +82,11 @@ class UsersController extends AppController
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -97,13 +96,28 @@ class UsersController extends AppController
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+                
         
+        $user = User::find($id);
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'name' => 'required',
+            'email' => 'required|email|unique:email',
+        ]);
 
-        
+
+        $user->update($data);
+        return redirect()->route('users.show', $user->id)->with('success', 'Administrador atualizado com sucesso');
     }
 
+        
+
+      
+            
+        
+   
     /**
      * Remove the specified resource from storage.
      *
@@ -111,7 +125,7 @@ class UsersController extends AppController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         $user = User::find($id);
         $user->delete();
 

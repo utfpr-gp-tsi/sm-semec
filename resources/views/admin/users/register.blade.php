@@ -22,6 +22,6 @@
                                                         'errors' => $errors])
             @endcomponent
     
-    @component('components.form.input_submit',['value' => 'Criar Administrador']) @endcomponent
+    @component('components.form.input_submit',['value' => 'Criar Administrador', 'route' => '/admin/users']) @endcomponent
 </form>
 @endsection

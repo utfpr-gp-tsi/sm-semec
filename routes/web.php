@@ -22,6 +22,8 @@ Route::namespace('Admin')->group(function () {
 	Route::post('/users', ['as' => 'users.register', 'uses' => 'UsersController@store']);
 	Route::get('/users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show']);
 	Route::delete('/users/{id}', ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']);
+	Route::get('/users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
+	Route::patch('/users/{id}', ['as' => 'users.update', 'uses' => 'UsersController@update']);
 
 
 
