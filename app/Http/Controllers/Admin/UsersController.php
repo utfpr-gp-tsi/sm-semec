@@ -13,7 +13,7 @@ class UsersController extends AppController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *  @return \Illuminate\View\View
      */
     public function index()
     {
@@ -24,7 +24,7 @@ class UsersController extends AppController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -36,7 +36,7 @@ class UsersController extends AppController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -66,8 +66,8 @@ class UsersController extends AppController
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $id
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
@@ -79,8 +79,8 @@ class UsersController extends AppController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $id
+     * @return  \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -93,23 +93,26 @@ class UsersController extends AppController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $id
+     * @return \Illuminate\Http\RedirectResponse
      */
+    
     public function update(Request $request, $id)
     {
-                
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
         
         $user = User::find($id);
-        $data = $request->all();
-        $validator = Validator::make($data, [
-            'name' => 'required',
-            'email' => 'required|email|unique:email',
-        ]);
 
-
-        $user->update($data);
-        return redirect()->route('users.show', $user->id)->with('success', 'Administrador atualizado com sucesso');
+        if ($user) {
+            $data = $request->all();
+       
+            $user->update($data);
+            return redirect()->route('users.show', $user->id)->with('success', 'Administrador atualizado com sucesso');
+        }
+        return redirect()->route('users')->with('danger', 'Não foi possível atualizar esse administrador.');
     }
 
         
@@ -121,14 +124,18 @@ class UsersController extends AppController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $id
+     * @return \Illuminate\Http\RedirectResponse
+     *
      */
     public function destroy($id)
     {
         $user = User::find($id);
-        $user->delete();
+        if ($user) {
+            $user->delete();
 
-        return redirect()->route('users')->with('success', 'Administrador removido com sucesso.');
+            return redirect()->route('users')->with('success', 'Administrador removido com sucesso.');
+        }
+        return redirect()->route('users')->with('danger', 'Administrador indisponível.');
     }
 }
