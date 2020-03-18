@@ -12,26 +12,41 @@ class PopulateSeeder extends Seeder
      */
     public function run()
     {
-        //$faker = \Faker\Factory::create();
+        DB::table('acts')->delete();
+        DB::table('contracts')->delete();
+        DB::table('dependents')->delete();
+        DB::table('licenses')->delete();
+        DB::table('servants')->delete();
 
         $servants = factory('App\Servant', 2)->create();
 
         $servants->each(function($servant) {
+            /**
+               * @var  string  $contracts
+            */
+            private $contracts;
 
-            //$acts = factory('App\Act', 2)->create(['contract_id' => $contract->id]);
+            $contracts = factory('App\Contract')->create(['servant_id' => $servant->id]);
+            /**
+               * @var  string  $dependents
+            */
+            private $dependents;
 
-            $contracts = factory('App\Contract', 2)->create(['servant_id' => $servant->id]);
+            $dependents = factory('App\Dependent')->create(['servant_id' => $servant->id]);
+            /**
+               * @var  string  $licenses
+            */
+            private $licenses;
 
-            $dependents = factory('App\Dependent', 2)->create(['servant_id' => $servant->id]);
-
-            $licenses = factory('App\License', 2)->create(['servant_id' => $servant->id]);
+            $licenses = factory('App\License')->create(['servant_id' => $servant->id]);
         });
 
-        $contracts = factory('App\Contract', 2)->create();
-
-        $contracts->each(function($contract) {
-
-            $acts = factory('App\Act', 2)->create(['contract_id' => $contract->id]);
+        $servants->each(function($contract) {
+            /**
+               * @var  string  $acts
+            */
+            private $acts;
+            $acts = factory('App\Act')->create(['contract_id' => $contract->id]);
         });
     }
 }
