@@ -21,29 +21,17 @@ class PopulateSeeder extends Seeder
         $servants = factory('App\Servant', 2)->create();
 
         $servants->each(function($servant) {
-            /**
-               * @var  string  $contracts
-            */
 
-            $contracts = factory('App\Contract')->create(['servant_id' => $servant->id]);
-            /**
-               * @var  string  $dependents
-            */
+            factory('App\Contract')->create(['servant_id' => $servant->id]);
 
-            $dependents = factory('App\Dependent')->create(['servant_id' => $servant->id]);
-            /**
-               * @var  string  $licenses
-            */
+            factory('App\Dependent')->create(['servant_id' => $servant->id]);
 
-            $licenses = factory('App\License')->create(['servant_id' => $servant->id]);
+            factory('App\License')->create(['servant_id' => $servant->id]);
         });
 
         $servants->each(function($contract) {
-            /**
-               * @var  string  $acts
-            */
             
-            $acts = factory('App\Act')->create(['contract_id' => $contract->id]);
+            factory('App\Act')->create(['contract_id' => $contract->id]);
         });
     }
 }
