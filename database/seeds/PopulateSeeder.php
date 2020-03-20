@@ -24,19 +24,16 @@ class PopulateSeeder extends Seeder
             /**
                * @var  string  $contracts
             */
-            private $contracts;
 
             $contracts = factory('App\Contract')->create(['servant_id' => $servant->id]);
             /**
                * @var  string  $dependents
             */
-            private $dependents;
 
             $dependents = factory('App\Dependent')->create(['servant_id' => $servant->id]);
             /**
                * @var  string  $licenses
             */
-            private $licenses;
 
             $licenses = factory('App\License')->create(['servant_id' => $servant->id]);
         });
@@ -45,7 +42,7 @@ class PopulateSeeder extends Seeder
             /**
                * @var  string  $acts
             */
-            private $acts;
+            
             $acts = factory('App\Act')->create(['contract_id' => $contract->id]);
         });
     }
