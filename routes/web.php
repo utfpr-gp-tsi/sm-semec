@@ -24,6 +24,7 @@ Route::namespace('Admin')->group(function () {
 	Route::delete('/users/{id}', ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']);
 	Route::get('/users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
 	Route::patch('/users/{id}', ['as' => 'users.update', 'uses' => 'UsersController@update']);
+	
 
 
 
@@ -43,7 +44,3 @@ Route::namespace('Admin')->group(function () {
 
 
 });
-
-
-
-

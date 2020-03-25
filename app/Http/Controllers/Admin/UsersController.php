@@ -7,7 +7,6 @@ use App\Http\Controllers\AppController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Hash;
-
 class UsersController extends AppController
 {
     /**
@@ -29,7 +28,7 @@ class UsersController extends AppController
     public function create()
     {
        
-        return view('admin.users.register');
+        return view('admin.users.new');
     }
 
     /**
@@ -50,16 +49,12 @@ class UsersController extends AppController
            'name' => $request->get('name'),
            'email' => $request->get('email'),
            'password' => $request->get('password'),
-           
-
         ]);
           
           $users = $request->all();
           $users['password'] = Hash::make($users['password']);
-         
- 
-        $user->save();
-        return redirect('/admin/users');
+          $user->save();
+          return redirect('/admin/users');
     }
 
     /**
@@ -98,28 +93,42 @@ class UsersController extends AppController
     
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-        ]);
         
         $user = User::find($id);
 
+        
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'nullable|confirmed',
+            'password_confirmation' => 'nullable',
+            
+            
+        ]);
+        
+     
+
+        $data = $request->all();
+         
+
         if ($user) {
-            $data = $request->all();
+            
+           
+            if($data['password'] != null) {
+                $data['password'] = Hash::make($data['password']);
+                 $user->update($data);
+                return redirect()->route('users.show', $user->id)->with('success', 'Administrador atualizado com sucesso TESTE');
+        }
+          $data['password'] = $user->password;
+
        
             $user->update($data);
             return redirect()->route('users.show', $user->id)->with('success', 'Administrador atualizado com sucesso');
         }
         return redirect()->route('users')->with('danger', 'Não foi possível atualizar esse administrador.');
     }
-
-        
-
-      
-            
-        
-   
+    
     /**
      * Remove the specified resource from storage.
      *
