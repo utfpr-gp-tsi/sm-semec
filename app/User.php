@@ -49,6 +49,11 @@ class User extends Authenticatable
     ];
 
 
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return date('d/m/y H:i', strtotime($value));

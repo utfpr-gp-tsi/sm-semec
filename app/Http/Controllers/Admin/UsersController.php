@@ -6,7 +6,7 @@ use App\User;
 use App\Http\Controllers\AppController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Hash;
+
 class UsersController extends AppController
 {
     /**
@@ -16,7 +16,7 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = User::latest()->paginate(5);
+        $users = User::all();
         return view('admin.users.index', compact('users'));
     }
 
@@ -25,7 +25,7 @@ class UsersController extends AppController
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function new()
     {
         $user = new User();
         return view('admin.users.new', compact('user'));
@@ -37,24 +37,24 @@ class UsersController extends AppController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required |email|unique:users,email',
-            'password' => 'required',
+        $data = $request->all();
+        $user = new User($data);
+
+        $validator = Validator::make($data, [
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
         ]);
 
-        $user = new User([
-           'name' => $request->get('name'),
-           'email' => $request->get('email'),
-           'password' => $request->get('password'),
-        ]);
+        if ($validator->fails()) {
+            $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
+            return view('admin.users.new', compact('user'))->withErrors($validator);
+        }
 
-          $users = $request->all();
-          $users['password'] = Hash::make($users['password']);
-          $user->save();
-          return redirect('/admin/users');
+        $user->save();
+        return redirect()->route('admin.users')->with('success', 'Usuário cadastrado com sucesso');
     }
 
     /**
@@ -66,7 +66,6 @@ class UsersController extends AppController
     public function show($id)
     {
         $user = User::find($id);
-
         return view('admin.users.show', compact('user'));
     }
 
@@ -79,7 +78,6 @@ class UsersController extends AppController
     public function edit($id)
     {
         $user = User::find($id);
-
         return view('admin.users.edit', compact('user'));
     }
 
@@ -95,38 +93,22 @@ class UsersController extends AppController
     {
 
         $user = User::find($id);
+        $data = array_filter($request->all());
 
-
-
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'nullable|confirmed',
-            'password_confirmation' => 'nullable',
-
-
+        $validator = Validator::make($data, [
+            'name'     => 'required',
+            'email'    => "required|email|unique:users,email,{$user->id},id",
+            'password' => 'string|min:6',
         ]);
 
-
-
-        $data = $request->all();
-
-
-        if ($user) {
-
-
-            if($data['password'] != null) {
-                $data['password'] = Hash::make($data['password']);
-                 $user->update($data);
-                return redirect()->route('users.show', $user->id)->with('success', 'Administrador atualizado com sucesso TESTE');
+        $user->fill($data);
+        if ($validator->fails()) {
+            $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
+            return view('admin.users.edit', compact('user'))->withErrors($validator);
         }
-          $data['password'] = $user->password;
 
-
-            $user->update($data);
-            return redirect()->route('users.show', $user->id)->with('success', 'Administrador atualizado com sucesso');
-        }
-        return redirect()->route('users')->with('danger', 'Não foi possível atualizar esse administrador.');
+        $user->save();
+        return redirect()->route('admin.users')->with('success', 'Usuário atualizado com sucesso');
     }
 
     /**
@@ -139,11 +121,7 @@ class UsersController extends AppController
     public function destroy($id)
     {
         $user = User::find($id);
-        if ($user) {
-            $user->delete();
-
-            return redirect()->route('users')->with('success', 'Administrador removido com sucesso.');
-        }
-        return redirect()->route('users')->with('danger', 'Administrador indisponível.');
+        $user->delete();
+        return redirect()->route('admin.users')->with('success', 'Usuário removido com sucesso.');
     }
 }
