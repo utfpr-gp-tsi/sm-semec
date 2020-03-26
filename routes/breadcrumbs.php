@@ -26,3 +26,24 @@ Breadcrumbs::for('password.update', function ($trail) {
 	$trail->parent('profile.edit');
 	$trail->push('Alterar Senha', route('password.update'));
 });
+
+Breadcrumbs::for('admin.users', function ($trail) {
+	$trail->parent('admin.dashboard');
+	$trail->push('Administradores', route('admin.users'));
+});
+
+Breadcrumbs::for('admin.show.user', function ($trail, $user) {
+	$trail->parent('admin.users');
+	$trail->push('Administrador', route('admin.show.user',$user));
+});
+
+Breadcrumbs::for('admin.edit.user', function ($trail, $user) {
+	$trail->parent('admin.show.user', $user);
+	$trail->push('Editar Administrador', route('admin.edit.user', $user));
+});
+
+Breadcrumbs::for('admin.new.user', function ($trail) {
+	$trail->parent('admin.users');
+	$trail->push('Novo Administrador', route('admin.new.user'));
+});
+
