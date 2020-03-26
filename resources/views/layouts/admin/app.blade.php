@@ -36,7 +36,7 @@
 
           <div class="col-md-9 col-lg-10">
 
-            @include('layouts/admin/_breadcrumbs')
+            @include('shared/_breadcrumbs')
 
             <div class="card" id="main-card">
               <div class="card-header">

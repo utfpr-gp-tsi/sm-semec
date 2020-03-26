@@ -5,6 +5,7 @@
 @section('content')
 
 <form action="{{route('profile.update')}}" method="post" enctype="multipart/form-data" novalidate>
+	@method('PUT')
   @csrf
 
   @component('components.form.input_text',['field'    => 'name',
