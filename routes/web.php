@@ -34,12 +34,12 @@ Route::namespace('Admin')->group(function () {
 
 	/* Users resources
 	|-------------------------------------------------------------------------- */
-	Route::get('/users', ['as' => 'users', 'uses' => 'UsersController@index']);
-	Route::get('/users/new', ['as' => 'register', 'uses' => 'UsersController@create']);
-	Route::post('/users', ['as' => 'users.register', 'uses' => 'UsersController@store']);
-	Route::get('/users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show']);
-	Route::delete('/users/{id}', ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']);
-	Route::get('/users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
-	Route::patch('/users/{id}', ['as' => 'users.update', 'uses' => 'UsersController@update']);
+	Route::get('/users',           ['as' => 'admin.users',        'uses' => 'UsersController@index']);
+	Route::get('/users/new',       ['as' => 'admin.new.user',     'uses' => 'UsersController@create']);
+	Route::post('/users',          ['as' => 'admin.create.user',  'uses' => 'UsersController@store']);
+	Route::get('/users/{id}',      ['as' => 'admin.show.user',    'uses' => 'UsersController@show']);
+	Route::get('/users/{id}/edit', ['as' => 'admin.edit.user',    'uses' => 'UsersController@edit']);
+	Route::patch('/users/{id}',    ['as' => 'admin.update.user',  'uses' => 'UsersController@update']);
+	Route::delete('/users/{id}',   ['as' => 'admin.destroy.user', 'uses' => 'UsersController@destroy']);
     });
 });
