@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
+use App\Services\DateFormatter;
 
 class User extends Authenticatable
 {
@@ -56,11 +57,11 @@ class User extends Authenticatable
 
     public function getCreatedAtAttribute($value)
     {
-        return date('d/m/y H:i', strtotime($value));
+        return DateFormatter::short($value);
     }
 
     public function getUpdatedAtAttribute($value)
     {
-        return date('d/m/y H:i', strtotime($value));
+        return DateFormatter::short($value);
     }
 }
