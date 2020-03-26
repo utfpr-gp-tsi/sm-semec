@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="table-striped mt-3 table-responsive">
-  <table class="table card-table table-vcenter ">
+  <table class="table card-table table-vcenter table-data">
     <div class="col-lg-10 mb-2">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Procurar...">
@@ -34,8 +34,8 @@
           <td>{{ $user->email }}</td>
           <td>{{$user->dateFormat($user->created_at)}}</td>
           <td >
-            @component('components.form.method_delete', ['url' => route('users.destroy', $user->id)]) @endcomponent
-            @component('components.form.method_edit', ['url' => route('users.edit', $user->id)]) @endcomponent
+            @component('components.links.edit', ['url' => route('users.edit', $user->id)]) @endcomponent
+            @component('components.links.delete', ['url' => route('users.destroy', $user->id)]) @endcomponent
           </td>
         </tr>
       </tbody>
