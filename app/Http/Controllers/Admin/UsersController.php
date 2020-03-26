@@ -27,8 +27,8 @@ class UsersController extends AppController
      */
     public function create()
     {
-       
-        return view('admin.users.new');
+        $user = new User();
+        return view('admin.users.new', compact('user'));
     }
 
     /**
@@ -50,7 +50,7 @@ class UsersController extends AppController
            'email' => $request->get('email'),
            'password' => $request->get('password'),
         ]);
-          
+
           $users = $request->all();
           $users['password'] = Hash::make($users['password']);
           $user->save();
@@ -90,31 +90,31 @@ class UsersController extends AppController
      * @param  \App\User  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    
+
     public function update(Request $request, $id)
     {
-        
+
         $user = User::find($id);
 
-        
+
 
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'nullable|confirmed',
             'password_confirmation' => 'nullable',
-            
-            
+
+
         ]);
-        
-     
+
+
 
         $data = $request->all();
-         
+
 
         if ($user) {
-            
-           
+
+
             if($data['password'] != null) {
                 $data['password'] = Hash::make($data['password']);
                  $user->update($data);
@@ -122,13 +122,13 @@ class UsersController extends AppController
         }
           $data['password'] = $user->password;
 
-       
+
             $user->update($data);
             return redirect()->route('users.show', $user->id)->with('success', 'Administrador atualizado com sucesso');
         }
         return redirect()->route('users')->with('danger', 'Não foi possível atualizar esse administrador.');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *

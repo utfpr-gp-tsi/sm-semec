@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return date('d/m/y H:i', strtotime($value));
     }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return date('d/m/y H:i', strtotime($value));
+    }
 }
