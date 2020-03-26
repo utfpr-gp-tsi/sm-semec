@@ -3,22 +3,10 @@
 @section('title', 'Administradores')
 @section('content')
 
+@component('components.index.header', ['search_url' => route('users'), 'new_url' => route('register')]) @endcomponent
+
 <div class="table-striped mt-3 table-responsive">
   <table class="table card-table table-vcenter table-data">
-    <div class="col-lg-10 mb-2">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Procurar...">
-        <span class="input-group-append">
-          <a class="btn btn-outline-info" >
-            <i class="fas fa-search"></i>
-          </a>
-          <a  class="btn btn-outline-primary col-lg-12 ml-5 " href="/admin/users/new" >
-            <i class="fas fa-plus"></i>
-            Novo Servidor
-          </a>
-        </span>
-      </div>
-    </div>
     <thead>
       <tr>
         <th>Nome</th>
