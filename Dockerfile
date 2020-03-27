@@ -67,6 +67,11 @@ COPY . /var/www
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
 
+# Cache vendor directory
+RUN mkdir /vendor
+RUN chown -R www:www /vendor
+RUN ln -sf /vendor /var/www/vendor
+
 # Change current user to www
 USER www
 
