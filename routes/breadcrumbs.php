@@ -32,18 +32,29 @@ Breadcrumbs::for('admin.users', function ($trail) {
 	$trail->push('Administradores', route('admin.users'));
 });
 
-Breadcrumbs::for('admin.show.user', function ($trail, $user) {
+Breadcrumbs::for('admin.show.user', function ($trail, $id) {
 	$trail->parent('admin.users');
-	$trail->push('Administrador', route('admin.show.user',$user));
+	$trail->push('Administrador #'.$id , route ('admin.show.user', $id));
 });
 
-Breadcrumbs::for('admin.edit.user', function ($trail, $user) {
-	$trail->parent('admin.show.user', $user);
-	$trail->push('Editar Administrador', route('admin.edit.user', $user));
+Breadcrumbs::for('admin.edit.user', function ($trail, $id) {
+	$trail->parent('admin.users', $id);
+	$trail->push('Editar Administrador #'.$id, route('admin.edit.user', $id));
 });
+
+Breadcrumbs::for('admin.update.user', function ($trail, $id) {
+	$trail->parent('admin.users');
+    $trail->push('Editar Administrador', route('admin.update.user', $id));
+});
+
 
 Breadcrumbs::for('admin.new.user', function ($trail) {
 	$trail->parent('admin.users');
 	$trail->push('Novo Administrador', route('admin.new.user'));
 });
 
+
+Breadcrumbs::for('admin.create.user', function ($trail) {
+	$trail->parent('admin.users');
+    $trail->push('Novo Administrador', route('admin.create.user'));
+});

@@ -34,10 +34,9 @@ class UsersController extends AppController
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+     * @return  \Illuminate\View\View.
+       */
     public function create(Request $request)
     {
         $data = $request->all();
@@ -87,12 +86,12 @@ class UsersController extends AppController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\View\View
      */
 
     public function update(Request $request, $id)
     {
-
+        
         $user = User::find($id);
         $data = array_filter($request->all());
 
