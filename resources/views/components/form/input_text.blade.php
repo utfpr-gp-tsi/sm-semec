@@ -1,12 +1,12 @@
-<div class="form-group password @if ($required) required @endif {{ $model }}_{{ $field }}">
+<div class="form-group string @if ($required) required @endif {{ $model }}_{{ $field }}">
 
-	<label class="form-control-label password required" for="name">
+	<label class="form-control-label string required" for="name">
 		{{ $label}} @if ($required) <abbr title="obrigatório">*</abbr> @endif
 	</label>
 
-	<input class="form-control password @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
+	<input class="form-control string @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
 				 @if ($required) required="required" @endif
-				 autofocus="autofocus" type="password" name="{{ $field }}"
+				 autofocus="autofocus" type="text" name="{{ $field }}"
 	  		 value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}"/>
 
 	@if ($errors->has($field))
@@ -19,4 +19,3 @@
 
 	<small class="form-text text-muted">{{ $hint ?? ''}}</small>
 </div>
-

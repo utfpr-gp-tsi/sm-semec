@@ -41,7 +41,7 @@ class ProfileController extends AppController
             'name' => 'required',
             'email' => 'required|email',
         ]);
-        
+
         $user->fill($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
@@ -79,8 +79,7 @@ class ProfileController extends AppController
             'password_confirmation' => 'required|min:6',
         ]);
 
-        $password = $request->input('password');
-        $user->password = Hash::make($password);
+        $user->password = $request->input('password');
         $user->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'Senha alterada com sucesso');

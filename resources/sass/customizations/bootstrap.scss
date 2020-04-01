@@ -3,10 +3,14 @@ body {
 }
 
 .page-main {
-	flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .table.table-data tbody tr td:last-child {
   text-align: right;
 }
 
+.btn-link {
+    background-color: transparent;
+    border: 0px solid transparent;
+}
