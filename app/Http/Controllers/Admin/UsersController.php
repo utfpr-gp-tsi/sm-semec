@@ -91,7 +91,6 @@ class UsersController extends AppController
 
     public function update(Request $request, $id)
     {
-        
         $user = User::find($id);
         $data = array_filter($request->all());
 
