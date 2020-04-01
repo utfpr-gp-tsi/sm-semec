@@ -18,5 +18,11 @@
       </span>
       Servidores
     </a>
+    <a class="list-group-item list-group-item-action" href="{{ route('admin.users') }}">
+      <span class="icon mr-2">
+        <i class="fas fa-user-plus"></i>
+      </span>
+      Administradores
+    </a>
   </div>
 </div>

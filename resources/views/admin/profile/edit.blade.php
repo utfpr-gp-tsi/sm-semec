@@ -8,26 +8,29 @@
 	@method('PUT')
   @csrf
 
-  @component('components.form.input_name',['field'  => 'name',
- 					   'label'  => 'Nome',
-					   'model'  => 'user',
-					   'value'  => $user->name,
-					   'errors' => $errors]) @endcomponent
+  @component('components.form.input_text',['field'    => 'name',
+ 					   'label'    => 'Nome',
+					   'model'    => 'user',
+					   'value'    => $user->name,
+                                           'required' => true,
+					   'errors'   => $errors]) @endcomponent
 
   <div class="form-row">
     <div class="col-sm-8">
-      @component('components.form.input_email',['field'  => 'email',
-						'label'  => 'Email',
-						'model'  => 'user',
-						'value'  => $user->email,
-						'errors' => $errors]) @endcomponent
+      @component('components.form.input_email',['field'    => 'email',
+						'label'    => 'Email',
+						'model'    => 'user',
+						'value'    => $user->email,
+						'required' => true,
+						'errors'   => $errors]) @endcomponent
 
 
-      @component('components.form.input_password',['field'  => 'current_password',
-  						   'label'  => 'Senha Atual',
-						   'hint'   => 'precisamos da sua senha atual para confirmar suas mudanças',
-						   'model'  => 'user',
-						   'errors' => $errors]) @endcomponent
+      @component('components.form.input_password',['field'    => 'current_password',
+  						   'label'    => 'Senha Atual',
+						   'hint'     => 'precisamos da sua senha atual para confirmar suas mudanças',
+						   'model'    => 'user',
+						   'required' => true,
+						   'errors'   => $errors]) @endcomponent
     </div>
 
     <div class="col-sm-4">
@@ -38,6 +41,6 @@
     </div>
   </div>
 
-  @component('components.form.input_submit',['value' => 'Atualizar']) @endcomponent
+  @component('components.form.input_submit', ['value' => 'Atualizar', 'back_url' => route('admin.dashboard')]) @endcomponent
 </form>
 @endsection

@@ -7,7 +7,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <title>@include('shared/_full_title')</title>
 
      <!--Icons-->
@@ -42,20 +41,19 @@
             <div class="card" id="main-card">
               <div class="card-header">
                 <h1 class="page-title mb-3">
-                 @yield('title')
-               </h1>
-             </div>
-             <div class="card-body">
-              <div>
-                @include('shared/_flash')
+                  @yield('title')
+                </h1>
               </div>
-              @yield('content')
+
+              <div class="card-body">
+                @include('shared/_flash')
+                @yield('content')
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </body>
 </html>
