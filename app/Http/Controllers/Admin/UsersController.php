@@ -35,7 +35,7 @@ class UsersController extends AppController
     /**
      * Store a newly created resource in storage.
      * @param  \Illuminate\Http\Request  $request
-     * @return  \Illuminate\View\View.
+     * @return  \Illuminate\View\View | \Illuminate\Http\RedirectResponse.
        */
     public function create(Request $request)
     {
@@ -86,7 +86,7 @@ class UsersController extends AppController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $id
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
 
     public function update(Request $request, $id)
