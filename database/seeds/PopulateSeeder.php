@@ -18,7 +18,7 @@ class PopulateSeeder extends Seeder
         DB::table('licenses')->delete();
         DB::table('servants')->delete();
 
-        $servants = factory('App\Servant', 2)->create();
+        $servants = factory('App\Servant', 1)->create();
 
         $servants->each(function($servant) {
 

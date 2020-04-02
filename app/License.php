@@ -11,9 +11,9 @@ class License extends Model
     */
     protected $fillable = [
         'registration',
-        'start date',
-        'finish date',
-        'license type',
+        'start_date',
+        'finish_date',
+        'license_type',
         'days',
         'servant_id',
     ];

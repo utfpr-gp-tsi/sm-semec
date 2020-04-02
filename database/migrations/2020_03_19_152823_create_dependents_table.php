@@ -17,7 +17,6 @@ class CreateDependentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->date('birth');
-            $table->integer('age');
             $table->string('degree');
             $table->char('study');
             $table->string('works');

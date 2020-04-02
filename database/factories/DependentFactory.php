@@ -20,7 +20,6 @@ $factory->define(Dependent::class, function (Faker $faker) {
     return [
         'name' => $faker->name(),
         'birth' => $faker->date(),
-        'age' => $faker->randomNumber(),
         'degree' => $faker->text(),
         'study' => $faker->text(),
         'works' => $faker->text(),

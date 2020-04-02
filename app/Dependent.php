@@ -12,7 +12,6 @@ class Dependent extends Model
     protected $fillable = [
         'name',
         'birth',
-        'age',
         'degree',
         'study',
         'works',
