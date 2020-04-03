@@ -47,7 +47,8 @@ class ProfileController extends AppController
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
             return view('admin.profile.edit', compact('user'))->withErrors($validator);
         }
-
+        $user->uploadImage($request->image);
+        
         $user->save();
         return redirect()->route('profile.edit')->with('success', 'Perfil atualizado com sucesso');
     }

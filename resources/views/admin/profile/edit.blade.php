@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form action="{{route('profile.update')}}" method="post" enctype="multipart/form-data" novalidate>
+<form action="{{route('profile.update')}}" method="post" enctype="multipart/form-data" novalidate id="form">
 	@method('PUT')
   @csrf
 
