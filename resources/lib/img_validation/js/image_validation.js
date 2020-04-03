@@ -1,7 +1,7 @@
 $(document).ready(function(){
   const input = $('.image_preview input[type=file]');
   SMSemec.imageValidation(input);
-  $.validator.addMethod('filesize', function(value, element, param) {
+  $.validator.addMethod('filesize', function(element, param) {
     var count = 0;
     for (var i = 0; i < element.files.length; i++) {
       count += element.files[i].size;

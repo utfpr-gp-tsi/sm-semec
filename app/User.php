@@ -8,6 +8,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\DateFormatter;
+use App\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\UploadedFile;
 
 class User extends Authenticatable
 {
@@ -63,5 +67,19 @@ class User extends Authenticatable
     public function getUpdatedAtAttribute($value)
     {
         return DateFormatter::short($value);
+    }
+
+    public function uploadImage($image)
+    {
+        if ($image == null) {
+            return false;
+        }
+        $name = Str::slug($this->id . $this->name, '-');
+        $extension = $this->image->extension();
+        $nameFile = "{$name}.{$extension}";
+        $this->image = $nameFile;
+        $destination = base_path() . '/public/assets/';
+        $image->move($destination, $nameFile);
+        return true;
     }
 }
