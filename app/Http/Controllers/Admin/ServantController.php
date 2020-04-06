@@ -19,8 +19,8 @@ class ServantController extends Controller
      */
     public function index()
     {
-        $servant = Servant::all();
-        return view('servant.index', compact('servant'));
+        $servants = Servant::all();
+        return view('servant.index', compact('servants'));
     }
 
     /**
@@ -52,14 +52,13 @@ class ServantController extends Controller
      */
     public function show($id)
     {
-        $servant = Servant::find($id);
+        $servants = Servant::find($id);
         $contracts = Contract::all();
         $dependents = Dependent::all();
         $acts = Act::all();
         $licenses = License::all();
-        dd($contracts); exit();
 
-        return view('servant.show', compact('servant' , 'contracts' , 'dependents' , 'acts' , 'licenses'));
+        return view('servant.show', compact('servants' , 'contracts' , 'dependents' , 'acts' , 'licenses'));
     }
 
     /**

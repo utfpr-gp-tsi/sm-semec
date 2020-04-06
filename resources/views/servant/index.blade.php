@@ -19,22 +19,26 @@
            <th colspan="3"></th>
          </tr>
        </thead>
-         @foreach($servant as $key => $servant)
+        @foreach($servants as $servants)
        <tbody>
          <tr>
-           <td><a href="{{route('admin.date',$servant->id)}}">{{ $servant->servant }}</a></td>
-           <td>{{ $servant->registration }}</td> 
-           <td>{{ $servant->contract['place'] }}</td> 
-           <td>{{ $servant->CPF }}</td> 
-           <td>{{ $servant->contract['role'] }}</td> 
+           <td><a href="{{route('admin.date',$servants->id)}}">{{ $servants->servant }}</a></td>
+           <td>{{ $servants->registration }}</td> 
+
+            @foreach($servants->contracts as $contract)
+             <td>{{ $contract->place }}</td>
+             <td>{{ $contract->role }}</td>
+            @endforeach
+
+           <td>{{ $servants->CPF }}</td> 
+
            <td class="text-center">
            </td>
          </tr>
        </tbody>
-         @endforeach
+        @endforeach
     </table>
   </div>
 </div>
 
-     @endsection
-     
+@endsection

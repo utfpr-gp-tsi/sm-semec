@@ -58,3 +58,15 @@ Breadcrumbs::for('admin.create.user', function ($trail) {
     $trail->parent('admin.users');
     $trail->push('Novo Administrador', route('admin.create.user'));
 });
+
+Breadcrumbs::for('admin.servants', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Servidores', route('admin.servants'));
+});
+
+Breadcrumbs::for('admin.date', function ($trail, $id) {
+    $servant = App\Servant::findOrFail($id);
+    $trail->parent('admin.dashboard');
+    $trail->push('Servidores', route('admin.servants'));
+    $trail->push('Dados Pessoais', route('admin.date', $servant));
+});
