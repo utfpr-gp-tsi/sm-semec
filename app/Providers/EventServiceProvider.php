@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        \App\Events\EventDelete::class => [
+            \App\Listeners\DeleteListener::class,
+        ],
     ];
 
     /**
@@ -28,7 +31,10 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+    }
 
-        //
+    public function shouldDiscoverEvents()
+    {
+        return true;
     }
 }

@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\UploadedFile;
+use App\Events\EventDelete;
 
 class User extends Authenticatable
 {
@@ -81,5 +82,10 @@ class User extends Authenticatable
         $destination = base_path() . '/public/assets/';
         $image->move($destination, $nameFile);
         return true;
+    }
+
+    public function delete()
+    {
+        event(new EventDelete($this));
     }
 }

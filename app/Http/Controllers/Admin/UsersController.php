@@ -7,6 +7,7 @@ use App\Http\Controllers\AppController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Services\DateFormatter;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends AppController
 {
