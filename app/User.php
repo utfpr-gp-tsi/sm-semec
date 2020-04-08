@@ -79,7 +79,7 @@ class User extends Authenticatable
         $extension = $this->image->extension();
         $nameFile = "{$name}.{$extension}";
         $this->image = $nameFile;
-        $destination = base_path() . '/public/assets/';
+        $destination = base_path() . '/public/uploads/users/' . $this->id;
         $image->move($destination, $nameFile);
         return true;
     }

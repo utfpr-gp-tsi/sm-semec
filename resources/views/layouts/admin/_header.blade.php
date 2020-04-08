@@ -10,7 +10,13 @@
       <div class="d-flex order-lg-2 ml-auto">
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+
+            @if(Auth()->user()->image != '/images/default/users/default-user.png')
+            <span class="avatar" style="background-image: url({{ asset('/uploads/users/'.auth()->user()->id.'/'.auth()->user()->image)}})"></span>
+            @else
             <span class="avatar" style="background-image: url({{ asset('/assets/'.auth()->user()->image)}})"></span>
+            @endif
+            
             <span class="ml-2 d-none d-lg-block">
               <span class="text-default">  {{ Auth::user()->name }}</span>
               <small class="text-muted d-block mt-1">  {{ Auth::user()->email }}</small>
