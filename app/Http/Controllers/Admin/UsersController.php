@@ -14,10 +14,11 @@ class UsersController extends AppController
      * Display a listing of the resource.
      *
      *  @return \Illuminate\View\View
+     *  @param  \App\User    $search
      */
-    public function index()
+    public function index($search = null)
     {
-        $users = User::all();
+        $users = User::search($search);
         return view('admin.users.index', compact('users'));
     }
 
