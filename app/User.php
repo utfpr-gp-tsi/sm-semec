@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\UploadedFile;
 use App\Events\EventDelete;
+use App\Services\ImageDefault;
 
 class User extends Authenticatable
 {
@@ -70,13 +71,22 @@ class User extends Authenticatable
         return DateFormatter::short($value);
     }
 
+    public function getImageAttribute($value)
+    {
+        if ($value == null) {
+            return '/assets/images/default/users/default-user.png';
+        }
+
+        return '/uploads/users/' . $this->id . '/' . $value;
+    }
+    
     public function uploadImage($image)
     {
         if ($image == null) {
             return false;
         }
         $name = Str::slug($this->id . $this->name, '-');
-        $extension = $this->image->extension();
+        $extension = $image->extension();
         $nameFile = "{$name}.{$extension}";
         $this->image = $nameFile;
         $destination = base_path() . '/public/uploads/users/' . $this->id;
