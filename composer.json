@@ -12,7 +12,6 @@
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
-        "laravel/scout": "^8.0",
         "laravel/tinker": "^2.0",
         "lucascudo/laravel-pt-br-localization": "^1.0"
     },
@@ -43,9 +42,6 @@
         "psr-4": {
             "App\\": "app/"
         },
-        "files": [
-            "app/Http/helpers.php"
-        ],
         "classmap": [
             "database/seeds",
             "database/factories"

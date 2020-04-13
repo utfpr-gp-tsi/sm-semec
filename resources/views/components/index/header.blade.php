@@ -1,12 +1,11 @@
-
 <div class="row">
   <div class="col-sm-12 col-lg-8 mb-2">
     <div>
       <div class="input-group input-icon">
         <input id="search_input" type="text" name="term" data-url="{{ $search_url }}"
-               placeholder="Procurar..." class="form-control enter-to-submit-search" value="{{ Request()->term }}">
+               placeholder="Procurar..." class="form-control enter-to-submit-search">
         <span class="input-group-append">
-          <a id="search" href="{{ $search_url }}" class="btn btn-outline-primary submit-search">
+          <a id="search" href="#" class="btn btn-outline-primary submit-search">
             <i class="fas fa-search"></i>
           </a>
         </span>
@@ -20,5 +19,3 @@
     </a>
   </div>
 </div>
-
-

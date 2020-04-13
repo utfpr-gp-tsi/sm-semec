@@ -58,8 +58,3 @@ Breadcrumbs::for('admin.create.user', function ($trail) {
     $trail->parent('admin.users');
     $trail->push('Novo Administrador', route('admin.create.user'));
 });
-
-Breadcrumbs::for('admin.search.users', function ($trail) {
-    $trail->push('Pesquisar Administrador', route('admin.search.users'));
-});
-

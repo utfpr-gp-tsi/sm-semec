@@ -64,14 +64,4 @@ class User extends Authenticatable
     {
         return DateFormatter::short($value);
     }
-
-    public static function search($term)
-    {
-        if ($term) {
-            $searchTerm = "%{$term}%";
-            return User::query()->where('name', 'LIKE', $searchTerm)->orWhere('email', 'LIKE', $searchTerm)->get();
-        }
-
-        return User::all();
-    }
 }
