@@ -5,7 +5,7 @@
 
 <div class="card">
   <div class="card-body">
-    <img class="card-profile-img mt-1" src="{{ $user->image }}">
+    <img class="card-profile-img mt-1" src="{{$user->image}}">
     <p><strong>Nome: </strong> {{ $user->name }}</p>
     <p><strong>Email: </strong> {{ $user->email }}</p>
     <p><strong>Criado em: </strong> {{ $user->created_at }}</p>
