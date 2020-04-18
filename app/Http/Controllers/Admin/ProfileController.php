@@ -47,8 +47,7 @@ class ProfileController extends AppController
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
             return view('admin.profile.edit', compact('user'))->withErrors($validator);
         }
-        $user->uploadImage($request->image);
-        
+
         $user->save();
         return redirect()->route('profile.edit')->with('success', 'Perfil atualizado com sucesso');
     }
@@ -69,7 +68,7 @@ class ProfileController extends AppController
      * @param  \Illuminate\Http\Request  $request
      * @return  \Illuminate\Http\RedirectResponse.
      */
-    
+
     public function updatePassword(Request $request)
     {
         $user = User::find(\Auth::user()->id);

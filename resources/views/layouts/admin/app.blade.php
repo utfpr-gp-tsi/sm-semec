@@ -14,7 +14,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('assets/vendor/jquery/jquery-3.2.1.min.js') }}" defer></script>
-    <script src="{{ asset('assets/vendor/jquery/jquery-validation.js') }}" defer></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
     <script src="{{ asset('assets/js/admin/app.js') }}" defer></script>
 

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form action="{{route('profile.update')}}" method="post" enctype="multipart/form-data" novalidate id="form">
+<form action="{{route('profile.update')}}" method="post" enctype="multipart/form-data" novalidate>
 	@method('PUT')
   @csrf
 
@@ -34,10 +34,10 @@
     </div>
 
     <div class="col-sm-4">
-      @component('components.form.input_image_preview',['field' => 'image',
-							'label' => 'Clique na imagem para alterá-la',
-							'asset' => $user->image,
-							'model' => 'user']) @endcomponent
+      @component('components.form.input_image_preview',['field'      => 'image',
+							'label'      => 'Clique na imagem para alterá-la',
+							'image_path' => $user->image_path,
+							'model'      => 'user']) @endcomponent
     </div>
   </div>
 

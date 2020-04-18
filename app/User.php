@@ -8,16 +8,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\DateFormatter;
-use App\User;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\UploadedFile;
-use App\Events\EventDelete;
-use App\Services\ImageDefault;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    public $image_file = null;
 
     /**
      * The attributes that are mass assignable.
@@ -55,6 +51,9 @@ class User extends Authenticatable
         'created_at', 'updated_at',
     ];
 
+    protected $appends = [
+        'image_path',
+    ];
 
     public function setPasswordAttribute($value)
     {
@@ -71,31 +70,19 @@ class User extends Authenticatable
         return DateFormatter::short($value);
     }
 
-    public function getImageAttribute($value)
+    public function getImagePathAttribute()
     {
-        if ($value == null) {
+        if ($this->getOriginal('image') == null) {
             return '/assets/images/default/users/default-user.png';
         }
 
-        return '/uploads/users/' . $this->id . '/' . $value;
-    }
-    
-    public function uploadImage($image)
-    {
-        if ($image == null) {
-            return false;
-        }
-        $name = Str::slug($this->id . $this->name, '-');
-        $extension = $image->extension();
-        $nameFile = "{$name}.{$extension}";
-        $this->image = $nameFile;
-        $destination = base_path() . '/public/uploads/users/' . $this->id;
-        $image->move($destination, $nameFile);
-        return true;
+        return '/uploads/users/' . $this->id . '/' . $this->getOriginal('image');
     }
 
-    public function delete()
+    public function saveWithoutEvents(array $options = [])
     {
-        event(new EventDelete($this));
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
     }
 }
