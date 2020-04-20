@@ -52,23 +52,30 @@ class UserObserver
      */
     private function deleteImageFile($user)
     {
-        $image_directory = public_path('uploads/users/' . $user->id);
-        $image_path = $image_directory  . '/' . $user->image;
+        $imageDirectory = public_path('uploads/users/' . $user->id);
+        $imagePath = $imageDirectory  . '/' . $user->image;
 
-        File::delete($image_path);
-        if (count(glob($image_directory . '/*')) === 0) {
-            File::deleteDirectory($image_directory);
+        File::delete($imagePath);
+        $files = glob($imageDirectory . '/*');
+        if (is_array($files) && count($files) === 0) {
+            File::deleteDirectory($imageDirectory);
         }
     }
 
+    /**
+     * Save file in disk.
+     *
+     * @param  \App\User $user
+     * @return void
+     */
     private function saveImageFile($user)
     {
         if ($user->image != null) {
-            $image_name = Str::slug($user->id . '-' . $user->name, '-') . '.' . $user->image->extension();
-            $store_path = public_path('uploads/users/' . $user->id);
+            $imageName = Str::slug($user->id . '-' . $user->name, '-') . '.' . $user->image->extension();
+            $storePath = public_path('uploads/users/' . $user->id);
 
-            $user->image->move($store_path, $image_name);
-            $user->image = $image_name;
+            $user->image->move($storePath, $imageName);
+            $user->image = $imageName;
         }
     }
 }

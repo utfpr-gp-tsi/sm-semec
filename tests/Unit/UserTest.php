@@ -14,6 +14,7 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
+    /** @var \App\User */
     protected $user;
 
     public function setUp(): void
@@ -27,14 +28,13 @@ class UserTest extends TestCase
         $this->user->delete();
     }
 
-    public function testCreateNoImage()
+    public function testCreateNoImage(): void
     {
-        fwrite(STDERR, print_r(\App::environment(), true));
         $this->assertNull($this->user->image);
         $this->assertEquals($this->defaultImage(), $this->user->image_path);
     }
 
-    public function testUpdateUserWithNewImageWhenImageIsNull()
+    public function testUpdateUserWithNewImageWhenImageIsNull(): void
     {
         $this->user->image = UploadedFile::fake()->image('avatar.png');
         $this->user->save();
@@ -44,7 +44,7 @@ class UserTest extends TestCase
         $this->assertFileExists($this->fullImagePath());
     }
 
-    public function testUpdateNoImage()
+    public function testUpdateNoImage(): void
     {
         $this->user->save();
 
@@ -52,29 +52,29 @@ class UserTest extends TestCase
         $this->assertEquals($this->defaultImage(), $this->user->image_path);
     }
 
-    public function testUpdateUserNoImageWhenImageIsPresent()
+    public function testUpdateUserNoImageWhenImageIsPresent(): void
     {
         $this->user->image = UploadedFile::fake()->image('avatar.png');
         $this->user->save();
 
-        $image_name = $this->imageName();
-        $image_path = $this->imagePath();
-        $image_full_path = $this->fullImagePath();
+        $imageName = $this->imageName();
+        $imagePath = $this->imagePath();
+        $imageFullPath = $this->fullImagePath();
 
         $this->user->name = 'new-name';
         $this->user->save();
 
         $this->assertEquals('new-name', $this->user->name);
-        $this->assertEquals($image_name, $this->user->image);
-        $this->assertEquals($image_path, $this->user->image_path);
-        $this->assertFileExists($image_full_path);
+        $this->assertEquals($imageName, $this->user->image);
+        $this->assertEquals($imagePath, $this->user->image_path);
+        $this->assertFileExists($imageFullPath);
     }
 
-    public function testUpdateUserWithNewImageWhenImageIsPresent()
+    public function testUpdateUserWithNewImageWhenImageIsPresent(): void
     {
         $this->user->image = UploadedFile::fake()->image('avatar.png');
         $this->user->save();
-        $previous_full_image_path = $this->fullImagePath();
+        $previousFullImagePath = $this->fullImagePath();
 
         $this->user->name = 'new-name';
         $this->user->image = UploadedFile::fake()->image('avatar.png');
@@ -84,35 +84,35 @@ class UserTest extends TestCase
         $this->assertEquals($this->imageName(), $this->user->image);
         $this->assertEquals($this->imagePath(), $this->user->image_path);
         $this->assertFileExists($this->fullImagePath());
-        $this->assertFileNotExists($previous_full_image_path);
+        $this->assertFileNotExists($previousFullImagePath);
     }
 
-    public function testWhenDeleteUserShouldDeleteTheImage()
+    public function testWhenDeleteUserShouldDeleteTheImage(): void
     {
         $this->user->image = UploadedFile::fake()->image('avatar.png');
         $this->user->save();
 
-        $previous_full_image_path = $this->fullImagePath();
+        $previousFullImagePath = $this->fullImagePath();
         $this->user->delete();
-        $this->assertFileNotExists($previous_full_image_path);
+        $this->assertFileNotExists($previousFullImagePath);
     }
 
-    private function imageName()
+    private function imageName(): string
     {
         return Str::slug($this->user->id . '-' . $this->user->name, '-') . '.png';
     }
 
-    private function imagePath()
+    private function imagePath(): string
     {
         return '/uploads/users/' . $this->user->id . '/' . $this->imageName();
     }
 
-    private function fullImagePath()
+    private function fullImagePath(): string
     {
         return public_path($this->imagePath());
     }
 
-    private function defaultImage()
+    private function defaultImage(): string
     {
         return '/assets/images/default/users/default-user.png';
     }

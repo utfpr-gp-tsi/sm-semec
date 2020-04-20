@@ -13,8 +13,6 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public $image_file = null;
-
     /**
      * The attributes that are mass assignable.
      *
