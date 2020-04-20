@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'image',
     ];
 
     /**
@@ -49,6 +49,9 @@ class User extends Authenticatable
         'created_at', 'updated_at',
     ];
 
+    protected $appends = [
+        'image_path',
+    ];
 
     public function setPasswordAttribute($value)
     {
@@ -63,5 +66,21 @@ class User extends Authenticatable
     public function getUpdatedAtAttribute($value)
     {
         return DateFormatter::short($value);
+    }
+
+    public function getImagePathAttribute()
+    {
+        if ($this->getOriginal('image') == null) {
+            return '/assets/images/default/users/default-user.png';
+        }
+
+        return '/uploads/users/' . $this->id . '/' . $this->getOriginal('image');
+    }
+
+    public function saveWithoutEvents(array $options = [])
+    {
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
     }
 }
