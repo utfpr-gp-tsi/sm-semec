@@ -12,15 +12,15 @@
       Página inicial
     </a>
 
-    <a class="list-group-item list-group-item-action" href="">
+    <a class="list-group-item list-group-item-action" href="{{ route('admin.servants') }}">
       <span class="icon mr-2">
-        <i class="fas fa-user-plus"></i>
+        <i class="fas fa-users"></i>
       </span>
       Servidores
     </a>
     <a class="list-group-item list-group-item-action {{ setActive(['admin/users*']) }}" href="{{ route('admin.users') }}">
       <span class="icon mr-2">
-        <i class="fas fa-user-plus"></i>
+        <i class="fas fa-users-cog"></i>
       </span>
       Administradores
     </a>

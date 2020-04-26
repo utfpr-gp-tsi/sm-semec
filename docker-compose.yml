@@ -17,6 +17,7 @@ services:
     volumes:
       - ./:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - vendor_path:/vendor
     networks:
       - app-network
 
@@ -32,6 +33,7 @@ services:
     volumes:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - vendor_path:/vendor
     networks:
       - app-network
 
@@ -77,3 +79,4 @@ networks:
 volumes:
   dbdata:
     driver: local
+  vendor_path:

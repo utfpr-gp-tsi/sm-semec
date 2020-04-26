@@ -20,6 +20,7 @@ Homestead.yaml
 /public/css/*
 /public/js/*
 /public/images/*
+/public/uploads/*
 
 ##
 # NPM

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Services\DateFormatter;
 
 class Servant extends Model
 {
@@ -12,11 +13,11 @@ class Servant extends Model
     protected $fillable = [
         'servant',
         'registration',
-        'birth',
-        'natural from',
-        'marital status',
-        'mother name',
-        'father name',
+        'birthed_at',
+        'natural_from',
+        'marital_status',
+        'mother_name',
+        'father_name',
         'CPG',
         'RG',
         'PIS',
@@ -49,5 +50,29 @@ class Servant extends Model
     public function licenses()
     {
         return $this->hasMany(License::class, 'servant_id');
+    }
+
+    /**
+    * @param string $value
+    */
+    public function getBirthedAtAttribute($value): string
+    {
+        return DateFormatter::shortDate($value);
+    }
+
+    /**
+    * @param string $value
+    */
+    public function getCreatedAtAttribute($value): string
+    {
+        return DateFormatter::short($value);
+    }
+
+    /**
+    * @param string $value
+    */
+    public function getUpdatedAtAttribute($value): string
+    {
+        return DateFormatter::short($value);
     }
 }

@@ -68,7 +68,7 @@ class ProfileController extends AppController
      * @param  \Illuminate\Http\Request  $request
      * @return  \Illuminate\Http\RedirectResponse.
      */
-    
+
     public function updatePassword(Request $request)
     {
         $user = User::find(\Auth::user()->id);
