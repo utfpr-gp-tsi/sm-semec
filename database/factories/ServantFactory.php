@@ -1,5 +1,5 @@
 <?php
- 
+
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Servant;
 use Illuminate\Support\Str;
@@ -16,12 +16,12 @@ use Faker\Generator as Faker;
 | model instances for testing / seeding your application's database.
 |
 */
- 
+
 $factory->define(Servant::class, function (Faker $faker) {
     return [
-        'servant' => $faker->name(),
+        'name' => $faker->name(),
         'registration' => $faker->randomNumber(),
-        'birth' => $faker->date(),
+        'birthed_at' => $faker->date(),
         'natural_from' => $faker->text(),
         'marital_status' => $faker->text(),
         'mother_name' => $faker->name(),

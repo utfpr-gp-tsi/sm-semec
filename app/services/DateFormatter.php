@@ -5,11 +5,18 @@ namespace App\Services;
 class DateFormatter
 {
     /**
-     * @return string
-     * @param  \App\User  $value
+     * @param  string  $value
      */
-    public static function short($value)
+    public static function short($value): string
     {
         return \Carbon\Carbon::parse($value)->format('d/m/y H:i');
+    }
+
+    /**
+     * @param  string  $value
+     */
+    public static function shortDate($value): string
+    {
+        return \Carbon\Carbon::parse($value)->format('d/m/y');
     }
 }

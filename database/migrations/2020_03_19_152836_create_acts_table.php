@@ -15,9 +15,9 @@ class CreateActsTable extends Migration
     {
         Schema::create('acts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('act');
-            $table->string('start');
-            $table->string('validaty');
+            $table->string('name');
+            $table->date('started_at');
+            $table->date('ended_at');
             $table->integer('number');
             $table->string('time');
             $table->bigInteger('contract_id')->unsigned()->index()->default(1);

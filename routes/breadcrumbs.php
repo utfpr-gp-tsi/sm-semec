@@ -64,9 +64,7 @@ Breadcrumbs::for('admin.servants', function ($trail) {
     $trail->push('Servidores', route('admin.servants'));
 });
 
-Breadcrumbs::for('admin.date', function ($trail, $id) {
-    $servant = App\Servant::findOrFail($id);
-    $trail->parent('admin.dashboard');
-    $trail->push('Servidores', route('admin.servants'));
-    $trail->push('Dados Pessoais', route('admin.date', $servant));
+Breadcrumbs::for('admin.show.servant', function ($trail, $id) {
+    $trail->parent('admin.servants');
+    $trail->push('Servidor #'.$id , route ('admin.show.servant', $id));
 });

@@ -1,0 +1,36 @@
+:<h3><i>Contratos:</i></h3>
+<div class="table-responsive">
+  <table class="table table-striped table-vcenter">
+    <thead>
+      <tr>
+        <th>Cargo</th>
+        <th>Secretaria</th>
+        <th>Local</th>
+        <th>Data Admissão</th>
+        <th>Data de Rescisão</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($servant->contracts as $contract)
+      <tr>
+        <td>{{ $contract->role }}</td>
+        <td>{{ $contract->secretary }}</td>
+        <td>{{ $contract->place }}</td>
+        <td>{{ $contract->admission_at }}</td>
+        <td>{{ $contract->termination_at }}</td>
+        <td>
+          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#actsModal-{{ $contract->id }}">
+            Atos
+          </button>
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+
+@foreach($servant->contracts as $contract)
+@include('admin.servants._acts')
+@endforeach
+

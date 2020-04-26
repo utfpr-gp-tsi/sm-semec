@@ -42,7 +42,9 @@ Route::namespace('Admin')->group(function () {
 	Route::patch('/users/{id}',    ['as' => 'admin.update.user',  'uses' => 'UsersController@update']);
 	Route::delete('/users/{id}',   ['as' => 'admin.destroy.user', 'uses' => 'UsersController@destroy']);
 
-	Route::get('/servants', [ 'as' => 'admin.servants' , 'uses' => 'ServantController@index']);
-	Route::get('/servants/data/{id}', [ 'as' => 'admin.date' , 'uses' => 'ServantController@show']);
+	/* Servants resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/servants',      ['as' => 'admin.servants',     'uses' => 'ServantsController@index']);
+	Route::get('/servants/{id}', ['as' => 'admin.show.servant', 'uses' => 'ServantsController@show']);
     });
 });

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Services\DateFormatter;
 
 class Dependent extends Model
 {
@@ -11,7 +12,7 @@ class Dependent extends Model
     */
     protected $fillable = [
         'name',
-        'birth',
+        'birthed_at',
         'degree',
         'study',
         'works',
@@ -21,8 +22,16 @@ class Dependent extends Model
     /**
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
-    public function servants()
+    public function servant()
     {
         return $this->belongsTo(Servant::class, 'servant_id');
+    }
+
+    /**
+    * @param string $value
+    */
+    public function getBirthedAtAttribute($value): string
+    {
+        return DateFormatter::shortDate($value);
     }
 }
