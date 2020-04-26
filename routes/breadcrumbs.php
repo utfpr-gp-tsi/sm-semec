@@ -27,13 +27,18 @@ Breadcrumbs::for('password.update', function ($trail) {
 	$trail->push('Alterar Senha', route('password.update'));
 });
 
-Breadcrumbs::for('admin.users', function ($trail) {
-	$trail->parent('admin.dashboard');
-	$trail->push('Administradores', route('admin.users'));
-});
-
 /* Users resources
 |-------------------------------------------------------------------------- */
+Breadcrumbs::for('admin.users', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Administradores', route('admin.users'));
+});
+
+Breadcrumbs::for('admin.search.users', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Administradores', route('admin.users'));
+});
+
 Breadcrumbs::for('admin.show.user', function ($trail, $id) {
     $trail->parent('admin.users');
     $trail->push('Administrador #'.$id , route ('admin.show.user', $id));
@@ -57,9 +62,4 @@ Breadcrumbs::for('admin.new.user', function ($trail) {
 Breadcrumbs::for('admin.create.user', function ($trail) {
     $trail->parent('admin.users');
     $trail->push('Novo Administrador', route('admin.create.user'));
-});
-
-Breadcrumbs::for('admin.search.users', function ($trail) {
-    $trail->parent('admin.users');
-    $trail->push('Pesquisar Administrador', route('admin.search.users'));
 });
