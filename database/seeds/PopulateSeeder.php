@@ -18,20 +18,16 @@ class PopulateSeeder extends Seeder
         DB::table('licenses')->delete();
         DB::table('servants')->delete();
 
-        $servants = factory('App\Servant', 2)->create();
+        $servants = factory('App\Servant', 30)->create();
 
         $servants->each(function($servant) {
-
-            factory('App\Contract')->create(['servant_id' => $servant->id]);
-
-            factory('App\Dependent')->create(['servant_id' => $servant->id]);
-
-            factory('App\License')->create(['servant_id' => $servant->id]);
+            factory('App\Contract', 2)->create(['servant_id' => $servant->id]);
+            factory('App\Dependent', 2)->create(['servant_id' => $servant->id]);
+            factory('App\License', 2)->create(['servant_id' => $servant->id]);
         });
 
         $servants->each(function($contract) {
-            
-            factory('App\Act')->create(['contract_id' => $contract->id]);
+            factory('App\Act', 2)->create(['contract_id' => $contract->id]);
         });
     }
 }

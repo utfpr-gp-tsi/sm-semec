@@ -3,16 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Services\DateFormatter;
 
 class Contract extends Model
 {
-        /**
+    /**
     * @var array
     */
     protected $fillable = [
         'registration',
-        'admission',
-        'termination',
+        'admission_at',
+        'termination_at',
         'secretary',
         'place',
         'role',
@@ -25,5 +26,29 @@ class Contract extends Model
     public function servant()
     {
         return $this->belongsTo(Servant::class, 'servant_id');
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function acts()
+    {
+        return $this->hasMany(Act::class, 'contract_id');
+    }
+
+    /**
+    * @param string $value
+    */
+    public function getAdmissionAtAttribute($value): string
+    {
+        return DateFormatter::shortDate($value);
+    }
+
+    /**
+    * @param string $value
+    */
+    public function getTerminationAtAttribute($value): string
+    {
+        return DateFormatter::shortDate($value);
     }
 }

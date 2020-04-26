@@ -16,10 +16,10 @@ class CreateLicensesTable extends Migration
         Schema::create('licenses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('registration');
-            $table->date('start date');
-            $table->date('finish date');
-            $table->string('license type');
-            $table->date('days');
+            $table->date('start_date');
+            $table->date('finish_date');
+            $table->string('license_type');
+            $table->integer('days');
             $table->bigInteger('servant_id')->unsigned()->index()->default(1);
             $table->foreign('servant_id')
                     ->references('id')

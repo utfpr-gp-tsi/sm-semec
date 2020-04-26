@@ -41,5 +41,10 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/users/{id}/edit', ['as' => 'admin.edit.user',    'uses' => 'UsersController@edit']);
 	Route::patch('/users/{id}',    ['as' => 'admin.update.user',  'uses' => 'UsersController@update']);
 	Route::delete('/users/{id}',   ['as' => 'admin.destroy.user', 'uses' => 'UsersController@destroy']);
+
+	/* Servants resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/servants',      ['as' => 'admin.servants',     'uses' => 'ServantsController@index']);
+	Route::get('/servants/{id}', ['as' => 'admin.show.servant', 'uses' => 'ServantsController@show']);
     });
 });

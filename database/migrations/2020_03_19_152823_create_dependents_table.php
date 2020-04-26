@@ -16,8 +16,7 @@ class CreateDependentsTable extends Migration
         Schema::create('dependents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->date('birth');
-            $table->integer('age');
+            $table->date('birthed_at');
             $table->string('degree');
             $table->char('study');
             $table->string('works');

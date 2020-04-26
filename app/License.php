@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Services\DateFormatter;
 
 class License extends Model
 {
@@ -11,9 +12,9 @@ class License extends Model
     */
     protected $fillable = [
         'registration',
-        'start date',
-        'finish date',
-        'license type',
+        'start_date',
+        'finish_date',
+        'license_type',
         'days',
         'servant_id',
     ];
@@ -21,8 +22,24 @@ class License extends Model
     /**
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
-    public function servants()
+    public function servant()
     {
         return $this->belongsTo(Servant::class, 'servant_id');
+    }
+
+    /**
+    * @param string $value
+    */
+    public function getStartDateAttribute($value): string
+    {
+        return DateFormatter::shortDate($value);
+    }
+
+    /**
+    * @param string $value
+    */
+    public function getFinishDateAttribute($value): string
+    {
+        return DateFormatter::shortDate($value);
     }
 }
