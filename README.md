@@ -22,7 +22,7 @@ _Project made at UTFPR-GP for the SEMEC-GP
 | :---------------------------------- | :------------------------------------------ |
 | ![Amanda](https://github.com/AmandaCarolyneDeLima.png?size=20) Amanda Carolyne De Lima             | https://github.com/AmandaCarolyneDeLima                 |
 | ![Eduarda](https://github.com/Dudalara.png?size=20) Eduarda Lara                      | https://github.com/Dudalara            | 
-| ![Tais](https://github.com/TaisHryssai.png?size=20) Tais Michele Hryssai Da Luz        | hhttps://github.com/TaisHryssai                 |
+| ![Tais](https://github.com/TaisHryssai.png?size=20) Tais Michele Hryssai Da Luz        | https://github.com/TaisHryssai                 |
 
 ## Maintainers
 
