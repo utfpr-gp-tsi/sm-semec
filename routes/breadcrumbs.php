@@ -27,13 +27,18 @@ Breadcrumbs::for('password.update', function ($trail) {
     $trail->push('Alterar Senha', route('password.update'));
 });
 
+/* Users resources
+|-------------------------------------------------------------------------- */
 Breadcrumbs::for('admin.users', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Administradores', route('admin.users'));
 });
 
-/* Users resources
-|-------------------------------------------------------------------------- */
+Breadcrumbs::for('admin.search.users', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Administradores', route('admin.users'));
+});
+
 Breadcrumbs::for('admin.show.user', function ($trail, $id) {
     $trail->parent('admin.users');
     $trail->push('Administrador #'.$id , route ('admin.show.user', $id));

@@ -5,7 +5,7 @@
       Administrativo
     </span>
 
-    <a class="list-group-item list-group-item-action active" aria-current="page" href="/admin">
+    <a class="list-group-item list-group-item-action {{ setActive(['admin']) }}" aria-current="page" href="/admin">
       <span class="icon mr-2">
         <i class="fas fa-home"></i>
       </span>
@@ -18,8 +18,7 @@
       </span>
       Servidores
     </a>
-
-    <a class="list-group-item list-group-item-action" href="{{ route('admin.users') }}">
+    <a class="list-group-item list-group-item-action {{ setActive(['admin/users*']) }}" href="{{ route('admin.users') }}">
       <span class="icon mr-2">
         <i class="fas fa-users-cog"></i>
       </span>
