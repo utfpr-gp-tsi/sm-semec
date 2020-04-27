@@ -12,7 +12,7 @@
       Página inicial
     </a>
 
-    <a class="list-group-item list-group-item-action" href="{{ route('admin.servants') }}">
+    <a class="list-group-item list-group-item-action {{ setActive(['admin/servants*']) }}" href="{{ route('admin.servants') }}">
       <span class="icon mr-2">
         <i class="fas fa-users"></i>
       </span>

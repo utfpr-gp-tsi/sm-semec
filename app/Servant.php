@@ -18,7 +18,7 @@ class Servant extends Model
         'marital_status',
         'mother_name',
         'father_name',
-        'CPG',
+        'CPF',
         'RG',
         'PIS',
         'CTPS',
@@ -74,5 +74,15 @@ class Servant extends Model
     public function getUpdatedAtAttribute($value): string
     {
         return DateFormatter::short($value);
+    }
+
+    public static function search($term)
+    {
+        if ($term) {
+            $searchTerm = "%{$term}%";
+            return Servant::query()->where('name', 'LIKE', $searchTerm)->orWhere('CPF', 'LIKE', $searchTerm)->get();
+        }
+
+        return Servant::all();
     }
 }

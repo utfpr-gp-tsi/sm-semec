@@ -1,11 +1,13 @@
 <?php
 
-// Página Inicial
+/* Dashboard
+|-------------------------------------------------------------------------- */
 Breadcrumbs::for('admin.dashboard', function ($trail) {
     $trail->push('Página Inicial', route('admin.dashboard'));
 });
 
-//Página Inicial/Meu Perfil
+/* Profile
+|-------------------------------------------------------------------------- */
 Breadcrumbs::for('profile.edit', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Meu Perfil', route('profile.edit'));
@@ -16,7 +18,8 @@ Breadcrumbs::for('profile.update', function ($trail) {
     $trail->push('Meu Perfil', route('profile.update'));
 });
 
-//Página Inicial/Alterar Senha
+/* Change password
+|-------------------------------------------------------------------------- */
 Breadcrumbs::for('password.edit', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Alterar Senha', route('password.edit'));
@@ -64,7 +67,14 @@ Breadcrumbs::for('admin.create.user', function ($trail) {
     $trail->push('Novo Administrador', route('admin.create.user'));
 });
 
+/* Servants resources
+|-------------------------------------------------------------------------- */
 Breadcrumbs::for('admin.servants', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Servidores', route('admin.servants'));
+});
+
+Breadcrumbs::for('admin.search.servants', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Servidores', route('admin.servants'));
 });

@@ -77,6 +77,7 @@ class User extends Authenticatable
 
         return User::all();
     }
+
     public function getImagePathAttribute()
     {
         if ($this->getOriginal('image') == null) {
