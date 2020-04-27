@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppController;
+use App\Http\Controllers\Admin\AppController;
 use App\Servant;
-use App\Contract;
-use App\Dependent;
-use App\Act;
-use App\License;
 
 class ServantsController extends AppController
 {

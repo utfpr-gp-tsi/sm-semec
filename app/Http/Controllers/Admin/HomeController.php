@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\AppController;
 
 class HomeController extends AppController
 {
