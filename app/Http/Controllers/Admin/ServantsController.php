@@ -12,6 +12,7 @@ class ServantsController extends AppController
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
+     * @param  string $search
      */
     public function index($search = null)
     {

@@ -14,7 +14,7 @@ class UsersController extends AppController
      * Display a listing of the resource.
      *
      *  @return \Illuminate\View\View
-     *  @param  \App\User $search
+     *  @param  string $search
      */
     public function index($search = null)
     {

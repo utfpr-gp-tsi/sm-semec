@@ -3,13 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateFormatter;
+use App\Services\DateTimeFormatter;
 
 class Servant extends Model
 {
     /**
-    * @var array
-    */
+     * @var array
+     */
     protected $fillable = [
         'servant',
         'registration',
@@ -29,53 +29,57 @@ class Servant extends Model
     ];
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function dependents()
     {
         return $this->hasMany(Dependent::class, 'servant_id');
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function contracts()
     {
         return $this->hasMany(Contract::class, 'servant_id');
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function licenses()
     {
         return $this->hasMany(License::class, 'servant_id');
     }
 
     /**
-    * @param string $value
-    */
+     * @param string $value
+     */
     public function getBirthedAtAttribute($value): string
     {
-        return DateFormatter::shortDate($value);
+        return DateTimeFormatter::format($value);
     }
 
     /**
-    * @param string $value
-    */
+     * @param string $value
+     */
     public function getCreatedAtAttribute($value): string
     {
-        return DateFormatter::short($value);
+        return DateTimeFormatter::format($value);
     }
 
     /**
-    * @param string $value
-    */
+     * @param string $value
+     */
     public function getUpdatedAtAttribute($value): string
     {
-        return DateFormatter::short($value);
+        return DateTimeFormatter::format($value);
     }
 
+    /**
+     * @param string $term
+     * @return \Illuminate\Database\Eloquent\Collection<\App\Servant>
+     */
     public static function search($term)
     {
         if ($term) {
