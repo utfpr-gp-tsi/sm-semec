@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateFormatter;
+use App\Services\DateTimeFormatter;
 
 class Act extends Model
 {
@@ -32,7 +32,7 @@ class Act extends Model
     */
     public function getStartedAtAttribute($value): string
     {
-        return DateFormatter::shortDate($value);
+        return DateTimeFormatter::format($value);
     }
 
     /**
@@ -40,6 +40,6 @@ class Act extends Model
     */
     public function getEndedAtAttribute($value): string
     {
-        return DateFormatter::shortDate($value);
+        return DateTimeFormatter::format($value);
     }
 }

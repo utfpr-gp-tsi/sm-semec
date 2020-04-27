@@ -1,8 +1,9 @@
 @extends('layouts.admin.app')
 
 @section('title', 'Servidores')
-
 @section('content')
+
+@component('components.index.header', ['search_url' => route('admin.search.servants')]) @endcomponent
 
 <div class="table-responsive mt-3">
   <table class="table card-table table-striped table-vcenter">

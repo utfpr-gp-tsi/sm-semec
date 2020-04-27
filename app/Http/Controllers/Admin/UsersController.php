@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
-use App\Http\Controllers\AppController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\User;
+use App\Http\Controllers\Admin\AppController;
 use App\Services\DateFormatter;
 
 class UsersController extends AppController
@@ -14,7 +14,7 @@ class UsersController extends AppController
      * Display a listing of the resource.
      *
      *  @return \Illuminate\View\View
-     *  @param  \App\User $search
+     *  @param  string $search
      */
     public function index($search = null)
     {

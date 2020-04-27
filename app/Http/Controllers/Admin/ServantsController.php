@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppController;
+use App\Http\Controllers\Admin\AppController;
 use App\Servant;
-use App\Contract;
-use App\Dependent;
-use App\Act;
-use App\License;
 
 class ServantsController extends AppController
 {
@@ -16,10 +12,11 @@ class ServantsController extends AppController
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
+     * @param  string $search
      */
-    public function index()
+    public function index($search = null)
     {
-        $servants = Servant::all();
+        $servants = Servant::search($search);
         return view('admin.servants.index', compact('servants'));
     }
 

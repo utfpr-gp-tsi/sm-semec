@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateFormatter;
+use App\Services\DateTimeFormatter;
 
 class User extends Authenticatable
 {
@@ -60,12 +60,12 @@ class User extends Authenticatable
 
     public function getCreatedAtAttribute($value)
     {
-        return DateFormatter::short($value);
+        return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
     }
 
     public function getUpdatedAtAttribute($value)
     {
-        return DateFormatter::short($value);
+        return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
     }
 
     public static function search($term)
@@ -77,6 +77,7 @@ class User extends Authenticatable
 
         return User::all();
     }
+
     public function getImagePathAttribute()
     {
         if ($this->getOriginal('image') == null) {

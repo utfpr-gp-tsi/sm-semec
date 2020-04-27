@@ -3,13 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateFormatter;
+use App\Services\DateTimeFormatter;
 
 class License extends Model
 {
-        /**
-    * @var array
-    */
+    /**
+     * @var array
+     */
     protected $fillable = [
         'registration',
         'start_date',
@@ -20,26 +20,26 @@ class License extends Model
     ];
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function servant()
     {
         return $this->belongsTo(Servant::class, 'servant_id');
     }
 
     /**
-    * @param string $value
-    */
+     * @param string $value
+     */
     public function getStartDateAttribute($value): string
     {
-        return DateFormatter::shortDate($value);
+        return DateTimeFormatter::format($value);
     }
 
     /**
-    * @param string $value
-    */
+     * @param string $value
+     */
     public function getFinishDateAttribute($value): string
     {
-        return DateFormatter::shortDate($value);
+        return DateTimeFormatter::format($value);
     }
 }

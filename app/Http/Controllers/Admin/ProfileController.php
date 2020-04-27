@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\AppController;
-use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Hash;
-use App\Rules\ConfirmCurrentPassword;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Admin\AppController;
+use App\Rules\ConfirmCurrentPassword;
+use App\User;
 
 class ProfileController extends AppController
 {
