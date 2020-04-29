@@ -12,6 +12,7 @@ Homestead.yaml
 /vendor
 /report
 /build
+/reports
 
 ##
 # ASSETS

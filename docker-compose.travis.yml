@@ -3,7 +3,7 @@ services:
 
   #PHP Service
   app:
-    image: dmarczal/laravel:php-to-laravel
+    image: dmarczal/laravel:php-to-laravel-7x
     container_name: app
     restart: unless-stopped
     tty: true

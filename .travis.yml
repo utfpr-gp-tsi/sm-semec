@@ -34,7 +34,7 @@ script:
   - docker-compose exec app vendor/bin/phpcs --standard=phpcs.xml ./
   - docker-compose exec app vendor/bin/phpmd ./ text phpmd.xml
   - docker-compose exec app php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
-  - docker-compose exec app ./vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+  - docker-compose exec app php artisan test --coverage-text --coverage-clover build/logs/clover.xml
 
 after_script:
   - sudp mkdir /var/www
