@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
 use App\Services\DateFormatter;
 
-class UsersController extends AppController
+class EdictsController extends AppController
 {
     /**
      * Display a listing of the resource.
@@ -17,5 +17,15 @@ class UsersController extends AppController
     public function index()
     {
         return view('admin.edicts.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function new()
+    {
+        return view('admin.edicts.new');
     }
 }
