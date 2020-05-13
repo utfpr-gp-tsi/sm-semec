@@ -83,3 +83,16 @@ Breadcrumbs::for('admin.show.servant', function ($trail, $id) {
     $trail->parent('admin.servants');
     $trail->push('Servidor #'.$id , route ('admin.show.servant', $id));
 });
+
+/* Edicts resources
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('admin.edicts', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Editais', route('admin.edicts'));
+});
+Breadcrumbs::for('admin.new.edict', function ($trail) {
+    $trail->parent('admin.edicts');
+    $trail->push('Novo Edital', route('admin.new.edict'));
+});
+
+
