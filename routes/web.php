@@ -42,9 +42,10 @@ Route::namespace('Admin')->group(function () {
 	Route::patch('/users/{id}',    ['as' => 'admin.update.user',  'uses' => 'UsersController@update']);
 	Route::delete('/users/{id}',   ['as' => 'admin.destroy.user', 'uses' => 'UsersController@destroy']);
 	
-	/* Edicts
+	/* Edicts resources
 	|-------------------------------------------------------------------------- */
-	Route::get('/edicts',           ['as' => 'admin.edicts',        'uses' => 'EdictsController@index']);
+	Route::get('/edicts',                 ['as' => 'admin.edicts',        'uses' => 'EdictsController@index']);
+	Route::get('/edicts/new',	          ['as' => 'admin.new.edict',     'uses' => 'EdictsController@new']);
 	
 });
 });
