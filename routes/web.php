@@ -47,13 +47,6 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/servants',      	       ['as' => 'admin.servants',        'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term?}', ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',    'uses' => 'ServantsController@show']);
-	
-
-	/* Edicts resources
-	|-------------------------------------------------------------------------- */
-	Route::get('/edicts',                 ['as' => 'admin.edicts',        'uses' => 'EdictsController@index']);
-	Route::get('/edicts/new',	          ['as' => 'admin.new.edict',     'uses' => 'EdictsController@new']);
-
-    });
+	});
 
 });
