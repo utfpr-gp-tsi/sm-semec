@@ -3,9 +3,6 @@ FROM php:7.4-fpm
 ARG USER_ID
 ARG GROUP_ID
 
-# Copy composer.lock and composer.json
-COPY composer.lock composer.json /var/www/
-
 # Set working directory
 WORKDIR /var/www
 
