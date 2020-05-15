@@ -1,3 +1,4 @@
+# For travis use user id 2000
 env:
   global:
     - CC_TEST_REPORTER_ID=fcccb2678486786b2076f6a4744683837be23b89bcff990be727793a449b1447
@@ -17,7 +18,6 @@ before_install:
   - sudo chown -R $USER:$USER ./
   - cp .env.travis .env
   - cp docker-compose.travis.yml docker-compose.yml
-  - cp Dockerfile.travis Dockerfile
   - docker-compose up -d
   - docker-compose ps
   - docker-compose exec app php artisan key:generate

@@ -1,5 +1,8 @@
 FROM php:7.4-fpm
 
+ARG USER_ID
+ARG GROUP_ID
+
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
 
@@ -9,6 +12,7 @@ WORKDIR /var/www
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
+    --no-install-recommends apt-utils \
     libzip-dev \
     libonig-dev \
     default-mysql-client \
@@ -21,7 +25,8 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip \
     git \
-    curl
+    curl \
+    sudo
 
 RUN pecl install xdebug
 
@@ -29,7 +34,7 @@ RUN pecl install xdebug
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-install pdo_mysql zip exif pcntl
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install gd
 RUN docker-php-ext-enable xdebug
@@ -59,24 +64,45 @@ RUN npm install -g yarn@berry
 # end YARN -------------------------------------------------------------------------------------------------------------
 
 
-# Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+# Define environment variables
+ENV _USER www
+ENV HOME /home/${_USER}/
+ENV APP /var/${_USER}/
+ENV VENDOR_PATH /vendor
+
+# ADD an user called www
+# --gecos GECOS
+#          Set  the  gecos (information about the user) field for the new entry generated.  adduser will
+#          not ask for finger information if this option is given
+#
+# The users of the group staff can install executables in /usr/local/bin and /usr/local/sbin without root privileges
+RUN addgroup --gid $GROUP_ID ${_USER}
+RUN adduser  --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID ${_USER} \
+  && usermod -a -G sudo ${_USER} \
+  && usermod -a -G staff ${_USER} \
+  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
+  && echo "${_USER}:${_USER}" | chpasswd
+
+
+# Configure the main working directory. This is the base
+# directory used in any further RUN, COPY, and ENTRYPOINT commands.
+RUN mkdir -p $HOME \
+  && mkdir -p $APP \
+  && mkdir -p $VENDOR_PATH \
+  && chown -R ${_USER}:${_USER} $HOME \
+  && chown -R ${_USER}:${_USER} $VENDOR_PATH \
+  && chown -R ${_USER}:${_USER} $APP
 
 # Copy existing application directory contents
-COPY . /var/www
+COPY . $APP
 
-# Copy existing application directory permissions
-COPY --chown=www:www . /var/www
-
-# Cache vendor directory
-RUN mkdir /vendor
-RUN chown -R www:www /vendor
+# Cache vendor directo
 RUN ln -sf /vendor /var/www/vendor
 
 # Change current user to www
-USER www
+USER ${_USER}:${_USER}
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
+
 CMD ["php-fpm"]
