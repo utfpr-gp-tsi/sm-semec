@@ -8,26 +8,26 @@ Breadcrumbs::for('admin.dashboard', function ($trail) {
 
 /* Profile
 |-------------------------------------------------------------------------- */
-Breadcrumbs::for('profile.edit', function ($trail) {
+Breadcrumbs::for('admin.profile.edit', function ($trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('Meu Perfil', route('profile.edit'));
+    $trail->push('Meu Perfil', route('admin.profile.edit'));
 });
 
-Breadcrumbs::for('profile.update', function ($trail) {
+Breadcrumbs::for('admin.profile.update', function ($trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('Meu Perfil', route('profile.update'));
+    $trail->push('Meu Perfil', route('admin.profile.update'));
 });
 
 /* Change password
 |-------------------------------------------------------------------------- */
-Breadcrumbs::for('password.edit', function ($trail) {
+Breadcrumbs::for('admin.password.edit', function ($trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('Alterar Senha', route('password.edit'));
+    $trail->push('Alterar Senha', route('admin.password.edit'));
 });
 
-Breadcrumbs::for('password.update', function ($trail) {
-    $trail->parent('profile.edit');
-    $trail->push('Alterar Senha', route('password.update'));
+Breadcrumbs::for('admin.password.update', function ($trail) {
+    $trail->parent('admin.profile.edit');
+    $trail->push('Alterar Senha', route('admin.password.update'));
 });
 
 /* Users resources

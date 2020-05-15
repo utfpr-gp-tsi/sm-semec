@@ -3,7 +3,7 @@
 
 @section('content')
 
-<form  action="{{route('password.update')}}" method="POST" novalidate>
+<form  action="{{route('admin.password.update')}}" method="POST" novalidate>
   @csrf
    @component('components.form.input_password', ['field'    => 'current_password',
                                                  'label'    => 'Senha Atual',
