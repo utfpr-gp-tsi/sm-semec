@@ -11,9 +11,7 @@
 |
  */
 
-Route::get('/', function () {
-    return view('home/index');
-});
+Route::get('/',  ['as' => 'root_path',    'uses' => 'HomeController@index']);
 
 Route::namespace('Admin')->group(function () {
     Route::prefix('admin')->group(function () {
@@ -21,12 +19,12 @@ Route::namespace('Admin')->group(function () {
 	|-------------------------------------------------------------------------- */
 	Auth::routes(['register' => false]);
 
-	Route::get('/login/signOut',  ['as' => 'admin.logout',    'uses' => 'Auth\LoginController@logout']);
-	Route::get('/profile/edit',   ['as' => 'profile.edit',    'uses' => 'ProfileController@edit']);
-	Route::put('/profile/edit',  ['as' => 'profile.update',  'uses' => 'ProfileController@update']);
+	Route::get('/login/signOut',  ['as' => 'admin.logout',          'uses' => 'Auth\LoginController@logout']);
+	Route::get('/profile/edit',   ['as' => 'admin.profile.edit',    'uses' => 'ProfileController@edit']);
+	Route::put('/profile/edit',   ['as' => 'admin.profile.update',  'uses' => 'ProfileController@update']);
 
-	Route::get('/password/edit',  ['as' => 'password.edit',   'uses' => 'ProfileController@editPassword']);
-	Route::post('/password/edit', ['as' => 'password.update', 'uses' => 'ProfileController@updatePassword']);
+	Route::get('/password/edit',  ['as' => 'admin.password.edit',   'uses' => 'ProfileController@editPassword']);
+	Route::post('/password/edit', ['as' => 'admin.password.update', 'uses' => 'ProfileController@updatePassword']);
 
 	/* Dashboard
 	|-------------------------------------------------------------------------- */
