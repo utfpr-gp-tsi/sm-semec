@@ -23,7 +23,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    sudo
+    sudo \
+    ssh \
+    procps
 
 RUN pecl install xdebug
 
