@@ -36,8 +36,8 @@ host('production')
  * --------------------------------- */
 
 task('deploy:cp-docker-files', function () {
-    run('cd {{release_path}} && cp deploy/staging/* {{deploy_path}}');
-})->onStage('staging');
+    run('cd {{release_path}} && cp deploy/production/* {{deploy_path}}');
+})->onStage('production');
 
 task('deploy:build-containers', function () {
     run('cd {{deploy_path}} && docker-compose stop app-semec');
