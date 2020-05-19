@@ -62,33 +62,33 @@ task('deploy:setup:docker', [
 /* --------------------------------- */
 
 task('deploy:composer:install', function () {
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec composer install --no-ansi --no-dev --no-interaction --no-plugins --no-progress --no-scripts --no-suggest --optimize-autoloader');
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec composer install --no-ansi --no-dev --no-interaction --no-plugins --no-progress --no-scripts --no-suggest --optimize-autoloader');
 });
 
-task('deploy:artisankey:generate', function () {
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec php artisan key:generate');
+task('deploy:artisan:key:generate', function () {
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec php artisan key:generate');
 });
 
 task('deploy:config:cache', function () {
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec php artisan config:cache');
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec php artisan config:cache');
 });
 
 task('deploy:migrate', function () {
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec php artisan migrate --force');
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec php artisan migrate --force');
 });
 
 task('deploy:seed', function () {
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec php artisan db:seed --force');
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec php artisan db:seed --force');
 });
 
 task('deploy:assets', function () {
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec npm install');
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec npm run production');
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec npm install');
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec npm run production');
 });
 
 task('deploy:cache', function () {
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec php artisan route:cache');
-    run('cd {{deploy_path}} && docker-compose exec -T -w {{deploy_path}}/current app-semec php artisan view:cache');
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec php artisan route:cache');
+    run('cd {{deploy_path}} && docker-compose exec -T -w {{release_path}} app-semec php artisan view:cache');
 });
 
 task('deploy:reload:php', function () {
@@ -96,7 +96,6 @@ task('deploy:reload:php', function () {
 });
 
 task('deploy:reload:nginx', function () {
-    run('sudo ln -sf /var/www/sm-semec/current/nginx/conf.d/staging/app.conf /etc/nginx/sites-enabled/sm-semec');
     run('sudo nginx -s reload');
 });
 
@@ -109,7 +108,6 @@ task('deploy', [
     'deploy:update_code',
     'deploy:shared',
     'deploy:clear_paths',
-    'deploy:symlink',
     'deploy:composer:install',
     'deploy:config:cache',
     'deploy:migrate',
@@ -118,6 +116,7 @@ task('deploy', [
     'deploy:cache',
     'deploy:reload:php',
     'deploy:reload:nginx',
+    'deploy:symlink',
     'deploy:unlock',
     'cleanup',
     'success'
