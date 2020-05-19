@@ -1,4 +1,5 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
@@ -29,7 +30,10 @@ host('production')
     ->set('deploy_path', '/var/www/{{application}}')
     ->set('branch','production');    
     
-// Tasks
+
+/*
+ * Tasks
+ * --------------------------------- */
 
 task('deploy:cp-docker-files', function () {
     run('cd {{release_path}} && cp deploy/staging/* {{deploy_path}}');
@@ -118,5 +122,4 @@ task('deploy', [
     'success'
 ]);
 
-// [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
