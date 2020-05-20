@@ -50,3 +50,26 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',    'uses' => 'ServantsController@show']);
     });
 });
+
+
+/* AreaServidor
+	|-------------------------------------------------------------------------- */
+
+Route::namespace('Servant')->group(function () {
+    Route::prefix('servant')->group(function () {
+	/* Session
+	|-------------------------------------------------------------------------- */
+	Auth::routes(['register' => false]);
+
+	Route::get('/login/signOut',  ['as' => 'servant.logout',    'uses' => 'Auth\LoginServantController@logout']);
+	Route::get('/profile/edit',   ['as' => 'profile.edit',    'uses' => 'ProfileServantController@edit']);
+	Route::put('/profile/edit',  ['as' => 'profile.update',  'uses' => 'ProfileServantController@update']);
+
+	Route::get('/password/edit',  ['as' => 'password.edit',   'uses' => 'ProfileServantController@editPassword']);
+	Route::post('/password/edit', ['as' => 'password.update', 'uses' => 'ProfileServantController@updatePassword']);
+
+	/* Dashboard
+	|-------------------------------------------------------------------------- */
+	Route::get('/', [ 'as' => 'servant.dashboard' , 'uses' => 'HomeServantController@index']);
+    });
+});

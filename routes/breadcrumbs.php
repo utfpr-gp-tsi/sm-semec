@@ -83,3 +83,9 @@ Breadcrumbs::for('admin.show.servant', function ($trail, $id) {
     $trail->parent('admin.servants');
     $trail->push('Servidor #'.$id , route ('admin.show.servant', $id));
 });
+
+/* AreaServidor - Dashboard
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('servant.dashboard', function ($trail) {
+    $trail->push('Página Inicial', route('servant.dashboard'));
+});
