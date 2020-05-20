@@ -37,6 +37,8 @@ host('staging')
 
 task('deploy:cp-docker-files', function () {
     upload('deploy/staging/', "{{deploy_path}}");
+    upload('deploy/php/', "{{deploy_path}}/shared/php/");
+    upload('deploy/mysql/', "{{deploy_path}}/shared/mysql/");
 })->onStage('staging');
 
 task('deploy:build-containers', function () {
