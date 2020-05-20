@@ -36,7 +36,7 @@ host('staging')
  * --------------------------------- */
 
 task('deploy:cp-docker-files', function () {
-    run('cd {{release_path}} && cp deploy/staging/* {{deploy_path}}');
+    upload('deploy/staging/', "{{deploy_path}}");
 })->onStage('staging');
 
 task('deploy:build-containers', function () {
