@@ -99,7 +99,7 @@ RUN mkdir -p $HOME \
 COPY . $APP
 
 # Cache vendor directory
-RUN ln -sf ${VENDOR_PATH} ${APP}/current/vendor
+RUN ln -sf ${VENDOR_PATH} ${APP}/shared/vendor
 
 # Change current
 USER ${_USER}:${_USER}
