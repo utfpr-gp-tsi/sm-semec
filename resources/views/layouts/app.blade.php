@@ -20,6 +20,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+    
+
   </head>
   <body>
     <div class="page">
