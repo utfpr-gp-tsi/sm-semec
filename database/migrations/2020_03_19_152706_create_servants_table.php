@@ -16,19 +16,18 @@ class CreateServantsTable extends Migration
         Schema::create('servants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('registration');
             $table->date('birthed_at');
             $table->string('natural_from');
             $table->string('marital_status');
             $table->string('mother_name');
             $table->string('father_name');
-            $table->integer('CPF');
-            $table->integer('RG');
-            $table->integer('PIS');
-            $table->integer('CTPS');
+            $table->string('CPF');
+            $table->string('RG');
+            $table->string('PIS');
+            $table->string('CTPS');
             $table->string('title');
             $table->string('address');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('email');
             $table->timestamps();
         });

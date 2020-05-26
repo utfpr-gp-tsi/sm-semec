@@ -17,7 +17,8 @@ class Contract extends Model
         'secretary',
         'place',
         'role',
-        'servant_id ',
+        'link',
+        'servant_id',
     ];
 
     /**

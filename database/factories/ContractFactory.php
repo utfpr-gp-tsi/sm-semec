@@ -24,6 +24,7 @@ $factory->define(Contract::class, function (Faker $faker) {
         'secretary' => $faker->name(15),
         'place' => $faker->name(10),
         'role' => $faker->name(10),
+        'link' => $faker->name(10),
         'servant_id' => factory(App\Servant::class),
     ];
 });

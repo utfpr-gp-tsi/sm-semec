@@ -11,7 +11,7 @@ class Servant extends Model
      * @var array
      */
     protected $fillable = [
-        'servant',
+        'name',
         'registration',
         'birthed_at',
         'natural_from',
@@ -41,7 +41,12 @@ class Servant extends Model
      */
     public function contracts()
     {
-        return $this->hasMany(Contract::class, 'servant_id');
+        return $this->hasMany(Contract::class, 'servant_id')->orderBy('admission_at', 'desc');
+    }
+
+    public function lastContract()
+    {
+        return $this->contracts()->first() ?: new Contract;
     }
 
     /**
@@ -84,7 +89,10 @@ class Servant extends Model
     {
         if ($term) {
             $searchTerm = "%{$term}%";
-            return Servant::query()->where('name', 'LIKE', $searchTerm)->orWhere('CPF', 'LIKE', $searchTerm)->get();
+            return Servant::query()->where('name', 'LIKE', $searchTerm)
+                                   ->orWhere('CPF', 'LIKE', $searchTerm)
+                                   ->orderBy('name', 'asc')
+                                   ->get();
         }
 
         return Servant::all();

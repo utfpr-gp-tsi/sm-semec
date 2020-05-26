@@ -17,7 +17,7 @@ class ServantsController extends AppController
     public function index($search = null)
     {
         $servants = Servant::search($search);
-        return view('admin.servants.index', compact('servants'));
+        return view('admin.servants.index')->with('servants', $servants);
     }
 
     /**

@@ -20,7 +20,6 @@ use Faker\Generator as Faker;
 $factory->define(Servant::class, function (Faker $faker) {
     return [
         'name' => $faker->name(),
-        'registration' => $faker->randomNumber(),
         'birthed_at' => $faker->date(),
         'natural_from' => $faker->text(),
         'marital_status' => $faker->text(),
