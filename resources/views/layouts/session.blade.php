@@ -9,13 +9,13 @@
     <!--Icons-->
     <script src="https://kit.fontawesome.com/826671e166.js" crossorigin="anonymous"></script>
     <!-- Scripts -->
-    <script src="{{ asset('/assets/js/app.js') }}" defer></script>
+    <script src="{{ asset(mix('/assets/js/app.js')) }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('assets/vendor/tabler/css/tabler.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/login/session.css') }}" rel="stylesheet">
+    <link href="{{ asset(mix('assets/vendor/tabler/css/tabler.min.css')) }}" rel="stylesheet">
+    <link href="{{ asset(mix('assets/css/login/session.css')) }}" rel="stylesheet">
   </head>
 
   <body class="">
