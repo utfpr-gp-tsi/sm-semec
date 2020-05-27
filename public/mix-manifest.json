@@ -1,7 +1,9 @@
 {
-    "/assets/js/admin/app.js": "/assets/js/admin/app.js",
-    "/assets/js/app.js": "/assets/js/app.js",
-    "/assets/css/app.css": "/assets/css/app.css",
-    "/assets/css/login/session.css": "/assets/css/login/session.css",
-    "/assets/css/admin/app.css": "/assets/css/admin/app.css"
+    "/assets/js/admin/app.js": "/assets/js/admin/app.js?id=1f504b81a7e931575bba",
+    "/assets/js/app.js": "/assets/js/app.js?id=c91c95a47489a799c1eb",
+    "/assets/css/app.css": "/assets/css/app.css?id=9d791c1e1b38bb62404a",
+    "/assets/css/login/session.css": "/assets/css/login/session.css?id=39a5fa34734d44d5eca7",
+    "/assets/css/admin/app.css": "/assets/css/admin/app.css?id=153dbc56d16ee6b2a41c",
+    "/assets/vendor/tabler/css/tabler.min.css": "/assets/vendor/tabler/css/tabler.min.css?id=6ce7bfa569c9030b54d9",
+    "/assets/vendor/tabler/css/tabler-dashboard.css": "/assets/vendor/tabler/css/tabler-dashboard.css?id=61091747ccaa2a28e032"
 }

@@ -19,8 +19,8 @@
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-            <a class="dropdown-item" href="{{route('profile.edit')}}"> <i class="dropdown-icon far fa-user"></i>  Meu Perfil </a>
-            <a class="dropdown-item" href="{{route('password.edit')}}"> <i class="dropdown-icon fas fa-unlock-alt"></i>Alterar Senha</a>
+            <a class="dropdown-item" href="{{route('admin.profile.edit')}}"> <i class="dropdown-icon far fa-user"></i>  Meu Perfil </a>
+            <a class="dropdown-item" href="{{route('admin.password.edit')}}"> <i class="dropdown-icon fas fa-unlock-alt"></i>Alterar Senha</a>
             <a class="dropdown-item" rel="nofollow" data-method="delete" href="{{ route('admin.logout') }}" id="logout"> <i class="dropdown-icon fas fa-sign-out-alt"></i> {{__('Logout') }}
             </a>
           </div>
