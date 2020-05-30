@@ -18,7 +18,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Contract::class, function (Faker $faker) {
     return [
-        'registration' => $faker->randomNumber(),
+        'registration' => $faker->unique()->randomNumber,
         'admission_at' => $faker->date(),
         'termination_at' => $faker->date(),
         'secretary' => $faker->name(15),

@@ -38,6 +38,14 @@ class Contract extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function licenses()
+    {
+        return $this->hasMany(License::class, 'contract_id');
+    }
+
+    /**
      * @param string $value
      */
     public function getAdmissionAtAttribute($value): string

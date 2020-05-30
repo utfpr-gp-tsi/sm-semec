@@ -18,11 +18,10 @@ use Faker\Generator as Faker;
 
 $factory->define(License::class, function (Faker $faker) {
     return [
-        'registration' => $faker->randomNumber(),
-        'start_date' => $faker->date(),
-        'finish_date' => $faker->date(),
+        'started_at' => $faker->date(),
+        'ended_at' => $faker->date(),
         'license_type' => $faker->text(),
         'days' => $faker->randomNumber(),
-        'servant_id' => factory(App\Servant::class),
+        'contract_id' => factory(App\Contract::class),
     ];
 });

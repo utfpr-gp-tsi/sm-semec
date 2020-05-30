@@ -28,7 +28,7 @@ class ServantsController extends AppController
      */
     public function show($id)
     {
-        $servant = Servant::find($id);
+        $servant = Servant::with(['contracts', 'dependents', 'contracts.acts', 'licenses.contract'])->find($id);
         return view('admin.servants.show', compact('servant'));
     }
 }

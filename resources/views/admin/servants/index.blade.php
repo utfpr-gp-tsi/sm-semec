@@ -11,8 +11,13 @@
          <tr>
            <th>Nome</th>
            <th>CPF</th>
-           <th>Matrícula</th>
-           <th>Cargo / Local de trabalho</th>
+           <th>
+              Matrícula<i class="fas fa-info-circle d-inline ml-1" data-toggle="tooltip" title="Referente ao último contrato"></i>
+           </th>
+           <th>
+              Cargo<i class="fas fa-info-circle d-inline ml-1" data-toggle="tooltip" title="Referente ao último contrato"></i></th>
+           <th>
+              Local de trabalho<i class="fas fa-info-circle d-inline ml-1" data-toggle="tooltip" title="Referente ao último contrato"></i></th>
          </tr>
        </thead>
        <tbody>

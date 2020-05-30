@@ -4,7 +4,7 @@
   </td>
   <td>{{ $servant->CPF }}</td>
   <td>{{ $servant->lastContract()->registration }}</td>
-  <td>
-      {{ $servant->lastContract()->role }} / {{ $servant->lastContract()->place }} </br>
+  <td>{{ $servant->lastContract()->role }}</td>
+  <td>{{ $servant->lastContract()->place }}</td>
   </td>
 </tr>
