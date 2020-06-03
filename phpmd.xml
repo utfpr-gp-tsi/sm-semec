@@ -12,12 +12,5 @@
     <rule ref="rulesets/design.xml"/>
     <rule ref="rulesets/unusedcode.xml"/>
 
-    <exclude-pattern>/bootstrap/</exclude-pattern>
-    <exclude-pattern>/config/</exclude-pattern>
-    <exclude-pattern>/node_modules/</exclude-pattern>
-    <exclude-pattern>/public/</exclude-pattern>
-    <exclude-pattern>/storage/</exclude-pattern>
-    <exclude-pattern>/vendor/</exclude-pattern>
-    <exclude-pattern>/templates/</exclude-pattern>
     <exclude-pattern>app/Console/Kernel.php</exclude-pattern>
 </ruleset>

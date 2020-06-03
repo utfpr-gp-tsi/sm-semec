@@ -12,10 +12,10 @@ class ServantsController extends AppController
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
-     * @param  string $search
      */
-    public function index($search = null)
+    public function index()
     {
+        $search = Request()->term;
         $servants = Servant::search($search);
         return view('admin.servants.index')->with('servants', $servants);
     }

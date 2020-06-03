@@ -85,7 +85,7 @@ class Servant extends Model
 
     /**
      * @param string $term
-     * @return \Illuminate\Database\Eloquent\Collection<\App\Servant>
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public static function search($term)
     {
@@ -95,9 +95,9 @@ class Servant extends Model
                                    ->where('name', 'LIKE', $searchTerm)
                                    ->orWhere('CPF', 'LIKE', $searchTerm)
                                    ->orderBy('name', 'asc')
-                                   ->get();
+                                   ->paginate(20);
         }
 
-        return Servant::with(['contracts'])->get();
+        return Servant::with(['contracts'])->paginate(20);
     }
 }

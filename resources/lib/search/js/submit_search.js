@@ -1,22 +1,31 @@
 $(document).ready(() => {
-  SMSemec.enterToSubmitSearch();
+  SMSemec.submitSearch();
 });
 
-SMSemec.enterToSubmitSearch = function() {
+SMSemec.submitSearch = function() {
   const el = 'input.enter-to-submit-search';
   const btn = '.submit-search';
-  const base_url = $(el).data('url');
+  const base_url = $(el).data('base-url');
+
+  const requestSearch = function () {
+    var term = $(el).val();
+    var url = base_url;
+
+    if (term && term.trim().length) {
+      url += '/search/' + term;
+    }
+
+    return window.location.assign(url);
+  }
 
   $(btn).click(function() {
-    const url = base_url + '/' + $(el).val();
-    return window.location.assign(url);
+    return requestSearch();
   });
 
   $(el).keypress(function(e) {
     const keycode = e.keyCode || e.which;
     if (keycode === 13) {
-      const url = base_url + '/' + $(el).val();
-      return window.location.assign(url);
+      return requestSearch();
     }
   });
 };
