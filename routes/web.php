@@ -43,11 +43,11 @@ Route::namespace('Admin')->group(function () {
 
 	/* Servants resources
 	|-------------------------------------------------------------------------- */
-	Route::get('/servants/page/{page}',    ['as' => 'admin.servants',        'uses' => 'ServantsController@index']);
+	Route::get('/servants/page/{page}',    ['as' => 'admin.servants.page',   'uses' => 'ServantsController@index']);
 	Route::get('/servants',      	       ['as' => 'admin.servants',        'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}/page/{page}',
-					       ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
-	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
-	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',    'uses' => 'ServantsController@show']);
+					       ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
+	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants',      'uses' => 'ServantsController@index']);
+	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',         'uses' => 'ServantsController@show']);
     });
 });

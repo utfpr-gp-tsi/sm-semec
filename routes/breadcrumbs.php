@@ -74,7 +74,17 @@ Breadcrumbs::for('admin.servants', function ($trail) {
     $trail->push('Servidores', route('admin.servants'));
 });
 
+Breadcrumbs::for('admin.servants.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Servidores', route('admin.servants'));
+});
+
 Breadcrumbs::for('admin.search.servants', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Servidores', route('admin.servants'));
+});
+
+Breadcrumbs::for('admin.search.servants.page', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Servidores', route('admin.servants'));
 });
