@@ -6,7 +6,6 @@
 <div class="card">
   <div class="card-body">
     <p><strong>Nome:</strong>       {{ $servant->name }}</p>
-    <p><strong>Matrícula:</strong>  {{ $servant->registration }}</p>
     <p><strong>Nascimento:</strong> {{ $servant->birthed_at }}</p>
     <p><strong>Natural de:</strong> {{ $servant->natural_from }}</p>
     <p><strong>Est. Civil:</strong> {{ $servant->marital_status }}</p>

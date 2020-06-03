@@ -11,26 +11,25 @@ class License extends Model
      * @var array
      */
     protected $fillable = [
-        'registration',
-        'start_date',
-        'finish_date',
+        'started_at',
+        'ended_at',
         'license_type',
         'days',
-        'servant_id',
+        'contract_id',
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function servant()
+    public function contract()
     {
-        return $this->belongsTo(Servant::class, 'servant_id');
+        return $this->belongsTo(Contract::class, 'contract_id');
     }
 
     /**
      * @param string $value
      */
-    public function getStartDateAttribute($value): string
+    public function getStartedAtAttribute($value): string
     {
         return DateTimeFormatter::format($value);
     }
@@ -38,7 +37,7 @@ class License extends Model
     /**
      * @param string $value
      */
-    public function getFinishDateAttribute($value): string
+    public function getEndedAtAttribute($value): string
     {
         return DateTimeFormatter::format($value);
     }

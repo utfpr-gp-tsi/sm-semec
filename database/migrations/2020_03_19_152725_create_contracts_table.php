@@ -15,17 +15,17 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('registration');
+            $table->bigInteger('registration')->unique();
             $table->date('admission_at');
             $table->date('termination_at');
-            $table->string('secretary');
+            $table->string('secretary')->nullable();
             $table->string('place');
             $table->string('role');
-            $table->bigInteger('servant_id')->unsigned()->index()->default(1);
+            $table->string('link');
+            $table->unsignedBigInteger('servant_id')->index();
             $table->foreign('servant_id')
                     ->references('id')
                     ->on('servants')
-                    ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();
         });

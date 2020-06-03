@@ -4,8 +4,8 @@
     <thead>
       <tr>
         <th>Matrícula</th>
-        <th>Data início</th>
-        <th>Data final</th>
+        <th>Data Início</th>
+        <th>Data Término</th>
         <th>Tipo Licença</th>
         <th>Dias</th>
       </tr>
@@ -13,9 +13,9 @@
     <tbody>
       @foreach($servant->licenses as $license)
         <tr>
-          <td>{{ $license->registration }}</td>
-          <td>{{ $license->start_date }}</td>
-          <td>{{ $license->finish_date }}</td>
+          <td>{{ $license->contract->registration }}</td>
+          <td>{{ $license->started_at }}</td>
+          <td>{{ $license->ended_at }}</td>
           <td>{{ $license->license_type }}</td>
           <td>{{ $license->days }}</td>
         </tr>

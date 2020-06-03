@@ -18,12 +18,13 @@ use Faker\Generator as Faker;
 
 $factory->define(Contract::class, function (Faker $faker) {
     return [
-        'registration' => $faker->randomNumber(),
+        'registration' => $faker->unique()->randomNumber,
         'admission_at' => $faker->date(),
         'termination_at' => $faker->date(),
         'secretary' => $faker->name(15),
         'place' => $faker->name(10),
         'role' => $faker->name(10),
+        'link' => $faker->name(10),
         'servant_id' => factory(App\Servant::class),
     ];
 });
