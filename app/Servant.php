@@ -11,8 +11,7 @@ class Servant extends Model
      * @var array
      */
     protected $fillable = [
-        'servant',
-        'registration',
+        'name',
         'birthed_at',
         'natural_from',
         'marital_status',
@@ -41,15 +40,23 @@ class Servant extends Model
      */
     public function contracts()
     {
-        return $this->hasMany(Contract::class, 'servant_id');
+        return $this->hasMany(Contract::class, 'servant_id')->orderBy('admission_at', 'desc');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return Contract
+     */
+    public function lastContract()
+    {
+        return $this->contracts->first() ?: new Contract();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function licenses()
     {
-        return $this->hasMany(License::class, 'servant_id');
+        return $this->hasManyThrough(License::class, Contract::class, 'servant_id', 'contract_id');
     }
 
     /**
@@ -84,9 +91,13 @@ class Servant extends Model
     {
         if ($term) {
             $searchTerm = "%{$term}%";
-            return Servant::query()->where('name', 'LIKE', $searchTerm)->orWhere('CPF', 'LIKE', $searchTerm)->get();
+            return Servant::query()->with(['contracts'])
+                                   ->where('name', 'LIKE', $searchTerm)
+                                   ->orWhere('CPF', 'LIKE', $searchTerm)
+                                   ->orderBy('name', 'asc')
+                                   ->get();
         }
 
-        return Servant::all();
+        return Servant::with(['contracts'])->get();
     }
 }
