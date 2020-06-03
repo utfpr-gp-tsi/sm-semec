@@ -85,7 +85,7 @@ class Servant extends Model
 
     /**
      * @param string $term
-     * @return \Illuminate\Database\Eloquent\Collection<\App\Servant>
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public static function search($term)
     {

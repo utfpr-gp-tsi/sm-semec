@@ -23,7 +23,7 @@ class PrettyPaginationServiceProvider extends ServiceProvider
     public function register()
     {
         \Illuminate\Pagination\Paginator::currentPageResolver(function ($pageName = 'page') {
-            $page = Request()->page;
+            $page = Request()->$pageName;
 
             if (filter_var($page, FILTER_VALIDATE_INT) !== false && (int) $page >= 1) {
                 return (int) $page;

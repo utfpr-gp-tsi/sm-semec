@@ -13,13 +13,11 @@ function setActive($path, $active = 'active')
 }
 
 /**
- * Activate sidebar link
+ * Pretty url for pagination, from ?page=2 -> page/2
  *
- *  @param  string $path
- *  @param  string $active
- *  @return string
+ *  @param string $links
  */
-function prettyPaginationLinks($links)
+function prettyPaginationLinks($links): string
 {
     $pattern = '#\?page=#';
     $replacement = '/page/';
