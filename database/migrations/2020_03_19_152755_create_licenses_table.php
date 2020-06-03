@@ -15,16 +15,14 @@ class CreateLicensesTable extends Migration
     {
         Schema::create('licenses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('registration');
-            $table->date('start_date');
-            $table->date('finish_date');
+            $table->date('started_at');
+            $table->date('ended_at');
             $table->string('license_type');
             $table->integer('days');
-            $table->bigInteger('servant_id')->unsigned()->index()->default(1);
-            $table->foreign('servant_id')
+            $table->unsignedBigInteger('contract_id')->index();
+            $table->foreign('contract_id')
                     ->references('id')
-                    ->on('servants')
-                    ->onUpdate('cascade')
+                    ->on('contracts')
                     ->onDelete('cascade');
             $table->timestamps();
         });

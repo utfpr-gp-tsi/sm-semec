@@ -1,7 +1,7 @@
 FROM php:7.4-fpm
 
-ARG USER_ID
-ARG GROUP_ID
+ARG USER_ID=1000
+ARG GROUP_ID=1000
 
 # Set working directory
 WORKDIR /var/www
@@ -70,7 +70,7 @@ RUN npm install -g yarn@berry
 # Define environment variables
 ENV _USER www
 ENV HOME /home/${_USER}/
-ENV APP /var/${_USER}/
+ENV APP /var/www/
 ENV VENDOR_PATH /vendor
 
 # ADD an user called www

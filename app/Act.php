@@ -11,7 +11,7 @@ class Act extends Model
     * @var array
     */
     protected $fillable = [
-        'act',
+        'name',
         'started_at',
         'ended_at',
         'number',

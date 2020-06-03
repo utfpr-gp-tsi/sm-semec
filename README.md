@@ -28,4 +28,6 @@ _Project made at UTFPR-GP for the SEMEC-GP
 
 |             Maintainers             |                    GitHub                   |
 | :---------------------------------- | :------------------------------------------ |
+| ![Andres](https://github.com/andresjesse.png?size=20) Andres Jesse Porfirio                       | https://github.com/andresjesse
 | ![Diego](https://github.com/dmarczal.png?size=20) Diego Marczal                       | https://github.com/dmarczal
+

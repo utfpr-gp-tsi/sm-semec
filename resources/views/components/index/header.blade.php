@@ -3,7 +3,7 @@
   <div class="col-sm-12 col-lg-8 mb-2">
     <div>
       <div class="input-group input-icon">
-        <input id="search_input" type="text" name="term" data-url="{{ $search_url }}"
+        <input id="search_input" type="text" name="term" data-base-url="{{ $base_search_path ?? '' }}"
                placeholder="Procurar..." class="form-control enter-to-submit-search" value="{{ Request()->term }}">
         <span class="input-group-append">
           <a id="search" href="#" class="btn btn-outline-primary submit-search">

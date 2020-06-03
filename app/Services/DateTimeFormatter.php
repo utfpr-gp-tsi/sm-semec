@@ -4,8 +4,8 @@ namespace App\Services;
 
 class DateTimeFormatter
 {
-    public const SHORT_DATE = 'd/m/y';
-    public const SHORT_DATE_TIME = 'd/m/y H:i';
+    public const SHORT_DATE = 'd/m/Y';
+    public const SHORT_DATE_TIME = 'd/m/Y H:i';
 
     /**
      * @param  string  $date

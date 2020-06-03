@@ -17,7 +17,8 @@ class Contract extends Model
         'secretary',
         'place',
         'role',
-        'servant_id ',
+        'link',
+        'servant_id',
     ];
 
     /**
@@ -34,6 +35,14 @@ class Contract extends Model
     public function acts()
     {
         return $this->hasMany(Act::class, 'contract_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function licenses()
+    {
+        return $this->hasMany(License::class, 'contract_id');
     }
 
     /**
