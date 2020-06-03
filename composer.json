@@ -73,7 +73,7 @@
             "vendor/bin/phpcs --standard=phpcs.xml ./"
         ],
         "phpmd": [
-            "vendor/bin/phpmd ./ text phpmd.xml"
+            "vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml"
         ],
         "phpstan": [
             "vendor/bin/phpstan analyse -c phpstan.neon"

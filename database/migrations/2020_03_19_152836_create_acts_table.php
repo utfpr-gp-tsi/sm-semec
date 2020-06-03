@@ -18,13 +18,12 @@ class CreateActsTable extends Migration
             $table->string('name');
             $table->date('started_at');
             $table->date('ended_at');
-            $table->integer('number');
+            $table->string('number');
             $table->string('time');
-            $table->bigInteger('contract_id')->unsigned()->index()->default(1);
+            $table->unsignedBigInteger('contract_id')->index();
             $table->foreign('contract_id')
                     ->references('id')
                     ->on('contracts')
-                    ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();
         });

@@ -3,7 +3,7 @@
 @section('title', 'Administradores')
 @section('content')
 
-@component('components.index.header', ['search_url' => route('admin.search.users'), 'new_url' => route('admin.new.user')]) @endcomponent
+@component('components.index.header', ['base_search_path' => route('admin.users'), 'new_url' => route('admin.new.user')]) @endcomponent
 
 <div class="table-responsive mt-3">
   <table class="table card-table table-striped table-vcenter table-data">
