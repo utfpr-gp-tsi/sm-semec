@@ -7,7 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-   <title>@include('shared/_full_title')</title>
+    @include('shared/_favicon')
+
+    <title>@include('shared/_full_title')</title>
 
     <!--Icons-->
     <script src="https://kit.fontawesome.com/826671e166.js" crossorigin="anonymous"></script>
