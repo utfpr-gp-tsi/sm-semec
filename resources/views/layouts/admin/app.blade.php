@@ -7,6 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @include('shared/_favicon')
+
     <title>@include('shared/_full_title')</title>
 
      <!--Icons-->
