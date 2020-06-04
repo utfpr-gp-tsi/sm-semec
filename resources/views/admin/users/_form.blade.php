@@ -1,4 +1,4 @@
-<form action="{{ $route }}" method="POST" enctype="multipart/form-data" novalidate>
+<form action="{{ $route }}" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
     @csrf
     @method($method)
     @component('components.form.input_text', ['field'    => 'name',
