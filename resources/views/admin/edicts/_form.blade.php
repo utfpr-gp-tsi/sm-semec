@@ -29,9 +29,6 @@
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
                                              
-    @component('components.form.input_pdf',  ['field'      => 'pdf',
-							                  'label'      => 'Clique na imagem para alterá-la',
-							                  'model'      => 'edict']) @endcomponent
 
     
 

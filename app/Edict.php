@@ -15,7 +15,6 @@ class Edict extends Model
         'description',
         'started_at',
         'ended_at',
-        'pdf',
         
        
     ];
@@ -28,9 +27,7 @@ class Edict extends Model
     protected $dates = [
         'started_at', 'ended_at',
     ];
-    protected $appends = [
-        'pdf_path',
-    ];
+  
     
     /**
     * @param string $value
@@ -56,5 +53,7 @@ class Edict extends Model
 
         return Edict::all();
     }
+
+
 
 }

@@ -16,10 +16,9 @@ class CreateEdictsTable extends Migration
         Schema::create('edicts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->date('started_at');
             $table->date('ended_at');
-            $table->string('pdf')->nullable();
             $table->timestamps();
         });
     }
