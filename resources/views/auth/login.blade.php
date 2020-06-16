@@ -2,7 +2,7 @@
 @section('title', 'Login')
 @section('content')
 
-<form class="card" action="{{route('login')}}" method="POST">
+<form class="card" action="{{route($loginRoute)}}" method="POST">
     @csrf
 
     <div class="card-body p-4">
@@ -29,7 +29,7 @@
     <div class="form-footer">
         <button type="submit" class="btn btn-primary btn-block">{{ __('Login')}}</button>
           @if (Route::has('password.request'))
-        <a class="btn-link float-right" href="{{ route('password.request') }}"> {{ __('Forgot Your Password?') }} </a>
+        <a class="btn-link float-right" href="{{ route($forgotPasswordRoute) }}"> {{ __('Forgot Your Password?') }} </a>
          @endif
     </div>
     </div>
