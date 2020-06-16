@@ -3,7 +3,7 @@
 
 @section('content')
 
-<form class="card" action="{{route('password.update')}}" method="POST">
+<form class="card" method="POST" action="{{ route($passwordUpdateRoute) }}">
     @csrf
     <input type="hidden" name="token" value="{{ $token }}">
     <div class="card-body p-4">

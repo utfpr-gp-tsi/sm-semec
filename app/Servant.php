@@ -5,11 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\DateTimeFormatter;
 use App\Traits\CreatedAndUpdatedAtFormatted;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Servant extends Model
+class Servant extends Authenticatable
 {
     use CreatedAndUpdatedAtFormatted;
-
+    use Notifiable;
+    
     /**
      * @var array
      */
@@ -28,6 +33,7 @@ class Servant extends Model
         'address',
         'phone',
         'email',
+        'password'
     ];
 
     /**
@@ -86,5 +92,14 @@ class Servant extends Model
         }
 
         return Servant::with(['contracts'])->paginate(20);
+    }
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +18,13 @@ class DatabaseSeeder extends Seeder
         ],[
             'name' => 'Administrador',
             'password' => '123456'
+        ]);
+
+        App\Servant::firstOrCreate([
+            'email' => 'servant@gmail.com'
+        ],[
+            'name' => 'Servidor',
+            'password' => '123456',
         ]);
     }
 }
