@@ -39,7 +39,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $userData = array(
-            'email'  => $request->get('email'),
+            'CPF'  => $request->get('CPF'),
             'password' => $request->get('password'),
         );
 
