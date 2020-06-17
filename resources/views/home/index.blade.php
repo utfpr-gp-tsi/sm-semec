@@ -6,7 +6,7 @@
   <div class="card py-5">
     <div class="card-body py-5 text-center">
       <a href="{{ route('admin.dashboard') }}" class="btn btn-primary btn-lg">Acessar Área Administrativa</a>
-      <a href="{{ url('/servant') }}" class="btn btn-primary btn-lg">Acessar Área do Funcionário</a>
+      <a href="{{ url('/servant') }}" class="btn btn-primary btn-lg">Acessar Área do Servidor</a>
 
     </div>
   </div>

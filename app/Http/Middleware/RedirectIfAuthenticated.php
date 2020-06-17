@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
             if ($guard == "servant") {
                 return redirect()->route('servant.dashboard');
             }
-                return redirect()->route('/');
+                return redirect()->route('admin.dashboard');
         }
         return $next($request);
     }

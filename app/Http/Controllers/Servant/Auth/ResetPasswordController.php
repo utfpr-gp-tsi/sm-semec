@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Servant\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Auth;
+use Password;
+use Auth;
 
 class ResetPasswordController extends Controller
 {
@@ -20,20 +20,17 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/servant';
 
-    
     /**
-     * Only guests for "admin" guard are allowed except
+     * Only guests for "servant" guard are allowed except
      * for logout.
-     *
+     * 
      * @return void
      */
-    
     public function __construct()
     {
         $this->middleware('guest:servant');
     }
 
-    
     /**
      * Show the reset password form.
      *
@@ -58,7 +55,7 @@ class ResetPasswordController extends Controller
     {
         return Password::broker('servants');
     }
-
+    
     /**
      * Get the guard to be used during password reset.
      *

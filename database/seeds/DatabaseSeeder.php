@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'semec@gmail.com'
         ],[
             'name' => 'Administrador',
+            'CPF' => '00000000000',
             'password' => '123456'
         ]);
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'servant@gmail.com'
         ],[
             'name' => 'Servidor',
+            'CPF' => '11111111111',
             'password' => '123456',
         ]);
     }

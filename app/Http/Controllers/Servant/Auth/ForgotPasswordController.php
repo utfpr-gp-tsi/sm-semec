@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Servant\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 use Password;
 use Auth;
 
@@ -43,17 +43,17 @@ class ForgotPasswordController extends Controller
     *
     * @return \Illuminate\Contracts\Auth\PasswordBroker
     */
-    public function broker()
+    protected function broker()
     {
         return Password::broker('servants');
     }
 
-    /**
-     * Get the guard to be used during authentication
-     * after password reset.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
+    // *
+    //  * Get the guard to be used during authentication
+    //  * after password reset.
+    //  *
+    //  * @return \Illuminate\Contracts\Auth\StatefulGuard
+     
     public function guard()
     {
         return Auth::guard('servant');
