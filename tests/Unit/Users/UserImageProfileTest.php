@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Users;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
