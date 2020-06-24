@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Password;
 use Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -35,6 +37,19 @@ class ResetPasswordController extends Controller
         return view('auth.passwords.reset', [
             'passwordUpdateRoute' => 'password.update',
             'token' => $token,
+            'email' => $request->email,
         ]);
+    }
+
+    /**
+     * Set the user's password.
+     *
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
+     * @return void
+     */
+    protected function setUserPassword($user, $password)
+    {
+        $user->password = $password;
     }
 }

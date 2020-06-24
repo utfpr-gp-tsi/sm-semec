@@ -10,12 +10,12 @@
       <div class="card-title">{{ __('Login to your account')}}</div>
       <div class="form-group">
         <label class="form-label">{{ __('CPF')}}</label>
-        <input type="number" class="form-control" id="exampleInputEmail1" name="CPF" aria-describedby="emailHelp" placeholder="CPF" autofocus="">
+        <input type="number" class="form-control" id="cpf" name="CPF" aria-describedby="emailHelp" placeholder="CPF" autofocus="">
     </div>
 
     <div class="form-group">
         <label class="form-label">{{ __('Password')}}</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
     </div>
     <div class="form-group">
         <label class="custom-control custom-checkbox">

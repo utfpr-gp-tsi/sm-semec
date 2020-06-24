@@ -48,13 +48,14 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/servants/search/{term}/page/{page}', ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants',      'uses' => 'ServantsController@index']);
 	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',         'uses' => 'ServantsController@show']);
+
     });
 });
 
 	/*----------ÁREA DOS SERVIDORES----------	*/
 
-Route::namespace('Servant')->Route::prefix('servant')->name('servant.')->group(function () {
-
+Route::namespace('Servant')->group(function () {
+    Route::prefix('servant')->name('servant.')->group(function () {
 /* Session
 |-------------------------------------------------------------------------- */
     Route::namespace('Auth')->group(function(){
@@ -67,11 +68,21 @@ Route::namespace('Servant')->Route::prefix('servant')->name('servant.')->group(f
         
         Route::get('/servant/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
         Route::post('/password/reset','ResetPasswordController@reset')->name('password.upload');
-
+         Route::get('/_dusk/login/{userId}/{guard?}', [
+        'middleware' => 'web',
+        'uses' => 'Laravel\Dusk\Http\Controllers\UserController@login',
+    ]);
     });
 
 /* Dashboard
    |----------------------------------------------------------------------------*/
-   Route::get('/', [ 'as' => 'dashboard' , 'uses' => 'HomeController@index']);
+    Route::get('/', [ 'as' => 'dashboard' , 'uses' => 'HomeController@index']);
 
+    });
 });
+    Route::get('/_dusk/login/{userId}/{guard?}', [
+        'middleware' => 'web',
+        'uses' => 'Laravel\Dusk\Http\Controllers\UserController@login',
+    ]);
+
+
