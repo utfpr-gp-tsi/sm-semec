@@ -2,7 +2,7 @@
 
 namespace Tests\Browser\Servant\Session;
 
-use Laravel\Dusk\Browser;
+use Laravel\Dusk\Chrome;
 use Tests\DuskTestCase;
 use App\Servant;
 
