@@ -34,6 +34,7 @@ script:
   - docker-compose exec app vendor/bin/phpcs --standard=phpcs.xml ./
   - docker-compose exec app vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
   - docker-compose exec app php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
+  - docker-compose exec app php artisan migrate --env=testing
   - docker-compose exec app php artisan test --coverage-text --coverage-clover build/logs/clover.xml
 
 after_script:

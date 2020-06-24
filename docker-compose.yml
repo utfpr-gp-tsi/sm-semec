@@ -58,18 +58,12 @@ services:
     networks:
       - app-network
 
-  cypress:
-    # the Docker image to use from https://github.com/cypress-io/cypress-docker-images
-    image: "cypress/included:3.3.0"
-    depends_on:
-      - webserver
-    environment:
-      # pass base url to test pointing at the web application
-      - CYPRESS_baseUrl=http://webserver
-    # share the current folder as volume to avoid copying
-    working_dir: /e2e
-    volumes:
-      - ./:/e2e
+  selenium:
+    image: selenium/standalone-chrome-debug:latest
+    container_name: selenium
+    ports:
+      - 4444:4444
+      - 5900:5900
     networks:
       - app-network
 
