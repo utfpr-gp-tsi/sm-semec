@@ -44,7 +44,8 @@ class Edicts extends Command
             return;
         }
 
+        $this->info('Populate edicts');
         DB::table('edicts')->delete();
-        factory('App\Edict', 10)->create();
+        factory('App\Edict', 30)->create();
     }
 }

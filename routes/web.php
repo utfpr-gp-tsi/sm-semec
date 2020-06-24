@@ -18,8 +18,7 @@ Route::namespace('Admin')->group(function () {
 	/* Session
 	|-------------------------------------------------------------------------- */
 	Auth::routes(['register' => false]);
-
-	Route::get('/login/signOut',  ['as' => 'admin.logout',    'uses' => 'Auth\LoginController@logout']);
+	Route::get('/login/signOut',  ['as' => 'admin.logout',          'uses' => 'Auth\LoginController@logout']);
 	Route::get('/profile/edit',   ['as' => 'admin.profile.edit',    'uses' => 'ProfileController@edit']);
 	Route::post('/profile/edit',  ['as' => 'admin.profile.update',  'uses' => 'ProfileController@update']);
     Route::get('/password/edit',  ['as' => 'admin.password.edit',   'uses' => 'ProfileController@editPassword']);
@@ -44,14 +43,15 @@ Route::namespace('Admin')->group(function () {
 	|-------------------------------------------------------------------------- */
 	Route::get('/servants/page/{page}',    ['as' => 'admin.servants',        'uses' => 'ServantsController@index']);
 	Route::get('/servants',      	       ['as' => 'admin.servants',        'uses' => 'ServantsController@index']);
-	Route::get('/servants/search/{term}/page/{page}',
-					       ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
+	Route::get('/servants/search/{term}/page/{page}', ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',    'uses' => 'ServantsController@show']);
 
 	/* Edicts resources
 	|-------------------------------------------------------------------------- */
-	Route::get('/edicts',                 ['as' => 'admin.edicts',        'uses' => 'EdictsController@index']);
+	Route::get('/edicts/page/{page}',     ['as' => 'admin.edicts',        'uses' => 'EdictsController@index']);
+	Route::get('/edicts',      	          ['as' => 'admin.edicts',        'uses' => 'EdictsController@index']);
+	Route::get('/edicts/search/{term}/page/{page}', ['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
 	Route::get('/edicts/search/{term?}',  ['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
 	Route::get('/edicts/new',	          ['as' => 'admin.new.edict',     'uses' => 'EdictsController@new']);
 	Route::post('/edicts',                ['as' => 'admin.create.edict',  'uses' => 'EdictsController@create']);

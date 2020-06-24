@@ -1,7 +1,8 @@
 <tr>
-  <td><a href="{{route('admin.show.edict', $edict->id)}}">{{ $edict->name }}</a></td>
+  <td><a href="{{route('admin.show.edict', $edict->id)}}">{{ $edict->title }}</a></td>
   <td>{{ $edict->started_at }}</td>
   <td>{{ $edict->ended_at }}</td>
+
   <td >
     @component('components.links.edit', ['url' => route('admin.edit.edict', $edict->id)]) @endcomponent
     @component('components.links.delete', ['url' => route('admin.destroy.edict', $edict->id)]) @endcomponent

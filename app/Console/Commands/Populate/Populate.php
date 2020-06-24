@@ -42,5 +42,6 @@ class Populate extends Command
             return;
         }
         $this->call('populate:servants', ['--clear' => 'clear']);
+        $this->call('populate:edicts');
     }
 }

@@ -7,7 +7,7 @@
   <div class="card-body">
     <p><strong>Nome: </strong> {{ $edict->name }}</p>
     <p><strong>Decrição: </strong> {{ $edict->description }}</p>
-    <p><strong>Aberto em: </strong> {{ $edict->created_at }}</p>
+    <p><strong>Aberto em: </strong> {{ $edict->started_at }}</p>
     <p><strong>Válido até: </strong> {{ $edict->ended_at }}</p>
   </div>
 </div>

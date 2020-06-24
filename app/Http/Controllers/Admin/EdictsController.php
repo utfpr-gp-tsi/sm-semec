@@ -15,10 +15,11 @@ class EdictsController extends AppController
      *
      *  
      */
-    public function index($search = null)
+    public function index()
     {
+        $search = Request()->term;
         $edicts = Edict::search($search);
-        return view('admin.edicts.index',compact('edicts'));
+        return view('admin.edicts.index')->with('edicts', $edicts);
     }
 
     /**
@@ -43,10 +44,10 @@ class EdictsController extends AppController
           $edict = new Edict($data);
   
           $validator = Validator::make($data, [
-              'name'        => 'required',
+              'title'        => 'required',
               'description' => 'required',
-              'started_at'  => 'required',
-               'ended_at'   => 'required',
+              'started_at'  => 'required|date',
+               'ended_at'   => 'required|date',
           ]);
   
           if ($validator->fails()) {
@@ -96,7 +97,7 @@ class EdictsController extends AppController
         $data = array_filter($request->all());
 
         $validator = Validator::make($data, [
-            'name'     => 'required',
+            'title'     => 'required',
             'description'    => 'required',
             'started_at'  => 'required',
             'ended_at'   => 'required',

@@ -1,10 +1,10 @@
 <form action="{{ $route }}" method="POST" enctype="multipart/form-data" novalidate>
     @csrf
     @method($method)
-    @component('components.form.input_text', ['field'    => 'name',
-                                              'label'    => 'Nome',
+    @component('components.form.input_text', ['field'    => 'title',
+                                              'label'    => 'Título',
                                               'model'    => 'edict',
-                                              'value'    => $edict->name,
+                                              'value'    => $edict->title,
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
     
