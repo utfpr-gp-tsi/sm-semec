@@ -8,6 +8,7 @@ use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
+    /** @var \App\User */
     protected $user;
 
     public function setUp(): void
@@ -21,7 +22,7 @@ class LoginTest extends DuskTestCase
      *
      * @return void
      */
-    public function testSucessLogin()
+    public function testSucessLogin(): void
     {
         $this->browse(function ($browser) {
             $browser->visit('/admin/login')
@@ -41,7 +42,7 @@ class LoginTest extends DuskTestCase
         });
     }
 
-    public function testFailureLogin()
+    public function testFailureLogin(): void
     {
         $this->browse(function ($browser) {
             $browser->visit('/admin/login')

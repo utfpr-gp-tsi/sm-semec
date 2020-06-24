@@ -31,17 +31,20 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function driver()
     {
+        $opts = [];
         if (env('LAUNCH_BROWSER', false) == false) {
             $opts[] = '--headless';
         }
         $opts[] = '--disable-gpu';
         $opts[] = '--window-size=1280,720';
 
-        $chromeOptions = (new ChromeOptions)->addArguments($opts);
+        $chromeOptions = (new ChromeOptions())->addArguments($opts);
 
         return RemoteWebDriver::create(
-            'http://selenium:4444/wd/hub', DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY, $chromeOptions
+            'http://selenium:4444/wd/hub',
+            DesiredCapabilities::chrome()->setCapability(
+                ChromeOptions::CAPABILITY,
+                $chromeOptions
             )
         );
     }

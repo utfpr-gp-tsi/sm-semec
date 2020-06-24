@@ -7,6 +7,7 @@ use App\User;
 
 class UserSearchTest extends TestCase
 {
+     /** @var array */
     protected $users;
 
     public function setUp(): void
