@@ -17,7 +17,7 @@ class LogoutTest extends DuskTestCase
     {
         $servant = factory(Servant::class)->create();
         $this->browse(function ($browser) use ($servant){
-            $browser->loginAs($servant)->visit('/servant');
+            $browser->loginAs($servant, 'servant')->visit('/servant');
             $browser->click('div.header a.nav-link')
                     ->clickLink('Sair')
                     ->assertPathIs('/servant/login');

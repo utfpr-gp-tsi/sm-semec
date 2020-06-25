@@ -2,10 +2,11 @@
 
 namespace Tests\Browser\Servants\Session;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Servant;
+use Illuminate\Support\Facades\DB;
+use App\User;
 
 class ResetTest extends DuskTestCase
 {
@@ -18,48 +19,59 @@ class ResetTest extends DuskTestCase
     }
 
     /**
-     * A Dusk test home page.
+     * A Dusk test link to reset password
      *
      * @return void
      */
-    public function test_home_page()
-    {
-        $this->browse(function ($browser) {
-            $browser->visit('/')
-                    ->assertSee('Acessar Área do Servidor');
-        });
-    }
-
-    /**
-     * A Dusk test login page success.
-     *
-     * @return void
-     */
-    public function test_password_reset_page()
+    public function test_link_to_reset_password()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/servant/password/reset')
                 ->type('email', $this->servant->email)
                 ->click('.btn-block')
-                ->assertPathIs('/servant/password/reset')
-                ->assertSee('Enviamos seu link de redefinição de senha por e-mail!');
+                ->assertPathIs('/servant/password/reset');
+
+            $browser->with('div.alert', function ($flash) {
+                $flash->assertSee('Enviamos seu link de redefinição de senha por e-mail!');
+            });
+             //dd(DB::table('servants')->select('email_verified_at')->get());
+             //dd(DB::table('password_resets')->select('email')->get());exit();
         });
     }
 
-    /**
-     * A Dusk test back login page.
-     *
-     * @return void
-     */
+    // /**
+    //  * A Dusk test back login page.
+    //  *
+    //  * @return void
+    //  */
     public function test_back_login_page()
     {
 
         $this->browse(function ($browser){
             $browser->visit('/servant/password/reset')
                     ->assertSee('Modificar Senha')
-                    ->clickLink('me envie de volta')
-                    ->assertSee('Faça login na sua conta');
+                    ->clickLink('me envie de volta');
+
+            $browser->with('div.card-title', function ($flash) {
+                $flash->assertSee('Faça login na sua conta');
+            });
         });
     }
 
+    /**
+     * A Dusk test test link to change password
+     *
+     * @return void
+     */
+    public function test_link_change_password()
+    {
+        $request = Request();
+        dd($token = $request->input('token'));exit;
+
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/servant/password/reset');
+            });
+
+         dd(DB::table('password_resets')->select('email')->get());exit();
+    }
 }

@@ -8,19 +8,41 @@ use App\Servant;
 
 class LoginTest extends DuskTestCase
 {
+     /** @var \App\Servant */
     protected $servant;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->servant = factory(Servant::class)->create();
+        $this->servant = factory(Servant::class, 'servant')->create();
     }
+    
     /**
-     * A Dusk test login page success.
+     * A Dusk test login fail.
      *
      * @return void
      */
-    public function test_login_page_success()
+    public function test_failure_login()
+    {
+        $this->browse(function ($browser) {
+            $browser->visit('/servant/login')
+                    ->type ('CPF', $this->servant->CPF)
+                    ->type('password', 'wrong-password')
+                    ->press('Entrar')
+                    ->assertPathIs('/servant/login');
+  
+            $browser->with('div.alert', function ($flash) {
+                $flash->assertSee('Usuário ou senha incorretas.');
+            });
+        });
+    }
+
+    /**
+     * A Dusk test login success.
+     *
+     * @return void
+     */
+     public function test_login_page_success()
     {
         $this->browse(function ($browser) {
             $browser->visit('/servant/login')
@@ -36,26 +58,6 @@ class LoginTest extends DuskTestCase
             $browser->with('div.header', function ($header) {
                 $header->assertSee($this->servant->name);
                 $header->assertSee($this->servant->email);
-            });
-        });
-    }
-
-    /**
-     * A Dusk test login page fail.
-     *
-     * @return void
-     */
-    public function test_failure_login()
-    {
-        $this->browse(function ($browser) {
-            $browser->visit('/servant/login')
-                    ->type ('CPF', $this->servant->CPF)
-                    ->type('password', 'wrong-password')
-                    ->press('Entrar')
-                    ->assertPathIs('/servant/login');
-  
-            $browser->with('div.alert', function ($flash) {
-                $flash->assertSee('Usuário ou senha incorretas.');
             });
         });
     }

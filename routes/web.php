@@ -66,8 +66,9 @@ Route::namespace('Servant')->group(function () {
         Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email'); 
         Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
         
-        Route::get('/servant/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-        Route::post('/password/reset','ResetPasswordController@reset')->name('password.upload');
+        Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
+        Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+        
     });
 
 /* Dashboard
