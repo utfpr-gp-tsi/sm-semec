@@ -1,19 +1,16 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Users;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use App\User;
 use File;
 
-class UserTest extends TestCase
+class UserImageProfileTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @var \App\User */
     protected $user;
 

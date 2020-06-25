@@ -17,7 +17,7 @@
     @isset($new_url)
       <a href="{{ $new_url }}" class="btn btn-outline-primary d-block">
         <i class="fas fa-plus"></i>
-        {{$value ?? ''}}
+        {{ $new_btn_name }}
       </a>
     @endisset
   </div>

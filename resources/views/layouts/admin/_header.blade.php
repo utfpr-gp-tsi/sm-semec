@@ -1,7 +1,7 @@
 <div class="fixed-top header py-4">
   <div class="container-fluid">
     <div class="d-flex">
-      <a class="header-brand" href="./index.html">
+      <a class="header-brand mr-0" href="./index.html">
         <img src="{{ asset('assets/images/brasao-prefeitura.png') }}" class="header-brand-img" alt="tabler logo">
       </a>
       <span class="d-lg-block mt-1 text-muted font-weight-bold">

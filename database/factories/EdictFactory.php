@@ -19,7 +19,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Edict::class, function (Faker $faker) {
     return [
-        'title' => $faker->sentence(),
+        'title' => $faker->sentence($nbWords = 3),
         'description' => $faker->text(),
         'started_at' => $faker->date(),
         'ended_at' => $faker->date(),

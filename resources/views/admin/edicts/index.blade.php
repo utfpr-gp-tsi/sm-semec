@@ -3,7 +3,9 @@
 @section('title', 'Editais')
 @section('content')
 
-@component('components.index.header', ['base_search_path' => route('admin.edicts'), 'new_url' => route('admin.new.edict'), 'value' => 'Criar Edital']) @endcomponent
+@component('components.index.header', ['base_search_path' => route('admin.edicts'),
+                                       'new_url' => route('admin.new.edict'),
+                                       'new_btn_name' => 'Edital']) @endcomponent
 
 <div class="table-responsive mt-3">
 @component('components.index.page_entries_info', ['entries' => $edicts]) @endcomponent

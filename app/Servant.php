@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Services\DateTimeFormatter;
+use App\Traits\CreatedAndUpdatedAtFormatted;
 
 class Servant extends Model
 {
+    use CreatedAndUpdatedAtFormatted;
+
     /**
      * @var array
      */
@@ -63,22 +66,6 @@ class Servant extends Model
      * @param string $value
      */
     public function getBirthedAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value);
-    }
-
-    /**
-     * @param string $value
-     */
-    public function getCreatedAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value);
-    }
-
-    /**
-     * @param string $value
-     */
-    public function getUpdatedAtAttribute($value): string
     {
         return DateTimeFormatter::format($value);
     }

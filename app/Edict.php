@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateTimeFormatter;
+use App\Traits\CreatedAndUpdatedAtFormatted;
 
 class Edict extends Model
 {
+
+    use CreatedAndUpdatedAtFormatted;
     /**
      * @var array
      */
@@ -28,22 +30,6 @@ class Edict extends Model
         'started_at', 'ended_at',
     ];
   
-    
-    /**
-    * @param string $value
-    */
-    public function getStartedAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
-    }
-
-    /**
-    * @param string $value
-    */
-    public function getEndedAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
-    }
    
      /**
      * @param string $term
