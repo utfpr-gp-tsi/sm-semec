@@ -68,10 +68,6 @@ Route::namespace('Servant')->group(function () {
         
         Route::get('/servant/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
         Route::post('/password/reset','ResetPasswordController@reset')->name('password.upload');
-         Route::get('/_dusk/login/{userId}/{guard?}', [
-        'middleware' => 'web',
-        'uses' => 'Laravel\Dusk\Http\Controllers\UserController@login',
-    ]);
     });
 
 /* Dashboard
@@ -80,9 +76,3 @@ Route::namespace('Servant')->group(function () {
 
     });
 });
-    Route::get('/_dusk/login/{userId}/{guard?}', [
-        'middleware' => 'web',
-        'uses' => 'Laravel\Dusk\Http\Controllers\UserController@login',
-    ]);
-
-

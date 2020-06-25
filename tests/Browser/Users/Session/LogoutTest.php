@@ -18,7 +18,6 @@ class LogoutTest extends DuskTestCase
         $user = factory(User::class)->create();
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)->visit('/admin');
-
             $browser->click('div.header a.nav-link')
                     ->clickLink('Sair')
                     ->assertPathIs('/admin/login');
