@@ -5,6 +5,9 @@ parameters:
     - '#Cannot call method [a-zA-Z0-9()]+ on .+|null.#'
     - '#notExistingMethod()#'
     - '#Function factory invoked with [0-9] parameter, 0 required#'
+    -
+      message: '#Access to an undefined property [a-zA-Z0-9\\_]+::\$[a-zA-Z]+_at#'
+      path: tests/Unit/Traits/CreatedAndUpdatedAtFormattedTest.php
   level: max
   paths:
     - app

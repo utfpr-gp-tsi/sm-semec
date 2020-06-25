@@ -7,11 +7,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateTimeFormatter;
+use App\Traits\CreatedAndUpdatedAtFormatted;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use CreatedAndUpdatedAtFormatted;
 
     /**
      * The attributes that are mass assignable.
@@ -56,16 +57,6 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
-    }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
-    }
-
-    public function getUpdatedAtAttribute($value)
-    {
-        return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
     }
 
     public static function search($term)
