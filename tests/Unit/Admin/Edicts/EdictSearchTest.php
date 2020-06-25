@@ -77,18 +77,4 @@ class EdictTest extends TestCase
         $this->assertEquals(null, $searchResult->count());
         $this->assertEmpty($searchResult->diff(collect($expectedEdicts)));
     }
-
-
-
-
-
-    
-    
-   
-      public function tearDown(): void
-    {
-        parent::tearDown();
-        
-    }
-    
 }

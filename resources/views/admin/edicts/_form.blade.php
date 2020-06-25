@@ -34,5 +34,4 @@
 
     @component('components.form.input_submit',['value' => $submit, 'back_url' => route('admin.users')]) @endcomponent
 
-
 </form>
