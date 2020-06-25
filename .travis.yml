@@ -1,14 +1,11 @@
 # For travis use user id 2000
-env:
-  global:
-    - CC_TEST_REPORTER_ID=fcccb2678486786b2076f6a4744683837be23b89bcff990be727793a449b1447
-
-sudo: required
-
-language: bash
-
+language: shell
+os: linux
+dist: xenial
 env:
   DOCKER_COMPOSE_VERSION: 1.4.2
+  global:
+    - CC_TEST_REPORTER_ID=fcccb2678486786b2076f6a4744683837be23b89bcff990be727793a449b1447
 
 services:
   - docker
@@ -40,9 +37,8 @@ script:
   - docker-compose exec -T db mysql -uroot  <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
   - docker-compose exec app php artisan migrate:refresh --env=testing
   - docker-compose exec app php artisan test --coverage-text --coverage-clover build/logs/clover.xml
-  - docker-compose exec app php artisan dusk
 
 after_script:
-  - sudp mkdir /var/www
+  - sudo mkdir /var/www
   - sudo cp -r . /var/www/
   - export CC_TEST_REPORTER_ID=fcccb2678486786b2076f6a4744683837be23b89bcff990be727793a449b1447 && ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT
