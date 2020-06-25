@@ -13,6 +13,7 @@ Homestead.yaml
 /report
 /build
 /reports
+clover.xml
 
 ##
 # ASSETS
