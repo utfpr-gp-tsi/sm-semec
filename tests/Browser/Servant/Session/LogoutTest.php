@@ -5,13 +5,9 @@ namespace Tests\Browser\Servant\Session;
 use Laravel\Dusk\Chrome;
 use Tests\DuskTestCase;
 use App\Servant;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Auth;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class LogoutTest extends DuskTestCase
 {
-    use DatabaseMigrations;
     /**
      * A Dusk test 
      *
@@ -21,8 +17,7 @@ class LogoutTest extends DuskTestCase
     {
         $servant = factory(Servant::class)->create();
 
-        //dd(Auth::guard('servant')->login($servant)); exit();
-           Auth::guard('servant')->login($servant);
+        dd($servant); exit();
 
         $this->browse(function ($browser) use ($servant){
             $browser->loginAs($servant)->visit('/servant');
