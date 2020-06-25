@@ -36,9 +36,8 @@ script:
   - docker-compose exec -T db mysql -uroot  <<< "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
   - docker-compose exec -T db mysql -uroot  <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
   - docker-compose exec app php artisan migrate:refresh --env=testing
-  - docker-compose exec app php artisan test --coverage-text --coverage-clover build/logs/clover.xml
+  - docker-compose exec app php artisan test
 
 after_script:
-  - sudo mkdir /var/www
-  - sudo cp -r . /var/www/
-  - export CC_TEST_REPORTER_ID=fcccb2678486786b2076f6a4744683837be23b89bcff990be727793a449b1447 && ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT
+  - sed -i 's?/var/www?'`pwd`'?' clover.xml
+  - export CC_TEST_REPORTER_ID=fcccb2678486786b2076f6a4744683837be23b89bcff990be727793a449b1447 && ./cc-test-reporter after-build -p /home/travis/build/utfpr-gp-tsi/sm-semec/ -t clover --exit-code $TRAVIS_TEST_RESULT
