@@ -22,6 +22,7 @@ before_install:
   - docker-compose ps
   - docker-compose exec app php artisan key:generate
   - docker-compose exec app php artisan config:cache
+  - docker-compose exec app php artisan route:cache
   - docker-compose exec app php artisan cache:clear
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -34,8 +35,12 @@ script:
   - docker-compose exec app vendor/bin/phpcs --standard=phpcs.xml ./
   - docker-compose exec app vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
   - docker-compose exec app php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
+  - docker-compose exec -T db mysql -uroot  <<< "create database sm_semec_test;"
+  - docker-compose exec -T db mysql -uroot  <<< "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
+  - docker-compose exec -T db mysql -uroot  <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
   - docker-compose exec app php artisan migrate --env=testing
   - docker-compose exec app php artisan test --coverage-text --coverage-clover build/logs/clover.xml
+  - docker-compose exec app php artisan dusk
 
 after_script:
   - sudp mkdir /var/www
