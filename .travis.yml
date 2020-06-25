@@ -38,7 +38,7 @@ script:
   - docker-compose exec -T db mysql -uroot  <<< "create database sm_semec_test;"
   - docker-compose exec -T db mysql -uroot  <<< "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
   - docker-compose exec -T db mysql -uroot  <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
-  - docker-compose exec app php artisan migrate --env=testing
+  - docker-compose exec app php artisan migrate:refresh --env=testing
   - docker-compose exec app php artisan test --coverage-text --coverage-clover build/logs/clover.xml
   - docker-compose exec app php artisan dusk
 
