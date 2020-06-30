@@ -17,8 +17,8 @@ class CreateEdictsTable extends Migration
             $table->bigIncrements('id');
             $table->text('title');
             $table->text('description');
-            $table->date('started_at');
-            $table->date('ended_at');
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
             $table->timestamps();
         });
     }
