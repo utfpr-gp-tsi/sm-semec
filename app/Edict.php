@@ -18,6 +18,8 @@ class Edict extends Model
         
        
     ];
+
+    
   
     
     /**
@@ -35,7 +37,14 @@ class Edict extends Model
     {
         return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
     }
-    
+
+    public function getDateStarted(): string
+    {
+        return DateTimeFormatter::format($this->getOriginal('started_at'), DateTimeFormatter::SHORT_DATE_TIME_INPUT);
+    }
+
+   
+   
    
      /**
      * @param string $term

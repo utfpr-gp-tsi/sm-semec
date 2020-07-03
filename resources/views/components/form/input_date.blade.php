@@ -7,7 +7,7 @@
 	<input class="form-control datetime-local @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
 				 @if ($required) required="required" @endif
 				 autofocus="autofocus" type="datetime-local" name="{{ $field }}"
-	  		 value="{{ date('Y-m-d\TH:i', strtotime($value)) ?? '' }}" id="{{ $model }}_{{ $field }}"/>
+	  		 value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}"/>
 
 	@if ($errors->has($field))
 		<span class="invalid-feedback" role="alert">

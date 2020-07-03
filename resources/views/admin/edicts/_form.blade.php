@@ -18,14 +18,14 @@
     @component('components.form.input_date', ['field'    => 'started_at',
                                               'label'    => 'Início',
                                               'model'    => 'edict',
-                                              'value'    => $edict->started_at,
+                                              'value'    => $edict->getDateStarted(),
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
 
     @component('components.form.input_date', ['field'    => 'ended_at',
                                               'label'    => 'Término',
                                               'model'    => 'edict',
-                                              'value'    => $edict->ended_at,
+                                              'value'    => $edict->getDateEnded,
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
                                              
