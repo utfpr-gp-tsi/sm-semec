@@ -150,7 +150,11 @@ return [
         'password' => 'senha',
         'name' => 'nome',
         'Current Password' => 'Senha Atual',
-        'password_confirmation' => 'senha'
+        'password_confirmation' => 'senha',
+        'title' => 'Título',
+        'description' => 'Descrição',
+        'started_at' => 'Início',
+        'ended_at' => 'Término'
     ],
 
 ];

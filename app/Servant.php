@@ -4,12 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Services\DateTimeFormatter;
-use App\Traits\CreatedAndUpdatedAtFormatted;
 
 class Servant extends Model
 {
-    use CreatedAndUpdatedAtFormatted;
-
     /**
      * @var array
      */

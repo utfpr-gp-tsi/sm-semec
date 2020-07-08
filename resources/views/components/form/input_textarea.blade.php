@@ -4,10 +4,10 @@
 		{{ $label}} @if ($required) <abbr title="obrigatório">*</abbr> @endif
 	</label>
 
-	<input class="form-control datetime-local @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
+	<textarea class="form-control @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
 				 @if ($required) required="required" @endif
-				 autofocus="autofocus" type="datetime-local" name="{{ $field }}"
-	  		 value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}"/>
+				 autofocus="autofocus" name="{{ $field }}" rows="4"
+				 id="{{ $model }}_{{ $field }}">{{ $value ?? '' }}</textarea>
 
 	@if ($errors->has($field))
 		<span class="invalid-feedback" role="alert">
@@ -19,3 +19,4 @@
 
 	<small class="form-text text-muted">{{ $hint ?? ''}}</small>
 </div>
+

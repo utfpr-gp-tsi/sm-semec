@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateTimeFormatter;
+use App\Traits\DateTimeFormatter;
 
 class Edict extends Model
 {
+    use DateTimeFormatter;
+
     /**
      * @var array
      */
@@ -15,56 +17,25 @@ class Edict extends Model
         'description',
         'started_at',
         'ended_at',
-        
-       
     ];
 
-    
-  
-    
-    /**
-    * @param string $value
-    */
-    public function getStartedAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
-    }
+    protected $dates = [
+        'started_at',
+        'ended_at'
+    ];
 
     /**
-    * @param string $value
-    */
-    public function getEndedAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value, DateTimeFormatter::SHORT_DATE_TIME);
-    }
-
-    public function getDateStarted(): string
-    {
-        return DateTimeFormatter::format($this->getOriginal('started_at'), DateTimeFormatter::SHORT_DATE_TIME_INPUT);
-    }
-
-   
-   
-   
-     /**
      * @param string $term
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public static function search($term)
     {
         if ($term) {
             $searchTerm = "%{$term}%";
             return Edict::where('title', 'LIKE', $searchTerm)
-                          ->orderBy('started_at', 'desc')
-                          ->paginate(20);
+                ->orderBy('started_at', 'desc')
+                ->paginate(20);
         }
-        $edicts = Edict::orderBy('started_at', 'desc')->paginate(20);
-
-        return $edicts;
-
-       
+        return Edict::orderBy('started_at', 'desc')->paginate(20);
     }
-
-
-
 }

@@ -13,7 +13,7 @@ class EdictsController extends AppController
     /**
      * Display a listing of the resource.
      *
-     *  
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -37,29 +37,29 @@ class EdictsController extends AppController
      * Store a newly created resource in storage.
      * @param  \Illuminate\Http\Request  $request
      * @return  \Illuminate\View\View | \Illuminate\Http\RedirectResponse.
-       */
-      public function create(Request $request)
-      {
-          $data = $request->all();
-          $edict = new Edict($data);
-  
-          $validator = Validator::make($data, [
-              'title'        => 'required',
-              'description' => 'required',
-              'started_at'  => 'required|date',
-               'ended_at'   => 'required|date',
-          ]);
-  
-          if ($validator->fails()) {
-              $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-              return view('admin.edicts.new', compact('edict'))->withErrors($validator);
-          }
-  
-          $edict->save();
-          return redirect()->route('admin.edicts')->with('success', 'Edital cadastrado com sucesso');
-      }
+     */
+    public function create(Request $request)
+    {
+        $data = $request->all();
+        $edict = new Edict($data);
 
-      /**
+        $validator = Validator::make($data, [
+            'title'       => 'required',
+            'description' => 'required',
+            'started_at'  => 'required|date_format:d/m/Y H:i|after_or_equal:now',
+            'ended_at'    => 'required|date_format:d/m/Y H:i|after_or_equal:started_at'
+        ]);
+
+        if ($validator->fails()) {
+            $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
+            return view('admin.edicts.new', compact('edict'))->withErrors($validator);
+        }
+
+        $edict->save();
+        return redirect()->route('admin.edicts')->with('success', 'Edital cadastrado com sucesso');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Edict  $id
@@ -70,13 +70,13 @@ class EdictsController extends AppController
         $edict =  Edict::find($id);
         return view('admin.edicts.show', compact('edict'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Edict  $id
      * @return  \Illuminate\View\View
-     */ 
+     */
     public function edit($id)
     {
         $edict = Edict::find($id);
@@ -97,10 +97,10 @@ class EdictsController extends AppController
         $data = array_filter($request->all());
 
         $validator = Validator::make($data, [
-            'title'     => 'required',
-            'description'    => 'required',
-            'started_at'  => 'required',
-            'ended_at'   => 'required',
+            'title'       => 'required',
+            'description' => 'required',
+            'started_at'  => 'required|date_format:d/m/Y H:i|after_or_equal:now',
+            'ended_at'    => 'required|date_format:d/m/Y H:i|after_or_equal:started_at'
         ]);
 
         $edict->fill($data);
@@ -113,7 +113,7 @@ class EdictsController extends AppController
         return redirect()->route('admin.edicts')->with('success', 'Edital atualizado com sucesso');
     }
 
-     /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Edict  $id
@@ -126,8 +126,4 @@ class EdictsController extends AppController
         $edict->delete();
         return redirect()->route('admin.edicts')->with('success', 'Edital removido com sucesso.');
     }
-
-
-
-
 }
