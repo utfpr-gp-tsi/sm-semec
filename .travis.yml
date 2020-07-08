@@ -18,8 +18,8 @@ before_install:
   - docker-compose up -d
   - docker-compose ps
   - docker-compose exec app php artisan key:generate
-  - docker-compose exec app php artisan config:cache
-  - docker-compose exec app php artisan route:cache
+  - docker-compose exec app php artisan config:clear
+  - docker-compose exec app php artisan route:clear
   - docker-compose exec app php artisan cache:clear
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -35,8 +35,10 @@ script:
   - docker-compose exec -T db mysql -uroot  <<< "create database sm_semec_test;"
   - docker-compose exec -T db mysql -uroot  <<< "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
   - docker-compose exec -T db mysql -uroot  <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
+  - docker-compose exec -T db mysql -usm-semec -psm-semec  <<< "show databases;"
   - docker-compose exec app php artisan migrate:refresh --env=testing
   - docker-compose exec app php artisan test
+  - docker-compose exec app php artisan dusk
 
 after_script:
   - sed -i 's?/var/www?'`pwd`'?' clover.xml
