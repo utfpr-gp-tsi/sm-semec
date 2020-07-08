@@ -5,7 +5,7 @@
 
 @component('components.index.header', ['base_search_path' => route('admin.edicts'),
                                        'new_url' => route('admin.new.edict'),
-                                       'new_btn_name' => 'Edital']) @endcomponent
+                                       'new_btn_name' => 'Novo Edital']) @endcomponent
 
 <div class="table-responsive mt-3">
 @component('components.index.page_entries_info', ['entries' => $edicts]) @endcomponent
@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-    @each('admin.edicts._edict_row', $edicts, 'edict')
+      @each('admin.edicts._edict_row', $edicts, 'edict')
     </tbody>
   </table>
   <div class="mt-5 float-right flex-wrap">

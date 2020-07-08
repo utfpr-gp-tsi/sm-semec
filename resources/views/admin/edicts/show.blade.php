@@ -5,10 +5,12 @@
 
 <div class="card">
   <div class="card-body">
-    <p><strong>Nome: </strong> {{ $edict->name }}</p>
-    <p><strong>Decrição: </strong> {{ $edict->description }}</p>
-    <p><strong>Aberto em: </strong> {{ $edict->started_at }}</p>
-    <p><strong>Válido até: </strong> {{ $edict->ended_at }}</p>
+    <p><strong>Nome: </strong> {{ $edict->title }}</p>
+    <p><strong>Decrição: </strong></p>
+    {!! nl2br($edict->description) !!}
+    <p></p>
+    <p><strong>Aberto em: </strong> {{ $edict->started_at->toShortDateTime() }}</p>
+    <p><strong>Válido até: </strong> {{ $edict->ended_at->toShortDateTime() }}</p>
   </div>
 </div>
 

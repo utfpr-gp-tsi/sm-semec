@@ -7,31 +7,31 @@
                                               'value'    => $edict->title,
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
-    
-    @component('components.form.input_text', ['field'    => 'description',
+
+    @component('components.form.input_textarea', [
+                                              'field'    => 'description',
                                               'label'    => 'Descrição',
                                               'model'    => 'edict',
                                               'value'    => $edict->description,
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
-    
-    @component('components.form.input_date', ['field'    => 'started_at',
+
+    @component('components.form.input_datetimepicker', [
+                                              'field'    => 'started_at',
                                               'label'    => 'Início',
                                               'model'    => 'edict',
-                                              'value'    => $edict->getDateStarted(),
+                                              'value'    => $edict->started_at,
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
 
-    @component('components.form.input_date', ['field'    => 'ended_at',
+    @component('components.form.input_datetimepicker', [
+                                              'field'    => 'ended_at',
                                               'label'    => 'Término',
                                               'model'    => 'edict',
-                                              'value'    => $edict->getDateEnded,
+                                              'value'    => $edict->ended_at,
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
-                                             
 
-    
-
-    @component('components.form.input_submit',['value' => $submit, 'back_url' => route('admin.users')]) @endcomponent
+    @component('components.form.input_submit',['value' => $submit, 'back_url' => route('admin.edicts')]) @endcomponent
 
 </form>

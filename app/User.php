@@ -7,12 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\CreatedAndUpdatedAtFormatted;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use CreatedAndUpdatedAtFormatted;
 
     /**
      * The attributes that are mass assignable.

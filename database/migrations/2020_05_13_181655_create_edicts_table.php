@@ -15,7 +15,7 @@ class CreateEdictsTable extends Migration
     {
         Schema::create('edicts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('title');
+            $table->string('title');
             $table->text('description');
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
