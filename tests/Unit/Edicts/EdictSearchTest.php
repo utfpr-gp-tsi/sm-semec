@@ -66,12 +66,4 @@ class EdictSearchTest extends TestCase
         $this->assertEmpty($searchResult->diff(collect($expectedEdicts)));
     }
 
-    public function testSearchNull(): void
-    {
-        $searchResult = Edict::search('2015');
-        $expectedEdicts = collect($this->edicts);
-
-        $this->assertEquals(null, $searchResult->count());
-        $this->assertEmpty($searchResult->diff(collect($expectedEdicts)));
-    }
 }
