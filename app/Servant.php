@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateTimeFormatter;
 
 class Servant extends Model
 {
@@ -25,6 +24,10 @@ class Servant extends Model
         'address',
         'phone',
         'email',
+    ];
+
+    protected $dates = [
+        'birthed_at'
     ];
 
     /**
@@ -57,14 +60,6 @@ class Servant extends Model
     public function licenses()
     {
         return $this->hasManyThrough(License::class, Contract::class, 'servant_id', 'contract_id');
-    }
-
-    /**
-     * @param string $value
-     */
-    public function getBirthedAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value);
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateTimeFormatter;
 
 class Contract extends Model
 {
@@ -19,6 +18,11 @@ class Contract extends Model
         'role',
         'link',
         'servant_id',
+    ];
+
+    protected $dates = [
+        'admission_at',
+        'termination_at'
     ];
 
     /**
@@ -43,21 +47,5 @@ class Contract extends Model
     public function licenses()
     {
         return $this->hasMany(License::class, 'contract_id');
-    }
-
-    /**
-     * @param string $value
-     */
-    public function getAdmissionAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value);
-    }
-
-    /**
-     * @param string $value
-     */
-    public function getTerminationAtAttribute($value): string
-    {
-        return DateTimeFormatter::format($value);
     }
 }

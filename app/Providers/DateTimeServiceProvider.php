@@ -16,6 +16,9 @@ class DateTimeServiceProvider extends ServiceProvider
         \Illuminate\Support\Carbon::macro('toShortDateTime', function () {
             return $this->format('d/m/Y H:i'); /** @phpstan-ignore-line */
         });
+        \Illuminate\Support\Carbon::macro('toShortDate', function () {
+            return $this->format('d/m/Y'); /** @phpstan-ignore-line */
+        });
     }
 
     /**
