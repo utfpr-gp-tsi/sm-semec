@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Edict;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
-use App\Services\DateFormatter;
 
 class EdictsController extends AppController
 {
@@ -41,7 +40,6 @@ class EdictsController extends AppController
     public function create(Request $request)
     {
         $data = $request->all();
-        $edict = new Edict($data);
 
         $validator = Validator::make($data, [
             'title'       => 'required',
@@ -50,6 +48,8 @@ class EdictsController extends AppController
             'ended_at'    => 'required|date_format:d/m/Y H:i|after_or_equal:started_at'
         ]);
 
+        $this->filterDateTimeFormat($data, ['started_at', 'ended_at']);
+        $edict = new Edict($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
             return view('admin.edicts.new', compact('edict'))->withErrors($validator);
@@ -103,6 +103,7 @@ class EdictsController extends AppController
             'ended_at'    => 'required|date_format:d/m/Y H:i|after_or_equal:started_at'
         ]);
 
+        $this->filterDateTimeFormat($data, ['started_at', 'ended_at']);
         $edict->fill($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');

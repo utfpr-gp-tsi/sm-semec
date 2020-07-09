@@ -14,8 +14,8 @@
       @foreach($servant->licenses as $license)
         <tr>
           <td>{{ $license->contract->registration }}</td>
-          <td>{{ $license->started_at }}</td>
-          <td>{{ $license->ended_at }}</td>
+          <td>{{ $license->started_at->toShortDate() }}</td>
+          <td>{{ $license->ended_at->toShortDate() }}</td>
           <td>{{ $license->license_type }}</td>
           <td>{{ $license->days }}</td>
         </tr>
