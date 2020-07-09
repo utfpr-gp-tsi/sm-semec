@@ -8,15 +8,10 @@ use App\Servant;
 
 class LogoutTest extends DuskTestCase
 {
-    /**
-     * A Dusk test 
-     *
-     * @return void
-     */
-    public function test_success_logout()
+    public function testSuccessLogout(): void
     {
         $servant = factory(Servant::class)->create();
-        $this->browse(function ($browser) use ($servant){
+        $this->browse(function ($browser) use ($servant) {
             $browser->loginAs($servant, 'servant')->visit('/servant');
             $browser->click('div.header a.nav-link')
                     ->clickLink('Sair')

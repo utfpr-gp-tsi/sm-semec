@@ -28,7 +28,7 @@ class ForgotPasswordController extends Controller
     /**
      * Show the reset email form.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function showLinkRequestForm()
     {
@@ -48,12 +48,11 @@ class ForgotPasswordController extends Controller
         return Password::broker('servants');
     }
 
-    // *
-    //  * Get the guard to be used during authentication
-    //  * after password reset.
-    //  *
-    //  * @return \Illuminate\Contracts\Auth\StatefulGuard
-     
+    /**
+    * Get the guard to be used during authentication
+    * after password reset.
+    * @return \Illuminate\Contracts\Auth\Guard
+    */
     public function guard()
     {
         return Auth::guard('servant');

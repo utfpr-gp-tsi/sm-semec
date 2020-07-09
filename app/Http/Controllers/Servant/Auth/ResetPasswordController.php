@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -38,7 +37,7 @@ class ResetPasswordController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  string|null  $token
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function showResetForm(Request $request, $token = null)
     {
@@ -53,7 +52,7 @@ class ResetPasswordController extends Controller
      * Set the user's password.
      *
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
-     * @param  string  $password
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $password
      * @return void
      */
     protected function setUserPassword($user, $password)

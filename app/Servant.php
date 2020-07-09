@@ -99,6 +99,10 @@ class Servant extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+    * @param string $value
+    * @return void
+    */
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);

@@ -32,6 +32,10 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/admin';
 
+   /**
+   * @param  string  $token
+   * @return \Illuminate\View\View.
+   */
     public function showResetForm(Request $request, $token = null)
     {
         return view('auth.passwords.reset', [

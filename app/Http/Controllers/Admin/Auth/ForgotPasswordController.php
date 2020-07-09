@@ -23,7 +23,7 @@ class ForgotPasswordController extends Controller
    /**
    * Show the reset email form.
    *
-   * @return \Illuminate\Http\Response
+   * @return \Illuminate\View\View.
    */
     public function showLinkRequestForm()
     {

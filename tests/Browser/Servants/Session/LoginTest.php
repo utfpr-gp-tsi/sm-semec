@@ -8,7 +8,7 @@ use App\Servant;
 
 class LoginTest extends DuskTestCase
 {
-     /** @var \App\Servant */
+    /** @var \App\Servant */
     protected $servant;
 
     public function setUp(): void
@@ -22,11 +22,11 @@ class LoginTest extends DuskTestCase
      *
      * @return void
      */
-    public function test_failure_login()
+    public function testFailureLogin(): void
     {
         $this->browse(function ($browser) {
             $browser->visit('/servant/login')
-                    ->type ('CPF', $this->servant->CPF)
+                    ->type('CPF', $this->servant->CPF)
                     ->type('password', 'wrong-password')
                     ->press('Entrar')
                     ->assertPathIs('/servant/login');
@@ -42,11 +42,11 @@ class LoginTest extends DuskTestCase
      *
      * @return void
      */
-     public function test_login_page_success()
+    public function testSucessLogin(): void
     {
         $this->browse(function ($browser) {
             $browser->visit('/servant/login')
-                    ->type ('CPF', $this->servant->CPF)
+                    ->type('CPF', $this->servant->CPF)
                     ->type('password', 'password')
                     ->press('Entrar')
                     ->assertPathIs('/servant');

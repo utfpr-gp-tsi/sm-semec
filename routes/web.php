@@ -52,10 +52,11 @@ Route::namespace('Admin')->group(function () {
     });
 });
 
-	/*----------ÁREA DOS SERVIDORES----------	*/
+	/*----------SERVANT AREA----------	*/
 
 Route::namespace('Servant')->group(function () {
     Route::prefix('servant')->name('servant.')->group(function () {
+
 /* Session
 |-------------------------------------------------------------------------- */
     Route::namespace('Auth')->group(function(){
@@ -68,7 +69,6 @@ Route::namespace('Servant')->group(function () {
         
         Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
         Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
-        
     });
 
 /* Dashboard

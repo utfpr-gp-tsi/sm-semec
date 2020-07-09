@@ -21,5 +21,11 @@ parameters:
     - app/Http/Controllers/Admin/Auth/LoginController.php
     - app/User.php
     - app/Http/Controllers/Admin/ProfileController.php
+    - app/Http/Controllers/Admin/Auth/ResetPasswordController.php
+    - app/Servant.php
+    - app/Http/Controllers/Servant/Auth/LoginController.php
+    - app/Http/Controllers/Servant/Auth/ResetPasswordController.php
+    - app/Notifications/ResetPasswordNotification.php
+    - tests/Browser/Servants/Session/ResetPasswordTest.php
   checkMissingIterableValueType: false
 

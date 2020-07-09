@@ -8,6 +8,11 @@ use App\Http\Controllers\Servant\AppController;
 
 class HomeController extends AppController
 {
+    /**
+    * Show the application dashboard.
+    *
+    * @return \Illuminate\Contracts\Support\Renderable
+    */
     public function index()
     {
         return view('servant.home.index');

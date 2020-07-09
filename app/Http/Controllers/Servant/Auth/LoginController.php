@@ -8,17 +8,14 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
 use Auth;
-use App\Http\Controllers\Auth\Hash;
-use App\User;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-
     /**
-    * Only guests for "admin" guard are allowed except
+    * Only guests for "servant" guard are allowed except
     * for logout.
     *
     *@return void
@@ -27,7 +24,11 @@ class LoginController extends Controller
     {
         $this->middleware('guest:servant')->except('logout');
     }
-
+    
+    /**
+    *
+    * @return \Illuminate\View\View
+    */
     public function showLoginForm()
     {
         return view('auth.login', [

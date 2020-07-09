@@ -27,6 +27,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Servidor',
             'CPF' => '11111111111',
             'password' => '123456',
+            'birthed_at' => now(),
+            'natural_from' => Str::random(10),
+            'marital_status' => Str::random(10),
+            'mother_name' => Str::random(10),
+            'father_name' => Str::random(10),
+            'RG' => rand(),
+            'PIS' => rand(),
+            'CTPS' => rand(),
+            'title' => Str::random(10),
+            'address' => Str::random(10),
+            'phone' => rand(),
         ]);
     }
 }
