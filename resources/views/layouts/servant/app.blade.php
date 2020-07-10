@@ -15,7 +15,7 @@
      <script src="https://kit.fontawesome.com/826671e166.js" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
-    <script src="{{ asset(mix('assets/js/admin/app.js')) }}" defer></script>
+    <script src="{{ asset(mix('assets/js/servants/app.js')) }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,7 +23,7 @@
 
     <!-- Styles -->
     <link href="{{ asset(mix('assets/vendor/tabler/css/tabler-dashboard.css')) }}" rel="stylesheet">
-    <link href="{{ asset(mix('assets/css/admin/app.css')) }}" rel="stylesheet">
+    <link href="{{ asset(mix('assets/css/servants/app.css')) }}" rel="stylesheet">
 </head>
 <body>
   <div id="app" class="page">

@@ -37,6 +37,11 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return  \Illuminate\Http\RedirectResponse.
+    */
     public function login(Request $request)
     {
         $userData = array(
@@ -51,6 +56,10 @@ class LoginController extends Controller
         return redirect('servant')->with('success', 'Login efetuado com sucesso.');
     }
 
+    /**
+    *
+    * @return  \Illuminate\Http\RedirectResponse.
+    */
     public function logout()
     {
         Auth::guard('servant')->logout();

@@ -1,9 +1,11 @@
 {
     "/assets/js/admin/app.js": "/assets/js/admin/app.js?id=6a60fb74f4fb01135cb7",
-    "/assets/js/app.js": "/assets/js/app.js?id=7de6ea0a1766e4b6ac8f",
+    "/assets/js/app.js": "/assets/js/app.js?id=c77f5f1ebb3842e05e61",
     "/assets/css/app.css": "/assets/css/app.css?id=4256a46075179d5240f7",
     "/assets/css/login/session.css": "/assets/css/login/session.css?id=39a5fa34734d44d5eca7",
     "/assets/css/admin/app.css": "/assets/css/admin/app.css?id=153dbc56d16ee6b2a41c",
+    "/assets/js/servants/app.js": "/assets/js/servants/app.js?id=cc79103d71fe97607532",
     "/assets/vendor/tabler/css/tabler.min.css": "/assets/vendor/tabler/css/tabler.min.css?id=6ce7bfa569c9030b54d9",
-    "/assets/vendor/tabler/css/tabler-dashboard.css": "/assets/vendor/tabler/css/tabler-dashboard.css?id=61091747ccaa2a28e032"
+    "/assets/vendor/tabler/css/tabler-dashboard.css": "/assets/vendor/tabler/css/tabler-dashboard.css?id=61091747ccaa2a28e032",
+    "/assets/css/servants/app.css": "/assets/css/servants/app.css?id=153dbc56d16ee6b2a41c"
 }

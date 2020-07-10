@@ -11,8 +11,7 @@ use Auth;
 class ForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
-
-
+    
     /**
      * Only guests for "servant" guard are allowed except
      * for logout.
@@ -23,7 +22,6 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest:servant');
     }
-
 
     /**
      * Show the reset email form.

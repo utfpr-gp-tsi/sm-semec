@@ -8,6 +8,17 @@ parameters:
     -
       message: '#Access to an undefined property [a-zA-Z0-9\\_]+::\$[a-zA-Z]+_at#'
       path: tests/Unit/Traits/CreatedAndUpdatedAtFormattedTest.php
+    -
+      message: '#Access to an undefined property#'
+      paths: 
+            - app/Http/Controllers/Servant/Auth/ResetPasswordController.php
+            - app/Http/Controllers/Admin/Auth/ResetPasswordController.php 
+    -
+      message: '#Call to an undefined method#'
+      paths: 
+            - tests/Browser/Servants/Session/ResetPasswordTest.php
+            - app/Http/Controllers/Servant/Auth/LoginController.php
+
   level: max
   paths:
     - app
@@ -21,11 +32,4 @@ parameters:
     - app/Http/Controllers/Admin/Auth/LoginController.php
     - app/User.php
     - app/Http/Controllers/Admin/ProfileController.php
-    - app/Http/Controllers/Admin/Auth/ResetPasswordController.php
-    - app/Servant.php
-    - app/Http/Controllers/Servant/Auth/LoginController.php
-    - app/Http/Controllers/Servant/Auth/ResetPasswordController.php
-    - app/Notifications/ResetPasswordNotification.php
-    - tests/Browser/Servants/Session/ResetPasswordTest.php
   checkMissingIterableValueType: false
-
