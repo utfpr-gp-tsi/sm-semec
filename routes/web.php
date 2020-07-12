@@ -46,8 +46,35 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/servants/page/{page}',    ['as' => 'admin.servants.page',   'uses' => 'ServantsController@index']);
 	Route::get('/servants',      	       ['as' => 'admin.servants',        'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}/page/{page}',
-					       ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
+	                       ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants',      'uses' => 'ServantsController@index']);
 	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',         'uses' => 'ServantsController@show']);
+
+    });
+});
+
+	/*----------SERVANT AREA----------	*/
+
+Route::namespace('Servant')->group(function () {
+    Route::prefix('servant')->name('servant.')->group(function () {
+
+/* Session
+|-------------------------------------------------------------------------- */
+    Route::namespace('Auth')->group(function(){
+        Route::get('/login','LoginController@showLoginForm')->name('login');
+        Route::post('/login','LoginController@login');
+        Route::get('/login/signOut',  ['as' => 'logout','uses' => 'LoginController@logout']);
+
+        Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email'); 
+        Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
+        
+        Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
+        Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+    });
+
+/* Dashboard
+   |----------------------------------------------------------------------------*/
+    Route::get('/', [ 'as' => 'dashboard' , 'uses' => 'HomeController@index']);
+
     });
 });

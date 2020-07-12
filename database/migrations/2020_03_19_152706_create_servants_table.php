@@ -29,6 +29,9 @@ class CreateServantsTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('email');
+            $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

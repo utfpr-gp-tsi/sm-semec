@@ -3,7 +3,7 @@
 
 @section('content')
 
-<form class="card" method="POST" action="{{ route('password.email') }}">
+<form class="card" method="POST" action="{{ route($passwordEmailRoute) }}">
   @csrf
     <div class="card-body p-6">
       <div class="card-title">
@@ -26,6 +26,6 @@
     </div>
   </div>
 </form>
-<div class="text-center text-muted">{{ __('Forget it,')}} <a href="{{ route('login') }}">{{ __('send me back') }}</a> {{ __('to the sign in screen.')}} </div>
+<div class="text-center text-muted">{{ __('Forget it,')}} <a href="{{ route($loginRoute) }}">{{ __('send me back') }}</a> {{ __('to the sign in screen.')}} </div>
 
 @endsection

@@ -34,11 +34,18 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    public function showLoginForm()
+    {
+        return view('auth.login', [
+            'loginRoute' => 'login',
+            'forgotPasswordRoute' => 'password.request',
+        ]);
+    }
 
     public function login(Request $request)
     {
         $userData = array(
-            'email'  => $request->get('email'),
+            'CPF'  => $request->get('CPF'),
             'password' => $request->get('password'),
         );
 
