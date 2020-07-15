@@ -65,5 +65,5 @@ class EdictSearchTest extends TestCase
         $this->assertEquals(10, $searchResult->count());
         $this->assertEmpty($searchResult->diff(collect($expectedEdicts)));
     }
-
 }
+               

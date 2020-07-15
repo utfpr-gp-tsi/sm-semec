@@ -51,9 +51,9 @@ Route::namespace('Admin')->group(function () {
 	
 	/* Edicts resources
 	|-------------------------------------------------------------------------- */
-	Route::get('/edicts/page/{page}',     ['as' => 'admin.edicts',        'uses' => 'EdictsController@index']);
+	Route::get('/edicts/page/{page}',     ['as' => 'admin.edicts.page',        'uses' => 'EdictsController@index']);
 	Route::get('/edicts',      	          ['as' => 'admin.edicts',        'uses' => 'EdictsController@index']);
-	Route::get('/edicts/search/{term}/page/{page}', ['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
+	Route::get('/edicts/search/{term}/page/{page}', ['as' => 'admin.search.edicts.page', 'uses' => 'EdictsController@index']);
 	Route::get('/edicts/search/{term?}',  ['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
 	Route::get('/edicts/new',	          ['as' => 'admin.new.edict',     'uses' => 'EdictsController@new']);
 	Route::post('/edicts',                ['as' => 'admin.create.edict',  'uses' => 'EdictsController@create']);
