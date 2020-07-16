@@ -2,11 +2,9 @@
 
 namespace Tests\Unit\Edicts;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use App\Edict;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class EdictSearchTest extends TestCase
 {
@@ -66,4 +64,3 @@ class EdictSearchTest extends TestCase
         $this->assertEmpty($searchResult->diff(collect($expectedEdicts)));
     }
 }
-               

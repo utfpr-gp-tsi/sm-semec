@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Validator;
 
 trait FilterDateTimeFormatter
 {
+    /**
+     *  @return void
+     *  @param string $format
+     *  @param array $keys
+     *  @param array $data
+     */
     public function filterDateTimeFormat(&$data, $keys, $format = 'd/m/Y H:i')
     {
         foreach ($keys as $key) {

@@ -3,9 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Services\DateTimeFormatter;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\ResetPasswordNotification;
 
-class Servant extends Model
+class Servant extends Authenticatable
 {
+    use Notifiable;
+
     /**
      * @var array
      */
@@ -24,6 +32,7 @@ class Servant extends Model
         'address',
         'phone',
         'email',
+        'password'
     ];
 
     protected $dates = [
@@ -78,5 +87,23 @@ class Servant extends Model
         }
 
         return Servant::with(['contracts'])->paginate(20);
+    }
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+    * @param string $value
+    * @return void
+    */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

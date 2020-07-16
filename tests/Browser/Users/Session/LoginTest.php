@@ -26,7 +26,7 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser->visit('/admin/login')
-                    ->type('email', $this->user->email)
+                    ->type('CPF', $this->user->CPF)
                     ->type('password', 'password')
                     ->press('Entrar')
                     ->assertPathIs('/admin');
@@ -46,7 +46,7 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser->visit('/admin/login')
-                    ->type('email', $this->user->email)
+                    ->type('CPF', $this->user->CPF)
                     ->type('password', 'wrong-password')
                     ->press('Entrar')
                     ->assertPathIs('/admin/login');

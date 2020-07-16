@@ -130,3 +130,8 @@ Breadcrumbs::for('admin.update.edict', function ($trail, $id) {
     $trail->parent('admin.edicts');
     $trail->push('Editar Edital', route('admin.update.edict', $id));
 });
+/* Dashboard Servant
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('servant.dashboard', function ($trail) {
+    $trail->push('Página Inicial', route('servant.dashboard'));
+});

@@ -61,6 +61,34 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/edicts/{id}/edit',       ['as' => 'admin.edit.edict',    'uses' => 'EdictsController@edit']);
 	Route::patch('/edicts/{id}',          ['as' => 'admin.update.edict',  'uses' => 'EdictsController@update']);
 	Route::delete('/edicts/{id}',         ['as' => 'admin.destroy.edict', 'uses' => 'EdictsController@destroy']);
+         
+
+    });
 });
+
+	/*----------SERVANT AREA----------	*/
+
+Route::namespace('Servant')->group(function () {
+    Route::prefix('servant')->name('servant.')->group(function () {
+
+/* Session
+|-------------------------------------------------------------------------- */
+    Route::namespace('Auth')->group(function(){
+        Route::get('/login','LoginController@showLoginForm')->name('login');
+        Route::post('/login','LoginController@login');
+        Route::get('/login/signOut',  ['as' => 'logout','uses' => 'LoginController@logout']);
+
+        Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email'); 
+        Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
+        
+        Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
+        Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+    });
+
+/* Dashboard
+   |----------------------------------------------------------------------------*/
+    Route::get('/', [ 'as' => 'dashboard' , 'uses' => 'HomeController@index']);
+
+    });
 });
 
