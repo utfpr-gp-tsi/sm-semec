@@ -91,4 +91,3 @@ Route::namespace('Servant')->group(function () {
 
     });
 });
-

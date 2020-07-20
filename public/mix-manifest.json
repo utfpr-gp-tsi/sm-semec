@@ -1,11 +1,13 @@
 {
-    "/assets/js/admin/app.js": "/assets/js/admin/app.js?id=325ef237b6cd493f8fda",
-    "/assets/js/app.js": "/assets/js/app.js?id=8594794591fc7ef13cf5",
+    "/assets/js/admin/app.js": "/assets/js/admin/app.js?id=efb549f3a5535be931f6",
+    "/assets/js/app.js": "/assets/js/app.js?id=7dc919e2da0b6dd70199",
     "/assets/css/app.css": "/assets/css/app.css?id=4256a46075179d5240f7",
     "/assets/css/login/session.css": "/assets/css/login/session.css?id=39a5fa34734d44d5eca7",
     "/assets/css/admin/app.css": "/assets/css/admin/app.css?id=153dbc56d16ee6b2a41c",
     "/assets/css/servants/app.css": "/assets/css/servants/app.css?id=153dbc56d16ee6b2a41c",
-    "/assets/js/servants/app.js": "/assets/js/servants/app.js?id=b9c57c0903ca5c0c11a8",
+    "/assets/js/servants/app.js": "/assets/js/servants/app.js?id=30387eeb6984837780a8",
     "/assets/vendor/tabler/css/tabler.min.css": "/assets/vendor/tabler/css/tabler.min.css?id=6ce7bfa569c9030b54d9",
-    "/assets/vendor/tabler/css/tabler-dashboard.css": "/assets/vendor/tabler/css/tabler-dashboard.css?id=61091747ccaa2a28e032"
+    "/assets/vendor/tabler/css/tabler-dashboard.css": "/assets/vendor/tabler/css/tabler-dashboard.css?id=61091747ccaa2a28e032",
+    "/assets/vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css": "/assets/vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css?id=31ae12765a1d21d6945c",
+    "/assets/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js": "/assets/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js?id=ac4d4d755b70ee1a00f7"
 }
