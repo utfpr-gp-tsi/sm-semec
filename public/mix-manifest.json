@@ -7,5 +7,7 @@
     "/assets/css/servants/app.css": "/assets/css/servants/app.css?id=153dbc56d16ee6b2a41c",
     "/assets/js/servants/app.js": "/assets/js/servants/app.js?id=edd1c3e3f2d41d3401f9",
     "/assets/vendor/tabler/css/tabler.min.css": "/assets/vendor/tabler/css/tabler.min.css?id=6ce7bfa569c9030b54d9",
-    "/assets/vendor/tabler/css/tabler-dashboard.css": "/assets/vendor/tabler/css/tabler-dashboard.css?id=61091747ccaa2a28e032"
+    "/assets/vendor/tabler/css/tabler-dashboard.css": "/assets/vendor/tabler/css/tabler-dashboard.css?id=61091747ccaa2a28e032",
+    "/assets/vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css": "/assets/vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css?id=31ae12765a1d21d6945c",
+    "/assets/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js": "/assets/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js?id=ac4d4d755b70ee1a00f7"
 }
