@@ -34,7 +34,16 @@ class Servant extends Authenticatable
         'address',
         'phone',
         'email',
-        'password'
+        'password',
+        'image'
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    protected $appends = [
+        'image_path',
     ];
 
     /**
@@ -95,10 +104,6 @@ class Servant extends Authenticatable
         return Servant::with(['contracts'])->paginate(20);
     }
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
     /**
     * @param string $value
     * @return void
@@ -111,5 +116,27 @@ class Servant extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+    
+    /**
+    * @return string
+    */
+    public function getImagePathAttribute()
+    {
+        if ($this->getOriginal('image') == null) {
+            return '/assets/images/default/default-user.png';
+        }
+
+        return '/uploads/servants/' . $this->id . '/' . $this->getOriginal('image');
+    }
+
+    /**
+    * @return $this
+    */
+    public function saveWithoutEvents(array $options = [])
+    {
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
     }
 }

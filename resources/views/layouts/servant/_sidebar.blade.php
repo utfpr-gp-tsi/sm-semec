@@ -4,5 +4,13 @@
       <i class="fas fa-compass mr-2"></i>
       Servidores
     </span>
+
+    <a class="list-group-item list-group-item-action {{ setActive(['servant']) }}" aria-current="page" href="/servant">
+      <span class="icon mr-2">
+        <i class="fas fa-home"></i>
+      </span>
+      Página inicial
+    </a>
+  
   </div>
 </div>

@@ -76,5 +76,11 @@ Route::namespace('Servant')->group(function () {
    |----------------------------------------------------------------------------*/
     Route::get('/', [ 'as' => 'dashboard' , 'uses' => 'HomeController@index']);
 
+    Route::get('/profile/edit',   ['as' => 'profile.edit',    'uses' => 'ProfileController@edit']);
+    Route::put('/profile/edit',   ['as' => 'profile.update',  'uses' => 'ProfileController@update']);
+    
+    Route::get('/password/edit',  ['as' => 'password.edit',   'uses' => 'ProfileController@editPassword']);
+    Route::post('/password/edit', ['as' => 'profile.password.update', 'uses' => 'ProfileController@updatePassword']);
+   
     });
 });
