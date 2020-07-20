@@ -6,7 +6,7 @@ use App\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class IndexTest extends DuskTestCase
+class NewEdictTest extends DuskTestCase
 {
     /**
      * A Dusk test example.

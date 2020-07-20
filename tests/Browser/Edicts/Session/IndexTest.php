@@ -35,7 +35,7 @@ class IndexTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)->visit('/admin/edicts')
-                      ->assertSee('Edital 2016', 'Edital 2015', 'Edital 2020');
+                      ->assertSee('Edital 2016');
 
             
         });
