@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser;
+namespace Tests\Browser\Edicts\Session;
 
 use App\Edict;
 use App\User;
@@ -23,8 +23,7 @@ class EditEdictTest extends DuskTestCase
     }
    
     /**
-     * A Dusk test example.
-     *
+     * @return void
      */
     public function testSucessEditEdict()
     {
@@ -42,7 +41,9 @@ class EditEdictTest extends DuskTestCase
             });
         });
     }
-
+    /**
+     * @return void
+     */
     public function testFailuteEditEdict()
     {
         $user = factory(User::class)->create();

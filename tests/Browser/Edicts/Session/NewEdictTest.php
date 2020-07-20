@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser;
+namespace Tests\Browser\Edicts\Session;
 
 use App\User;
 use Laravel\Dusk\Browser;
@@ -30,7 +30,9 @@ class IndexTest extends DuskTestCase
             });
         });
     }
-
+    /**
+     * @return void
+     */
     public function testFailureNewEdict()
     {
         $user = factory(User::class)->create();

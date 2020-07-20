@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser;
+namespace Tests\Browser\Edicts\Session;
 
 use App\Edict;
 use App\User;
@@ -10,7 +10,6 @@ use Tests\DuskTestCase;
 class IndexTest extends DuskTestCase
 {
       /** @var \App\Edict */
-      protected $edict;
 
     public function setUp(): void
     {
@@ -18,12 +17,34 @@ class IndexTest extends DuskTestCase
           $this->edict = factory(Edict::class)->create([
             'title' => 'Edital 2016',
           ]);
+          $this->edict = factory(Edict::class)->create([
+            'title' => 'Edital 2015',
+          ]);
+          $this->edict = factory(Edict::class)->create([
+            'title' => 'Edital 2020',
+          ]);
     }
     /**
      *
      * @return void
      */
-    public function testLinkNewEdict()
+    public function testSucessIndexContains()
+    {
+        $user = factory(User::class)->create();
+        
+
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)->visit('/admin/edicts')
+                      ->assertSee('Edital 2016', 'Edital 2015', 'Edital 2020');
+
+            
+        });
+    }
+    /**
+     *
+     * @return void
+     */
+    public function testSucessNewEdict()
     {
         $user = factory(User::class)->create();
 
@@ -39,7 +60,7 @@ class IndexTest extends DuskTestCase
      * @return void
      */
 
-    public function testLinkEdit()
+    public function testSucessEdit()
     {
         $user = factory(User::class)->create();
         
@@ -54,7 +75,7 @@ class IndexTest extends DuskTestCase
      * @return void
      */
 
-    public function testLinkShow()
+    public function testSucessShow()
     {
         $user = factory(User::class)->create();
         
@@ -69,7 +90,7 @@ class IndexTest extends DuskTestCase
      * @return void
      */
     
-    public function testLinkDelete()
+    public function testSucessDelete()
     {
         $user = factory(User::class)->create();
         
