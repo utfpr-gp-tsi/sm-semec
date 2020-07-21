@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
-class ResetTest extends DuskTestCase
+class ResetPasswordTest extends DuskTestCase
 {
     /** @var \App\Servant */
     protected $servant;
