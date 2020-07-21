@@ -99,3 +99,27 @@ Breadcrumbs::for('admin.show.servant', function ($trail, $id) {
 Breadcrumbs::for('servant.dashboard', function ($trail) {
     $trail->push('Página Inicial', route('servant.dashboard'));
 });
+
+/* Profile
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('servant.profile.edit', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Meu Perfil', route('servant.profile.edit'));
+});
+
+Breadcrumbs::for('servant.profile.update', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Meu Perfil', route('servant.profile.update'));
+});
+
+/* Change password
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('servant.password.edit', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Alterar Senha', route('servant.password.edit'));
+});
+
+Breadcrumbs::for('servant.profile.password.update', function ($trail) {
+    $trail->parent('servant.profile.edit');
+    $trail->push('Alterar Senha', route('servant.profile.password.update'));
+});
