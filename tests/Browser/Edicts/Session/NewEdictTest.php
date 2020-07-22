@@ -5,7 +5,7 @@ namespace Tests\Browser\Edicts\Session;
 use App\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-
+ 
 class NewEdictTest extends DuskTestCase
 {
     /**
