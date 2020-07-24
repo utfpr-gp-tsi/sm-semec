@@ -49,8 +49,21 @@ Route::namespace('Admin')->group(function () {
 	                       ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants',      'uses' => 'ServantsController@index']);
 	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',         'uses' => 'ServantsController@show']);
-
-    });
+	
+	/* Edicts resources
+        |-------------------------------------------------------------------------- */
+        Route::get('/edicts/page/{page}', ['as' => 'admin.edicts.page', 'uses' => 'EdictsController@index']);
+        Route::get('/edicts', ['as' => 'admin.edicts', 'uses' => 'EdictsController@index']);
+        Route::get('/edicts/search/{term}/page/{page}', ['as' => 'admin.search.edicts.page', 'uses' => 'EdictsController@index']);
+        Route::get('/edicts/search/{term?}', ['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
+        Route::get('/edicts/new', ['as' => 'admin.new.edict', 'uses' => 'EdictsController@new']);
+        Route::post('/edicts', ['as' => 'admin.create.edict', 'uses' => 'EdictsController@create']);
+        Route::get('/edicts/{id}', ['as' => 'admin.show.edict', 'uses' => 'EdictsController@show']);
+        Route::get('/edicts/{id}/edit', ['as' => 'admin.edit.edict', 'uses' => 'EdictsController@edit']);
+        Route::patch('/edicts/{id}', ['as' => 'admin.update.edict', 'uses' => 'EdictsController@update']);
+        Route::delete('/edicts/{id}', ['as' => 'admin.destroy.edict', 'uses' => 'EdictsController@destroy']);
+	
+});
 });
 
 	/*----------SERVANT AREA----------	*/
