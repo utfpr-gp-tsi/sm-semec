@@ -44,4 +44,20 @@ class Contract extends Model
     {
         return $this->hasMany(License::class, 'contract_id');
     }
+
+    /**
+     * @param string $value
+     */
+    public function getAdmissionAtAttribute($value): string
+    {
+        return DateTimeFormatter::format($value);
+    }
+
+    /**
+     * @param string $value
+     */
+    public function getTerminationAtAttribute($value): string
+    {
+        return DateTimeFormatter::format($value);
+    }
 }

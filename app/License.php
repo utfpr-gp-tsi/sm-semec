@@ -25,4 +25,20 @@ class License extends Model
     {
         return $this->belongsTo(Contract::class, 'contract_id');
     }
+
+    /**
+     * @param string $value
+     */
+    public function getStartedAtAttribute($value): string
+    {
+        return DateTimeFormatter::format($value);
+    }
+
+    /**
+     * @param string $value
+     */
+    public function getEndedAtAttribute($value): string
+    {
+        return DateTimeFormatter::format($value);
+    }
 }

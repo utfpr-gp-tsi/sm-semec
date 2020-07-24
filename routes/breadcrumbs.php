@@ -94,43 +94,6 @@ Breadcrumbs::for('admin.show.servant', function ($trail, $id) {
     $trail->push('Servidor #'.$id , route ('admin.show.servant', $id));
 });
 
-/* Edicts resources
-|-------------------------------------------------------------------------- */
-Breadcrumbs::for('admin.edicts', function ($trail) {
-    $trail->parent('admin.dashboard');
-    $trail->push('Editais', route('admin.edicts'));
-});
-
-Breadcrumbs::for('admin.create.edict', function ($trail) {
-    $trail->parent('admin.edicts');
-    $trail->push('Novo Edital', route('admin.new.edict'));
-});
-
-Breadcrumbs::for('admin.new.edict', function ($trail) {
-    $trail->parent('admin.edicts');
-    $trail->push('Novo Edital', route('admin.new.edict'));
-});
-
-Breadcrumbs::for('admin.search.edicts', function ($trail) {
-    $trail->parent('admin.dashboard');
-    $trail->push('Editais', route('admin.edicts'));
-});
-
-Breadcrumbs::for('admin.show.edict', function ($trail, $id) {
-    $trail->parent('admin.edicts');
-    $trail->push('Edital #'.$id , route ('admin.show.edict', $id));
-});
-
-Breadcrumbs::for('admin.edit.edict', function ($trail, $id) {
-    $trail->parent('admin.edicts', $id);
-    $trail->push('Editar Edital #'.$id, route('admin.edit.edict', $id));
-});
-
-Breadcrumbs::for('admin.update.edict', function ($trail, $id) {
-    $trail->parent('admin.edicts');
-    $trail->push('Editar Edital', route('admin.update.edict', $id));
-});
-
 /* Dashboard Servant
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('servant.dashboard', function ($trail) {

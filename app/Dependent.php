@@ -26,4 +26,12 @@ class Dependent extends Model
     {
         return $this->belongsTo(Servant::class, 'servant_id');
     }
+
+    /**
+     * @param string $value
+     */
+    public function getBirthedAtAttribute($value): string
+    {
+        return DateTimeFormatter::format($value);
+    }
 }

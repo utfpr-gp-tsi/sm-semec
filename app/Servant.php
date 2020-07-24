@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Services\DateTimeFormatter;
+use App\Traits\CreatedAndUpdatedAtFormatted;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +13,7 @@ use App\Notifications\ResetPasswordNotification;
 
 class Servant extends Authenticatable
 {
+    use CreatedAndUpdatedAtFormatted;
     use Notifiable;
 
     /**
@@ -75,6 +77,15 @@ class Servant extends Authenticatable
     {
         return $this->hasManyThrough(License::class, Contract::class, 'servant_id', 'contract_id');
     }
+
+    /**
+     * @param string $value
+     */
+    public function getBirthedAtAttribute($value): string
+    {
+        return DateTimeFormatter::format($value);
+    }
+
     /**
      * @param string $term
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
