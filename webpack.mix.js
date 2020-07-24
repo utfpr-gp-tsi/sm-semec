@@ -25,7 +25,9 @@ mix.copyDirectory('resources/images',        'public/assets/images');
 
 mix.version([
    'public/assets/vendor/tabler/css/tabler.min.css',
-   'public/assets/vendor/tabler/css/tabler-dashboard.css'
+   'public/assets/vendor/tabler/css/tabler-dashboard.css',
+   'public/assets/vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css',
+   'public/assets/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js'
 ]).options({ processCssUrls: false });
 
 if (mix.inProduction()) {
