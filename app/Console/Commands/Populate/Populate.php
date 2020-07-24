@@ -41,8 +41,7 @@ class Populate extends Command
             $this->info('This task can not be run in production because it will erase de database');
             return;
         }
-
-        $this->call('populate:servants');
-        $this->call('populate:edicts');
+        $this->call('populate:servants', ['--clear' => 'clear']);
+        
     }
 }
