@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\Populate\Units::class,
         Commands\Populate\Servants::class,
         Commands\Populate\Populate::class
     ];
@@ -23,7 +24,7 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    /**
+    /**0
      * Register the commands for the application.
      *
      * @return void
