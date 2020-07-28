@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Users\Session;
+namespace Tests\Browser\Admin\Session;
 
 use App\User;
 use Laravel\Dusk\Chrome;

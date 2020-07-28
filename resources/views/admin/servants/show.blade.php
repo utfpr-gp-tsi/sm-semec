@@ -19,8 +19,8 @@
     <p><strong>Endereço:</strong>   {{ $servant->address }}</p>
     <p><strong>Fone:</strong>       {{ $servant->phone }}</p>
     <p><strong>E-mail:</strong>     {{ $servant->email }}</p>
-    <p><strong>Criado em:</strong>  {{ $servant->created_at }}</p>
-    <p><strong>Atualizado em:</strong> {{ $servant->updated_at }}</p>
+    <p><strong>Criado em:</strong>  {{ $servant->created_at->toShortDateTime() }}</p>
+    <p><strong>Atualizado em:</strong> {{ $servant->updated_at->toShortDateTime() }}</p>
 
     @include('admin/servants/_contracts')
     <br/>

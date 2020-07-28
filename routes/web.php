@@ -46,54 +46,52 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/servants/page/{page}',    ['as' => 'admin.servants.page',   'uses' => 'ServantsController@index']);
 	Route::get('/servants',      	       ['as' => 'admin.servants',        'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}/page/{page}',
-	                       ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
-	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants',      'uses' => 'ServantsController@index']);
-	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',         'uses' => 'ServantsController@show']);
-	
+					  ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
+	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
+	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',    'uses' => 'ServantsController@show']);
+
 	/* Edicts resources
         |-------------------------------------------------------------------------- */
-        Route::get('/edicts/page/{page}', ['as' => 'admin.edicts.page', 'uses' => 'EdictsController@index']);
-        Route::get('/edicts', ['as' => 'admin.edicts', 'uses' => 'EdictsController@index']);
-        Route::get('/edicts/search/{term}/page/{page}', ['as' => 'admin.search.edicts.page', 'uses' => 'EdictsController@index']);
-        Route::get('/edicts/search/{term?}', ['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
-        Route::get('/edicts/new', ['as' => 'admin.new.edict', 'uses' => 'EdictsController@new']);
-        Route::post('/edicts', ['as' => 'admin.create.edict', 'uses' => 'EdictsController@create']);
-        Route::get('/edicts/{id}', ['as' => 'admin.show.edict', 'uses' => 'EdictsController@show']);
-        Route::get('/edicts/{id}/edit', ['as' => 'admin.edit.edict', 'uses' => 'EdictsController@edit']);
-        Route::patch('/edicts/{id}', ['as' => 'admin.update.edict', 'uses' => 'EdictsController@update']);
-        Route::delete('/edicts/{id}', ['as' => 'admin.destroy.edict', 'uses' => 'EdictsController@destroy']);
-	
-});
+        Route::get('/edicts/page/{page}',	['as' => 'admin.edicts.page',   'uses' => 'EdictsController@index']);
+        Route::get('/edicts', 			['as' => 'admin.edicts', 	'uses' => 'EdictsController@index']);
+	Route::get('/edicts/search/{term}/page/{page}',
+			    		   ['as' => 'admin.search.edicts.page', 'uses' => 'EdictsController@index']);
+        Route::get('/edicts/search/{term?}',	['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
+        Route::get('/edicts/new', 		['as' => 'admin.new.edict',     'uses' => 'EdictsController@new']);
+        Route::post('/edicts', 			['as' => 'admin.create.edict',  'uses' => 'EdictsController@create']);
+        Route::get('/edicts/{id}', 		['as' => 'admin.show.edict',    'uses' => 'EdictsController@show']);
+        Route::get('/edicts/{id}/edit', 	['as' => 'admin.edit.edict',    'uses' => 'EdictsController@edit']);
+        Route::patch('/edicts/{id}',		['as' => 'admin.update.edict',  'uses' => 'EdictsController@update']);
+        Route::delete('/edicts/{id}', 		['as' => 'admin.destroy.edict', 'uses' => 'EdictsController@destroy']);
+    });
 });
 
-	/*----------SERVANT AREA----------	*/
-
+/*----------SERVANT AREA----------	*/
 Route::namespace('Servant')->group(function () {
     Route::prefix('servant')->name('servant.')->group(function () {
 
-/* Session
-|-------------------------------------------------------------------------- */
-    Route::namespace('Auth')->group(function(){
-        Route::get('/login','LoginController@showLoginForm')->name('login');
-        Route::post('/login','LoginController@login');
-        Route::get('/login/signOut',  ['as' => 'logout','uses' => 'LoginController@logout']);
+	/* Session
+	|-------------------------------------------------------------------------- */
+	Route::namespace('Auth')->group(function(){
+	    Route::get('/login','LoginController@showLoginForm')->name('login');
+	    Route::post('/login','LoginController@login');
+	    Route::get('/login/signOut',  ['as' => 'logout','uses' => 'LoginController@logout']);
 
-        Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email'); 
-        Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
-        
-        Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-        Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
-    });
+	    Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+	    Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
 
-/* Dashboard
-   |----------------------------------------------------------------------------*/
-    Route::get('/', [ 'as' => 'dashboard' , 'uses' => 'HomeController@index']);
+	    Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
+	    Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+	});
 
-    Route::get('/profile/edit',   ['as' => 'profile.edit',    'uses' => 'ProfileController@edit']);
-    Route::put('/profile/edit',   ['as' => 'profile.update',  'uses' => 'ProfileController@update']);
-    
-    Route::get('/password/edit',  ['as' => 'password.edit',   'uses' => 'ProfileController@editPassword']);
-    Route::post('/password/edit', ['as' => 'profile.password.update', 'uses' => 'ProfileController@updatePassword']);
-   
+	/* Dashboard
+	|----------------------------------------------------------------------------*/
+	Route::get('/', [ 'as' => 'dashboard' , 'uses' => 'HomeController@index']);
+
+	Route::get('/profile/edit',   ['as' => 'profile.edit',    'uses' => 'ProfileController@edit']);
+	Route::put('/profile/edit',   ['as' => 'profile.update',  'uses' => 'ProfileController@update']);
+
+	Route::get('/password/edit',  ['as' => 'password.edit',   'uses' => 'ProfileController@editPassword']);
+	Route::post('/password/edit', ['as' => 'profile.password.update', 'uses' => 'ProfileController@updatePassword']);
     });
 });

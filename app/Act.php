@@ -19,6 +19,11 @@ class Act extends Model
         'contract_id',
     ];
 
+    protected $dates = [
+        'started_at',
+        'ended_at'
+    ];
+
     /**
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */

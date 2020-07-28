@@ -44,8 +44,8 @@ class EdictsController extends AppController
         $validator = Validator::make($data, [
             'title'       => 'required',
             'description' => 'required',
-            'started_at'  => 'required|date_format:d/m/Y H:i|after_or_equal:now',
-            'ended_at'    => 'required|date_format:d/m/Y H:i|after_or_equal:started_at'
+            'started_at'  => 'required|date_format:d/m/Y H:i',
+            'ended_at'    => 'required|date_format:d/m/Y H:i'
         ]);
 
         $this->filterDateTimeFormat($data, ['started_at', 'ended_at']);
@@ -90,7 +90,6 @@ class EdictsController extends AppController
      * @param  \App\Edict  $id
      * @return \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
-
     public function update(Request $request, $id)
     {
         $edict = Edict::find($id);
@@ -99,8 +98,8 @@ class EdictsController extends AppController
         $validator = Validator::make($data, [
             'title'       => 'required',
             'description' => 'required',
-            'started_at'  => 'required|date_format:d/m/Y H:i|after_or_equal:now',
-            'ended_at'    => 'required|date_format:d/m/Y H:i|after_or_equal:started_at'
+            'started_at'  => 'required|date_format:d/m/Y H:i',
+            'ended_at'    => 'required|date_format:d/m/Y H:i'
         ]);
 
         $this->filterDateTimeFormat($data, ['started_at', 'ended_at']);

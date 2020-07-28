@@ -26,8 +26,8 @@
               @foreach($contract->acts as $act)
               <tr>
                 <td> {{ $act->name }}</td>
-                <td> {{ $act->started_at }}</td>
-                <td> {{ $act->ended_at }}</td>
+                <td> {{ $act->started_at->toShortDate() }}</td>
+                <td> {{ $act->ended_at->toShortDate() }}</td>
                 <td> {{ $act->number }}</td>
                 <td> {{ $act->time }}</td>
               </tr>

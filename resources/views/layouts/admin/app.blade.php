@@ -11,8 +11,8 @@
 
     <title>@include('shared/_full_title')</title>
 
-     <!--Icons-->
-     <script src="https://kit.fontawesome.com/826671e166.js" crossorigin="anonymous"></script>
+    <!--Icons-->
+    <script src="https://kit.fontawesome.com/826671e166.js" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
     <script src="{{ asset(mix('assets/js/admin/app.js')) }}" defer></script>
