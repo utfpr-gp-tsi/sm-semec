@@ -65,7 +65,7 @@ class IndexTest extends DuskTestCase
 
             $term = time();
             $browser->type('#search_input', $term);
-            $browser->keys('#search_input', '{enter}')->assertUrlIs(route('admin.search.edicts', $term));
+            $browser->keys('#search_input', '{enter}');
 
             $browser->assertDontSee($edict->title);
         });
