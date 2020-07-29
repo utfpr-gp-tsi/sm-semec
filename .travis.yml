@@ -36,9 +36,10 @@ script:
   - docker-compose exec -T db mysql -uroot  <<< "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
   - docker-compose exec -T db mysql -uroot  <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
   - docker-compose exec -T db mysql -usm-semec -psm-semec  <<< "show databases;"
+  - docker-compose exec app npm install
+  - docker-compose exec app npm run dev
   - docker-compose exec app php artisan migrate:refresh --env=testing
   - docker-compose exec app php artisan test
-  - docker-compose exec app npm run dev
   - docker-compose exec app php artisan dusk
 
 after_script:
