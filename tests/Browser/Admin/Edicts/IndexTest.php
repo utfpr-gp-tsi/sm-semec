@@ -55,8 +55,7 @@ class IndexTest extends DuskTestCase
 
             $browser->visit('/admin/edicts')
                     ->type('#search_input', $edict->title)
-                    ->press('#search')
-                    ->assertUrlIs(route('admin.search.edicts', $edict->title));
+                    ->press('#search');
 
             $browser->assertInputValue('term', $edict->title);
             $browser->with("table.table tbody tr:nth-child(1)", function ($row) use ($edict) {
