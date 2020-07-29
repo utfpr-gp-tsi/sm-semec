@@ -38,6 +38,7 @@ script:
   - docker-compose exec -T db mysql -usm-semec -psm-semec  <<< "show databases;"
   - docker-compose exec app php artisan migrate:refresh --env=testing
   - docker-compose exec app php artisan test
+  - docker-compose exec app npm run dev
   - docker-compose exec app php artisan dusk
 
 after_script:

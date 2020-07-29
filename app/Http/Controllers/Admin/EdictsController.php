@@ -45,7 +45,7 @@ class EdictsController extends AppController
             'title'       => 'required',
             'description' => 'required',
             'started_at'  => 'required|date_format:d/m/Y H:i',
-            'ended_at'    => 'required|date_format:d/m/Y H:i'
+            'ended_at'    => 'required|date_format:d/m/Y H:i|after_or_equal:started_at'
         ]);
 
         $this->filterDateTimeFormat($data, ['started_at', 'ended_at']);
@@ -99,7 +99,7 @@ class EdictsController extends AppController
             'title'       => 'required',
             'description' => 'required',
             'started_at'  => 'required|date_format:d/m/Y H:i',
-            'ended_at'    => 'required|date_format:d/m/Y H:i'
+            'ended_at'    => 'required|date_format:d/m/Y H:i|after_or_equal:started_at'
         ]);
 
         $this->filterDateTimeFormat($data, ['started_at', 'ended_at']);
