@@ -17,58 +17,41 @@ class CreateTest extends DuskTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->edict = factory(Edict::class)->create();
+        $this->edict = factory(Edict::class)->make([
+            'started_at' => '28/07/2020 15:18',
+            'ended_at' => '29/07/2020 15:18'
+        ]);
         $this->user = factory(User::class)->create();
     }
 
-    public function testFilledFields(): void
+    public function testSucessfullyCreate(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.edict', $this->edict->id));
+            $browser->loginAs($this->user)->visit(route('admin.new.edict'));
 
-            $browser->assertInputValue('title', $this->edict->title)
-                    ->assertInputValue('description', $this->edict->description)
-                    ->assertInputValue('started_at', $this->edict->started_at->toShortDateTime())
-                    ->assertInputValue('ended_at', $this->edict->ended_at->toShortDateTime());
-        });
-    }
-
-    public function testSucessfullyUpdate(): void
-    {
-        $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.edict', $this->edict->id));
-
-            $newData = factory(Edict::class)->make();
-
-            $browser->type('title', $newData->title)
-                ->type('description', $newData->description)
-                ->type('started_at', $newData->started_at->toShortDateTime())
-                ->type('ended_at', $newData->ended_at->toShortDateTime())
-                ->press('Atualizar Edital');
+            $browser->type('title', $this->edict->title)
+                ->type('description', $this->edict->description)
+                ->type('started_at', $this->edict->started_at->toShortDateTime())
+                ->type('ended_at', $this->edict->ended_at->toShortDateTime())
+                ->press('Criar Edital');
 
             $browser->assertUrlIs(route('admin.edicts'));
             $browser->with('div.alert', function ($flash) {
-                $flash->assertSee('Edital atualizado com sucesso');
+                $flash->assertSee('Edital cadastrado com sucesso');
             });
-            $browser->with('table.table', function ($table) use ($newData) {
-                $table->assertSee($newData->title);
-                $table->assertDontSee($this->edict->title);
+            $browser->with('table.table', function ($table) {
+                $table->assertSee($this->edict->title);
             });
         });
     }
 
-    public function testFailuteUpdate(): void
+    public function testFailureUpdate(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.edict', $this->edict->id));
+            $browser->loginAs($this->user)->visit(route('admin.new.edict'));
 
-            $browser->type('title', '')
-                    ->type('description', '')
-                    ->type('started_at', '')
-                    ->type('ended_at', '')
-                    ->press('Atualizar Edital');
+            $browser->press('Criar Edital');
 
-            $browser->assertUrlIs(route('admin.show.edict', $this->edict->id));
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Existem dados incorretos! Por favor verifique!');
             });
@@ -85,6 +68,45 @@ class CreateTest extends DuskTestCase
             $browser->with('div.edict_ended_at', function ($flash) {
                 $flash->assertSee('O campo Término é obrigatório.');
             });
+        });
+    }
+
+    public function testDatesValidations(): void
+    {
+        $this->browse(function ($browser) {
+            $browser->loginAs($this->user)->visit(route('admin.new.edict'));
+
+            $browser->type('started_at', '28/07/2020 15:18')
+                    ->type('ended_at', '27/07/2020 15:18')
+                    ->press('Criar Edital');
+
+            $browser->assertUrlIs(route('admin.edicts'));
+            $browser->with('div.alert', function ($flash) {
+                $flash->assertSee('Existem dados incorretos! Por favor verifique!');
+            });
+
+            $browser->with('div.edict_ended_at', function ($flash) {
+                $flash->assertSee('O campo Término deve ser uma data posterior ou igual a Início.');
+            });
+        });
+    }
+
+    public function testAssertLinksPresent(): void
+    {
+        $this->edict = factory(Edict::class)->create();
+
+        $this->browse(function ($browser) {
+            $browser->loginAs($this->user)->visit(route('admin.new.edict'));
+
+            $backLinkSelector = "#main-card a[href='" . route('admin.edicts') . "']";
+            $browser->assertSeeIn($backLinkSelector, 'Voltar');
+
+            $rootBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.dashboard') . "']";
+            $secondBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.edicts') . "']";
+            $thirdBreadcrumbSelector = ".breadcrumb li:nth-child(3)";
+            $browser->assertSeeIn($rootBreadcrumbSelector, 'Página Inicial');
+            $browser->assertSeeIn($secondBreadcrumbSelector, 'Editais');
+            $browser->assertSeeIn($thirdBreadcrumbSelector, "Novo Edital");
         });
     }
 }

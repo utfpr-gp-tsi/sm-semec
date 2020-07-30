@@ -21,7 +21,7 @@ $factory->define(Edict::class, function (Faker $faker) {
     return [
         'title' => $faker->name(),
         'description' => $faker->text(),
-        'started_at' => $faker->date(),
-        'ended_at' => $faker->date(),
+        'started_at' => $faker->dateTimeBetween('now', '+01 days'),
+        'ended_at' => $faker->dateTimeBetween('+02 days', '+04 days')
     ];
 });

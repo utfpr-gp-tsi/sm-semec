@@ -12,7 +12,7 @@ SMSemec.submitSearch = function() {
     var url = base_url;
 
     if (term && term.trim().length) {
-      url += '/search/' + term;
+      url += '/search/' + encodeURI(term);
     }
 
     return window.location.assign(url);
