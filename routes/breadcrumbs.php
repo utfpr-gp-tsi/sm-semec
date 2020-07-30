@@ -101,6 +101,11 @@ Breadcrumbs::for('admin.edicts', function ($trail) {
     $trail->push('Editais', route('admin.edicts'));
 });
 
+Breadcrumbs::for('admin.edicts.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Editais', route('admin.edicts'));
+});
+
 Breadcrumbs::for('admin.create.edict', function ($trail) {
     $trail->parent('admin.edicts');
     $trail->push('Novo Edital', route('admin.new.edict'));
@@ -115,6 +120,12 @@ Breadcrumbs::for('admin.search.edicts', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Editais', route('admin.edicts'));
 });
+
+Breadcrumbs::for('admin.search.edicts.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Editais', route('admin.edicts'));
+});
+
 
 Breadcrumbs::for('admin.show.edict', function ($trail, $id) {
     $trail->parent('admin.edicts');

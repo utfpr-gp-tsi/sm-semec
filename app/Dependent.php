@@ -19,6 +19,10 @@ class Dependent extends Model
         'servant_id'
     ];
 
+    protected $dates = [
+        'birthed_at'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

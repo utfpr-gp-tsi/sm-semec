@@ -63,12 +63,8 @@ class Servants extends Command
             return;
         }
 
-        #DB::table('servants')->delete();
-        #DB::table('contracts')->delete();
-        #DB::table('acts')->delete();
-        #DB::table('licenses')->delete();
-        #DB::table('dependents')->delete();
-
+        $this->info('Populate servants');
+        DB::table('servants')->delete();
         $servants = factory('App\Servant', 30)->create();
 
         $servants->each(function ($servant) {

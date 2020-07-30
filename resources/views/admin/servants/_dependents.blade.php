@@ -14,7 +14,7 @@
       @foreach($servant->dependents as $dependent)
         <tr>
           <td>{{ $dependent->name }}</td>
-          <td>{{ $dependent->birthed_at }}</td>
+          <td>{{ $dependent->birthed_at->toShortDate() }}</td>
           <td>{{ $dependent->degree }}</td>
           <td>{{ $dependent->study }}</td>
           <td>{{ $dependent->works }}</td>

@@ -9,7 +9,7 @@ use App\Http\Controllers\Traits\FilterDateTimeFormatter;
 class AppController extends Controller
 {
     use FilterDateTimeFormatter;
-    
+
     public function __construct()
     {
         $this->middleware('auth');

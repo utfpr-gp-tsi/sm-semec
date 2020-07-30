@@ -21,6 +21,11 @@ class Contract extends Model
         'servant_id',
     ];
 
+    protected $dates = [
+        'admission_at',
+        'termination_at'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

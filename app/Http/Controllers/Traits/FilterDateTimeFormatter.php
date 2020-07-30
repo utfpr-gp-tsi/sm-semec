@@ -18,6 +18,7 @@ trait FilterDateTimeFormatter
             $validator = Validator::make($data, [
                 $key  => 'date_format:' . $format,
             ]);
+
             if ($validator->fails()) {
                 unset($data[$key]);
             }
