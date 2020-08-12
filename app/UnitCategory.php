@@ -22,4 +22,18 @@ class UnitCategory extends Model
     {
         return $this->hasMany(License::class, 'unitcategory_id');
     }
+    /**
+     * @param string $term
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function search($term)
+    {
+        if ($term) {
+            $searchTerm = "%{$term}%";
+            return UnitCategory::where('name', 'LIKE', $searchTerm)
+                ->orderBy('name', 'desc')
+                ->paginate(20);
+        }
+        return UnitCategory::orderBy('name', 'desc')->paginate(20);
+    }
 }

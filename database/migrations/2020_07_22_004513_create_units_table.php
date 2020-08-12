@@ -15,7 +15,7 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('category_id');
+            $table->bigInteger('unitscategory_id');
             $table->string('name')->unique();
             $table->string('address');
             $table->string('phone');

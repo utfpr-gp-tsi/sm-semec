@@ -101,11 +101,6 @@ Breadcrumbs::for('admin.edicts', function ($trail) {
     $trail->push('Editais', route('admin.edicts'));
 });
 
-Breadcrumbs::for('admin.edicts.page', function ($trail) {
-    $trail->parent('admin.dashboard');
-    $trail->push('Editais', route('admin.edicts'));
-});
-
 Breadcrumbs::for('admin.create.edict', function ($trail) {
     $trail->parent('admin.edicts');
     $trail->push('Novo Edital', route('admin.new.edict'));
@@ -120,12 +115,6 @@ Breadcrumbs::for('admin.search.edicts', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Editais', route('admin.edicts'));
 });
-
-Breadcrumbs::for('admin.search.edicts.page', function ($trail) {
-    $trail->parent('admin.dashboard');
-    $trail->push('Editais', route('admin.edicts'));
-});
-
 
 Breadcrumbs::for('admin.show.edict', function ($trail, $id) {
     $trail->parent('admin.edicts');
@@ -170,4 +159,34 @@ Breadcrumbs::for('servant.password.edit', function ($trail) {
 Breadcrumbs::for('servant.profile.password.update', function ($trail) {
     $trail->parent('servant.profile.edit');
     $trail->push('Alterar Senha', route('servant.profile.password.update'));
+});
+
+/* Category of Units
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('admin.categories', function ($trail) {
+    $trail->push('Categorias de Unidades', route('admin.categories'));
+});
+
+Breadcrumbs::for('admin.new.category', function ($trail) {
+    $trail->parent('admin.categories');
+    $trail->push('Nova Categoria', route('admin.new.category'));
+});
+
+Breadcrumbs::for('admin.search.categories', function ($trail) {
+    $trail->push('Buscar Categorias', route('admin.search.categories'));
+});
+
+Breadcrumbs::for('admin.edit.category', function ($trail, $id) {
+    $trail->parent('admin.categories');
+    $trail->push('Editar Categoria', route('admin.edit.category', $id));
+});
+
+Breadcrumbs::for('admin.update.category', function ($trail, $id) {
+    $trail->parent('admin.categories');
+    $trail->push('Editar Categoria', route('admin.update.category', $id));
+});
+
+Breadcrumbs::for('admin.create.category', function ($trail) {
+    $trail->parent('admin.categories');
+    $trail->push('Nova Categoria', route('admin.create.category'));
 });

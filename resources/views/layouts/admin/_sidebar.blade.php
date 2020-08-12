@@ -30,5 +30,11 @@
       </span>
       Editais
     </a>
+        <a class="list-group-item list-group-item-action {{ setActive(['admin/category*']) }}" href="{{ route('admin.categories') }}">
+      <span class="icon mr-2">
+      <i class="fas fa-align-justify"></i>
+      </span>
+      Categoria de Unidades
+    </a>
   </div>
 </div>
