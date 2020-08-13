@@ -65,16 +65,16 @@ Route::namespace('Admin')->group(function () {
 
     /* Category resources
         |-------------------------------------------------------------------------- */
-        Route::get('/categories/page/{page}', ['as' => 'admin.categories.page', 'uses' => 'CategoryController@index']);
-        Route::get('/categories', ['as' => 'admin.categories', 'uses' => 'CategoryController@index']);
+        Route::get('/categories/page/{page}', ['as' => 'admin.categories.page', 'uses' => 'UnitCategoryController@index']);
+        Route::get('/categories', ['as' => 'admin.categories', 'uses' => 'UnitCategoryController@index']);
 
-        Route::get('/categories/search/{term}/page/{page}', ['as' => 'admin.search.categories.page', 'uses' => 'CategoryController@index']);
-        Route::get('/categories/search/{term?}', ['as' => 'admin.search.categories', 'uses' => 'CategoryController@index']);
-        Route::get('/categories/new', ['as' => 'admin.new.category', 'uses' => 'CategoryController@new']);
-        Route::post('/categories', ['as' => 'admin.create.category', 'uses' => 'CategoryController@create']);
-        Route::get('/categories/{id}/edit', ['as' => 'admin.edit.category', 'uses' => 'CategoryController@edit']);
-        Route::patch('/categories/{id}', ['as' => 'admin.update.category', 'uses' => 'CategoryController@update']);
-        Route::delete('/categories/{id}', ['as' => 'admin.destroy.category', 'uses' => 'CategoryController@destroy']);
+        Route::get('/categories/search/{term}/page/{page}', ['as' => 'admin.search.categories.page', 'uses' => 'UnitCategoryController@index']);
+        Route::get('/categories/search/{term?}', ['as' => 'admin.search.categories', 'uses' => 'UnitCategoryController@index']);
+        Route::get('/categories/new', ['as' => 'admin.new.category', 'uses' => 'UnitCategoryController@new']);
+        Route::post('/categories', ['as' => 'admin.create.category', 'uses' => 'UnitCategoryController@create']);
+        Route::get('/categories/{id}/edit', ['as' => 'admin.edit.category', 'uses' => 'UnitCategoryController@edit']);
+        Route::patch('/categories/{id}', ['as' => 'admin.update.category', 'uses' => 'UnitCategoryController@update']);
+        Route::delete('/categories/{id}', ['as' => 'admin.destroy.category', 'uses' => 'UnitCategoryController@destroy']);
 
 	
 });

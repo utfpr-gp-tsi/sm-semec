@@ -7,7 +7,7 @@ use App\UnitCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
 
-class CategoryController extends AppController
+class UnitCategoryController extends AppController
 {
      /**
      * Display a listing of the resource.
@@ -21,19 +21,7 @@ class CategoryController extends AppController
         return view('admin.categories.index')->with('categories', $categories);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\UnitCategory  $id
-     * @return  \Illuminate\View\View
-     */
-    public function edit($name)
-    {
-        $category = UnitCategory::find($name);
-        return view('admin.categories.edit', compact('category'));
-    }
-
-       /**
+      /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
@@ -68,25 +56,46 @@ class CategoryController extends AppController
         return redirect()->route('admin.categories')->with('success', 'Categoria cadastrada com sucesso');
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\UnitCategory  $id
      * @return  \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($name)
     {
-        $category = UnitCategory::find($id);
+        $category = UnitCategory::find($name);
         return view('admin.categories.edit', compact('category'));
     }
 
-    /**
+     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Edict  $id
+     * @param  \App\UnitCategory  $id
      * @return \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
+
+    public function update(Request $request, $id)
+    {
+        $category = UnitCategory::find($id);
+        $data = array_filter($request->all());
+
+        $validator = Validator::make($data, [
+            'name'       => 'required',
+        ]);
+
+        $category->fill($data);
+        if ($validator->fails()) {
+            $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
+            return view('admin.categories.edit', compact('category'))->withErrors($validator);
+        }
+
+        $category->save();
+        return redirect()->route('admin.categories')->with('success', 'Categoria atualizada com sucesso');
+    }
+
 
     /**
      * Remove the specified resource from storage.

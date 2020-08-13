@@ -19,7 +19,6 @@ use Faker\Generator as Faker;
 
 $factory->define(UnitCategory::class, function (Faker $faker) {
     return [
-        'name' => $faker->name(),
-        'unit_id' => factory(App\Unit::class),
+        'name' => $faker->sentence($nbWords = 3),
     ];
 });

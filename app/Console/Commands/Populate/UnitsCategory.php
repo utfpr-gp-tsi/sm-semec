@@ -3,22 +3,24 @@
 namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
+use DB;
+use App\UnitCategory;
 
-class Populate extends Command
+class UnitsCategory extends Command
 {
-    /**
+   /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'populate';
+    protected $signature = 'populate:units_category';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Populate database';
+    protected $description = 'Populate Units Category';
 
     /**
      * Create a new command instance.
@@ -41,6 +43,9 @@ class Populate extends Command
             $this->info('This task can not be run in production because it will erase de database');
             return;
         }
-        $this->call('populate:servants', ['--clear' => 'clear']);
+
+        $this->info('Populate Units Category');
+        DB::table('units_category')->delete();
+        factory('App\UnitCategory', 30)->create();
     }
 }

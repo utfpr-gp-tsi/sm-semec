@@ -3,25 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateTimeFormatter;
+
 
 class UnitCategory extends Model
 {
+    
+    protected $table = 'units_category';
     /**
-    * @var array
-    */
+     * @var array
+     */
     protected $fillable = [
         'id',
         'name',
     ];
-    
-/**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function unit()
-    {
-        return $this->hasMany(License::class, 'unitcategory_id');
-    }
+
+
     /**
      * @param string $term
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator

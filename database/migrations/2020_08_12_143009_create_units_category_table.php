@@ -14,7 +14,7 @@ class CreateUnitsCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('unitscategory', function (Blueprint $table) {
+        Schema::create('units_category', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateUnitsCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unitscategory');
+        Schema::dropIfExists('units_category');
     }
 }
