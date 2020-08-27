@@ -63,6 +63,11 @@ Route::namespace('Admin')->group(function () {
         Route::get('/edicts/{id}/edit', 	['as' => 'admin.edit.edict',    'uses' => 'EdictsController@edit']);
         Route::patch('/edicts/{id}',		['as' => 'admin.update.edict',  'uses' => 'EdictsController@update']);
         Route::delete('/edicts/{id}', 		['as' => 'admin.destroy.edict', 'uses' => 'EdictsController@destroy']);
+
+    /* Pdfs resources
+        |-------------------------------------------------------------------------- */
+        Route::get('/edicts/pdf/new/{id}', 	['as' => 'admin.new.pdf',     'uses' => 'PdfController@new']);
+        Route::post('/edicts/pdf/{id}', 	['as' => 'admin.create.pdf',  'uses' => 'PdfController@create']);
     });
 });
 

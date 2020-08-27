@@ -4,6 +4,7 @@
   <td>{{ $edict->ended_at->toShortDateTime() }}  </td>
 
   <td >
+    @component('components.links.new_pdf', ['url' => route('admin.new.pdf', $edict->id)]) @endcomponent
     @component('components.links.edit', ['url' => route('admin.edit.edict', $edict->id)]) @endcomponent
     @component('components.links.delete', ['url' => route('admin.destroy.edict', $edict->id)]) @endcomponent
   </td>

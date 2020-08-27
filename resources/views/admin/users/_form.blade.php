@@ -15,6 +15,13 @@
                                                'required' => true,
                                                'errors'   => $errors]) @endcomponent
 
+    @component('components.form.input_text', ['field'    => 'CPF',
+                                              'label'    => 'CPF',
+                                              'model'    => 'user',
+                                              'value'    => $user->CPF,
+                                              'required' => true,
+                                              'errors'   => $errors]) @endcomponent
+
     @component('components.form.input_password', ['field'    => 'password',
                                                   'label'    => 'Senha',
                                                   'model'    => 'user',
