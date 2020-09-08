@@ -1,9 +1,6 @@
-<div data-toggle="tooltip" data-placement="left">
-	<div class="input-field">
-		<div class="center">
-			<div class="form-group file optional form-group-valid">
-				<input id="{{ $model}}_{{ $field }}" accept="pdf/*" type="file" name="{{ $field }}" class="form-control-file is-valid file optional">
-			</div>
-		</div>
+<div class="form-group">
+	<div class="custom-file">
+		<input id="{{ $model}}_{{ $field }}" type="file" accept="pdf/*" class="custom-file-input" name="{{ $field }}">
+		<label class="custom-file-label">Escolher Arquivo</label>
 	</div>
 </div>

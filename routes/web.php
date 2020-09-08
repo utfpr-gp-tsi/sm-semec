@@ -68,6 +68,7 @@ Route::namespace('Admin')->group(function () {
         |-------------------------------------------------------------------------- */
         Route::get('/edicts/pdf/new/{id}', 	['as' => 'admin.new.pdf',     'uses' => 'PdfController@new']);
         Route::post('/edicts/pdf/{id}', 	['as' => 'admin.create.pdf',  'uses' => 'PdfController@create']);
+        Route::get('/edicts/pdf/{id}', 	['as' => 'admin.show.pdf',  'uses' => 'PdfController@show']);
     });
 });
 

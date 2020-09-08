@@ -9,28 +9,6 @@ use File;
 class EdictObserver
 {
     /**
-    * Handle the edict "created" event.
-    *
-    * @param  \App\Edict  $edict
-    * @return void
-    */
-    public function created(Edict $edict)
-    {
-        //
-    }
-
-    /**
-    * Handle the edict "updated" event.
-    *
-    * @param  \App\Edict  $edict
-    * @return void
-    */
-    public function updated(Edict $edict)
-    {
-        //
-    }
-
-    /**
     * Handle the edict "deleted" event.
     *
     * @param  \App\Edict  $edict
@@ -44,12 +22,12 @@ class EdictObserver
     /**
     * Delete a pdf from file.
     *
-    * @param  \App\Pdf  $pdf
+    * @param  \App\Edict  $edict
     * @return void
     */
     private function deletePdfFile($edict)
     {
-        $pdfDirectory = public_path('uploads/edicts/edict-' . $edict->id);
+        $pdfDirectory = public_path('uploads/edicts/' . $edict->id);
         File::deleteDirectory($pdfDirectory);
     }
 }

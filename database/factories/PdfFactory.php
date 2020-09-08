@@ -8,7 +8,8 @@ use Illuminate\Http\UploadedFile;
 
 $factory->define(Pdf::class, function (Faker $faker) {
     return [
-        'pdf' =>  UploadedFile::fake()->create('document.pdf'),
+        'pdf' =>  UploadedFile::fake()->create('document.pdf', 'application/pdf'),
+        'name' => $faker->name(),
         'edict_id' => factory(App\Edict::class),
     ];
 });

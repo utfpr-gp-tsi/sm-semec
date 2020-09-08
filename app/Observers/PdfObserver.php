@@ -20,29 +20,6 @@ class PdfObserver
     }
 
     /**
-     * Handle the pdf "deleted" event.
-     *
-     * @param  \App\Pdf  $pdf
-     * @return void
-     */
-    public function deleted(Pdf $pdf)
-    {
-        $this->deletePdfFile($pdf);
-    }
-
-        /**
-     * Delete a pdf from file.
-     *
-     * @param  \App\Pdf  $pdf
-     * @return void
-     */
-    private function deletePdfFile($pdf)
-    {
-        $pdfDirectory = public_path('uploads/edicts/edict-' . $pdf->edict_id);
-        File::deleteDirectory($pdfDirectory);
-    }
-
-    /**
      * Save file in disk
      *
      * @param  \App\Pdf $pdf
@@ -51,8 +28,9 @@ class PdfObserver
     private function savePdfFile($pdf)
     {
         if ($pdf->pdf != null) {
-            $pdfName = Str::slug($pdf->edict_id . '-' . $pdf->name . '-' . now(), '-') . '.' . $pdf->pdf->extension();
-            $storePath = public_path('uploads/edicts/edict-' . $pdf->edict_id);
+            $date = now()->toShortDateTime();
+            $pdfName = Str::slug($pdf->edict_id . '-' . $pdf->name . '-' . $date, '-') . '.' . $pdf->pdf->extension();
+            $storePath = public_path('uploads/edicts/' . $pdf->edict_id);
 
             $pdf->pdf->move($storePath, $pdfName);
             $pdf->pdf = $pdfName;
