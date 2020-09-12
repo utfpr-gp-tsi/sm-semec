@@ -3,6 +3,6 @@
 @section('title', 'Editar Categorias')
 @section('content')
 
-@include('admin.categories._form', ['route' => route('admin.update.category', $category->id), 'method' => 'patch', 'submit' => 'Atualizar Categorias'])
+@include('admin.categories._form', ['route' => route('admin.update.category', $category->id), 'method' => 'patch', 'submit' => 'Atualizar Categoria'])
 
 @endsection

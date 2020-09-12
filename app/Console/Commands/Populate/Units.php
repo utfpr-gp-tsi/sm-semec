@@ -4,23 +4,24 @@ namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
 use DB;
+use App\Unit;
 use App\UnitCategory;
 
-class UnitsCategory extends Command
+class Units extends Command
 {
    /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'populate:units_category';
+    protected $signature = 'populate:units';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Populate Units Category';
+    protected $description = 'Populate Units';
 
     /**
      * Create a new command instance.
@@ -44,8 +45,14 @@ class UnitsCategory extends Command
             return;
         }
 
-        $this->info('Populate Units Category');
+        $this->info('Populate Units');
         DB::table('units_category')->delete();
-        factory('App\UnitCategory', 30)->create();
+        $categories = factory('App\UnitCategory', 4)->create();
+
+        $categories->each(function ($category) {
+            DB::table('units')->delete();
+            $unit = factory('App\Unit', 22)->create(['category_id' => $category->id]);
+           });
     }
+
 }

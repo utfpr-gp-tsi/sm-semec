@@ -1,6 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\Unit;
 use App\UnitCategory;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -17,8 +18,11 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(UnitCategory::class, function (Faker $faker) {
+$factory->define(Unit::class, function (Faker $faker) {
     return [
         'name' => $faker->unique()->name,
+        'address' => $faker->unique()->address,
+        'phone' => $faker->unique()->phoneNumber,
+        'category_id' => factory(App\UnitCategory::class),
     ];
 });

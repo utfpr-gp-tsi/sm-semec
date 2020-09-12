@@ -33,7 +33,7 @@ abstract class DuskTestCase extends BaseTestCase
     {
         $opts = [];
         if (env('LAUNCH_BROWSER', false) == false) {
-            $opts[] = '--headless';
+          //  $opts[] = '--headless';
         }
         $opts[] = '--disable-gpu';
         $opts[] = '--window-size=1280,720';

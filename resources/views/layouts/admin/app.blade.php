@@ -17,6 +17,7 @@
     <!-- Scripts -->
     <script src="{{ asset(mix('assets/js/admin/app.js')) }}" defer></script>
     <script src="{{ asset(mix('assets/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js')) }}" defer></script>
+    <script src="{{ asset(mix('assets/vendor/selectize/js/selectize.min.js')) }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,7 +25,7 @@
 
     <!-- Styles -->
     <link href="{{ asset(mix('assets/vendor/tabler/css/tabler-dashboard.css')) }}" rel="stylesheet">
-    <link href="{{ asset(mix('assets/vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css')) }}" rel="stylesheet">
+    <link href="{{ asset(mix('assets/vendor/c/css/tempusdominus-bootstrap-4.min.css')) }}" rel="stylesheet">
     <link href="{{ asset(mix('assets/css/admin/app.css')) }}" rel="stylesheet">
 </head>
 <body>

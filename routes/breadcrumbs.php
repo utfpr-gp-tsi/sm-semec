@@ -131,6 +131,16 @@ Breadcrumbs::for('admin.update.edict', function ($trail, $id) {
     $trail->push('Editar Edital', route('admin.update.edict', $id));
 });
 
+Breadcrumbs::for('admin.edicts.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Editais', route('admin.edicts'));
+});
+
+Breadcrumbs::for('admin.search.edicts.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Editais', route('admin.edicts'));
+});
+
 /* Dashboard Servant
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('servant.dashboard', function ($trail) {
@@ -164,6 +174,7 @@ Breadcrumbs::for('servant.profile.password.update', function ($trail) {
 /* Category of Units
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('admin.categories', function ($trail) {
+    $trail->parent('admin.dashboard');
     $trail->push('Categorias de Unidades', route('admin.categories'));
 });
 
@@ -173,12 +184,13 @@ Breadcrumbs::for('admin.new.category', function ($trail) {
 });
 
 Breadcrumbs::for('admin.search.categories', function ($trail) {
+    $trail->parent('admin.categories');
     $trail->push('Buscar Categorias', route('admin.search.categories'));
 });
 
 Breadcrumbs::for('admin.edit.category', function ($trail, $id) {
     $trail->parent('admin.categories');
-    $trail->push('Editar Categoria', route('admin.edit.category', $id));
+    $trail->push('Editar Categoria #'.$id, route('admin.edit.category', $id));
 });
 
 Breadcrumbs::for('admin.update.category', function ($trail, $id) {
@@ -189,4 +201,62 @@ Breadcrumbs::for('admin.update.category', function ($trail, $id) {
 Breadcrumbs::for('admin.create.category', function ($trail) {
     $trail->parent('admin.categories');
     $trail->push('Nova Categoria', route('admin.create.category'));
+});
+
+Breadcrumbs::for('admin.categories.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Categorias', route('admin.categories'));
+});
+
+Breadcrumbs::for('admin.search.categories.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Categorias', route('admin.categories'));
+});
+
+
+/* Units
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('admin.units', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Unidades', route('admin.units'));
+});
+
+Breadcrumbs::for('admin.new.unit', function ($trail) {
+    $trail->parent('admin.units');
+    $trail->push('Nova Unidade', route('admin.new.unit'));
+});
+
+Breadcrumbs::for('admin.search.units', function ($trail) {
+    $trail->parent('admin.units');
+    $trail->push('Buscar Unidades', route('admin.search.units'));
+});
+
+Breadcrumbs::for('admin.edit.unit', function ($trail, $id) {
+    $trail->parent('admin.units');
+    $trail->push('Editar Unidade #'.$id, route('admin.edit.unit', $id));
+});
+
+Breadcrumbs::for('admin.update.unit', function ($trail, $id) {
+    $trail->parent('admin.units');
+    $trail->push('Editar Unidade', route('admin.update.unit', $id));
+});
+
+Breadcrumbs::for('admin.create.unit', function ($trail) {
+    $trail->parent('admin.units');
+    $trail->push('Nova Unidade', route('admin.create.unit'));
+});
+
+Breadcrumbs::for('admin.show.unit', function ($trail, $id) {
+    $trail->parent('admin.units');
+    $trail->push('Unidade', route('admin.show.unit', $id));
+});
+
+Breadcrumbs::for('admin.units.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Unidades', route('admin.units'));
+});
+
+Breadcrumbs::for('admin.search.units.page', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Unidades', route('admin.units'));
 });

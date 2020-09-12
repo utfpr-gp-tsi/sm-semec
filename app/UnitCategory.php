@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Unit;
 
 
 class UnitCategory extends Model
@@ -13,9 +14,13 @@ class UnitCategory extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
-        'name',
+        'name'
     ];
+
+       public function units()
+       {
+            return $this->hasMany(Unit::class, 'category_id');
+       }
 
 
     /**

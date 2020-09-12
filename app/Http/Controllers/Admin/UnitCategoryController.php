@@ -43,7 +43,7 @@ class UnitCategoryController extends AppController
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name'       => 'required',
+            'name' => 'required|unique:units_category,name',
         ]);
 
         $category = new UnitCategory($data);
@@ -54,6 +54,18 @@ class UnitCategoryController extends AppController
 
         $category->save();
         return redirect()->route('admin.categories')->with('success', 'Categoria cadastrada com sucesso');
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\UnitCategory  $id
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $category =  UnitCategory::find($id);
+        return view('admin.categories.edit', compact('category'));
     }
 
 
