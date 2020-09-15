@@ -72,7 +72,7 @@ class UnitCategoryController extends AppController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UnitCategory  $id
+     * @param  \App\UnitCategory  $name
      * @return  \Illuminate\View\View
      */
     public function edit($name)

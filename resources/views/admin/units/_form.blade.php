@@ -28,6 +28,7 @@
                                               'value'    => $unit->category_id,
                                               'options'  => $categories,
                                               'required' => true,
+                                              'default'  => 'Selecione uma categoria',
                                               'errors'   => $errors]) @endcomponent
 
 

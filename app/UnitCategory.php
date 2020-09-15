@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Unit;
 
-
 class UnitCategory extends Model
 {
     
@@ -17,11 +16,14 @@ class UnitCategory extends Model
         'name'
     ];
 
-       public function units()
-       {
-            return $this->hasMany(Unit::class, 'category_id');
-       }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
 
+    public function units()
+    {
+        return $this->hasMany(Unit::class, 'category_id');
+    }
 
     /**
      * @param string $term

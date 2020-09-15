@@ -18,7 +18,7 @@ class Unit extends Model
     ];
 
      /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function category()
     {

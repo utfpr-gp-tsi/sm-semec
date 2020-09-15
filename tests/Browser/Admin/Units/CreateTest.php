@@ -9,7 +9,7 @@ use Tests\DuskTestCase;
 
 class CreateTest extends DuskTestCase
 {
-    /** @var \App\UnitCategory */
+    /** @var \App\Unit */
     protected $unit;
     /** @var \App\User */
     protected $user;
@@ -23,6 +23,7 @@ class CreateTest extends DuskTestCase
         ]);
         $this->user = factory(User::class)->create();
     }
+
 
     public function testSucessfullyCreate(): void
     {
@@ -65,7 +66,6 @@ class CreateTest extends DuskTestCase
             $browser->with('div.unit_phone', function ($flash) {
                 $flash->assertSee('O campo telefone é obrigatório.');
             });
-    
         });
     }
 

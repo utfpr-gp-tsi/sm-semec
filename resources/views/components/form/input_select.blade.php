@@ -6,6 +6,7 @@
 				 @if ($required) required="required" @endif
 				 autofocus="autofocus" name="{{ $field }}"
 	  		 value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}">
+         <option disabled selected value> {{$default}} </option>
         @if(!empty($options))
           @foreach($options as $option)
               <option value="{{$option->id}} " {{ $value == $option->id ? 'selected' : ''}} >

@@ -21,7 +21,7 @@ use Faker\Generator as Faker;
 $factory->define(Unit::class, function (Faker $faker) {
     return [
         'name' => $faker->unique()->name,
-        'address' => $faker->unique()->address,
+        'address' => $faker->unique()->streetaddress,
         'phone' => $faker->unique()->phoneNumber,
         'category_id' => factory(App\UnitCategory::class),
     ];

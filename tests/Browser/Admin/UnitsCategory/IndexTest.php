@@ -21,6 +21,7 @@ class IndexTest extends DuskTestCase
     public function testIndexList(): void
     {
         $categories = factory(UnitCategory::class, 3)->create();
+        $categories = $categories->sortBy('name')->reverse();
 
         $this->browse(function ($browser) use ($categories) {
             $browser->loginAs($this->user)->visit('/admin/categories');
@@ -31,8 +32,10 @@ class IndexTest extends DuskTestCase
                     $pos += 1;
                     $baseSelector = "tr:nth-child({$pos}) ";
 
-                    $editSelector = $baseSelector . "a[href='" . route('admin.edit.category', $category->id) . "']";
-                    $deleteSelector = $baseSelector . "form[action='" . route('admin.destroy.category', $category->id) . "']";
+                    $editSelector = $baseSelector . "a[href='" .
+                     route('admin.edit.category', $category->id) . "']";
+                    $deleteSelector = $baseSelector . "form[action='" .
+                    route('admin.destroy.category', $category->id) . "']";
                     $row->assertPresent($editSelector);
                     $row->assertPresent($deleteSelector);
                 }
@@ -81,5 +84,4 @@ class IndexTest extends DuskTestCase
             });
         });
     }
-
 }

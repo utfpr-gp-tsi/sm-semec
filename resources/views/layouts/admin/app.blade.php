@@ -25,7 +25,7 @@
 
     <!-- Styles -->
     <link href="{{ asset(mix('assets/vendor/tabler/css/tabler-dashboard.css')) }}" rel="stylesheet">
-    <link href="{{ asset(mix('assets/vendor/c/css/tempusdominus-bootstrap-4.min.css')) }}" rel="stylesheet">
+    <link href="{{ asset(mix('assets/vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css')) }}" rel="stylesheet">
     <link href="{{ asset(mix('assets/css/admin/app.css')) }}" rel="stylesheet">
 </head>
 <body>

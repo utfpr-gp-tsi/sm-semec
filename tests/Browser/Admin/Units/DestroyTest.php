@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\Edicts;
+namespace Tests\Browser\Admin\Units;
 
 use App\Unit;
 use App\User;
@@ -10,7 +10,7 @@ use Tests\DuskTestCase;
 class DestroyTest extends DuskTestCase
 {
     /** @var \App\Unit */
-    protected $edict;
+    protected $unit;
     /** @var \App\User */
     protected $user;
 
@@ -20,6 +20,8 @@ class DestroyTest extends DuskTestCase
         $this->unit = factory(Unit::class)->create();
         $this->user = factory(User::class)->create();
     }
+
+    
 
     public function testDestroy(): void
     {

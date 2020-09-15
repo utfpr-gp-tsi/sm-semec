@@ -27,15 +27,13 @@ class CreateTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.new.category'));
-
-            $browser->type('name', $this->category->name) 
+            $browser->type('name', $this->category->name)
                     ->press('Criar Categoria');
             
             $browser->assertUrlIs(route('admin.categories'));
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Categoria cadastrada com sucesso');
             });
-
         });
     }
 
@@ -53,7 +51,6 @@ class CreateTest extends DuskTestCase
             $browser->with('div.UnitCategory_name', function ($flash) {
                 $flash->assertSee('O campo nome é obrigatório.');
             });
-    
         });
     }
 

@@ -19,8 +19,6 @@ class UnitCategorySearchTest extends TestCase
         $this->categories[] = factory(UnitCategory::class)->create(['name' => 'CMEI']);
         $this->categories[] = factory(UnitCategory::class)->create(['name' => 'Escolas Municipais']);
         $this->categories[] = factory(UnitCategory::class)->create(['name' => 'Departamentos SEMEC']);
-        
-        
     }
 
     public function testSearchBySpecifiedName(): void
@@ -50,4 +48,3 @@ class UnitCategorySearchTest extends TestCase
         $this->assertEmpty($searchResult->diff(collect($expectedCategories)));
     }
 }
-

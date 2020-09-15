@@ -9,7 +9,7 @@ use Tests\DuskTestCase;
 
 class UpdateTest extends DuskTestCase
 {
-    /** @var \App\Edict */
+    /** @var \App\Unit */
     protected $unit;
     /** @var \App\User */
     protected $user;
@@ -106,5 +106,4 @@ class UpdateTest extends DuskTestCase
             $browser->assertSeeIn($thirdBreadcrumbSelector, "Editar Unidade #{$this->unit->id}");
         });
     }
-
 }

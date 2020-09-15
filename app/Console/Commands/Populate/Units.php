@@ -51,8 +51,7 @@ class Units extends Command
 
         $categories->each(function ($category) {
             DB::table('units')->delete();
-            $unit = factory('App\Unit', 22)->create(['category_id' => $category->id]);
-           });
+             factory('App\Unit', 22)->create(['category_id' => $category->id]);
+        });
     }
-
 }

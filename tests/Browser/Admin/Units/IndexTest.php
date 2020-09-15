@@ -21,6 +21,7 @@ class IndexTest extends DuskTestCase
     public function testIndexList(): void
     {
         $units = factory(Unit::class, 10)->create();
+        $units = $units->sortBy('name')->reverse();
 
         $this->browse(function ($browser) use ($units) {
             $browser->loginAs($this->user)->visit('/admin/units');
@@ -60,7 +61,7 @@ class IndexTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        factory(Unit::class, 20)->create();
+        factory(Unit::class, 22)->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit('/admin/units');
@@ -79,5 +80,4 @@ class IndexTest extends DuskTestCase
             });
         });
     }
-
 }

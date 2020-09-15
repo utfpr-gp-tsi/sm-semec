@@ -27,7 +27,6 @@ class UpdateTest extends DuskTestCase
             $browser->loginAs($this->user)->visit(route('admin.edit.category', $this->category->id));
 
             $browser->assertInputValue('name', $this->category->name);
-        
         });
     }
 
@@ -91,7 +90,4 @@ class UpdateTest extends DuskTestCase
             $browser->assertSeeIn($thirdBreadcrumbSelector, "Editar Categoria #{$this->category->id}");
         });
     }
-
-
-
 }

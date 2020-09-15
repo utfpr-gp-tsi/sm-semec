@@ -19,7 +19,7 @@ class UnitController extends AppController
     {
         $search = Request()->term;
         $units = Unit::search($search);
-        return view('admin.units.index', compact('units', $units));
+        return view('admin.units.index')->with('units', $units);
     }
 
      /**
@@ -46,9 +46,9 @@ class UnitController extends AppController
 
         $validator = Validator::make($data, [
             'name' => 'required|unique:units,name',
-            'address' =>'required|unique:units,address',
+            'address' => 'required|unique:units,address',
             'phone' => 'required|min:11|unique:units,phone',
-            'category_id'=>'required',
+            'category_id' => 'required',
         ]);
 
         $unit = new Unit($data);
@@ -67,11 +67,11 @@ class UnitController extends AppController
      * @param  \App\Unit  $id
      * @return \Illuminate\View\View
      */
-        public function show($id)
+    public function show($id)
     {
         $unit =  Unit::find($id);
         return view('admin.units.show', compact('unit'));
-    } 
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -101,9 +101,9 @@ class UnitController extends AppController
 
         $validator = Validator::make($data, [
             'name' => "required|unique:units,name,$id",
-            'address' =>"required|unique:units,address,$id",
+            'address' => "required|unique:units,address,$id",
             'phone' => "required|min:11|unique:units,phone,$id",
-            'category_id'=>'required',
+            'category_id' => 'required',
         ]);
 
         
@@ -130,6 +130,4 @@ class UnitController extends AppController
         $unit->delete();
         return redirect()->route('admin.units')->with('success', 'Unidade removida com sucesso.');
     }
-
-
 }
