@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Edict;
 use App\Pdf;
 use App\Http\Controllers\Admin\AppController;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class PdfController extends AppController
 {
@@ -16,12 +19,10 @@ class PdfController extends AppController
      * @param  \App\Edict $id
      * @return \Illuminate\View\View
      */
-    public function new($id)
+    public function index($id)
     {
         $edict = Edict::find($id);
-        $search = Request()->term;
-        $pdfs = Pdf::search($search);
-        return view('admin.edicts.pdfs.new', compact('edict'))->with('pdfs', $pdfs);
+        return view('admin.edicts.pdfs.new', compact('edict'));
     }
 
     /**
@@ -35,7 +36,7 @@ class PdfController extends AppController
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name' => 'required',
+            'name' => 'required|max:60',
             'pdf' => 'required|mimes:pdf'
         ]);
 
@@ -47,22 +48,37 @@ class PdfController extends AppController
             return view('admin.edicts.pdfs.new', compact('edict'))->withErrors($validator);
         }
 
-        $pdf->edict_id = $edict->id;
-        $pdf->save();
-        return redirect()->route('admin.new.pdf', $id)->with('success', 'Pdf adicionado com sucesso');
+        $edict->pdfs()->save($pdf);
+        return redirect()->route('admin.index.pdf', $id)->with('success', 'PDF adicionado com sucesso');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Pdf  $id
+     * @param  \App\Edict $edictId
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse.
      */
-    public function show($id)
+    public function show($edictId, $id)
     {
         $pdf = Pdf::find($id);
+        $edict = Edict::find($edictId);
 
-        $pathToFile = public_path('uploads/edicts/' . $pdf->edict_id . '/' . $pdf->getOriginal('pdf'));
+        $pathToFile = public_path('uploads/edicts/' . $edict->id . '/' . $pdf->getOriginal('pdf'));
         return response()->file($pathToFile);
+    }
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  \App\Pdf  $id
+    * @return \Illuminate\Http\RedirectResponse
+    *
+    */
+    public function destroy($id)
+    {
+        $pdf = Pdf::find($id);
+        $pdf->delete();
+        return redirect()->route('admin.index.pdf', $pdf->edict_id)->with('success', 'PDF removido com sucesso.');
     }
 }

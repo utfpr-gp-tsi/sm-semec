@@ -66,9 +66,10 @@ Route::namespace('Admin')->group(function () {
 
     /* Pdfs resources
         |-------------------------------------------------------------------------- */
-        Route::get('/edicts/pdf/new/{id}', 	['as' => 'admin.new.pdf',     'uses' => 'PdfController@new']);
-        Route::post('/edicts/pdf/{id}', 	['as' => 'admin.create.pdf',  'uses' => 'PdfController@create']);
-        Route::get('/edicts/pdf/{id}', 	['as' => 'admin.show.pdf',  'uses' => 'PdfController@show']);
+        Route::get('/edicts/{id}/pdfs', 	['as' => 'admin.index.pdf',     'uses' => 'PdfController@index']);
+        Route::post('/edicts/{id}/pdfs', 	['as' => 'admin.create.pdf',  'uses' => 'PdfController@create']);
+        Route::get('/edicts/{edict_id}/pdfs/{id}', 	['as' => 'admin.show.pdf',  'uses' => 'PdfController@show']);
+        Route::delete('/edicts/pdfs/{id}', 		['as' => 'admin.destroy.pdf', 'uses' => 'PdfController@destroy']);
     });
 });
 

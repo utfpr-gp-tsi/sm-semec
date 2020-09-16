@@ -10,7 +10,7 @@ use App\Pdf;
 
 class IndexTest extends DuskTestCase
 {
-        /** @var \App\Edict */
+    /** @var \App\Edict */
     protected $edict;
     /** @var \App\User */
     protected $user;
@@ -24,34 +24,35 @@ class IndexTest extends DuskTestCase
 
     public function testIndexList(): void
     {
-        $pdfs = factory(Pdf::class, 3)->create();
+        $pdfs = factory(Pdf::class)->create();
 
         $this->browse(function ($browser) use ($pdfs) {
-            $browser->loginAs($this->user)->visit(route('admin.new.pdf', $this->edict->id))
-                    ->driver->executeScript('window.scrollTo(0, 400);');
+            $browser->loginAs($this->user)->visit('/admin/edicts/2/pdfs');
 
             $browser->with("table.table tbody", function ($row) use ($pdfs) {
                 $pos = 0;
-                foreach ($pdfs as $pdf) {
                     $pos += 1;
                     $baseSelector = "tr:nth-child({$pos}) ";
+                    $route = route('admin.show.pdf', ['edict_id' => $pdfs->edict->id, 'id' => $pdfs->id]);
 
-                    $showSelector = $baseSelector . "a[href='" . route('admin.show.pdf', $pdf->id) . "']";
-                    $row->assertSeeIn($showSelector, $pdf->name);
-                    $row->assertSeeIn($baseSelector, $pdf->edict->title);
-                    $row->assertSeeIn($baseSelector, $pdf->created_at->toShortDateTime());
-                    $row->assertSeeIn($baseSelector, $pdf->updated_at->toShortDateTime());
-                }
+                    $showSelector = $baseSelector . "a[href='" . $route . "']";
+                    $row->assertSeeIn($showSelector, $pdfs->name);
+                    $row->assertSeeIn($baseSelector, $pdfs->edict->title);
+                    $row->assertSeeIn($baseSelector, $pdfs->created_at->toShortDateTime());
+                    $row->assertSeeIn($baseSelector, $pdfs->updated_at->toShortDateTime());
+
+                    $deleteSelector = $baseSelector . "form[action='" . route('admin.destroy.pdf', $pdfs->id) . "']";
+                    $row->assertPresent($deleteSelector);
             });
         });
     }
 
     public function testAssertLinksPresent(): void
     {
-        factory(Pdf::class, 22)->create();
+        factory(Pdf::class, 2)->create();
 
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.new.pdf', $this->edict->id));
+            $browser->loginAs($this->user)->visit(route('admin.index.pdf', $this->edict->id));
 
             $rootBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.dashboard') . "']";
             $secondBreadcrumSelector = ".breadcrumb li:nth-child(2)";
@@ -59,12 +60,7 @@ class IndexTest extends DuskTestCase
 
             $browser->assertSeeIn($rootBreadcrumbSelector, 'Página Inicial');
             $browser->assertSeeIn($secondBreadcrumSelector, 'Editais');
-            $browser->assertSeeIn($thirdBreadcrumSelector, 'Novo Pdf');
-
-            $browser->with('.pagination', function ($pagination) {
-                $pagination->assertSee('1');
-                $pagination->assertSeeLink('2');
-            });
+            $browser->assertSeeIn($thirdBreadcrumSelector, 'Novo PDF');
         });
     }
 }

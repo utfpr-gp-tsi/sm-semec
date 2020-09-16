@@ -145,15 +145,16 @@ Breadcrumbs::for('admin.update.edict', function ($trail, $id) {
 
 /* Pdfs Edict
 |-------------------------------------------------------------------------- */
-Breadcrumbs::for('admin.new.pdf', function ($trail, $id) {
+Breadcrumbs::for('admin.index.pdf', function ($trail, $id) {
     $trail->parent('admin.edicts');
-    $trail->push('Novo Pdf', route('admin.new.pdf', $id));
+    $trail->push('Novo PDF', route('admin.index.pdf', $id));
 });
 
 Breadcrumbs::for('admin.create.pdf', function ($trail, $id) {
     $trail->parent('admin.edicts');
-    $trail->push('Novo Pdf', route('admin.create.pdf', $id));
+    $trail->push('Novo PDF', route('admin.create.pdf', $id));
 });
+
 
 /* Dashboard Servant
 |-------------------------------------------------------------------------- */
