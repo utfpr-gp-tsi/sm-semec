@@ -38,4 +38,22 @@ class Edict extends Model
         }
         return Edict::orderBy('started_at', 'desc')->paginate(20);
     }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function pdfs()
+    {
+        return $this->hasMany(Pdf::class, 'edict_id');
+    }
+
+    /**
+    * @return $this
+    */
+    public function saveWithoutEvents(array $options = [])
+    {
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
+    }
 }
