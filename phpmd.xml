@@ -13,4 +13,5 @@
     <rule ref="rulesets/unusedcode.xml"/>
 
     <exclude-pattern>app/Console/Kernel.php</exclude-pattern>
+    <exclude-pattern>tests/DuskTestCase.php</exclude-pattern>
 </ruleset>
