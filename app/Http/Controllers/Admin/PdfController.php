@@ -22,7 +22,8 @@ class PdfController extends AppController
     public function index($id)
     {
         $edict = Edict::find($id);
-        return view('admin.edicts.pdfs.new', compact('edict'));
+        $pdf = new PDF();
+        return view('admin.edicts.pdfs.index', compact('edict', 'pdf'));
     }
 
     /**
@@ -43,9 +44,10 @@ class PdfController extends AppController
         $pdf = new Pdf($data);
         $pdf->fill($data);
         $edict = Edict::find($id);
+
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('admin.edicts.pdfs.new', compact('edict'))->withErrors($validator);
+            return view('admin.edicts.pdfs.index', compact('edict', 'pdf'))->withErrors($validator);
         }
 
         $edict->pdfs()->save($pdf);
