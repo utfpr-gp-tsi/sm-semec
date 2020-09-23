@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use App\Edict;
+use Illuminate\Support\Facades\DB;
 
 class Pdf extends Model
 {
@@ -49,4 +50,16 @@ class Pdf extends Model
             return $this->save($options);
         });
     }
+
+    public static function anoTeste()
+    {
+            $ordersByWeek = Pdf::select([
+                    DB::raw('count(*) as name'),
+                    DB::raw('year(created_at) as year'),
+                ])
+                ->groupBy(['year'])
+                ->get();
+
+        return $ordersByWeek;
+  }
 }

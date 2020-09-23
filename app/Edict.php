@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\DateTimeFormatter;
+use Illuminate\Support\Facades\DB;
 
 class Edict extends Model
 {
@@ -33,8 +34,8 @@ class Edict extends Model
         if ($term) {
             $searchTerm = "%{$term}%";
             return Edict::where('title', 'LIKE', $searchTerm)
-                ->orderBy('started_at', 'desc')
-                ->paginate(20);
+            ->orderBy('started_at', 'desc')
+            ->paginate(20);
         }
         return Edict::orderBy('started_at', 'desc')->paginate(20);
     }
@@ -55,5 +56,17 @@ class Edict extends Model
         return static::withoutEvents(function () use ($options) {
             return $this->save($options);
         });
+    }
+
+    public static function anoTeste()
+    {
+        $ordersByWeek = Edict::select([
+            DB::raw('count(id) as title'),
+            DB::raw('year(started_at) as year')
+        ])
+        ->groupBy(['year'])
+        ->get();    
+
+        return $ordersByWeek;
     }
 }

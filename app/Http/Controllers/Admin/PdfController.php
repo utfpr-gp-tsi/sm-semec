@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\AppController;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;   
 
 class PdfController extends AppController
 {
@@ -82,5 +84,25 @@ class PdfController extends AppController
         $pdf = Pdf::find($id);
         $pdf->delete();
         return redirect()->route('admin.index.pdf', $pdf->edict_id)->with('success', 'PDF removido com sucesso.');
+    }
+
+    public function listPdfs()
+    {
+        $edicts = Edict::all();
+        $year = 2019;
+        // $dates = DB::table('edicts')->whereYear('started_at', '=', $year)->groupBy('started_at')->format('Y')->get();
+
+        // $dates = DB::table('edicts')->select('started_at')->get();
+        $dates = Edict::anoTeste();
+
+        // $dates = Edict::anoTeste();
+
+
+       //  $dates = Edict::get()->groupBy(function($edicts) {
+       //     return Carbon::parse($edicts->created_at)->format('Y');
+       // });
+
+
+        return view('admin.edicts.pdfs.list', compact('edicts', 'dates', 'pdfs'));
     }
 }
