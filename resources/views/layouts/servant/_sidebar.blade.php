@@ -11,6 +11,12 @@
       </span>
       Página inicial
     </a>
+    <a class="list-group-item list-group-item-action {{ setActive(['servant/edicts*']) }}" href="{{ route('servant.edicts') }}">
+      <span class="icon mr-2 h4">
+      <i class="fas fa-file-alt"></i>
+      </span>
+      Editais
+    </a>
   
   </div>
 </div>

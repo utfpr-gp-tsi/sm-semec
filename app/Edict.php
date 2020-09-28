@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\DateTimeFormatter;
+use Carbon\Carbon;
 
 class Edict extends Model
 {
@@ -38,4 +39,55 @@ class Edict extends Model
         }
         return Edict::orderBy('started_at', 'desc')->paginate(20);
     }
+
+    /**
+     * @param string $term
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+
+     public static function searchOpen($term){
+        if ($term) {
+            $searchTerm = "%{$term}%";
+            return Edict::where([
+                'ended_at', '>=', Carbon::now()->toDateString(),
+                'title', 'LIKE', $searchTerm,
+                 ])->get() 
+                ->orderBy('started_at', 'desc')
+                ->paginate(20);
+        }
+
+        return Edict::where('ended_at', '>=', Carbon::now()->toDateString())
+                      ->orderBy('started_at', 'desc')
+                      ->paginate(20);
+
+    }
+
+    /**
+     * @param string $term
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+
+    public static function searchClose($term){
+        if ($term) {
+            $searchTerm = "%{$term}%";
+            return Edict::where([
+                'ended_at', '<=', Carbon::now()->toDateString(),
+                'title', 'LIKE', $searchTerm,
+                 ])->get() 
+                ->paginate(20);
+        }
+
+        return Edict::where('ended_at', '<=', Carbon::now()->toDateString())
+                      ->orderBy('started_at', 'desc')
+                      ->paginate(20);
+
+        
+    
+    }
+     
+
+
+    
+
+    
 }
