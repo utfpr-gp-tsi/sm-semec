@@ -194,6 +194,17 @@ Breadcrumbs::for('servant.edicts.close.page', function ($trail, $term) {
     $trail->push('Editais', route('servant.edicts.close.page', $term));
 });
 
+Breadcrumbs::for('servant.search.edicts', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', route('servant.search.edicts'));
+});
+
+Breadcrumbs::for('servant.search.edicts.close', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', route('servant.search.edicts.close'));
+});
+
+
 /* Category of Units
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('admin.categories', function ($trail) {
