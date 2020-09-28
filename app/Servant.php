@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPasswordNotification;
+use App\Subscription;
 
 class Servant extends Authenticatable
 {
@@ -127,5 +128,13 @@ class Servant extends Authenticatable
         return static::withoutEvents(function () use ($options) {
             return $this->save($options);
         });
+    }
+
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class, 'servant_id');
     }
 }

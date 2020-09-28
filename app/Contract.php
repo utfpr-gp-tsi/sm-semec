@@ -49,4 +49,9 @@ class Contract extends Model
     {
         return $this->hasMany(License::class, 'contract_id');
     }
+
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class, 'subscription_id');
+    }
 }

@@ -50,6 +50,7 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',    'uses' => 'ServantsController@show']);
 
+
 	/* Edicts resources
         |-------------------------------------------------------------------------- */
         Route::get('/edicts/page/{page}',	['as' => 'admin.edicts.page',   'uses' => 'EdictsController@index']);
@@ -100,5 +101,10 @@ Route::namespace('Servant')->group(function () {
 
 	Route::get('/password/edit',  ['as' => 'password.edit',   'uses' => 'ProfileController@editPassword']);
 	Route::post('/password/edit', ['as' => 'profile.password.update', 'uses' => 'ProfileController@updatePassword']);
+
+    /* Edicts
+    |----------------------------------------------------------------------------*/
+    Route::get('/inscription/edict',       ['as' => 'new.subscribe',     'uses' => 'EdictsController@new']);
+    Route::post('/inscription/edict',       ['as' => 'subscribe',     'uses' => 'EdictsController@create']);
     });
 });

@@ -185,3 +185,14 @@ Breadcrumbs::for('servant.profile.password.update', function ($trail) {
     $trail->parent('servant.profile.edit');
     $trail->push('Alterar Senha', route('servant.profile.password.update'));
 });
+
+
+/* Edicts 
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('servant.new.subscribe', function ($trail) {
+    $trail->push('Inscreva-se', route('servant.new.subscribe'));
+});
+
+Breadcrumbs::for('servant.subscribe', function ($trail) {
+    $trail->push('Title Here', route('servant.subscribe'));
+});
