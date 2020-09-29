@@ -12,6 +12,9 @@
  */
 
 Route::get('/',  ['as' => 'root_path',    'uses' => 'HomeController@index']);
+Route::get('/edicts',  ['as' => 'edicts',    'uses' => 'HomeController@listEdicts']);
+Route::get('/edicts/{edict_id}/pdfs/{id}', 	['as' => 'edict.show',  'uses' => 'HomeController@show']);
+
 
 Route::namespace('Admin')->group(function () {
     Route::prefix('admin')->group(function () {
@@ -70,7 +73,6 @@ Route::namespace('Admin')->group(function () {
         Route::post('/edicts/{id}/pdfs', 	['as' => 'admin.create.pdf',  'uses' => 'PdfController@create']);
         Route::get('/edicts/{edict_id}/pdfs/{id}', 	['as' => 'admin.show.pdf',  'uses' => 'PdfController@show']);
         Route::delete('/edicts/pdfs/{id}', 		['as' => 'admin.destroy.pdf', 'uses' => 'PdfController@destroy']);
-        Route::get('/pdfs', 	['as' => 'admin.list.pdf',  'uses' => 'PdfController@listPdfs']);
     });
 });
 

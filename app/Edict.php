@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\DateTimeFormatter;
-use Illuminate\Support\Facades\DB;
 
 class Edict extends Model
 {
@@ -56,17 +55,5 @@ class Edict extends Model
         return static::withoutEvents(function () use ($options) {
             return $this->save($options);
         });
-    }
-
-    public static function anoTeste()
-    {
-        $ordersByWeek = Edict::select([
-            DB::raw('count(id) as title'),
-            DB::raw('year(started_at) as year')
-        ])
-        ->groupBy(['year'])
-        ->get();    
-
-        return $ordersByWeek;
     }
 }
