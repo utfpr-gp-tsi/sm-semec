@@ -5,3 +5,4 @@ require('../../lib/search/js/submit_search');
 require('../../config/js/tooltip');
 require('../../config/js/datetimepicker');
 require('../../config/js/selectize');
+require('../../lib/pdf_preview/js/pdf_preview');

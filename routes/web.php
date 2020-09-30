@@ -46,57 +46,62 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/servants/page/{page}',    ['as' => 'admin.servants.page',   'uses' => 'ServantsController@index']);
 	Route::get('/servants',      	       ['as' => 'admin.servants',        'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}/page/{page}',
-					  ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
+	    ['as' => 'admin.search.servants.page', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/search/{term}',  ['as' => 'admin.search.servants', 'uses' => 'ServantsController@index']);
 	Route::get('/servants/{id}',           ['as' => 'admin.show.servant',    'uses' => 'ServantsController@show']);
 
 	/* Edicts resources
-        |-------------------------------------------------------------------------- */
-        Route::get('/edicts/page/{page}', ['as' => 'admin.edicts.page', 'uses' => 'EdictsController@index']);
-        Route::get('/edicts', ['as' => 'admin.edicts', 'uses' => 'EdictsController@index']);
-        Route::get('/edicts/search/{term}/page/{page}', ['as' => 'admin.search.edicts.page', 'uses' => 'EdictsController@index']);
-        Route::get('/edicts/search/{term?}', ['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
-        Route::get('/edicts/new', ['as' => 'admin.new.edict', 'uses' => 'EdictsController@new']);
-        Route::post('/edicts', ['as' => 'admin.create.edict', 'uses' => 'EdictsController@create']);
-        Route::get('/edicts/{id}', ['as' => 'admin.show.edict', 'uses' => 'EdictsController@show']);
-        Route::get('/edicts/{id}/edit', ['as' => 'admin.edit.edict', 'uses' => 'EdictsController@edit']);
-        Route::patch('/edicts/{id}', ['as' => 'admin.update.edict', 'uses' => 'EdictsController@update']);
-        Route::delete('/edicts/{id}', ['as' => 'admin.destroy.edict', 'uses' => 'EdictsController@destroy']);
+	|-------------------------------------------------------------------------- */
+	Route::get('/edicts/page/{page}',	['as' => 'admin.edicts.page',   'uses' => 'EdictsController@index']);
+	Route::get('/edicts', 			['as' => 'admin.edicts', 	'uses' => 'EdictsController@index']);
+	Route::get('/edicts/search/{term}/page/{page}',
+	    ['as' => 'admin.search.edicts.page', 'uses' => 'EdictsController@index']);
+	Route::get('/edicts/search/{term?}',	['as' => 'admin.search.edicts', 'uses' => 'EdictsController@index']);
+	Route::get('/edicts/new', 		['as' => 'admin.new.edict',     'uses' => 'EdictsController@new']);
+	Route::post('/edicts', 			['as' => 'admin.create.edict',  'uses' => 'EdictsController@create']);
+	Route::get('/edicts/{id}', 		['as' => 'admin.show.edict',    'uses' => 'EdictsController@show']);
+	Route::get('/edicts/{id}/edit', 	['as' => 'admin.edit.edict',    'uses' => 'EdictsController@edit']);
+	Route::patch('/edicts/{id}',		['as' => 'admin.update.edict',  'uses' => 'EdictsController@update']);
+	Route::delete('/edicts/{id}', 		['as' => 'admin.destroy.edict', 'uses' => 'EdictsController@destroy']);
 
-    /* Category resources
-        |-------------------------------------------------------------------------- */
-        Route::get('/categories/page/{page}', ['as' => 'admin.categories.page', 'uses' => 'UnitCategoryController@index']);
-        Route::get('/categories', ['as' => 'admin.categories', 'uses' => 'UnitCategoryController@index']);
-        Route::get('/categories/{id}', ['as' => 'admin.show.category', 'uses' => 'UnitCategoryController@show']);
-        Route::get('/categories/search/{term}/page/{page}', ['as' => 'admin.search.categories.page', 'uses' => 'UnitCategoryController@index']);
-        Route::get('/categories/search/{term?}', ['as' => 'admin.search.categories', 'uses' => 'UnitCategoryController@index']);
-        Route::get('/categories/new', ['as' => 'admin.new.category', 'uses' => 'UnitCategoryController@new']);
-        Route::post('/categories', ['as' => 'admin.create.category', 'uses' => 'UnitCategoryController@create']);
-        Route::get('/categories/{id}/edit', ['as' => 'admin.edit.category', 'uses' => 'UnitCategoryController@edit']);
-        Route::patch('/categories/{id}', ['as' => 'admin.update.category', 'uses' => 'UnitCategoryController@update']);
-		Route::delete('/categories/{id}', ['as' => 'admin.destroy.category', 'uses' => 'UnitCategoryController@destroy']);
-		
-		/* Unit resources
-        |-------------------------------------------------------------------------- */
-        Route::get('/units/page/{page}', ['as' => 'admin.units.page', 'uses' => 'UnitController@index']);
-        Route::get('/units', ['as' => 'admin.units', 'uses' => 'UnitController@index']);
-        Route::get('/units/{id}', ['as' => 'admin.show.unit', 'uses' => 'UnitController@show']);
-        Route::get('/units/search/{term}/page/{page}', ['as' => 'admin.search.units.page', 'uses' => 'UnitController@index']);
-        Route::get('/units/search/{term?}', ['as' => 'admin.search.units', 'uses' => 'UnitController@index']);
-        Route::get('/units/new', ['as' => 'admin.new.unit', 'uses' => 'UnitController@new']);
-        Route::post('/units', ['as' => 'admin.create.unit', 'uses' => 'UnitController@create']);
-        Route::get('/units/{id}/edit', ['as' => 'admin.edit.unit', 'uses' => 'UnitController@edit']);
-        Route::patch('/units/{id}', ['as' => 'admin.update.unit', 'uses' => 'UnitController@update']);
-        Route::delete('/units/{id}', ['as' => 'admin.destroy.unit', 'uses' => 'UnitController@destroy']);
+	/* Pdfs resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/edicts/{id}/pdfs', 	['as' => 'admin.index.pdf',     'uses' => 'PdfController@index']);
+	Route::post('/edicts/{id}/pdfs', 	['as' => 'admin.create.pdf',  'uses' => 'PdfController@create']);
+	Route::get('/edicts/{edict_id}/pdfs/{id}', 	['as' => 'admin.show.pdf',  'uses' => 'PdfController@show']);
+	Route::delete('/edicts/pdfs/{id}', 		['as' => 'admin.destroy.pdf', 'uses' => 'PdfController@destroy']);
 
-	
-});
+	/* Category resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/categories/page/{page}', ['as' => 'admin.categories.page', 'uses' => 'UnitCategoryController@index']);
+	Route::get('/categories', ['as' => 'admin.categories', 'uses' => 'UnitCategoryController@index']);
+	Route::get('/categories/{id}', ['as' => 'admin.show.category', 'uses' => 'UnitCategoryController@show']);
+	Route::get('/categories/search/{term}/page/{page}', ['as' => 'admin.search.categories.page', 'uses' => 'UnitCategoryController@index']);
+	Route::get('/categories/search/{term?}', ['as' => 'admin.search.categories', 'uses' => 'UnitCategoryController@index']);
+	Route::get('/categories/new', ['as' => 'admin.new.category', 'uses' => 'UnitCategoryController@new']);
+	Route::post('/categories', ['as' => 'admin.create.category', 'uses' => 'UnitCategoryController@create']);
+	Route::get('/categories/{id}/edit', ['as' => 'admin.edit.category', 'uses' => 'UnitCategoryController@edit']);
+	Route::patch('/categories/{id}', ['as' => 'admin.update.category', 'uses' => 'UnitCategoryController@update']);
+	Route::delete('/categories/{id}', ['as' => 'admin.destroy.category', 'uses' => 'UnitCategoryController@destroy']);
+
+	/* Unit resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/units/page/{page}', ['as' => 'admin.units.page', 'uses' => 'UnitController@index']);
+	Route::get('/units', ['as' => 'admin.units', 'uses' => 'UnitController@index']);
+	Route::get('/units/{id}', ['as' => 'admin.show.unit', 'uses' => 'UnitController@show']);
+	Route::get('/units/search/{term}/page/{page}', ['as' => 'admin.search.units.page', 'uses' => 'UnitController@index']);
+	Route::get('/units/search/{term?}', ['as' => 'admin.search.units', 'uses' => 'UnitController@index']);
+	Route::get('/units/new', ['as' => 'admin.new.unit', 'uses' => 'UnitController@new']);
+	Route::post('/units', ['as' => 'admin.create.unit', 'uses' => 'UnitController@create']);
+	Route::get('/units/{id}/edit', ['as' => 'admin.edit.unit', 'uses' => 'UnitController@edit']);
+	Route::patch('/units/{id}', ['as' => 'admin.update.unit', 'uses' => 'UnitController@update']);
+	Route::delete('/units/{id}', ['as' => 'admin.destroy.unit', 'uses' => 'UnitController@destroy']);
+    });
 });
 
 /*----------SERVANT AREA----------	*/
 Route::namespace('Servant')->group(function () {
     Route::prefix('servant')->name('servant.')->group(function () {
-
 	/* Session
 	|-------------------------------------------------------------------------- */
 	Route::namespace('Auth')->group(function(){

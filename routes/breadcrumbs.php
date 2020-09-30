@@ -121,6 +121,7 @@ Breadcrumbs::for('admin.show.edict', function ($trail, $id) {
     $trail->push('Edital #'.$id , route ('admin.show.edict', $id));
 });
 
+
 Breadcrumbs::for('admin.edit.edict', function ($trail, $id) {
     $trail->parent('admin.edicts', $id);
     $trail->push('Editar Edital #'.$id, route('admin.edit.edict', $id));
@@ -139,6 +140,18 @@ Breadcrumbs::for('admin.edicts.page', function ($trail) {
 Breadcrumbs::for('admin.search.edicts.page', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Editais', route('admin.edicts'));
+});
+
+/* Pdfs Edict
+|-------------------------------------------------------------------------- */
+Breadcrumbs::for('admin.index.pdf', function ($trail, $id) {
+    $trail->parent('admin.edicts');
+    $trail->push('Novo PDF', route('admin.index.pdf', $id));
+});
+
+Breadcrumbs::for('admin.create.pdf', function ($trail, $id) {
+    $trail->parent('admin.edicts');
+    $trail->push('Novo PDF', route('admin.create.pdf', $id));
 });
 
 /* Dashboard Servant
