@@ -48,7 +48,7 @@ class IndexTest extends DuskTestCase
 
     public function testSearchField(): void
     {
-        $edict = factory(Edict::class)->create();
+        $edict = factory(Edict::class)->create(['title' => 'Edict title']);
 
         $this->browse(function ($browser) use ($edict) {
             $browser->loginAs($this->user);

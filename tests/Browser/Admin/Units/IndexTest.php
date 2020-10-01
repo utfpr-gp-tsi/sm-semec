@@ -43,7 +43,7 @@ class IndexTest extends DuskTestCase
 
     public function testSearchField(): void
     {
-        $unit = factory(Unit::class)->create();
+        $unit = factory(Unit::class)->create(['name' => 'Unit name']);
 
         $this->browse(function ($browser) use ($unit) {
             $browser->loginAs($this->user);

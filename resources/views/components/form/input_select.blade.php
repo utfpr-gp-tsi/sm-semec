@@ -9,10 +9,9 @@
          <option disabled selected value> {{$default}} </option>
         @if(!empty($options))
           @foreach($options as $option)
-              <option value="{{$option->id}} " {{ $value == $option->id ? 'selected' : ''}} >
+              <option value="{{$option->id}}" {{ $value == $option->id ? 'selected' : ''}} >
             {{ $option->name  }}</option>
-            @endforeach  
+            @endforeach
             @endif
         </select>
-          
  </div>

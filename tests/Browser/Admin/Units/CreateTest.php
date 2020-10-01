@@ -3,6 +3,7 @@
 namespace Tests\Browser\Admin\Units;
 
 use App\Unit;
+use App\UnitCategory;
 use App\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -13,13 +14,15 @@ class CreateTest extends DuskTestCase
     protected $unit;
     /** @var \App\User */
     protected $user;
+    /** @var \App\UnitCategory */
+    protected $categories;
 
     public function setUp(): void
     {
         parent::setUp();
+        $this->categories = factory(UnitCategory::class, 4)->create();
         $this->unit = factory(Unit::class)->make([
             'name' => 'Escola Municipal Santa Cruz',
-            
         ]);
         $this->user = factory(User::class)->create();
     }
@@ -30,10 +33,13 @@ class CreateTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.new.unit'));
 
+            $category = $this->categories->first();
+
             $browser->type('name', $this->unit->name)
                     ->type('address', $this->unit->address)
                     ->type('phone', $this->unit->phone)
-                    ->select('category_id', $this->unit->category_id)
+                    ->click('div.unit_category_id #unit_category_id-selectized')
+                    ->click("div.unit_category_id .selectize-dropdown .option[data-value='{$category->id}']")
                     ->press('Criar Unidade');
 
             $browser->assertUrlIs(route('admin.units'));

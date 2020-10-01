@@ -45,7 +45,7 @@ class IndexTest extends DuskTestCase
 
     public function testSearchField(): void
     {
-        $category = factory(UnitCategory::class)->create();
+        $category = factory(UnitCategory::class)->create(['name' => 'Unit category name']);
 
         $this->browse(function ($browser) use ($category) {
             $browser->loginAs($this->user);
