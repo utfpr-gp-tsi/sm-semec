@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\UnitsCategory;
+namespace Tests\Browser\Admin\UnitCategories;
 
 use App\UnitCategory;
 use App\User;
@@ -24,7 +24,7 @@ class UpdateTest extends DuskTestCase
     public function testFilledFields(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.category', $this->category->id));
+            $browser->loginAs($this->user)->visit(route('admin.edit.unit_category', $this->category->id));
 
             $browser->assertInputValue('name', $this->category->name);
         });
@@ -33,7 +33,7 @@ class UpdateTest extends DuskTestCase
     public function testSucessfullyUpdate(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.category', $this->category->id));
+            $browser->loginAs($this->user)->visit(route('admin.edit.unit_category', $this->category->id));
 
             $newData = factory(UnitCategory::class)->make([
                 'name' => 'Cmei',
@@ -42,7 +42,7 @@ class UpdateTest extends DuskTestCase
             $browser->type('name', $newData->name)
                     ->press('Atualizar Categoria');
 
-            $browser->assertUrlIs(route('admin.categories'));
+            $browser->assertUrlIs(route('admin.unit_categories'));
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Categoria atualizada com sucesso');
             });
@@ -56,34 +56,62 @@ class UpdateTest extends DuskTestCase
     public function testFailuteUpdate(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.category', $this->category->id));
+            $browser->loginAs($this->user)->visit(route('admin.edit.unit_category', $this->category->id));
 
             $browser->type('name', '')
                     ->press('Atualizar Categoria');
 
-            $browser->assertUrlIs(route('admin.show.category', $this->category->id));
+            $browser->assertUrlIs(route('admin.update.unit_category', $this->category->id));
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Existem dados incorretos! Por favor verifique!');
             });
 
-            $browser->with('div.UnitCategory_name', function ($flash) {
+            $browser->with('div.unit_category_name', function ($flash) {
                 $flash->assertSee('O campo nome é obrigatório.');
             });
         });
     }
+
+    public function testUniquenessOnUpdate(): void
+    {
+        $this->browse(function ($browser) {
+            $category = factory(UnitCategory::class)->create();
+            $browser->loginAs($this->user)->visit(route('admin.edit.unit_category', $this->category->id));
+
+
+            $browser->type('name', $category->name)
+                    ->press('Atualizar Categoria');
+
+            $browser->with('div.unit_category_name', function ($flash) {
+                $flash->assertSee('O campo nome já está sendo utilizado.');
+            });
+
+            $browser->type('name', $this->category->name)
+                    ->press('Atualizar Categoria');
+
+            $browser->assertUrlIs(route('admin.unit_categories'));
+            $browser->with('div.alert', function ($flash) {
+                $flash->assertSee('Categoria atualizada com sucesso');
+            });
+            $browser->with('table.table', function ($table) {
+                $table->assertSee($this->category->name);
+            });
+        });
+    }
+
 
     public function testAssertLinksPresent(): void
     {
         $this->category = factory(UnitCategory::class)->create();
 
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.category', $this->category->id));
+            $browser->loginAs($this->user)->visit(route('admin.edit.unit_category', $this->category->id));
 
-            $backLinkSelector = "#main-card a[href='" . route('admin.categories') . "']";
+            $backLinkSelector = "#main-card a[href='" . route('admin.unit_categories') . "']";
             $browser->assertSeeIn($backLinkSelector, 'Voltar');
 
             $rootBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.dashboard') . "']";
-            $secondBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.categories') . "']";
+            $secondBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.unit_categories') . "']";
             $thirdBreadcrumbSelector = ".breadcrumb li:nth-child(3)";
             $browser->assertSeeIn($rootBreadcrumbSelector, 'Página Inicial');
             $browser->assertSeeIn($secondBreadcrumbSelector, 'Categorias');

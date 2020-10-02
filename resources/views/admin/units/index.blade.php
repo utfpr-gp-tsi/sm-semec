@@ -8,7 +8,7 @@
                                        'new_btn_name' => 'Nova Unidade']) @endcomponent
 
 <div class="table-responsive mt-3">
-@component('components.index.page_entries_info', ['entries' => $units]) @endcomponent
+  @component('components.index.page_entries_info', ['entries' => $units]) @endcomponent
 
   <table class="table card-table table-striped table-vcenter table-data">
     <thead>

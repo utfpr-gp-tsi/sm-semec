@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\UnitsCategory;
+namespace Tests\Browser\Admin\UnitCategories;
 
 use App\UnitCategory;
 use App\User;
@@ -24,7 +24,7 @@ class IndexTest extends DuskTestCase
         $categories = $categories->sortBy('name')->reverse();
 
         $this->browse(function ($browser) use ($categories) {
-            $browser->loginAs($this->user)->visit('/admin/categories');
+            $browser->loginAs($this->user)->visit('/admin/unit-categories');
 
             $browser->with("table.table tbody", function ($row) use ($categories) {
                 $pos = 0;
@@ -33,9 +33,9 @@ class IndexTest extends DuskTestCase
                     $baseSelector = "tr:nth-child({$pos}) ";
 
                     $editSelector = $baseSelector . "a[href='" .
-                     route('admin.edit.category', $category->id) . "']";
+                     route('admin.edit.unit_category', $category->id) . "']";
                     $deleteSelector = $baseSelector . "form[action='" .
-                    route('admin.destroy.category', $category->id) . "']";
+                    route('admin.destroy.unit_category', $category->id) . "']";
                     $row->assertPresent($editSelector);
                     $row->assertPresent($deleteSelector);
                 }
@@ -50,14 +50,14 @@ class IndexTest extends DuskTestCase
         $this->browse(function ($browser) use ($category) {
             $browser->loginAs($this->user);
 
-            $browser->visit('/admin/categories')
+            $browser->visit('/admin/unit-categories')
                     ->type('#search_input', $category->name)
                     ->press('#search')
-                    ->assertUrlIs(route('admin.search.categories', $category->name));
+                    ->assertUrlIs(route('admin.search.unit_categories', $category->name));
 
             $term = time();
             $browser->type('#search_input', $term);
-            $browser->keys('#search_input', '{enter}')->assertUrlIs(route('admin.search.categories', $term));
+            $browser->keys('#search_input', '{enter}')->assertUrlIs(route('admin.search.unit_categories', $term));
 
             $browser->assertDontSee($category->name);
         });
@@ -68,9 +68,9 @@ class IndexTest extends DuskTestCase
         factory(UnitCategory::class, 22)->create();
 
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit('/admin/categories');
+            $browser->loginAs($this->user)->visit('/admin/unit-categories');
 
-            $newLinkSelector = "#main-card a[href='" . route('admin.new.category') . "']";
+            $newLinkSelector = "#main-card a[href='" . route('admin.new.unit_category') . "']";
             $rootBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.dashboard') . "']";
             $secondBreadcrumSelector = ".breadcrumb li:nth-child(2)";
 

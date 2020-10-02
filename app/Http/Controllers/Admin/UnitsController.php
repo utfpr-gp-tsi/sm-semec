@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
+use App\Unit;
 use App\UnitCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
 
-class UnitCategoryController extends AppController
+class UnitsController extends AppController
 {
      /**
      * Display a listing of the resource.
@@ -17,21 +18,21 @@ class UnitCategoryController extends AppController
     public function index()
     {
         $search = Request()->term;
-        $categories = UnitCategory::search($search);
-        return view('admin.categories.index')->with('categories', $categories);
+        $units = Unit::search($search);
+        return view('admin.units.index')->with('units', $units);
     }
 
-      /**
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
      */
     public function new()
     {
-        $category = new UnitCategory();
-        return view('admin.categories.new', compact('category'));
+        $unit = new Unit();
+        $categories = UnitCategory::all();
+        return view('admin.units.new', compact('unit', 'categories'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -41,85 +42,92 @@ class UnitCategoryController extends AppController
     public function create(Request $request)
     {
         $data = $request->all();
+        $categories = UnitCategory::all();
 
         $validator = Validator::make($data, [
-            'name' => 'required|unique:units_category,name',
+            'name' => 'required|unique:units,name',
+            'address' => 'required|unique:units,address',
+            'phone' => 'required|min:10|unique:units,phone',
+            'category_id' => 'required',
         ]);
 
-        $category = new UnitCategory($data);
+        $unit = new Unit($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('admin.categories.new', compact('category'))->withErrors($validator);
+            return view('admin.units.new', compact('unit', 'categories'))->withErrors($validator);
         }
 
-        $category->save();
-        return redirect()->route('admin.categories')->with('success', 'Categoria cadastrada com sucesso');
+        $unit->save();
+        return redirect()->route('admin.units')->with('success', 'Unidade cadastrada com sucesso');
     }
 
-     /**
+    /**
      * Display the specified resource.
      *
-     * @param  \App\UnitCategory  $id
+     * @param  \App\Unit  $id
      * @return \Illuminate\View\View
      */
     public function show($id)
     {
-        $category =  UnitCategory::find($id);
-        return view('admin.categories.edit', compact('category'));
+        $unit =  Unit::find($id);
+        return view('admin.units.show', compact('unit'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UnitCategory  $name
+     * @param  \App\Unit  $id
      * @return  \Illuminate\View\View
      */
-    public function edit($name)
+    public function edit($id)
     {
-        $category = UnitCategory::find($name);
-        return view('admin.categories.edit', compact('category'));
+        $unit = Unit::find($id);
+        $categories = UnitCategory::all();
+        return view('admin.units.edit', compact('unit', 'categories'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UnitCategory  $id
+     * @param  \App\Unit  $id
      * @return \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
-
     public function update(Request $request, $id)
     {
-        $category = UnitCategory::find($id);
+        $unit = Unit::find($id);
+        $categories = UnitCategory::all();
         $data = array_filter($request->all());
 
         $validator = Validator::make($data, [
-            'name'       => 'required',
+            'name' => "required|unique:units,name,$id",
+            'address' => "required|unique:units,address,$id",
+            'phone' => "required|min:10|unique:units,phone,$id",
+            'category_id' => 'required',
         ]);
 
-        $category->fill($data);
+
+        $unit->fill($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('admin.categories.edit', compact('category'))->withErrors($validator);
+            return view('admin.units.edit', compact('unit', 'categories'))->withErrors($validator);
         }
 
-        $category->save();
-        return redirect()->route('admin.categories')->with('success', 'Categoria atualizada com sucesso');
+        $unit->save();
+        return redirect()->route('admin.units')->with('success', 'Unidade atualizada com sucesso');
     }
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UnitCategory  $id
+     * @param  \App\Unit  $id
      * @return \Illuminate\Http\RedirectResponse
      *
      */
     public function destroy($id)
     {
-        $category = UnitCategory::find($id);
-        $category->delete();
-        return redirect()->route('admin.categories')->with('success', 'Categoria removida com sucesso.');
+        $unit = Unit::find($id);
+        $unit->delete();
+        return redirect()->route('admin.units')->with('success', 'Unidade removida com sucesso.');
     }
 }

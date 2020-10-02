@@ -7,8 +7,8 @@ use App\Unit;
 
 class UnitCategory extends Model
 {
-    
-    protected $table = 'units_category';
+
+    protected $table = 'unit_categories';
     /**
      * @var array
      */

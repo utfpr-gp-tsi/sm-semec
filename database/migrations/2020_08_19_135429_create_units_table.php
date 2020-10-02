@@ -21,7 +21,7 @@ class CreateUnitsTable extends Migration
             $table->unsignedBigInteger('category_id')->index();
             $table->foreign('category_id')
                     ->references('id')
-                    ->on('units_category')
+                    ->on('unit_categories')
                     ->onDelete('cascade');
             $table->timestamps();
         });

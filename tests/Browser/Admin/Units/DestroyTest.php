@@ -21,8 +21,6 @@ class DestroyTest extends DuskTestCase
         $this->user = factory(User::class)->create();
     }
 
-    
-
     public function testDestroy(): void
     {
         $this->browse(function ($browser) {

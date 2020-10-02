@@ -3,8 +3,8 @@
 @section('title', 'Categorias de Unidades')
 @section('content')
 
-@component('components.index.header', ['base_search_path' => route('admin.categories'),
-                                       'new_url' => route('admin.new.category'),
+@component('components.index.header', ['base_search_path' => route('admin.unit_categories'),
+                                       'new_url' => route('admin.new.unit_category'),
                                        'new_btn_name' => 'Nova Categoria']) @endcomponent
 
 <div class="table-responsive mt-3">
@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      @each('admin.categories._category_row', $categories, 'category')
+      @each('admin.unit_categories._category_row', $categories, 'category')
     </tbody>
   </table>
   <div class="mt-5 float-right flex-wrap">
