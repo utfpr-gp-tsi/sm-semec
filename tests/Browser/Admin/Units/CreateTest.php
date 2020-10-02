@@ -22,6 +22,7 @@ class CreateTest extends DuskTestCase
             
         ]);
         $this->user = factory(User::class)->create();
+    
     }
 
 
@@ -33,7 +34,7 @@ class CreateTest extends DuskTestCase
             $browser->type('name', $this->unit->name)
                     ->type('address', $this->unit->address)
                     ->type('phone', $this->unit->phone)
-                    ->select('category_id', $this->unit->category_id)
+                    ->type('category_id', $this->unit->category_id)
                     ->press('Criar Unidade');
 
             $browser->assertUrlIs(route('admin.units'));

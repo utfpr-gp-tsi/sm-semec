@@ -15,7 +15,7 @@
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
 
-    @component('components.form.input_text', ['field'    => 'phone',
+    @component('components.form.input_phone', ['field'    => 'phone',
                                               'label'    => 'Telefone',
                                               'model'    => 'unit',
                                               'value'    => $unit->phone,

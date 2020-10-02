@@ -47,7 +47,7 @@ class UnitController extends AppController
         $validator = Validator::make($data, [
             'name' => 'required|unique:units,name',
             'address' => 'required|unique:units,address',
-            'phone' => 'required|min:10|unique:units,phone',
+            'phone' => 'required|unique:units,phone',
             'category_id' => 'required',
         ]);
 
