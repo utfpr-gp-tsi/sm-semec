@@ -2,27 +2,27 @@
 
 namespace Tests\Browser\Admin\Pdfs;
 
-use App\Edict;
-use App\User;
-use App\Pdf;
+use App\Models\Edict;
+use App\Models\User;
+use App\Models\Pdf;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class DestroyTest extends DuskTestCase
 {
-    /** @var \App\Edict */
+    /** @var \App\Models\Edict */
     protected $edict;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
-    /** @var \App\Pdf */
+    /** @var \App\Models\Pdf */
     protected $pdf;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->edict = factory(Edict::class)->create();
-        $this->user = factory(User::class)->create();
-        $this->pdf = factory(Pdf::class)->create();
+        $this->edict = Edict::factory()->create();
+        $this->user = User::factory()->create();
+        $this->pdf = Pdf::factory()->create();
     }
 
     public function testDestroy(): void

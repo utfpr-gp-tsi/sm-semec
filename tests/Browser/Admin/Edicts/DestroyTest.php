@@ -2,23 +2,23 @@
 
 namespace Tests\Browser\Admin\Edicts;
 
-use App\Edict;
-use App\User;
+use App\Models\Edict;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class DestroyTest extends DuskTestCase
 {
-    /** @var \App\Edict */
+    /** @var \App\Models\Edict */
     protected $edict;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->edict = factory(Edict::class)->create();
-        $this->user = factory(User::class)->create();
+        $this->edict = Edict::factory()->create();
+        $this->user = User::factory()->create();
     }
 
     public function testDestroy(): void

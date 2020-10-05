@@ -4,13 +4,14 @@ namespace Tests\Unit\Traits;
 
 use Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Edict;
 
 class DateTimeFormatterTest extends TestCase
 {
 
     public function testFormat(): void
     {
-        $user = factory(\App\Edict::class)->make();
+        $user = Edict::factory()->make();
 
         $user->started_at = '13/08/2020 01:54';
         $user->ended_at = '07/08/2020 01:54';

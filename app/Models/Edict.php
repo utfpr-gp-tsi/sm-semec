@@ -1,13 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\DateTimeFormatter;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Edict extends Model
 {
     use DateTimeFormatter;
+    use HasFactory;
 
     /**
      * @var array

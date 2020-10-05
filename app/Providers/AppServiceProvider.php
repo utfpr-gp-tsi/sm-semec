@@ -3,14 +3,15 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\User;
+use App\Models\User;
 use App\Observers\UserObserver;
-use App\Servant;
+use App\Models\Servant;
 use App\Observers\ServantObserver;
-use App\Pdf;
+use App\Models\Pdf;
 use App\Observers\PdfObserver;
-use App\Edict;
+use App\Models\Edict;
 use App\Observers\EdictObserver;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
         Servant::observe(ServantObserver::class);
         Pdf::observe(PdfObserver::class);
         Edict::observe(EdictObserver::class);
+        Paginator::useBootstrap();
     }
 }

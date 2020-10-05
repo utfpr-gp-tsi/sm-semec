@@ -4,18 +4,18 @@ namespace Tests\Browser\Servants\Profile;
 
 use Laravel\Dusk\Chrome;
 use Tests\DuskTestCase;
-use App\Servant;
+use App\Models\Servant;
 use Illuminate\Http\UploadedFile;
 
 class ProfileUpdateTest extends DuskTestCase
 {
-    /** @var \App\Servant */
+    /** @var \App\Models\Servant */
     protected $servant;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->servant = factory(Servant::class, 'servant')->create();
+        $this->servant = Servant::factory('servant')->create();
     }
 
     public function testProfiledUpdateSuccess(): void

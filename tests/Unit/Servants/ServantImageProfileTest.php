@@ -6,18 +6,18 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
-use App\Servant;
+use App\Models\Servant;
 use File;
 
 class ServantImageProfileTest extends TestCase
 {
-    /** @var \App\Servant */
+    /** @var \App\Models\Servant */
     protected $servant;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->servant = factory(Servant::class)->create();
+        $this->servant = Servant::factory()->create();
     }
 
     public function down(): void
@@ -81,7 +81,7 @@ class ServantImageProfileTest extends TestCase
         $this->assertEquals($this->imageName(), $this->servant->image);
         $this->assertEquals($this->imagePath(), $this->servant->image_path);
         $this->assertFileExists($this->fullImagePath());
-        $this->assertFileNotExists($previousFullImagePath);
+        $this->assertFileDoesNotExist($previousFullImagePath);
     }
 
     public function testWhenDeleteUserShouldDeleteTheImage(): void
@@ -91,7 +91,7 @@ class ServantImageProfileTest extends TestCase
 
         $previousFullImagePath = $this->fullImagePath();
         $this->servant->delete();
-        $this->assertFileNotExists($previousFullImagePath);
+        $this->assertFileDoesNotExist($previousFullImagePath);
     }
 
     private function imageName(): string

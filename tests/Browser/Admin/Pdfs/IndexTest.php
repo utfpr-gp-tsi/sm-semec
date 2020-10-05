@@ -4,27 +4,27 @@ namespace Tests\Browser\Admin\Pdfs;
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Edict;
-use App\User;
-use App\Pdf;
+use App\Models\Edict;
+use App\Models\User;
+use App\Models\Pdf;
 
 class IndexTest extends DuskTestCase
 {
-    /** @var \App\Edict */
+    /** @var \App\Models\Edict */
     protected $edict;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->edict = factory(Edict::class)->create();
-        $this->user = factory(User::class)->create();
+        $this->edict = Edict::factory()->create();
+        $this->user = User::factory()->create();
     }
 
     public function testIndexList(): void
     {
-        $pdfs = factory(Pdf::class)->create();
+        $pdfs = Pdf::factory()->create();
 
         $this->browse(function ($browser) use ($pdfs) {
             $browser->loginAs($this->user)->visit('/admin/edicts/2/pdfs');
@@ -49,7 +49,7 @@ class IndexTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        factory(Pdf::class, 2)->create();
+        Pdf::factory()->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.index.pdf', $this->edict->id));

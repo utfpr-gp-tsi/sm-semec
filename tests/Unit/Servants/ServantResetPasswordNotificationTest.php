@@ -3,7 +3,7 @@
 namespace Tests\Unit\Servants;
 
 use Tests\TestCase;
-use App\Servant;
+use App\Models\Servant;
 use Illuminate\Support\Facades\Password;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Notification;
 
 class ServantResetPasswordNotificationTest extends TestCase
 {
-    /** @var \App\Servant */
+    /** @var \App\Models\Servant */
     protected $servant;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->servant = factory(Servant::class)->create();
+        $this->servant = Servant::factory()->create();
         Notification::fake();
         Notification::assertNothingSent();
 
