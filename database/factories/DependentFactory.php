@@ -1,28 +1,39 @@
 <?php
 
+namespace Database\Factories;
+
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Dependent;
+use App\Models\Dependent;
+use App\Models\Servant;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+class DependentFactory extends Factory
+{
 
-$factory->define(Dependent::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name(),
-        'birthed_at' => $faker->date(),
-        'degree' => $faker->text(),
-        'study' => $faker->text(),
-        'works' => $faker->text(),
-        'servant_id' => factory(App\Servant::class),
-    ];
-});
+    /**
+    * The name of the factory's corresponding model.
+    *
+    * @var string
+    */
+    protected $model = Dependent::class;
+
+    /**
+    * Define the model's default state.
+    *
+    * @return array
+    */
+
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name(),
+            'birthed_at' => $this->faker->date(),
+            'degree' => $this->faker->text(),
+            'study' => $this->faker->text(),
+            'works' => $this->faker->text(),
+            'servant_id' => Servant::factory(),
+        ];
+    }
+}

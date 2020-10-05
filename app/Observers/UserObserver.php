@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Str;
 use File;
 
@@ -11,7 +11,7 @@ class UserObserver
     /**
      * Handle the user "created" event.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return void
      */
     public function created(User $user)
@@ -22,7 +22,7 @@ class UserObserver
     /**
      * Handle the user "updating" event.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return void
      */
     public function updating(User $user)
@@ -36,7 +36,7 @@ class UserObserver
     /**
      * Handle the user "deleted" event.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return void
      */
     public function deleted(User $user)
@@ -47,7 +47,7 @@ class UserObserver
     /**
      * Delete a image from file.
      *
-     * @param  \App\User $user
+     * @param  \App\Models\User $user
      * @return void
      */
     private function deleteImageFile($user)
@@ -65,7 +65,7 @@ class UserObserver
     /**
      * Save file in disk.
      *
-     * @param  \App\User $user
+     * @param  \App\Models\User $user
      * @return void
      */
     private function saveImageFile($user)

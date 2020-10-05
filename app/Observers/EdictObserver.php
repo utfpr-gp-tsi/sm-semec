@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
-use App\Edict;
-use App\Pdf;
+use App\Models\Edict;
+use App\Models\Pdf;
 use File;
 
 class EdictObserver
@@ -11,7 +11,7 @@ class EdictObserver
     /**
     * Handle the edict "deleted" event.
     *
-    * @param  \App\Edict  $edict
+    * @param  \App\Models\Edict  $edict
     * @return void
     */
     public function deleted(Edict $edict)
@@ -22,7 +22,7 @@ class EdictObserver
     /**
     * Delete a pdf from file.
     *
-    * @param  \App\Edict  $edict
+    * @param  \App\Models\Edict  $edict
     * @return void
     */
     private function deletePdfFile($edict)

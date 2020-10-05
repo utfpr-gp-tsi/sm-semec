@@ -3,20 +3,20 @@
 namespace Tests\Unit\Pdfs;
 
 use Tests\TestCase;
-use App\Pdf;
-use App\Edict;
+use App\Models\Pdf;
+use App\Models\Edict;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
 class UploadPdf extends TestCase
 {
-    /** @var \App\Pdf */
+    /** @var \App\Models\Pdf */
     protected $pdf;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->pdf = factory(Pdf::class)->make([
+        $this->pdf = Pdf::factory()->make([
         'pdf' => UploadedFile::fake()->create('document.pdf', 'application/pdf')]);
     }
 
@@ -41,7 +41,7 @@ class UploadPdf extends TestCase
 
         $previousFullImagePath = $this->fullPdfPath();
         $this->pdf->edict->delete();
-        $this->assertFileNotExists($previousFullImagePath);
+        $this->assertFileDoesNotExist($previousFullImagePath);
     }
 
     private function pdfName(): string

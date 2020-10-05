@@ -4,10 +4,11 @@ namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
 use DB;
-use App\Servant;
-use App\Contract;
-use App\Act;
-use App\License;
+use App\Models\Servant;
+use App\Models\Contract;
+use App\Models\Act;
+use App\Models\License;
+use App\Models\Dependent;
 
 class Servants extends Command
 {
@@ -65,16 +66,16 @@ class Servants extends Command
 
         $this->info('Populate servants');
         DB::table('servants')->delete();
-        $servants = factory('App\Servant', 30)->create();
+        $servants = Servant::factory()->count(30)->create();
 
         $servants->each(function ($servant) {
-            $contracts = factory('App\Contract', 2)->create(['servant_id' => $servant->id]);
+            $contracts = Contract::factory()->count(2)->create(['servant_id' => $servant->id]);
             $contracts->each(function ($contract) {
-                factory('App\Act', 2)->create(['contract_id' => $contract->id]);
-                factory('App\License', 2)->create(['contract_id' => $contract->id]);
+                Act::factory()->count(2)->create(['contract_id' => $contract->id]);
+                License::factory()->count(2)->create(['contract_id' => $contract->id]);
             });
 
-            factory('App\Dependent', 2)->create(['servant_id' => $servant->id]);
+            Dependent::factory()->count(2)->create(['servant_id' => $servant->id]);
         });
     }
 

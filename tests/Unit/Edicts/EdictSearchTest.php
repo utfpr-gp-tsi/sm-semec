@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Edicts;
 
-use App\Edict;
+use App\Models\Edict;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -16,16 +16,16 @@ class EdictSearchTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2019/1 - Permuta']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2019/2 - Remoção']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2019/3 - Informativo']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2019/4 - Permuta']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2019/5 - Remoção']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2020/1 - Permuta']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2020/2 - Remoção']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2020/3- Permuta']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2020/4 - Permuta']);
-        $this->edicts[] = factory(Edict::class)->create(['title' => 'Edital 2020/5 - Permuta']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2019/1 - Permuta']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2019/2 - Remoção']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2019/3 - Informativo']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2019/4 - Permuta']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2019/5 - Remoção']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2020/1 - Permuta']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2020/2 - Remoção']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2020/3- Permuta']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2020/4 - Permuta']);
+        $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2020/5 - Permuta']);
     }
 
     public function testSearchBySpecifiedName(): void

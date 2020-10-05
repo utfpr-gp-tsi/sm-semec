@@ -4,7 +4,7 @@ namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
 use DB;
-use App\Edict;
+use App\Models\Edict;
 
 class Edicts extends Command
 {
@@ -46,6 +46,6 @@ class Edicts extends Command
 
         $this->info('Populate edicts');
         DB::table('edicts')->delete();
-        factory('App\Edict', 30)->create();
+        Edict::factory()->count(30)->create();
     }
 }

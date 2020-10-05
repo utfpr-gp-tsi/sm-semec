@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Servant;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Servant\AppController;
 use Illuminate\Http\Request;
-use App\Servant;
+use App\Models\Servant;
 use App\Rules\ConfirmCurrentPassword;
 use Illuminate\Support\Facades\Validator;
 

@@ -3,7 +3,7 @@
 namespace Tests\Unit\Users;
 
 use Tests\TestCase;
-use App\User;
+use App\Models\User;
 
 class UserSearchTest extends TestCase
 {
@@ -13,11 +13,11 @@ class UserSearchTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->users[] = factory(User::class)->create(['name' => 'Diego Marczal']);
-        $this->users[] = factory(User::class)->create(['name' => 'Andres Jesse']);
-        $this->users[] = factory(User::class)->create(['name' => 'Eduarda Lara']);
-        $this->users[] = factory(User::class)->create(['name' => 'Amanda Carolyne de Lima']);
-        $this->users[] = factory(User::class)->create(['name' => 'Thais Michele Hryssai da Luz']);
+        $this->users[] = User::factory()->create(['name' => 'Diego Marczal']);
+        $this->users[] = User::factory()->create(['name' => 'Andres Jesse']);
+        $this->users[] = User::factory()->create(['name' => 'Eduarda Lara']);
+        $this->users[] = User::factory()->create(['name' => 'Amanda Carolyne de Lima']);
+        $this->users[] = User::factory()->create(['name' => 'Thais Michele Hryssai da Luz']);
     }
 
     public function testSearchByNamePassingOneLetterThatShouldReturnAllUsers(): void

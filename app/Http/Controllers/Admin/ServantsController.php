@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
-use App\Servant;
+use App\Models\Servant;
 
 class ServantsController extends AppController
 {

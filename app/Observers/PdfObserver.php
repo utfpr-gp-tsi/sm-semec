@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Pdf;
+use App\Models\Pdf;
 use Illuminate\Support\Str;
 use File;
 
@@ -11,7 +11,7 @@ class PdfObserver
     /**
      * Handle the pdf "creating" event.
      *
-     * @param  \App\Pdf $pdf
+     * @param  \App\Models\Pdf $pdf
      * @return void
      */
     public function creating(Pdf $pdf)
@@ -22,7 +22,7 @@ class PdfObserver
     /**
     * Handle the pdf "deleted" event.
     *
-    * @param  \App\Pdf $pdf
+    * @param  \App\Models\Pdf $pdf
     * @return void
     */
     public function deleted(Pdf $pdf)
@@ -33,7 +33,7 @@ class PdfObserver
     /**
     * Delete a pdf from file.
     *
-    * @param  \App\Pdf $pdf
+    * @param  \App\Models\Pdf $pdf
     * @return void
     */
     private function deletePdfFile($pdf)
@@ -47,7 +47,7 @@ class PdfObserver
     /**
      * Save file in disk
      *
-     * @param  \App\Pdf $pdf
+     * @param  \App\Models\Pdf $pdf
      * @return void
      */
     private function savePdfFile($pdf)

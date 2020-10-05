@@ -6,18 +6,18 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
-use App\User;
+use App\Models\User;
 use File;
 
 class UserImageProfileTest extends TestCase
 {
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $this->user = User::factory()->create();
     }
 
     public function tearDown(): void
@@ -81,7 +81,7 @@ class UserImageProfileTest extends TestCase
         $this->assertEquals($this->imageName(), $this->user->image);
         $this->assertEquals($this->imagePath(), $this->user->image_path);
         $this->assertFileExists($this->fullImagePath());
-        $this->assertFileNotExists($previousFullImagePath);
+        $this->assertFileDoesNotExist($previousFullImagePath);
     }
 
     public function testWhenDeleteUserShouldDeleteTheImage(): void
@@ -91,7 +91,7 @@ class UserImageProfileTest extends TestCase
 
         $previousFullImagePath = $this->fullImagePath();
         $this->user->delete();
-        $this->assertFileNotExists($previousFullImagePath);
+        $this->assertFileDoesNotExist($previousFullImagePath);
     }
 
     private function imageName(): string
