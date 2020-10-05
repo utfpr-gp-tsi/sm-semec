@@ -46,6 +46,20 @@ class Edicts extends Command
 
         $this->info('Populate edicts');
         DB::table('edicts')->delete();
-        factory('App\Edict', 30)->create();
+
+        $current_year = now()->year;
+
+        for ($i = 0; $i < 5; $i++) {
+            $year = $current_year - $i;
+            $started_at = "01/10/{$year} 00:00";
+            $ended_at = "01/11/{$year} 23:59";
+
+            factory('App\Edict', rand(5, 10))
+                ->create(['started_at' => $started_at, 'ended_at' => $ended_at])
+                ->each(function ($edict) {
+                    $edict->pdfs()->save(factory('App\Pdf')->make());
+                    $edict->pdfs()->save(factory('App\Pdf')->make());
+                });
+        }
     }
 }

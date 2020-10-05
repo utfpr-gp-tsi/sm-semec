@@ -155,14 +155,6 @@ Breadcrumbs::for('admin.create.pdf', function ($trail, $id) {
     $trail->push('Novo PDF', route('admin.create.pdf', $id));
 });
 
-/* List Edict
-|-------------------------------------------------------------------------- */
-Breadcrumbs::for('admin.list.edicts', function ($trail) {
-    $trail->parent('admin.dashboard');
-    $trail->push('Lista de Editais', route('admin.list.edicts'));
-});
-
-
 /* Dashboard Servant
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('servant.dashboard', function ($trail) {

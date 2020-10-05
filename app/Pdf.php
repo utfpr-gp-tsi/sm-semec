@@ -25,6 +25,12 @@ class Pdf extends Model
         return $this->belongsTo(Edict::class, 'edict_id');
     }
 
+
+    public function pathToFile()
+    {
+       return public_path('uploads/edicts/' . $this->edict_id . '/' . $this->getOriginal('pdf'));
+    }
+
     /**
      * @param string $term
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator

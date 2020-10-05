@@ -3,8 +3,4 @@
 
 // Variables
 @import 'variables';
-
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import './home/app' ;
+@import './customizations/bootstrap' ;
