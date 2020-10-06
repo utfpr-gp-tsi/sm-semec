@@ -44,6 +44,7 @@ class Units extends Command
     {
         if ($this->option('clear')) {
             DB::table('units')->delete();
+            DB::table('unit_categories')->delete();
         }
 
         if ($this->option('json')) {
@@ -62,19 +63,19 @@ class Units extends Command
         }
 
         $this->info('Populate Units');
-        DB::table('units_category')->delete();
+        DB::table('units')->delete();
+        DB::table('unit_categories')->delete();
+
         $categories = factory('App\UnitCategory', 4)->create();
 
         $categories->each(function ($category) {
-            DB::table('units')->delete();
              factory('App\Unit', 22)->create(['category_id' => $category->id]);
         });
     }
 
     private function populateFromJSON(): void
     {
-        DB::table('units_category')->delete();
-        DB::table('units')->delete();
+        $this->info('Populate Units from ./database/data/units.json');
         $jsonPath = base_path('./database/data/units.json');
         $jsonString = file_get_contents($jsonPath);
 
@@ -86,11 +87,10 @@ class Units extends Command
 
         $jsonDecoded = json_decode($jsonString);
         $unitsCategory = $jsonDecoded->units_categories;
-        
+
         foreach ($unitsCategory as $data) {
             $category = $this->createOrUpdateUnitCategory($data);
-            
-    
+
             foreach ($data->units as $unit) {
                   $this->createOrUpdateUnit($category, $unit);
             }
@@ -111,7 +111,7 @@ class Units extends Command
         );
     }
 
-       /**
+    /**
      * Create or update Unit
      *
      * @param  object $unit

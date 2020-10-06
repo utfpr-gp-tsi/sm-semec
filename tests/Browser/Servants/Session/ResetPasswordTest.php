@@ -38,7 +38,7 @@ class ResetPasswordTest extends DuskTestCase
             });
         });
     }
-    
+
     /**
      * A Dusk test test change password
      *
@@ -60,6 +60,7 @@ class ResetPasswordTest extends DuskTestCase
             ->type('password', 'password1')
             ->type('password_confirmation', 'password1')
             ->press('Modificar Senha')
+            ->waitForLocation('/servant')
             ->click('div.header a.nav-link')
             ->clickLink('Sair');
 
@@ -72,7 +73,7 @@ class ResetPasswordTest extends DuskTestCase
             $browser->with('span.invalid-feedback', function ($flash) {
                 $flash->assertSee('Este token de redefinição de senha é inválido.');
             });
-            
+
             /*Check if the user's password has been changed*/
             $browser->visit('/servant/login')
             ->type('CPF', $this->servant->CPF)

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit\UnitsCategory;
+namespace Tests\Unit\UnitCategories;
 
 use App\UnitCategory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
-class UnitCategorySearchTest extends TestCase
+class UnitCategoriesSearchTest extends TestCase
 {
     use DatabaseTransactions;
 

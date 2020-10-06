@@ -88,6 +88,57 @@ class UpdateTest extends DuskTestCase
         });
     }
 
+    public function testFailureValidateCaracteresPhone(): void
+    {
+        $this->browse(function ($browser) {
+            $browser->loginAs($this->user)->visit(route('admin.edit.unit', $this->unit->id));
+
+            $newData = factory(Unit::class)->make([
+                'name' => 'Escola Municipal Stange',
+                
+            ]);
+            
+            $browser->type('name', $newData->name)
+                    ->type('address', $newData->address)
+                    ->type('phone', '12')
+                    ->select('category_id', $newData->category_id)
+                    ->press('Atualizar Unidade');
+
+    
+
+            $browser->with('div.alert', function ($flash) {
+                $flash->assertSee('Existem dados incorretos! Por favor verifique!');
+            });
+
+
+            $browser->with('div.unit_phone', function ($flash) {
+                $flash->assertSee('O campo telefone deve ter pelo menos 10 caracteres.');
+            });
+        });
+    }
+
+    public function testUniquenessOnCreate(): void
+    {
+         $this->browse(function ($browser) {
+            $newData = factory(Unit::class)->create();
+            $browser->loginAs($this->user)->visit(route('admin.edit.unit', $this->unit->id));
+
+            $browser->type('name', $newData->name)
+                    ->type('address', $newData->address)
+                    ->type('phone', $newData->phone)
+                    ->select('category_id', $newData->category_id)
+                    ->press('Atualizar Unidade');
+
+            $browser->with('div.unit_name', function ($flash) {
+                $flash->assertSee('O campo nome já está sendo utilizado.');
+            });
+
+            $browser->with('div.unit_phone', function ($flash) {
+                $flash->assertSee('O campo telefone já está sendo utilizado.');
+            });
+         });
+    }
+
     public function testAssertLinksPresent(): void
     {
         $this->unit = factory(Unit::class)->create();

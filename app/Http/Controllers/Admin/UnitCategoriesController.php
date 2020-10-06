@@ -7,7 +7,7 @@ use App\UnitCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
 
-class UnitCategoryController extends AppController
+class UnitCategoriesController extends AppController
 {
      /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class UnitCategoryController extends AppController
     {
         $search = Request()->term;
         $categories = UnitCategory::search($search);
-        return view('admin.categories.index')->with('categories', $categories);
+        return view('admin.unit_categories.index')->with('categories', $categories);
     }
 
       /**
@@ -29,9 +29,8 @@ class UnitCategoryController extends AppController
     public function new()
     {
         $category = new UnitCategory();
-        return view('admin.categories.new', compact('category'));
+        return view('admin.unit_categories.new', compact('category'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -43,31 +42,18 @@ class UnitCategoryController extends AppController
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name' => 'required|unique:units_category,name',
+            'name' => 'required|unique:unit_categories,name'
         ]);
 
         $category = new UnitCategory($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('admin.categories.new', compact('category'))->withErrors($validator);
+            return view('admin.unit_categories.new', compact('category'))->withErrors($validator);
         }
 
         $category->save();
-        return redirect()->route('admin.categories')->with('success', 'Categoria cadastrada com sucesso');
+        return redirect()->route('admin.unit_categories')->with('success', 'Categoria cadastrada com sucesso');
     }
-
-     /**
-     * Display the specified resource.
-     *
-     * @param  \App\UnitCategory  $id
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $category =  UnitCategory::find($id);
-        return view('admin.categories.edit', compact('category'));
-    }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -78,7 +64,7 @@ class UnitCategoryController extends AppController
     public function edit($name)
     {
         $category = UnitCategory::find($name);
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.unit_categories.edit', compact('category'));
     }
 
      /**
@@ -95,17 +81,17 @@ class UnitCategoryController extends AppController
         $data = array_filter($request->all());
 
         $validator = Validator::make($data, [
-            'name'       => 'required',
+            'name' => "required|unique:unit_categories,name,{$category->id}"
         ]);
 
         $category->fill($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('admin.categories.edit', compact('category'))->withErrors($validator);
+            return view('admin.unit_categories.edit', compact('category'))->withErrors($validator);
         }
 
         $category->save();
-        return redirect()->route('admin.categories')->with('success', 'Categoria atualizada com sucesso');
+        return redirect()->route('admin.unit_categories')->with('success', 'Categoria atualizada com sucesso');
     }
 
 
@@ -120,6 +106,6 @@ class UnitCategoryController extends AppController
     {
         $category = UnitCategory::find($id);
         $category->delete();
-        return redirect()->route('admin.categories')->with('success', 'Categoria removida com sucesso.');
+        return redirect()->route('admin.unit_categories')->with('success', 'Categoria removida com sucesso.');
     }
 }

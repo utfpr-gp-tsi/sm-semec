@@ -27,16 +27,18 @@ class PasswordUpdateTest extends DuskTestCase
                     ->type('password', '12345678')
                     ->type('password_confirmation', '12345678')
                     ->press('Alterar senha');
-                    
+
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Senha alterada com sucesso');
             });
 
             $browser->click('div.header a.nav-link')
                     ->clickLink('Sair')
+                    ->waitForLocation('/servant/login')
                     ->type('CPF', $this->servant->CPF)
                     ->type('password', '12345678')
                     ->press('Entrar')
+                    ->waitForLocation('/servant')
                     ->assertSee('Login efetuado com sucesso.');
         });
     }

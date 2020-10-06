@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUnitsCategoryTable extends Migration
+class CreateUnitCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateUnitsCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('units_category', function (Blueprint $table) {
+        Schema::create('unit_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateUnitsCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('units_category');
+        Schema::dropIfExists('unit_categories');
     }
 }

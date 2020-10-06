@@ -1,4 +1,4 @@
-<form action="{{ $route }}" method="POST" enctype="multipart/form-data" novalidate>
+<form action="{{ $route }}" method="POST" novalidate>
     @csrf
     @method($method)
     @component('components.form.input_text', ['field'    => 'name',
@@ -7,7 +7,7 @@
                                               'value'    => $unit->name,
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
-    
+
     @component('components.form.input_text', ['field'    => 'address',
                                               'label'    => 'Endereço',
                                               'model'    => 'unit',

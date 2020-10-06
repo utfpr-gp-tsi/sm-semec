@@ -3,6 +3,7 @@
 namespace Tests\Browser\Admin\Units;
 
 use App\Unit;
+use App\UnitCategory;
 use App\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -13,28 +14,31 @@ class CreateTest extends DuskTestCase
     protected $unit;
     /** @var \App\User */
     protected $user;
+    /** @var \App\UnitCategory */
+    protected $categories;
 
     public function setUp(): void
     {
         parent::setUp();
+        $this->categories = factory(UnitCategory::class, 4)->create();
         $this->unit = factory(Unit::class)->make([
             'name' => 'Escola Municipal Santa Cruz',
-            
         ]);
         $this->user = factory(User::class)->create();
-    
     }
-
 
     public function testSucessfullyCreate(): void
     {
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.new.unit'));
 
+            $category = $this->categories->first();
+
             $browser->type('name', $this->unit->name)
                     ->type('address', $this->unit->address)
                     ->type('phone', $this->unit->phone)
-                    ->type('category_id', $this->unit->category_id)
+                    ->click('div.unit_category_id #unit_category_id-selectized')
+                    ->click("div.unit_category_id .selectize-dropdown .option[data-value='{$category->id}']")
                     ->press('Criar Unidade');
 
             $browser->assertUrlIs(route('admin.units'));
@@ -47,7 +51,7 @@ class CreateTest extends DuskTestCase
         });
     }
 
-    public function testFailureUpdate(): void
+    public function testFailureCreate(): void
     {
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.new.unit'));
@@ -66,6 +70,65 @@ class CreateTest extends DuskTestCase
             });
             $browser->with('div.unit_phone', function ($flash) {
                 $flash->assertSee('O campo telefone é obrigatório.');
+            });
+        });
+    }
+
+    public function testFailureValidateCaracteresPhone(): void
+    {
+        $this->browse(function ($browser) {
+            $browser->loginAs($this->user)->visit(route('admin.new.unit'));
+            $category = $this->categories->first();
+            
+
+            $browser->type('name', $this->unit->name)
+                    ->type('address', $this->unit->address)
+                    ->type('phone', '12')
+                    ->click('div.unit_category_id #unit_category_id-selectized')
+                    ->click("div.unit_category_id .selectize-dropdown .option[data-value='{$category->id}']")
+                    ->press('Criar Unidade');
+
+    
+
+            $browser->with('div.alert', function ($flash) {
+                $flash->assertSee('Existem dados incorretos! Por favor verifique!');
+            });
+
+
+            $browser->with('div.unit_phone', function ($flash) {
+                $flash->assertSee('O campo telefone deve ter pelo menos 10 caracteres.');
+            });
+        });
+    }
+
+    public function testUniquenessOnCreate(): void
+    {
+        $this->browse(function ($browser) {
+            $browser->loginAs($this->user)->visit(route('admin.new.unit'));
+            $newData = factory(Unit::class)->create();
+            $category = $this->categories->first();
+            
+
+            $browser->type('name', $newData->name)
+                    ->type('address', $this->unit->address)
+                    ->type('phone', $newData->phone)
+                    ->click('div.unit_category_id #unit_category_id-selectized')
+                    ->click("div.unit_category_id .selectize-dropdown .option[data-value='{$category->id}']")
+                    ->press('Criar Unidade');
+
+    
+
+            $browser->with('div.alert', function ($flash) {
+                $flash->assertSee('Existem dados incorretos! Por favor verifique!');
+            });
+
+
+            $browser->with('div.unit_name', function ($flash) {
+                $flash->assertSee('O campo nome já está sendo utilizado.');
+            });
+
+            $browser->with('div.unit_phone', function ($flash) {
+                $flash->assertSee('O campo telefone já está sendo utilizado.');
             });
         });
     }

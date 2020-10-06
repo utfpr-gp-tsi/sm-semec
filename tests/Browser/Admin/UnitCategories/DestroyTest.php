@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Admin\UnitsCategory;
+namespace Tests\Browser\Admin\UnitCategories;
 
 use App\UnitCategory;
 use App\User;
@@ -24,7 +24,7 @@ class DestroyTest extends DuskTestCase
     public function testDestroy(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit('/admin/categories');
+            $browser->loginAs($this->user)->visit('/admin/unit-categories');
 
             $browser->with("table.table tbody", function ($row) {
                 $row->assertSee($this->category->name);

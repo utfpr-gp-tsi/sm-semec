@@ -8,7 +8,7 @@ use App\UnitCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
 
-class UnitController extends AppController
+class UnitsController extends AppController
 {
      /**
      * Display a listing of the resource.
@@ -46,8 +46,8 @@ class UnitController extends AppController
 
         $validator = Validator::make($data, [
             'name' => 'required|unique:units,name',
-            'address' => 'required|unique:units,address',
-            'phone' => 'required|unique:units,phone',
+            'address' => 'required',
+            'phone' => 'required|min:10|unique:units,phone',
             'category_id' => 'required',
         ]);
 
@@ -101,12 +101,12 @@ class UnitController extends AppController
 
         $validator = Validator::make($data, [
             'name' => "required|unique:units,name,$id",
-            'address' => "required|unique:units,address,$id",
+            'address' => 'required',
             'phone' => "required|min:10|unique:units,phone,$id",
             'category_id' => 'required',
         ]);
 
-        
+
         $unit->fill($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');

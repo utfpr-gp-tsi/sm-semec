@@ -28,7 +28,10 @@ mix.version([
    'public/assets/vendor/tabler/css/tabler-dashboard.css',
    'public/assets/vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css',
    'public/assets/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js',
-   'public/assets/vendor/selectize/js/selectize.min.js'
+   'public/assets/vendor/selectize/js/selectize.min.js',
+   'public/assets/vendor/mask/js/mask.min.js'
+
+   
 
 ]).options({ processCssUrls: false });
 
