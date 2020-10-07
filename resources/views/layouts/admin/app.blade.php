@@ -17,6 +17,8 @@
     <!-- Scripts -->
     <script src="{{ asset(mix('assets/js/admin/app.js')) }}" defer></script>
     <script src="{{ asset(mix('assets/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js')) }}" defer></script>
+    <script src="{{ asset(mix('assets/vendor/selectize/js/selectize.min.js')) }}" defer></script>
+    <script src="{{ asset(mix('assets/vendor/mask/js/mask.min.js')) }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

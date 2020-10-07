@@ -154,7 +154,10 @@ return [
         'title' => 'Título',
         'description' => 'Descrição',
         'started_at' => 'Início',
-        'ended_at' => 'Término'
+        'ended_at' => 'Término',
+        'phone' => 'telefone',
+        'address' => 'endereço',
+        'category_id' => 'categoria'
     ],
 
 ];
