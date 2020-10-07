@@ -25,6 +25,14 @@ class UploadPdf extends TestCase
         $this->pdf->delete();
     }
 
+    public function testPathToFile(): void
+    {
+         $this->pdf->pdf = UploadedFile::fake()->create('document.pdf');
+         $this->pdf->save();
+
+         $this->assertEquals($this->pdf->pathToFile(), $this->fullPdfPath());
+    }
+
     public function testAddFileAfterCreatingEdict(): void
     {
         $this->pdf->pdf = UploadedFile::fake()->create('document.pdf');
