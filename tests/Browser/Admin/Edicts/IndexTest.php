@@ -2,25 +2,25 @@
 
 namespace Tests\Browser\Admin\Edicts;
 
-use App\Edict;
-use App\User;
+use App\Models\Edict;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class IndexTest extends DuskTestCase
 {
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $this->user = User::factory()->create();
     }
 
     public function testIndexList(): void
     {
-        $edicts = factory(Edict::class, 3)->create();
+        $edicts = Edict::factory()->count(3)->create();
         $edicts = $edicts->sortBy('started_at')->reverse();
 
         $this->browse(function ($browser) use ($edicts) {
@@ -48,7 +48,7 @@ class IndexTest extends DuskTestCase
 
     public function testSearchField(): void
     {
-        $edict = factory(Edict::class)->create(['title' => 'Edict title']);
+        $edict = Edict::factory()->create(['title' => 'Edict title']);
 
         $this->browse(function ($browser) use ($edict) {
             $browser->loginAs($this->user);
@@ -75,7 +75,7 @@ class IndexTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        factory(Edict::class, 22)->create();
+        Edict::factory()->count(22)->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit('/admin/edicts');

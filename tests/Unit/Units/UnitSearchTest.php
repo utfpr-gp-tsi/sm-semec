@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Units;
 
-use App\Unit;
-use App\UnitCategory;
+use App\Models\Unit;
+use App\Models\UnitCategory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -17,12 +17,12 @@ class UnitSearchTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->units[] = factory(Unit::class)->create(['name' => 'Escola Municipal Dalila']);
-        $this->units[] = factory(Unit::class)->create(['name' => 'Escola Municipal Santa Cruz']);
-        $this->units[] = factory(Unit::class)->create(['name' => 'Departamento De Informática Educativa']);
-        $this->units[] = factory(Unit::class)->create(['name' => 'Departamento De Assuntos Culturais']);
-        $this->units[] = factory(Unit::class)->create(['name' => 'Cmei Boqueirão']);
-        $this->units[] = factory(Unit::class)->create(['name' => 'Cmei Vila Carli']);
+        $this->units[] = Unit::factory()->create(['name' => 'Escola Municipal Dalila']);
+        $this->units[] = Unit::factory()->create(['name' => 'Escola Municipal Santa Cruz']);
+        $this->units[] = Unit::factory()->create(['name' => 'Departamento De Informática Educativa']);
+        $this->units[] = Unit::factory()->create(['name' => 'Departamento De Assuntos Culturais']);
+        $this->units[] = Unit::factory()->create(['name' => 'Cmei Boqueirão']);
+        $this->units[] = Unit::factory()->create(['name' => 'Cmei Vila Carli']);
     }
 
     public function testSearchBySpecifiedName(): void

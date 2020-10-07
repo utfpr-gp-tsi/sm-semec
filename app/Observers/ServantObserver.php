@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Servant;
+use App\Models\Servant;
 use Illuminate\Support\Str;
 use File;
 
@@ -11,7 +11,7 @@ class ServantObserver
     /**
      * Handle the servant "created" event.
      *
-     * @param  \App\Servant  $servant
+     * @param  \App\Models\Servant  $servant
      * @return void
      */
     public function created(Servant $servant)
@@ -22,7 +22,7 @@ class ServantObserver
     /**
      * Handle the servant "updating" event.
      *
-     * @param  \App\Servant  $servant
+     * @param  \App\Models\Servant  $servant
      * @return void
      */
     public function updating(Servant $servant)
@@ -36,7 +36,7 @@ class ServantObserver
     /**
      * Handle the servant "deleted" event.
      *
-     * @param  \App\Servant  $servant
+     * @param  \App\Models\Servant  $servant
      * @return void
      */
     public function deleted(Servant $servant)
@@ -47,7 +47,7 @@ class ServantObserver
     /**
      * Delete a image from file.
      *
-     * @param  \App\Servant  $servant
+     * @param  \App\Models\Servant  $servant
      * @return void
      */
     private function deleteImageFile($servant)
@@ -65,7 +65,7 @@ class ServantObserver
     /**
      * Save file in disk
      *
-     * @param  \App\Servant  $servant
+     * @param  \App\Models\Servant  $servant
      * @return void
      */
     private function saveImageFile($servant)

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Edict;
-use App\Pdf;
+use App\Models\Edict;
+use App\Models\Pdf;
 use App\Http\Controllers\Admin\AppController;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Response;
@@ -16,7 +16,7 @@ class PdfController extends AppController
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \App\Edict $id
+     * @param  \App\Models\Edict $id
      * @return \Illuminate\View\View
      */
     public function index($id)
@@ -29,7 +29,7 @@ class PdfController extends AppController
     /**
      * Store a newly created resource in storage.
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Edict $id
+     * @param  \App\Models\Edict $id
      * @return  \Illuminate\View\View | \Illuminate\Http\RedirectResponse.
      */
     public function create(Request $request, $id)
@@ -57,8 +57,8 @@ class PdfController extends AppController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Pdf  $id
-     * @param  \App\Edict $edictId
+     * @param  \App\Models\Pdf  $id
+     * @param  \App\Models\Edict $edictId
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse.
      */
     public function show($edictId, $id)
@@ -73,7 +73,7 @@ class PdfController extends AppController
     /**
     * Remove the specified resource from storage.
     *
-    * @param  \App\Pdf  $id
+    * @param  \App\Models\Pdf  $id
     * @return \Illuminate\Http\RedirectResponse
     *
     */

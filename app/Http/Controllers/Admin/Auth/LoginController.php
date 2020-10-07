@@ -9,7 +9,7 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\Auth\Hash;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Symfony\Component\HttpFoundation\Session\Session;
 

@@ -2,23 +2,23 @@
 
 namespace Tests\Browser\Admin\Edicts;
 
-use App\Edict;
-use App\User;
+use App\Models\Edict;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class UpdateTest extends DuskTestCase
 {
-    /** @var \App\Edict */
+    /** @var \App\Models\Edict */
     protected $edict;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->edict = factory(Edict::class)->create();
-        $this->user = factory(User::class)->create();
+        $this->edict = Edict::factory()->create();
+        $this->user = User::factory()->create();
     }
 
     public function testFilledFields(): void
@@ -38,7 +38,7 @@ class UpdateTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.edit.edict', $this->edict->id));
 
-            $newData = factory(Edict::class)->make([
+            $newData = Edict::factory()->make([
                 'started_at' => '28/07/2020 15:18',
                 'ended_at' => '29/07/2020 15:18'
             ]);
@@ -113,7 +113,7 @@ class UpdateTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        $this->edict = factory(Edict::class)->create();
+        $this->edict = Edict::factory()->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.edit.edict', $this->edict->id));

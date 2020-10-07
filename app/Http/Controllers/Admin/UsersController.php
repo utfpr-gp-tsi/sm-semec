@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Admin\AppController;
 use App\Services\DateFormatter;
 
@@ -61,7 +61,7 @@ class UsersController extends AppController
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $id
+     * @param  \App\Models\User  $id
      * @return \Illuminate\View\View
      */
     public function show($id)
@@ -73,7 +73,7 @@ class UsersController extends AppController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $id
+     * @param  \App\Models\User  $id
      * @return  \Illuminate\View\View
      */
     public function edit($id)
@@ -86,7 +86,7 @@ class UsersController extends AppController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $id
+     * @param  \App\Models\User  $id
      * @return \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
 
@@ -114,7 +114,7 @@ class UsersController extends AppController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $id
+     * @param  \App\Models\User  $id
      * @return \Illuminate\Http\RedirectResponse
      *
      */

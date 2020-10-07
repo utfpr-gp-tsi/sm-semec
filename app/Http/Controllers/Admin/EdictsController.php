@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
-use App\Edict;
+use App\Models\Edict;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
 
@@ -62,7 +62,7 @@ class EdictsController extends AppController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Edict  $id
+     * @param  \App\Models\Edict  $id
      * @return \Illuminate\View\View
      */
     public function show($id)
@@ -74,7 +74,7 @@ class EdictsController extends AppController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Edict  $id
+     * @param  \App\Models\Edict  $id
      * @return  \Illuminate\View\View
      */
     public function edit($id)
@@ -87,7 +87,7 @@ class EdictsController extends AppController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Edict  $id
+     * @param  \App\Models\Edict  $id
      * @return \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
@@ -116,7 +116,7 @@ class EdictsController extends AppController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Edict  $id
+     * @param  \App\Models\Edict  $id
      * @return \Illuminate\Http\RedirectResponse
      *
      */

@@ -2,29 +2,29 @@
 
 namespace Tests\Browser\Admin\Units;
 
-use App\Unit;
-use App\UnitCategory;
-use App\User;
+use App\Models\Unit;
+use App\Models\UnitCategory;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class CreateTest extends DuskTestCase
 {
-    /** @var \App\Unit */
+    /** @var \App\Models\Unit */
     protected $unit;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
-    /** @var \App\UnitCategory */
+    /** @var \App\Models\UnitCategory */
     protected $categories;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->categories = factory(UnitCategory::class, 4)->create();
-        $this->unit = factory(Unit::class)->make([
+        $this->categories = UnitCategory::factory()->count(4)->create();
+        $this->unit = Unit::factory()->make([
             'name' => 'Escola Municipal Santa Cruz',
         ]);
-        $this->user = factory(User::class)->create();
+        $this->user = User::factory()->create();
     }
 
     public function testSucessfullyCreate(): void
@@ -107,7 +107,7 @@ class CreateTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.new.unit'));
-            $newData = factory(Unit::class)->create();
+            $newData = Unit::factory()->create();
             $category = $this->categories->first();
 
             $browser->type('name', $newData->name)
@@ -135,7 +135,7 @@ class CreateTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        $this->unit = factory(Unit::class)->create();
+        $this->unit = Unit::factory()->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.new.unit'));

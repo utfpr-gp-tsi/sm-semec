@@ -3,21 +3,12 @@ includes:
 parameters:
   ignoreErrors:
     - '#Cannot call method [a-zA-Z0-9()]+ on .+|null.#'
-    - '#notExistingMethod()#'
-    - '#Function factory invoked with [0-9] parameter, 0 required#'
-    -
-      message: '#Access to an undefined property [a-zA-Z0-9\\_]+::\$[a-zA-Z]+_at#'
-      path: tests/Unit/Traits/CreatedAndUpdatedAtFormattedTest.php
+    
     -
       message: '#Access to an undefined property#'
       paths: 
             - app/Http/Controllers/Servant/Auth/ResetPasswordController.php
             - app/Http/Controllers/Admin/Auth/ResetPasswordController.php 
-    -
-      message: '#Call to an undefined method#'
-      paths: 
-            - tests/Browser/Servants/Session/ResetPasswordTest.php
-            - app/Http/Controllers/Servant/Auth/LoginController.php
 
   level: max
   paths:
@@ -30,6 +21,6 @@ parameters:
     - app/Http/Middleware/CheckForMaintenanceMode.php
     - app/Http/Controllers/Auth/LoginController.php
     - app/Http/Controllers/Admin/Auth/LoginController.php
-    - app/User.php
+    - app/Models/User.php
     - app/Http/Controllers/Admin/ProfileController.php
   checkMissingIterableValueType: false

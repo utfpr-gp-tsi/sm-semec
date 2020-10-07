@@ -1,13 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\Edict;
+use App\Models\Edict;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pdf extends Model
 {
+    use HasFactory;
+    
     /**
      * @var array
      */

@@ -1,12 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\UnitCategory;
+use App\Models\UnitCategory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Unit extends Model
 {
+    use HasFactory;
+
      /**
      * @var array
      */

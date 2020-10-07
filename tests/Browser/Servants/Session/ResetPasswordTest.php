@@ -4,20 +4,20 @@ namespace Tests\Browser\Servants\Session;
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Servant;
+use App\Models\Servant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
 class ResetPasswordTest extends DuskTestCase
 {
-    /** @var \App\Servant */
+    /** @var \App\Models\Servant */
     protected $servant;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->servant = factory(Servant::class)->create();
+        $this->servant = Servant::factory()->create();
     }
 
     /**

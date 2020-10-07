@@ -2,25 +2,25 @@
 
 namespace Tests\Browser\Admin\UnitCategories;
 
-use App\UnitCategory;
-use App\User;
+use App\Models\UnitCategory;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class IndexTest extends DuskTestCase
 {
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $this->user = User::factory()->create();
     }
 
     public function testIndexList(): void
     {
-        $categories = factory(UnitCategory::class, 3)->create();
+        $categories = UnitCategory::factory()->count(3)->create();
         $categories = $categories->sortBy('name')->reverse();
 
         $this->browse(function ($browser) use ($categories) {
@@ -45,7 +45,7 @@ class IndexTest extends DuskTestCase
 
     public function testSearchField(): void
     {
-        $category = factory(UnitCategory::class)->create(['name' => 'Unit category name']);
+        $category = UnitCategory::factory()->create(['name' => 'Unit category name']);
 
         $this->browse(function ($browser) use ($category) {
             $browser->loginAs($this->user);
@@ -65,7 +65,7 @@ class IndexTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        factory(UnitCategory::class, 22)->create();
+        UnitCategory::factory()->count(22)->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit('/admin/unit-categories');

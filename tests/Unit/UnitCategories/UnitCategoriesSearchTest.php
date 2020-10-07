@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\UnitCategories;
 
-use App\UnitCategory;
+use App\Models\UnitCategory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -16,9 +16,9 @@ class UnitCategoriesSearchTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->categories[] = factory(UnitCategory::class)->create(['name' => 'CMEI']);
-        $this->categories[] = factory(UnitCategory::class)->create(['name' => 'Escolas Municipais']);
-        $this->categories[] = factory(UnitCategory::class)->create(['name' => 'Departamentos SEMEC']);
+        $this->categories[] = UnitCategory::factory()->create(['name' => 'CMEI']);
+        $this->categories[] = UnitCategory::factory()->create(['name' => 'Escolas Municipais']);
+        $this->categories[] = UnitCategory::factory()->create(['name' => 'Departamentos SEMEC']);
     }
 
     public function testSearchBySpecifiedName(): void

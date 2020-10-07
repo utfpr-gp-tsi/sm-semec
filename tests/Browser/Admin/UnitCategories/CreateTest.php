@@ -2,25 +2,25 @@
 
 namespace Tests\Browser\Admin\UnitCategories;
 
-use App\UnitCategory;
-use App\User;
+use App\Models\UnitCategory;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class CreateTest extends DuskTestCase
 {
-    /** @var \App\UnitCategory */
+    /** @var \App\Models\UnitCategory */
     protected $category;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->category = factory(UnitCategory::class)->make([
+        $this->category = UnitCategory::factory()->make([
             'name' => 'Cmei',
         ]);
-        $this->user = factory(User::class)->create();
+        $this->user = User::factory()->create();
     }
 
     public function testSucessfullyCreate(): void
@@ -57,7 +57,7 @@ class CreateTest extends DuskTestCase
     public function testUniquenessOnCreate(): void
     {
         $this->browse(function ($browser) {
-            $category = factory(UnitCategory::class)->create();
+            $category = UnitCategory::factory()->create();
             $browser->loginAs($this->user)->visit(route('admin.new.unit_category'));
 
             $browser->type('name', $category->name)
@@ -71,7 +71,7 @@ class CreateTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        $this->category = factory(UnitCategory::class)->create();
+        $this->category = UnitCategory::factory()->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.new.unit_category'));

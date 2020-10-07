@@ -1,30 +1,41 @@
 <?php
 
+namespace Database\Factories;
+
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Contract;
+use App\Models\Contract;
+use App\Models\Servant;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+class ContractFactory extends Factory
+{
 
-$factory->define(Contract::class, function (Faker $faker) {
-    return [
-        'registration' => $faker->unique()->randomNumber,
-        'admission_at' => $faker->date(),
-        'termination_at' => $faker->date(),
-        'secretary' => $faker->name(15),
-        'place' => $faker->name(10),
-        'role' => $faker->name(10),
-        'link' => $faker->name(10),
-        'servant_id' => factory(App\Servant::class),
-    ];
-});
+    /**
+    * The name of the factory's corresponding model.
+    *
+    * @var string
+    */
+    protected $model = Contract::class;
+
+    /**
+    * Define the model's default state.
+    *
+    * @return array
+    */
+
+    public function definition()
+    {
+        return [
+            'registration' => $this->faker->unique()->randomNumber,
+            'admission_at' => $this->faker->date(),
+            'termination_at' => $this->faker->date(),
+            'secretary' => $this->faker->name(15),
+            'place' => $this->faker->name(10),
+            'role' => $this->faker->name(10),
+            'link' => $this->faker->name(10),
+            'servant_id' => Servant::factory(),
+        ];
+    }
+}
