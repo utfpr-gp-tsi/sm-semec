@@ -2,23 +2,23 @@
 
 namespace Tests\Browser\Admin\Units;
 
-use App\Unit;
-use App\User;
+use App\Models\Unit;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class ShowTest extends DuskTestCase
 {
-    /** @var \App\Unit */
+    /** @var \App\Models\Unit */
     protected $unit;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->unit = factory(Unit::class)->create();
-        $this->user = factory(User::class)->create();
+        $this->unit = Unit::factory()->create();
+        $this->user = User::factory()->create();
     }
 
     public function testShow(): void

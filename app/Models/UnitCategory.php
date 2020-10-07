@@ -1,12 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Unit;
+use App\Models\Unit;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UnitCategory extends Model
 {
+    use HasFactory;
 
     protected $table = 'unit_categories';
     /**

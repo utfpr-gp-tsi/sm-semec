@@ -2,23 +2,23 @@
 
 namespace Tests\Browser\Admin\UnitCategories;
 
-use App\UnitCategory;
-use App\User;
+use App\Models\UnitCategory;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class UpdateTest extends DuskTestCase
 {
-    /** @var \App\UnitCategory*/
+    /** @var \App\Models\UnitCategory*/
     protected $category;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->category = factory(UnitCategory::class)->create();
-        $this->user = factory(User::class)->create();
+        $this->category = UnitCategory::factory()->create();
+        $this->user = User::factory()->create();
     }
 
     public function testFilledFields(): void
@@ -35,7 +35,7 @@ class UpdateTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.edit.unit_category', $this->category->id));
 
-            $newData = factory(UnitCategory::class)->make([
+            $newData = UnitCategory::factory()->make([
                 'name' => 'Cmei',
             ]);
 
@@ -75,7 +75,7 @@ class UpdateTest extends DuskTestCase
     public function testUniquenessOnUpdate(): void
     {
         $this->browse(function ($browser) {
-            $category = factory(UnitCategory::class)->create();
+            $category = UnitCategory::factory()->create();
             $browser->loginAs($this->user)->visit(route('admin.edit.unit_category', $this->category->id));
 
 
@@ -102,7 +102,7 @@ class UpdateTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        $this->category = factory(UnitCategory::class)->create();
+        $this->category = UnitCategory::factory()->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.edit.unit_category', $this->category->id));

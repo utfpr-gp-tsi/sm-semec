@@ -2,25 +2,25 @@
 
 namespace Tests\Browser\Admin\Units;
 
-use App\Unit;
-use App\User;
+use App\Models\Unit;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class IndexTest extends DuskTestCase
 {
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $this->user = User::factory()->create();
     }
 
     public function testIndexList(): void
     {
-        $units = factory(Unit::class, 10)->create();
+        $units = Unit::factory()->count(10)->create();
         $units = $units->sortBy('name')->reverse();
 
         $this->browse(function ($browser) use ($units) {
@@ -43,7 +43,7 @@ class IndexTest extends DuskTestCase
 
     public function testSearchField(): void
     {
-        $unit = factory(Unit::class)->create(['name' => 'Unit name']);
+        $unit = Unit::factory()->create(['name' => 'Unit name']);
 
         $this->browse(function ($browser) use ($unit) {
             $browser->loginAs($this->user);
@@ -61,7 +61,7 @@ class IndexTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        factory(Unit::class, 22)->create();
+        Unit::factory()->count(22)->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit('/admin/units');

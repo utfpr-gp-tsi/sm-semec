@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
-use App\Unit;
-use App\UnitCategory;
+use App\Models\Unit;
+use App\Models\UnitCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AppController;
 
@@ -64,7 +64,7 @@ class UnitsController extends AppController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Unit  $id
+     * @param  \App\Models\Unit  $id
      * @return \Illuminate\View\View
      */
     public function show($id)
@@ -76,7 +76,7 @@ class UnitsController extends AppController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Unit  $id
+     * @param  \App\Models\Unit  $id
      * @return  \Illuminate\View\View
      */
     public function edit($id)
@@ -90,7 +90,7 @@ class UnitsController extends AppController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Unit  $id
+     * @param  \App\Models\Unit  $id
      * @return \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
@@ -119,7 +119,7 @@ class UnitsController extends AppController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Unit  $id
+     * @param  \App\Models\Unit  $id
      * @return \Illuminate\Http\RedirectResponse
      *
      */

@@ -4,8 +4,8 @@ namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
 use DB;
-use App\Unit;
-use App\UnitCategory;
+use App\Models\Unit;
+use App\Models\UnitCategory;
 
 class Units extends Command
 {
@@ -66,10 +66,10 @@ class Units extends Command
         DB::table('units')->delete();
         DB::table('unit_categories')->delete();
 
-        $categories = factory('App\UnitCategory', 4)->create();
+        $categories = UnitCategory::factory()->count(4)->create();
 
         $categories->each(function ($category) {
-             factory('App\Unit', 22)->create(['category_id' => $category->id]);
+             Unit::factory()->count(22)->create(['category_id' => $category->id]);
         });
     }
 

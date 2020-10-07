@@ -2,23 +2,23 @@
 
 namespace Tests\Browser\Admin\UnitCategories;
 
-use App\UnitCategory;
-use App\User;
+use App\Models\UnitCategory;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class DestroyTest extends DuskTestCase
 {
-    /** @var \App\UnitCategory */
+    /** @var \App\Models\UnitCategory */
     protected $category;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->category = factory(UnitCategory::class)->create();
-        $this->user = factory(User::class)->create();
+        $this->category = UnitCategory::factory()->create();
+        $this->user = User::factory()->create();
     }
 
     public function testDestroy(): void

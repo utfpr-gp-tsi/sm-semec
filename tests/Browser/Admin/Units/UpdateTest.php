@@ -2,27 +2,27 @@
 
 namespace Tests\Browser\Admin\Units;
 
-use App\Unit;
-use App\UnitCategory;
-use App\User;
+use App\Models\Unit;
+use App\Models\UnitCategory;
+use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class UpdateTest extends DuskTestCase
 {
-    /** @var \App\Unit */
+    /** @var \App\Models\Unit */
     protected $unit;
-    /** @var \App\User */
+    /** @var \App\Models\User */
     protected $user;
-    /** @var \App\UnitCategory */
+    /** @var \App\Models\UnitCategory */
     protected $categories;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->unit = factory(Unit::class)->create();
-        $this->user = factory(User::class)->create();
-        $this->categories = factory(UnitCategory::class, 4)->create();
+        $this->unit = Unit::factory()->create();
+        $this->user = User::factory()->create();
+        $this->categories = UnitCategory::factory()->count(4)->create();
     }
 
     public function testFilledFields(): void
@@ -42,7 +42,7 @@ class UpdateTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.edit.unit', $this->unit->id));
 
-            $unitData = factory(Unit::class)->make([
+            $unitData = Unit::factory()->make([
                 'name' => 'Escola Municipal Stange',
             ]);
             $category = $this->categories->first();
@@ -114,7 +114,7 @@ class UpdateTest extends DuskTestCase
     public function testUniquenessOnUpdate(): void
     {
          $this->browse(function ($browser) {
-            $existingUnit = factory(Unit::class)->create();
+            $existingUnit = Unit::factory()->create();
             $browser->loginAs($this->user)->visit(route('admin.edit.unit', $this->unit->id));
 
             $browser->type('name', $existingUnit->name)
@@ -142,7 +142,7 @@ class UpdateTest extends DuskTestCase
 
     public function testAssertLinksPresent(): void
     {
-        $this->unit = factory(Unit::class)->create();
+        $this->unit = Unit::factory()->create();
 
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.edit.unit', $this->unit->id));
