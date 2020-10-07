@@ -3,6 +3,7 @@
 namespace Tests\Browser\Admin\Units;
 
 use App\Unit;
+use App\UnitCategory;
 use App\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -13,12 +14,15 @@ class UpdateTest extends DuskTestCase
     protected $unit;
     /** @var \App\User */
     protected $user;
+    /** @var \App\UnitCategory */
+    protected $categories;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->unit = factory(Unit::class)->create();
         $this->user = factory(User::class)->create();
+        $this->categories = factory(UnitCategory::class, 4)->create();
     }
 
     public function testFilledFields(): void
@@ -38,23 +42,25 @@ class UpdateTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.edit.unit', $this->unit->id));
 
-            $newData = factory(Unit::class)->make([
+            $unitData = factory(Unit::class)->make([
                 'name' => 'Escola Municipal Stange',
-                
             ]);
+            $category = $this->categories->first();
 
-            $browser->type('name', $newData->name)
-                    ->type('address', $newData->address)
-                    ->type('phone', $newData->phone)
-                    ->select('category_id', $newData->category_id)
+            $browser->type('name', $unitData->name)
+                    ->type('address', $unitData->address)
+                    ->type('phone', $unitData->phone)
+                    ->waitFor('#unit_category_id-selectized')
+                    ->click('div.unit_category_id #unit_category_id-selectized')
+                    ->click("div.unit_category_id .selectize-dropdown .option[data-value='{$category->id}']")
                     ->press('Atualizar Unidade');
 
             $browser->assertUrlIs(route('admin.units'));
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Unidade atualizada com sucesso');
             });
-            $browser->with('table.table', function ($table) use ($newData) {
-                $table->assertSee($newData->name);
+            $browser->with('table.table', function ($table) use ($unitData) {
+                $table->assertSee($unitData->name);
                 $table->assertDontSee($this->unit->name);
             });
         });
@@ -68,7 +74,6 @@ class UpdateTest extends DuskTestCase
             $browser->type('name', '')
                     ->type('address', '')
                     ->type('phone', '')
-                    ->select('category_id', '')
                     ->press('Atualizar Unidade');
 
             $browser->assertUrlIs(route('admin.show.unit', $this->unit->id));
@@ -93,23 +98,12 @@ class UpdateTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit(route('admin.edit.unit', $this->unit->id));
 
-            $newData = factory(Unit::class)->make([
-                'name' => 'Escola Municipal Stange',
-                
-            ]);
-            
-            $browser->type('name', $newData->name)
-                    ->type('address', $newData->address)
-                    ->type('phone', '12')
-                    ->select('category_id', $newData->category_id)
+            $browser->type('phone', '12')
                     ->press('Atualizar Unidade');
-
-    
 
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Existem dados incorretos! Por favor verifique!');
             });
-
 
             $browser->with('div.unit_phone', function ($flash) {
                 $flash->assertSee('O campo telefone deve ter pelo menos 10 caracteres.');
@@ -117,16 +111,14 @@ class UpdateTest extends DuskTestCase
         });
     }
 
-    public function testUniquenessOnCreate(): void
+    public function testUniquenessOnUpdate(): void
     {
          $this->browse(function ($browser) {
-            $newData = factory(Unit::class)->create();
+            $existingUnit = factory(Unit::class)->create();
             $browser->loginAs($this->user)->visit(route('admin.edit.unit', $this->unit->id));
 
-            $browser->type('name', $newData->name)
-                    ->type('address', $newData->address)
-                    ->type('phone', $newData->phone)
-                    ->select('category_id', $newData->category_id)
+            $browser->type('name', $existingUnit->name)
+                    ->type('phone', $existingUnit->phone)
                     ->press('Atualizar Unidade');
 
             $browser->with('div.unit_name', function ($flash) {
@@ -135,6 +127,15 @@ class UpdateTest extends DuskTestCase
 
             $browser->with('div.unit_phone', function ($flash) {
                 $flash->assertSee('O campo telefone já está sendo utilizado.');
+            });
+
+            # Should update using the same values!
+            $browser->type('name', $this->unit->name)
+                    ->type('phone', $this->unit->phone)
+                    ->press('Atualizar Unidade');
+
+            $browser->with('div.alert', function ($flash) {
+                $flash->assertSee('Unidade atualizada com sucesso');
             });
          });
     }

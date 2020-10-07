@@ -106,7 +106,6 @@ class UnitsController extends AppController
             'category_id' => 'required',
         ]);
 
-
         $unit->fill($data);
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');

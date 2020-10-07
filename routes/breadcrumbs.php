@@ -260,7 +260,7 @@ Breadcrumbs::for('admin.create.unit', function ($trail) {
 
 Breadcrumbs::for('admin.show.unit', function ($trail, $id) {
     $trail->parent('admin.units');
-    $trail->push('Unidade', route('admin.show.unit', $id));
+    $trail->push('Unidade #'.$id, route('admin.show.unit', $id));
 });
 
 Breadcrumbs::for('admin.units.page', function ($trail) {

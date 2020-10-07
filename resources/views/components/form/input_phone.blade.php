@@ -4,10 +4,10 @@
 		{{ $label}} @if ($required) <abbr title="obrigatório">*</abbr> @endif
 	</label>
 
-	<input class="form-control string mask-load @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
+	<input class="form-control string @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
 				 @if ($required) required="required" @endif
 				 autofocus="autofocus" type="text" name="{{ $field }}"
-	  		 value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}"/>
+	  		 value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}" data-phone-mask="true" />
 
 	@if ($errors->has($field))
 		<span class="invalid-feedback" role="alert">

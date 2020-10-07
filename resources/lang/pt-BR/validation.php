@@ -156,7 +156,8 @@ return [
         'started_at' => 'Início',
         'ended_at' => 'Término',
         'phone' => 'telefone',
-        'address' => 'endereço'
+        'address' => 'endereço',
+        'category_id' => 'categoria'
     ],
 
 ];

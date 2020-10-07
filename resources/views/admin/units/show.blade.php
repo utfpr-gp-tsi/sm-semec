@@ -12,7 +12,7 @@
   </div>
 </div>
 
-@component('components.links.back_and_edit', ['edit_url' => route('admin.edit.edict', $unit->id),
+@component('components.links.back_and_edit', ['edit_url' => route('admin.edit.unit', $unit->id),
                                               'back_url' => route('admin.units')]) @endcomponent
 
 @endsection
