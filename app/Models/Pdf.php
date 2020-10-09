@@ -29,18 +29,11 @@ class Pdf extends Model
     }
 
     /**
-     * @param string $term
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public static function search($term)
+    * @return string
+    */
+    public function pathToFile()
     {
-        if ($term) {
-            $searchTerm = "%{$term}%";
-            return Pdf::where('name', 'LIKE', $searchTerm)
-                ->orderBy('created_at', 'desc')
-                ->paginate(5);
-        }
-        return Pdf::orderBy('created_at', 'desc')->paginate(5);
+        return public_path('uploads/edicts/' . $this->edict_id . '/' . $this->getOriginal('pdf'));
     }
 
     /**
