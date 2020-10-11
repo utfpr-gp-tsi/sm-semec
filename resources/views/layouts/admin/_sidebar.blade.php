@@ -26,7 +26,7 @@
     </a>
     <a class="list-group-item list-group-item-action {{ setActive(['admin/edicts*']) }}" href="{{ route('admin.edicts') }}">
       <span class="icon mr-2 h4">
-      <i class="fas fa-file-alt"></i>
+        <i class="fas fa-file-alt"></i>
       </span>
       Editais
     </a>
