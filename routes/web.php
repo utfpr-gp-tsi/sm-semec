@@ -126,5 +126,21 @@ Route::namespace('Servant')->group(function () {
 
 	Route::get('/password/edit',  ['as' => 'password.edit',   'uses' => 'ProfileController@editPassword']);
 	Route::post('/password/edit', ['as' => 'profile.password.update', 'uses' => 'ProfileController@updatePassword']);
-    });
+	
+	
+	/* Edicts
+	|----------------------------------------------------------------------------*/
+	Route::get('/edicts/open/page/{page}', ['as' => 'edicts.page', 'uses' => 'EdictsController@indexOpen']);
+	Route::get('/edicts/open/search/{term}/page/{page}', ['as' => 'search.edicts.page', 'uses' => 'EdictsController@indexOpen']);
+	Route::get('/edicts/open/search/{term?}', ['as' => 'search.edicts', 'uses' => 'EdictsController@indexOpen']);
+	Route::get('/edicts/open', ['as' => 'edicts', 'uses' => 'EdictsController@indexOpen']);
+	Route::get('/edicts/close/page/{page}', ['as' => 'edicts.close.page', 'uses' => 'EdictsController@indexClose']);
+	Route::get('/edicts/close/search/{term}/page/{page}', ['as' => 'search.edicts.close.page', 'uses' => 'EdictsController@indexclose']);
+	Route::get('/edicts/close/search/{term?}', ['as' => 'search.edicts.close', 'uses' => 'EdictsController@indexClose']);
+	Route::get('/edicts/close', ['as' => 'edicts.close', 'uses' => 'EdictsController@indexClose']);
+    Route::get('/edicts/{id}', ['as' => 'show.edict', 'uses' => 'EdictsController@show']);
+
+
 });
+});
+

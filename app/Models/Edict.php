@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\DateTimeFormatter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Edict extends Model
@@ -39,6 +40,35 @@ class Edict extends Model
                 ->paginate(20);
         }
         return Edict::orderBy('started_at', 'desc')->paginate(20);
+    }
+
+    public static function searchOpen($term){
+        if ($term) {
+            $searchTerm = "%{$term}%";
+            return Edict::where([
+                ['ended_at', '>=', Carbon::now()->toDateString()],
+                ['title', 'LIKE', $searchTerm],
+                 ])
+                ->orderBy('started_at', 'desc')
+                ->paginate(20);
+        }
+        return Edict::where('ended_at', '>=', Carbon::now()->toDateString())
+                      ->orderBy('started_at', 'desc')
+                      ->paginate(20);
+     }
+
+    public static function searchClose($term){
+        if ($term) {
+            $searchTerm = "%{$term}%";
+            return Edict::where([
+                ['ended_at', '<=', Carbon::now()->toDateString()],
+                ['title', 'LIKE', $searchTerm],])
+                ->orderBy('started_at', 'desc')
+                ->paginate(20);
+        }
+        return Edict::where('ended_at', '<=', Carbon::now()->toDateString())
+                      ->orderBy('started_at', 'desc')
+                      ->paginate(20);
     }
 
     /**
