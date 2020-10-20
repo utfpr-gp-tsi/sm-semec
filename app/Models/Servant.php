@@ -46,6 +46,15 @@ class Servant extends Authenticatable
         'image_path',
     ];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(subscription::class, 'servant_id');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

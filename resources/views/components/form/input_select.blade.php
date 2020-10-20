@@ -1,16 +1,21 @@
 <div class="form-group string @if ($required) required @endif {{ $model }}_{{ $field }} @if ($errors->has($field)) is-invalid @endif">
     <label class="form-control-label string required" for="name">
-    	{{ $label}} @if ($required) <abbr title="obrigatório">*</abbr> @endif
+      {{ $label}} @if ($required) <abbr title="obrigatório">*</abbr> @endif
     </label>
     <select class="form-control custom-select @if ($required) required @endif"
             @if ($required) required="required" @endif
-    	      autofocus="autofocus" name="{{ $field }}"
-            value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}">
+            autofocus="autofocus" name="{{ $field }}"
+            id="{{ $model }}_{{ $field }}">
 
-      <option disabled selected value> {{$default}} </option>
+        <option> {{$default ?? ''}} </option>
         @if(!empty($options))
+          {{ $value_method = isset($value_method) ? $value_method : 'id' }}
+          {{ $label_method = isset($label_method) ? $label_method : 'name' }}
           @foreach($options as $option)
-            <option value="{{$option->id}}" {{ $value == $option->id ? 'selected' : ''}} >{{ $option->name  }}</option>
+            <option value="{{ $option->$value_method }}"
+                           {{ $value == $option->$value_method ? 'selected' : '' }} >
+                {{ $option->$label_method }}
+            </option>
           @endforeach
         @endif
     </select>

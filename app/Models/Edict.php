@@ -49,6 +49,15 @@ class Edict extends Model
         return $this->hasMany(Pdf::class, 'edict_id');
     }
 
+     /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class, 'edict_id');
+    }
+
+
     /**
     * @return $this
     */
