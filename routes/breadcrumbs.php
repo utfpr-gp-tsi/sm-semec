@@ -273,12 +273,12 @@ Breadcrumbs::for('admin.search.units.page', function ($trail) {
     $trail->push('Unidades', route('admin.units'));
 });
 
-/* Edicts 
+/* Edicts
 |-------------------------------------------------------------------------- */
-Breadcrumbs::for('servant.new.subscribe', function ($trail, $id) {
-    $trail->push('Inscreva-se', route('servant.new.subscribe' , $id));
+Breadcrumbs::for('servant.new.inscription', function ($trail, $id) {
+    $trail->push('Inscreva-se', route('servant.new.inscription' , $id));
 });
 
-Breadcrumbs::for('servant.subscribe', function ($trail, $id) {
-    $trail->push('Title Here', route('servant.subscribe' , $id));
+Breadcrumbs::for('servant.create.inscription', function ($trail, $id) {
+    $trail->push('Title Here', route('servant.create.inscription' , $id));
 });

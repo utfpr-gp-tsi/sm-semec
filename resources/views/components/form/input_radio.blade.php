@@ -7,7 +7,7 @@
     <div class="form-group">
     <div class="custom-controls-stacked">
         <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="removal_type" value="Permuta" checked="">
+            <input type="radio" class="custom-control-input" name="removal_type" value="Permuta">
             <div class="custom-control-label">Permuta</div>
         </label>
         <label class="custom-control custom-radio">
