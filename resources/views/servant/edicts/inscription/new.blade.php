@@ -4,33 +4,26 @@
 
 @section('content')
 
-<form action="{{route('servant.subscribe', $edict->id)}}" method="post" enctype="multipart/form-data" novalidate>
+<form action="{{route('servant.create.inscription', $edict->id)}}" method="post" enctype="multipart/form-data" novalidate>
 
   @csrf
 
-  @component('components.form.input_text',['field' => 'name',
-             'label'    => 'Nome',
-             'model'    => 'servant',
-             'value'    => $servant->name,
-                        'required' => true,
-             'errors'   => $errors]) @endcomponent
-
 @component('components.form.input_select',['field' => 'contract_id',
-             'label'    => 'Matricula',
-             'model'    => 'contract',
-             'value'    => $servant->contract_id,
+             'label'    => 'Matrícula',
+             'model'    => 'subscription',
+             'value'    => $subscription->contract_id,
              'options'  => $contracts,
              'default' => 'Selecione uma Matricula:',
              'value_method' => 'id',
              'label_method' => 'registration',
-                        'required' => true,
+             'required' => true,
              'errors'   => $errors]) @endcomponent
 
   @component('components.form.input_radio',['field' => 'removal_type',
              'label'    => 'Tipo de remoção',
              'model'    => 'subscription',
-             'value'    => 'Interesse', 
-                        'required' => true,
+             'value'    => $subscription->removal_type,
+             'required' => true,
              'errors'   => $errors]) @endcomponent
 
   @component('components.form.input_text',['field' => 'place',

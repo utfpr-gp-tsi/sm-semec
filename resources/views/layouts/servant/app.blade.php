@@ -16,6 +16,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset(mix('assets/js/servants/app.js')) }}" defer></script>
+    <script src="{{ asset(mix('assets/vendor/selectize/js/selectize.min.js')) }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

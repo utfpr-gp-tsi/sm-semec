@@ -11,8 +11,8 @@ class Subscription extends Model
      */
     protected $fillable = [
         'removal_type',
-        'interest_unit',
         'reason',
+        'unit_id',
         'contract_id',
         'servant_id',
         'edict_id'
