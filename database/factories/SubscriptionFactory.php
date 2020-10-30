@@ -1,7 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Subscription;
+use App\Models\Subscription;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -25,5 +25,6 @@ $factory->define(Subscription::class, function (Faker $faker) {
         'reason' => $faker->text(),
         'servant_id' => factory(App\Servant::class),
         'contract_id' => factory(App\Contract::class),
+        'removal_id' => factory(App\Removal::class),
     ];
 });

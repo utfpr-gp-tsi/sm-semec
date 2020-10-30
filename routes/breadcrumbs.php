@@ -276,9 +276,10 @@ Breadcrumbs::for('admin.search.units.page', function ($trail) {
 /* Edicts
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('servant.new.inscription', function ($trail, $id) {
-    $trail->push('Inscreva-se', route('servant.new.inscription' , $id));
+    // $trail->parent('servant.edicts'); ver aqui, arrumar
+    $trail->push('Inscrições #' .$id, route('servant.new.inscription' , $id));
 });
 
 Breadcrumbs::for('servant.create.inscription', function ($trail, $id) {
-    $trail->push('Title Here', route('servant.create.inscription' , $id));
+    $trail->push('Inscreva-se', route('servant.create.inscription' , $id));
 });

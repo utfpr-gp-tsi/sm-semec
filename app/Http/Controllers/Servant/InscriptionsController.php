@@ -10,6 +10,7 @@ use App\Models\Servant;
 use App\Models\Contract;
 use App\Models\Subscription;
 use App\Models\Unit;
+use App\Models\Removal;
 
 class InscriptionsController extends AppController
 {
@@ -18,10 +19,12 @@ class InscriptionsController extends AppController
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
+     * @param \App\Models\Edict $edictId
+     * @return  \Illuminate\View\View | \Illuminate\Http\RedirectResponse.
      */
-    public function new(Request $request, $edict_id)
+    public function new($edictId)
     {
-        $edict = Edict::find($edict_id);
+        $edict = Edict::find($edictId);
         if (now()->toShortDateTime() > $edict->ended_at->toShortDateTime()) {
             \Session::flash('danger', 'A data limite das inscriçoes foi atingida!');
             return redirect()->route('servant.dashboard');
@@ -31,18 +34,22 @@ class InscriptionsController extends AppController
         $contracts = $servant->contracts;
         $units = Unit::orderBy('name', 'ASC')->get();
 
+        $removals = Removal::all();
+
         $subscription = new subscription();
-        return view('servant.edicts.inscription.new', compact('edict', 'servant','subscription','contracts','units'));
+        return view('servant.edicts.inscription.new', (
+        compact('edict', 'servant', 'subscription', 'contracts', 'units', 'removals')));
     }
 
     /**
      * Store a newly created resource in storage.
      * @param  \Illuminate\Http\Request  $request
+     * @param \App\Models\Edict $edictId
      * @return  \Illuminate\View\View | \Illuminate\Http\RedirectResponse.
        */
-    public function create(Request $request, $edict_id)
+    public function create(Request $request, $edictId)
     {
-        $edict = Edict::find($edict_id);
+        $edict = Edict::find($edictId);
         if (now()->toShortDateTime() > $edict->ended_at->toShortDateTime()) {
             \Session::flash('danger', 'A data limite das inscriçoes foi atingida!');
             return redirect()->route('servant.dashboard');
@@ -51,29 +58,27 @@ class InscriptionsController extends AppController
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name'     => 'required',
             'contract_id'     => 'required',
-            'removal_type'     => 'required',
+            'removal_id'     => 'required',
             'place'     => 'required',
             'unit_id'     => 'required',
             'reason'     => 'required',
         ]);
 
         $subscription = new Subscription($data);
-        // dd($data);
-        // $subscription->fill($data);
-        //
-        $edict = Edict::find($edict_id);
+       
+        $edict = Edict::find($edictId);
         $servant = \Auth::guard('servant')->user();
-        // $contracts = Contract::find($servant);
+
+        $removals = Removal::all();
+
         $contracts = $servant->contracts;
         $units = Unit::orderBy('name', 'ASC')->get();
-        // dd($subscription->unit_id);
-        // $units = Unit::find($id);
-        // dd($subscription);
+       
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem campos em branco! Por favor verifique!');
-            return view('servant.edicts.inscription.new', compact('edict', 'servant', 'subscription', 'contracts', 'units'))->withErrors($validator);
+            return view('servant.edicts.inscription.new', (
+            compact('edict', 'servant', 'subscription', 'contracts', 'units', 'removals')));
         }
 
         $subscription->servant_id = $servant->id;

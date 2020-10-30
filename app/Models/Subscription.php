@@ -10,12 +10,12 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'removal_type',
         'reason',
         'unit_id',
         'contract_id',
         'servant_id',
-        'edict_id'
+        'edict_id',
+        'removal_id'
     ];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -42,10 +42,19 @@ class Subscription extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function edict()
     {
         return $this->belongsTo(Edict::class, 'edict_id');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function removal()
+    {
+        return $this->belongsTo(Removal::class, 'removal_id');
     }
 }

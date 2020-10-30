@@ -15,7 +15,6 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('removal_type', ['Permuta','Interesse']);
             $table->string('reason');
             $table->timestamps();
             $table->unsignedBigInteger('servant_id')->index();
@@ -37,6 +36,11 @@ class CreateSubscriptionsTable extends Migration
             $table->foreign('edict_id')
                     ->references('id')
                     ->on('edicts')
+                    ->onDelete('cascade');
+                    $table->unsignedBigInteger('removal_id')->index();
+            $table->foreign('removal_id')
+                    ->references('id')
+                    ->on('removals')
                     ->onDelete('cascade');
         });
     }
