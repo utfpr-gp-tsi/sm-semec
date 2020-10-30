@@ -19,10 +19,14 @@
              'required' => true,
              'errors'   => $errors]) @endcomponent
 
-  @component('components.form.input_radio',['field' => 'removal_type',
+  @component('components.form.input_select',['field' => 'removal_id',
              'label'    => 'Tipo de remoção',
              'model'    => 'subscription',
-             'value'    => $subscription->removal_type,
+             'value'    => $subscription->removal_id,
+             'options'  => $removals,
+             'default' => 'Selecione um tipo de Remoção:',
+             'value_method' => 'id',
+             'label_method' => 'removal',
              'required' => true,
              'errors'   => $errors]) @endcomponent
 
@@ -30,7 +34,8 @@
              'label'    => 'Unidade atual',
              'model'    => 'contract',
              'value'    => $contracts[0]->place,
-                        'required' => true,
+             'disable_field' => 'readonly',
+             'required' => true,
              'errors'   => $errors]) @endcomponent
 
   @component('components.form.input_select',['field' => 'unit_id',

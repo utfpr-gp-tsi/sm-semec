@@ -52,7 +52,7 @@ class Servant extends Authenticatable
      */
     public function subscriptions()
     {
-        return $this->hasMany(subscription::class, 'servant_id');
+        return $this->hasMany(Subscription::class, 'servant_id');
     }
 
     /**

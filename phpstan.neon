@@ -24,3 +24,4 @@ parameters:
     - app/Models/User.php
     - app/Http/Controllers/Admin/ProfileController.php
   checkMissingIterableValueType: false
+  
