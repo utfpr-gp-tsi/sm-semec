@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form action="{{route('servant.create.inscription', $edict->id)}}" method="post" enctype="multipart/form-data" novalidate>
+<form action="{{route('servant.create.inscription', $edict->id)}}" method="post" novalidate>
 
   @csrf
 
