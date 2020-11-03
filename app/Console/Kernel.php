@@ -15,6 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\Populate\Inscriptions::class,
         Commands\Populate\RemovalTypes::class,
+        Commands\Populate\Workloads::class,
+        Commands\Populate\Roles::class,
         Commands\Populate\Units::class,
         Commands\Populate\Edicts::class,
         Commands\Populate\Servants::class,

@@ -107,6 +107,16 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/edicts/{id}/inscriptions', ['as' => 'admin.inscriptions', 'uses' => 'InscriptionsController@index']);
 	Route::get('/edicts/{edict_id}/inscriptions/{id}', ['as' => 'admin.show.inscription', 'uses' => 'InscriptionsController@show']);
 
+	/* Servant Completary Data resources
+	|-------------------------------------------------------------------------- */
+    Route::get('/servant/{servant_id}/contract/{id}/completary-data',                ['as' => 'admin.index.completary_data',     'uses' => 'ServantCompletaryDataController@index']);
+    
+
+    Route::get('/servant/{servant_id}/contract/{id}/completary-data/new',                 ['as' => 'admin.new.completary_data',     'uses' => 'ServantCompletaryDataController@new']);
+	Route::post('/servant/{servant_id}/contract/{id}/completary-data',                    ['as' => 'admin.create.completary_data',  'uses' => 'ServantCompletaryDataController@create']);
+	Route::get('/servant/{servant_id}/contract/{contract_id}/completary-data/{id}/edit',  ['as' => 'admin.edit.completary_data',    'uses' => 'ServantCompletaryDataController@edit']);
+    Route::patch('/servant/{servant_id}/contract/{contract_id}/completary-data/{id}',     ['as' => 'admin.update.completary_data',   'uses' => 'ServantCompletaryDataController@update']);
+    
     });
 });
 
