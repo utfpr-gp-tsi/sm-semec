@@ -44,5 +44,6 @@ class Populate extends Command
         $this->call('populate:servants');
         $this->call('populate:edicts');
         $this->call('populate:units');
+        $this->call('populate:removals');
     }
 }

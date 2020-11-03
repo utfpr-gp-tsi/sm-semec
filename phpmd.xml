@@ -15,4 +15,5 @@
     <exclude-pattern>app/Console/Kernel.php</exclude-pattern>
     <exclude-pattern>tests/DuskTestCase.php</exclude-pattern>
     <exclude-pattern>app/Http/Controllers/Servant/InscriptionsController.php</exclude-pattern>
+    <exclude-pattern>app/Console/Commands/Populate/Removals.php</exclude-pattern>
 </ruleset>

@@ -157,7 +157,8 @@ return [
         'ended_at' => 'Término',
         'phone' => 'telefone',
         'address' => 'endereço',
-        'category_id' => 'categoria'
+        'category_id' => 'categoria',
+        'reason' => 'motivo'
     ],
 
 ];

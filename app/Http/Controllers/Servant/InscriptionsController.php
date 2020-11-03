@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Servant\AppController;
 use Illuminate\Http\Request;
 use App\Models\Edict;
-use App\Models\Servant;
-use App\Models\Contract;
 use App\Models\Subscription;
 use App\Models\Unit;
 use App\Models\Removal;
@@ -26,7 +24,7 @@ class InscriptionsController extends AppController
     {
         $edict = Edict::find($edictId);
         if (now()->toShortDateTime() > $edict->ended_at->toShortDateTime()) {
-            \Session::flash('danger', 'A data limite das inscriçoes foi atingida!');
+            \Session::flash('danger', 'A data limite das inscrições foi atingida!');
             return redirect()->route('servant.dashboard');
         }
 
@@ -51,7 +49,7 @@ class InscriptionsController extends AppController
     {
         $edict = Edict::find($edictId);
         if (now()->toShortDateTime() > $edict->ended_at->toShortDateTime()) {
-            \Session::flash('danger', 'A data limite das inscriçoes foi atingida!');
+            \Session::flash('danger', 'A data limite das inscrições foi atingida!');
             return redirect()->route('servant.dashboard');
         }
 
@@ -78,7 +76,7 @@ class InscriptionsController extends AppController
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem campos em branco! Por favor verifique!');
             return view('servant.edicts.inscription.new', (
-            compact('edict', 'servant', 'subscription', 'contracts', 'units', 'removals')));
+            compact('edict', 'servant', 'subscription', 'contracts', 'units', 'removals')))->withErrors($validator);
         }
 
         $subscription->servant_id = $servant->id;
