@@ -28,6 +28,7 @@
             Local de trabalho<i class="fas fa-info-circle d-inline ml-1"></i>
           </span>
         </th>
+        <th></th>
       </tr>
     </thead>
     <tbody>

@@ -15,8 +15,9 @@
     </thead>
     <tbody>
       @foreach($servant->contracts as $contract)
+
       <tr>
-        <td>{{ $contract->registration }}</td>
+        <td><a href="{{ route('admin.index.completary_data', ['servant_id' => $contract->servant_id, 'id' => $contract->id]) }}">{{ $contract->registration }}</a></td>
         <td>{{ $contract->role }}</td>
         <td>{{ $contract->secretary }}</td>
         <td>{{ $contract->place }}</td>

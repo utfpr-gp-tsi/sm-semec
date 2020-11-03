@@ -52,4 +52,12 @@ class Contract extends Model
     {
         return $this->hasMany(License::class, 'contract_id');
     }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    */
+    public function servantCompletaryData()
+    {
+        return $this->hasOne(ServantCompletaryData::class);
+    }
 }

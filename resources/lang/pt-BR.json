@@ -37,5 +37,7 @@
     "to the sign in screen." : "para a tela de login",
     "New Password" : "Nova Senha",
     "Confirm Password" : "Confirme a senha",
-    "Current Password" : "Senha Atual"
+    "Current Password" : "Senha Atual",
+    "Morning" : "Manhã",
+    "Evening" : "Tarde"
 }
