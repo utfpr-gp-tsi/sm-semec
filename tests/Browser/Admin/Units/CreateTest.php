@@ -63,6 +63,9 @@ class CreateTest extends DuskTestCase
                 $flash->assertSee('Existem dados incorretos! Por favor verifique!');
             });
 
+            $browser->with('div.unit_category_id', function ($flash) {
+                $flash->assertSee('O campo categoria é obrigatório.');
+            });
             $browser->with('div.unit_name', function ($flash) {
                 $flash->assertSee('O campo nome é obrigatório.');
             });
@@ -71,9 +74,6 @@ class CreateTest extends DuskTestCase
             });
             $browser->with('div.unit_phone', function ($flash) {
                 $flash->assertSee('O campo telefone é obrigatório.');
-            });
-            $browser->with('div.unit_category_id', function ($flash) {
-                $flash->assertSee('O campo categoria é obrigatório.');
             });
         });
     }
