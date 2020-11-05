@@ -7,7 +7,7 @@
             autofocus="autofocus" name="{{ $field }}"
             id="{{ $model }}_{{ $field }}">
 
-        <option> {{$default ?? ''}} </option>
+        <option value=''> {{$default ?? ''}} </option>
         @if(!empty($options))
           {{ $value_method = isset($value_method) ? $value_method : 'id' }}
           {{ $label_method = isset($label_method) ? $label_method : 'name' }}
