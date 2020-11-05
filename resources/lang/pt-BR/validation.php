@@ -158,7 +158,10 @@ return [
         'phone' => 'telefone',
         'address' => 'endereço',
         'category_id' => 'categoria',
-        'reason' => 'motivo'
+        'reason' => 'motivo',
+        'contract_id' => 'matricula',
+        'removal_id' => 'tipo de remoção',
+        'unit_id' => 'unidade de interesse',
     ],
 
 ];
