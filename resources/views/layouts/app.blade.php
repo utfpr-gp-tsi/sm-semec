@@ -21,23 +21,39 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="{{ asset(mix('assets/vendor/tabler/css/tabler-dashboard.css')) }}" rel="stylesheet">
     <link href="{{ asset(mix('assets/css/app.css')) }}" rel="stylesheet">
   </head>
   <body>
     <div class="page">
-      <div class="page-single">
-        <div class="container">
-          <div class="row py-5 mt-5">
-            <div class="col-lg-12 mx-auto p-4 mt-5">
+      <div class="flex-fill">
+        @include('layouts/_header')
 
-              @include('shared/_flash')
+        <div class="my-3 my-md-5">
+          <div class="container">
 
-              @yield('content')
+            <div class="page-header">
+              <h1 class="page-title">
+                @yield('title')
+              </h1>
+            </div>
 
+            <div class="row">
+
+              <div class="col-lg-3 order-lg-1 mb-4">
+                @include('layouts/_sidebar')
+              </div>
+
+              <div class="col-lg-9">
+                @include('shared/_flash')
+
+                @yield('content')
+              </div>
             </div>
           </div>
         </div>
       </div>
+      @include('layouts/_footer')
     </div>
   </body>
-  </html>
+</html>

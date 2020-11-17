@@ -11,7 +11,10 @@
 |
  */
 
-Route::get('/',  ['as' => 'root_path',    'uses' => 'HomeController@index']);
+Route::get('/',        ['as' => 'root_path',     'uses' => 'HomeController@index']);
+Route::get('/edicts',  ['as' => 'public.edicts', 'uses' => 'EdictsController@index']);
+Route::get('/edicts/{edict_id}/pdfs/{id}', ['as' => 'public.edict.show',  'uses' => 'EdictsController@showPdf']);
+
 
 Route::namespace('Admin')->group(function () {
     Route::prefix('admin')->group(function () {

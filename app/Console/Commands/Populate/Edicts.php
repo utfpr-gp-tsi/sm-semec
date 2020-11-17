@@ -5,6 +5,7 @@ namespace App\Console\Commands\Populate;
 use Illuminate\Console\Command;
 use DB;
 use App\Models\Edict;
+use App\Models\Pdf;
 
 class Edicts extends Command
 {
@@ -46,6 +47,20 @@ class Edicts extends Command
 
         $this->info('Populate edicts');
         DB::table('edicts')->delete();
-        Edict::factory()->count(30)->create();
+
+        $currentYear = now()->year;
+
+        for ($i = 0; $i < 5; $i++) {
+            $year = $currentYear - $i;
+            $startedAt = "01/10/{$year} 00:00";
+            $endedAt = "01/11/{$year} 23:59";
+
+            Edict::factory(rand(5, 10))
+                ->create(['started_at' => $startedAt, 'ended_at' => $endedAt])
+                ->each(function ($edict) {
+                    $edict->pdfs()->save(Pdf::factory()->make());
+                    $edict->pdfs()->save(Pdf::factory()->make());
+                });
+        }
     }
 }

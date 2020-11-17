@@ -35,8 +35,8 @@ class Edict extends Model
         if ($term) {
             $searchTerm = "%{$term}%";
             return Edict::where('title', 'LIKE', $searchTerm)
-                ->orderBy('started_at', 'desc')
-                ->paginate(20);
+            ->orderBy('started_at', 'desc')
+            ->paginate(20);
         }
         return Edict::orderBy('started_at', 'desc')->paginate(20);
     }

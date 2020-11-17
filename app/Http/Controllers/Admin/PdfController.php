@@ -58,16 +58,12 @@ class PdfController extends AppController
      * Display the specified resource.
      *
      * @param  \App\Models\Pdf  $id
-     * @param  \App\Models\Edict $edictId
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse.
      */
-    public function show($edictId, $id)
+    public function show($id)
     {
         $pdf = Pdf::find($id);
-        $edict = Edict::find($edictId);
-
-        $pathToFile = public_path('uploads/edicts/' . $edict->id . '/' . $pdf->getOriginal('pdf'));
-        return response()->file($pathToFile);
+        return response()->file($pdf->pathToFile());
     }
 
     /**
