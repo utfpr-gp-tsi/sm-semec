@@ -14,7 +14,7 @@ class Roles extends Command
      * @var string
      */
     protected $signature = 'populate:roles
-                            {--json} populate from a json file locate at database/data/roles.json
+                            {--json} populate from a json file locate at database/data/role.json
                             {--clear} erase roles and relationships';
 
     /**
@@ -63,19 +63,18 @@ class Roles extends Command
         $this->info('Populate Roles');
         DB::table('roles')->delete();
 
-        $categories = Role::factory()->count(4)->create();
-
+        //$categories = Role::factory()->count(4)->create();
     }
 
     private function populateFromJSON(): void
     {
-        $this->info('Populate Roles from ./database/data/roles.json');
-        $jsonPath = base_path('./database/data/roles.json');
+        $this->info('Populate Roles from ./database/data/role.json');
+        $jsonPath = base_path('./database/data/role.json');
         $jsonString = file_get_contents($jsonPath);
 
         if ($jsonString === false) {
-            $this->info('File roles.json not found');
-            $this->info('You need to create roles.json file in database/data folder');
+            $this->info('File role.json not found');
+            $this->info('You need to create role.json file in database/data folder');
             return;
         }
 
@@ -94,7 +93,7 @@ class Roles extends Command
      */
     public function createOrUpdateRole($data): Role
     {
-        return Rolw::updateOrCreate(
+        return Role::updateOrCreate(
             [
                 'name' => $data->name,
             ]

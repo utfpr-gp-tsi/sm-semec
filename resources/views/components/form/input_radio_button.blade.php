@@ -12,13 +12,13 @@
     @endforeach
 
 
-    @if ($errors->has($field))
-      <span class="invalid-feedback" role="alert">
-        @foreach ($errors->get($field) as $message)
-          <strong>{{ $message }}</strong>
-        @endforeach
-      </span>
-    @endif
+  @if ($errors->has($field))
+    <span class="invalid-feedback" role="alert">
+      @foreach ($errors->get($field) as $message)
+        <strong>{{ $message }}</strong>
+      @endforeach
+    </span>
+  @endif
 
   <small class="form-text text-muted">{{ $hint ?? ''}}</small>
 </div>
