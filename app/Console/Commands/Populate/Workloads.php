@@ -14,7 +14,7 @@ class Workloads extends Command
      * @var string
      */
     protected $signature = 'populate:workloads
-                            {--json} populate from a json file locate at database/data/workloads.json
+                            {--json} populate from a json file locate at database/data/workload.json
                             {--clear} erase roles and relationships';
 
     /**
@@ -63,23 +63,23 @@ class Workloads extends Command
         $this->info('Populate Workloads');
         DB::table('workloads')->delete();
 
-        $categories = Workload::factory()->count(4)->create();
-
+        //$categories = Workload::factory()->count(4)->create();
     }
 
     private function populateFromJSON(): void
     {
-        $this->info('Populate Workloads from ./database/data/workloads.json');
-        $jsonPath = base_path('./database/data/roles.json');
+        $this->info('Populate Workloads from ./database/data/workload.json');
+        $jsonPath = base_path('./database/data/workload.json');
         $jsonString = file_get_contents($jsonPath);
 
         if ($jsonString === false) {
-            $this->info('File roles.json not found');
-            $this->info('You need to create workloads.json file in database/data folder');
+            $this->info('File workload.json not found');
+            $this->info('You need to create workload.json file in database/data folder');
             return;
         }
 
         $jsonDecoded = json_decode($jsonString);
+
         $workloads = $jsonDecoded->workloads;
 
         foreach ($workloads as $data) {
@@ -88,13 +88,13 @@ class Workloads extends Command
     }
 
             /**
-     * Create or update Role
+     * Create or update Workload
      *
      * @param  object $data
      */
-    public function createOrUpdateWorkload($data): Role
+    public function createOrUpdateWorkload($data): Workload
     {
-        return Rolw::updateOrCreate(
+        return Workload::updateOrCreate(
             [
                 'workload' => $data->workload,
             ]

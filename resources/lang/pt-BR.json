@@ -38,6 +38,6 @@
     "New Password" : "Nova Senha",
     "Confirm Password" : "Confirme a senha",
     "Current Password" : "Senha Atual",
-    "Morning" : "Manhã",
-    "Evening" : "Tarde"
+    "evening"  : "Tarde",
+    "morning" : "Manhã"
 }

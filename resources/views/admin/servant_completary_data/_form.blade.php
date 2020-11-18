@@ -46,12 +46,12 @@
     @component('components.form.input_radio_button', ['field'    => 'period',
                                               'label'    => 'Período',
                                               'model'    => 'servantCompletaryData',
-                                              'required' => true,
-                                              'values'   => [0 => 'Morning' , 1 => 'Evening'],
+                                              'values'   => [0 => 'morning' , 1 => 'evening'],
                                               'value'    => $completaryData->period,
+                                              'required' => true,
                                               'errors'   => $errors]) @endcomponent
 
 
-    @component('components.form.input_submit',['value' => $submit, 'back_url' => route('admin.servants')]) @endcomponent
+    @component('components.form.input_submit',['value' => $submit, 'back_url' => route('admin.index.completary_data', $contract->servant_id)]) @endcomponent
 
 </form>

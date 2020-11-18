@@ -15,8 +15,8 @@ class CreateMovementsTable extends Migration
     {
         Schema::create('movements', function (Blueprint $table) {
             $table->id();
-            $table->string('started_at');
-            $table->string('ended_at');
+            $table->date('started_at');
+            $table->date('ended_at');
             $table->unsignedBigInteger('unit_id')->index();
             $table->foreign('unit_id')
                     ->references('id')
