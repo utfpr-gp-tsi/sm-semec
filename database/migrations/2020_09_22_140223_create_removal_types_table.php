@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRemovalsTable extends Migration
+class CreateRemovalTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateRemovalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('removals', function (Blueprint $table) {
+        Schema::create('removal_types', function (Blueprint $table) {
             $table->id();
-            $table->string('removal');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateRemovalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('removals');
+        Schema::dropIfExists('removal_types');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriptionsTable extends Migration
+class CreateInscriptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,35 +13,40 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('inscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('reason');
             $table->timestamps();
+
             $table->unsignedBigInteger('servant_id')->index();
             $table->foreign('servant_id')
                     ->references('id')
-                    ->on('servants')
-                    ->onDelete('cascade');
+                    ->on('servants');
+
             $table->unsignedBigInteger('contract_id')->index();
             $table->foreign('contract_id')
                     ->references('id')
-                    ->on('contracts')
-                    ->onDelete('cascade');
-                    $table->unsignedBigInteger('unit_id')->index();
-            $table->foreign('unit_id')
+                    ->on('contracts');
+
+            $table->unsignedBigInteger('current_unit_id')->index();
+            $table->foreign('current_unit_id')
+                  ->references('id')
+                  ->on('units');
+
+            $table->unsignedBigInteger('interested_unit_id')->index();
+            $table->foreign('interested_unit_id')
                     ->references('id')
-                    ->on('units')
-                    ->onDelete('cascade');
-                    $table->unsignedBigInteger('edict_id')->index();
+                    ->on('units');
+
+            $table->unsignedBigInteger('edict_id')->index();
             $table->foreign('edict_id')
                     ->references('id')
-                    ->on('edicts')
-                    ->onDelete('cascade');
-                    $table->unsignedBigInteger('removal_id')->index();
-            $table->foreign('removal_id')
+                    ->on('edicts');
+
+            $table->unsignedBigInteger('removal_type_id')->index();
+            $table->foreign('removal_type_id')
                     ->references('id')
-                    ->on('removals')
-                    ->onDelete('cascade');
+                    ->on('removal_types');
         });
     }
 
@@ -52,6 +57,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('inscriptions');
     }
 }

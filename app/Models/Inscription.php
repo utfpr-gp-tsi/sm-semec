@@ -4,25 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subscription extends Model
+class Inscription extends Model
 {
     /**
      * @var array
      */
     protected $fillable = [
-        'reason',
-        'unit_id',
-        'contract_id',
-        'servant_id',
         'edict_id',
-        'removal_id'
+        'servant_id',
+        'contract_id',
+        'removal_type_id',
+        'interested_unit_id',
+        'reason',
     ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function servant()
     {
-        return $this->belongsTo(Servant::class, 'subscription_id');
+        return $this->belongsTo(Servant::class, 'inscription_id');
     }
 
      /**
@@ -36,9 +37,17 @@ class Subscription extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function unit()
+    public function currentUnit()
     {
-        return $this->belongsTo(Unit::class, 'unit_id');
+        return $this->belongsTo(Unit::class, 'current_unit_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function interestedUnit()
+    {
+        return $this->belongsTo(Unit::class, 'interested_unit_id');
     }
 
     /**
@@ -49,12 +58,11 @@ class Subscription extends Model
         return $this->belongsTo(Edict::class, 'edict_id');
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function removal()
+    public function removalType()
     {
-        return $this->belongsTo(Removal::class, 'removal_id');
+        return $this->belongsTo(RemovalType::class, 'removal_type_id');
     }
 }

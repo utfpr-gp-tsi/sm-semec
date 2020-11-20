@@ -27,6 +27,33 @@ class Edict extends Model
     ];
 
     /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function pdfs()
+    {
+        return $this->hasMany(Pdf::class, 'edict_id');
+    }
+
+     /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function inscriptions()
+    {
+        return $this->hasMany(Inscription::class, 'edict_id');
+    }
+
+
+    /**
+    * @return $this
+    */
+    public function saveWithoutEvents(array $options = [])
+    {
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
+    }
+
+    /**
      * @param string $term
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
@@ -39,32 +66,5 @@ class Edict extends Model
             ->paginate(20);
         }
         return Edict::orderBy('started_at', 'desc')->paginate(20);
-    }
-
-    /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    */
-    public function pdfs()
-    {
-        return $this->hasMany(Pdf::class, 'edict_id');
-    }
-
-     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    */
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class, 'edict_id');
-    }
-
-
-    /**
-    * @return $this
-    */
-    public function saveWithoutEvents(array $options = [])
-    {
-        return static::withoutEvents(function () use ($options) {
-            return $this->save($options);
-        });
     }
 }

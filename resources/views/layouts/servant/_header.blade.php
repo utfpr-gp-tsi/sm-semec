@@ -11,11 +11,11 @@
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
 
-            <span class="avatar" style="background-image: url({{ auth()->user()->image_path }})"></span>
+            <span class="avatar" style="background-image: url({{ Auth::guard('servant')->user()->image_path }})"></span>
 
             <span class="ml-2 d-none d-lg-block">
-              <span class="text-default">  {{ Auth::user()->name }}</span>
-              <small class="text-muted d-block mt-1">  {{ Auth::user()->email }}</small>
+              <span class="text-default">  {{ Auth::guard('servant')->user()->name }}</span>
+              <small class="text-muted d-block mt-1">  {{ Auth::guard('servant')->user()->email }}</small>
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">

@@ -7,7 +7,7 @@
 	<input class="form-control string @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
 				 @if ($required) required="required" @endif
 				 autofocus="autofocus" type="text" name="{{ $field }}"
-	  		 value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}" {{$disable_field ?? ''}}/>
+	  		 value="{{ $value ?? '' }}" id="{{ $model }}_{{ $field }}" {{ $disabled ?? '' }}/>
 
 	@if ($errors->has($field))
 		<span class="invalid-feedback" role="alert">

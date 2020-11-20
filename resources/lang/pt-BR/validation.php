@@ -159,9 +159,8 @@ return [
         'address' => 'endereço',
         'category_id' => 'categoria',
         'reason' => 'motivo',
-        'contract_id' => 'matricula',
-        'removal_id' => 'tipo de remoção',
-        'unit_id' => 'unidade de interesse',
+        'interested_unit_id' => 'unidade de interesse',
+        'contract_id' => 'contrato',
+        'removal_type_id' => 'tipo de remoção'
     ],
-
 ];

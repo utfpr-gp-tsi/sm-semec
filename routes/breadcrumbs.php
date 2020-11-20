@@ -273,13 +273,19 @@ Breadcrumbs::for('admin.search.units.page', function ($trail) {
     $trail->push('Unidades', route('admin.units'));
 });
 
-/* Edicts
+/* Servant Inscrptions
+ * TODO: Após a listagem dos editais adicionar rotas corretas
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('servant.new.inscription', function ($trail, $id) {
-    // $trail->parent('servant.edicts'); ver aqui, arrumar
-    $trail->push('Inscrições #' .$id, route('servant.new.inscription' , $id));
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', '#');
+    $trail->push('Edital #' .$id, '#');
+    $trail->push('Nova Inscrição', route('servant.new.inscription' , $id));
 });
 
 Breadcrumbs::for('servant.create.inscription', function ($trail, $id) {
-    $trail->push('Inscreva-se', route('servant.create.inscription' , $id));
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', '#');
+    $trail->push('Edital #' .$id, '#');
+    $trail->push('Nova Inscrição', route('servant.create.inscription' , $id));
 });
