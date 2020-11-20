@@ -158,7 +158,9 @@ return [
         'phone' => 'telefone',
         'address' => 'endereço',
         'category_id' => 'categoria',
-        'reason' => 'motivo'
+        'reason' => 'motivo',
+        'interested_unit_id' => 'unidade de interesse',
+        'contract_id' => 'contrato',
+        'removal_type_id' => 'tipo de remoção'
     ],
-
 ];

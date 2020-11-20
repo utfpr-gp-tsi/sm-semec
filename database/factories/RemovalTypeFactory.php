@@ -3,12 +3,12 @@
 namespace Database\Factories;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Models\Removal;
+use App\Models\RemovalType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
-class RemovalFactory extends Factory
+class RemovalTypeFactory extends Factory
 {
 
     /**
@@ -16,18 +16,17 @@ class RemovalFactory extends Factory
     *
     * @var string
     */
-    protected $model = Removal::class;
+    protected $model = RemovalType::class;
 
     /**
     * Define the model's default state.
     *
     * @return array
     */
-
-     public function definition()
+    public function definition()
     {
         return [
-            'removal' => $this->faker->name(),
+            'name' => $this->faker->unique()->name(),
         ];
     }
 }

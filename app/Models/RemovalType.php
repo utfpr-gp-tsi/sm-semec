@@ -5,23 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Removal extends Model
+class RemovalType extends Model
 {
      use HasFactory;
-     
+
     /**
      * @var array
      */
 
     protected $fillable = [
-        'removal'
+        'name'
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subscription()
+    public function inscriptions()
     {
-        return $this->hasMany(Subscription::class, 'removal_id');
+        return $this->hasMany(Inscription::class, 'removal_type_id');
     }
 }

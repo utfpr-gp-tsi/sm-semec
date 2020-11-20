@@ -177,7 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\PrettyPaginationServiceProvider::class,
         App\Providers\DateTimeServiceProvider::class,
-
+        App\Providers\DuskServiceProvider::class,
     ],
 
     /*

@@ -4,25 +4,25 @@ namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
 use DB;
-use App\Models\Removal;
+use App\Models\RemovalType;
 
-class Removals extends Command
+class RemovalTypes extends Command
 {
    /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'populate:removals
-                            {--json} populate from a json file locate at database/data/removal.json
-                            {--clear} erase removals and relationships';
+    protected $signature = 'populate:removal_types
+                            {--json} populate from a json file locate at database/data/removal_types.json
+                            {--clear} erase removal types and relationships';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Populate Removals';
+    protected $description = 'Populate Removal Types';
 
     /**
      * Create a new command instance.
@@ -42,7 +42,7 @@ class Removals extends Command
     public function handle()
     {
         if ($this->option('clear')) {
-            DB::table('removals')->delete();
+            DB::table('removal_types')->delete();
         }
 
         if ($this->option('json')) {
@@ -60,43 +60,31 @@ class Removals extends Command
             return;
         }
 
-        $this->info('Populate Removals');
-        DB::table('removals')->delete();
+        $this->info('Populate Removal Types');
+        DB::table('removal_types')->delete();
 
-        $removals = Removal::factory()->count(3)->create();
+        RemovalType::factory()->count(3)->create();
     }
 
     private function populateFromJSON(): void
     {
-        $this->info('Populate Removals from ./database/data/removal.json');
-        $jsonPath = base_path('./database/data/removal.json');
+        $this->info('Populate Removals from ./database/data/removal_types.json');
+        $jsonPath = base_path('./database/data/removal_types.json');
         $jsonString = file_get_contents($jsonPath);
 
         if ($jsonString === false) {
-            $this->info('File removals.json not found');
+            $this->info('File removal_types.json not found');
             $this->info('You need to create removal.json file in database/data folder');
             return;
         }
 
         $jsonDecoded = json_decode($jsonString);
-        $removals = $jsonDecoded->removals;
+        $removalTypes = $jsonDecoded->removal_types;
 
-        foreach ($removals as $data) {
-            $removals = $this->createOrUpdateRemoval($data);
+        foreach ($removalTypes as $data) {
+            RemovalType::updateOrCreate([
+              'name' => $data->name
+            ]);
         }
-    }
-
-            /**
-     * Create or update Removal
-     *
-     * @param  object $data
-     */
-    public function createOrUpdateRemoval($data): Removal
-    {
-        return Removal::updateOrCreate(
-            [
-                'removal' => $data->removal,
-            ]
-        );
     }
 }

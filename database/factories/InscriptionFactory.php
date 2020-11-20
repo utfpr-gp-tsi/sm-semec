@@ -1,7 +1,11 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Models\Subscription;
+use App\Models\Inscription;
+use App\Models\Servant;
+use App\Models\Contrat;
+use App\Models\RemovalType;
+use App\Models\Unit;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -15,16 +19,14 @@ use Faker\Generator as Faker;
 | model instances for testing / seeding your application's database.
 |
 */
-
-$factory->define(Subscription::class, function (Faker $faker) {
+$factory->define(Inscription::class, function (Faker $faker) {
     return [
-        'name' => $faker->text(),
-        'registration' => $faker->text(),
-        'removal_type' => $faker->radio(),
-        'interest_unit' => $faker->text(),
+        'servant_id' => Servant::factory(),
+        'contract_id' => Contract::factory(),
+        'removal_type_id' => RemovalType::factory(),
+        'edict_id' => Edict::factory(),
+        'current_unit_id' => Unit::factory(),
+        'interested_unit_id' => Unit::factory(),
         'reason' => $faker->text(),
-        'servant_id' => factory(App\Servant::class),
-        'contract_id' => factory(App\Contract::class),
-        'removal_id' => factory(App\Removal::class),
     ];
 });
