@@ -69,7 +69,7 @@ class ResetPasswordController extends Controller
     {
         return Password::broker('servants');
     }
-    
+
     /**
      * Get the guard to be used during password reset.
      *

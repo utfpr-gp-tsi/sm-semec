@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\Populate\RemovalTypes::class,
         Commands\Populate\Units::class,
         Commands\Populate\Edicts::class,
         Commands\Populate\Servants::class,
@@ -38,7 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load('_DIR_'.'/Commands');
 
         require base_path('routes/console.php');
     }

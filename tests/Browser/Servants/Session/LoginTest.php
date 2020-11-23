@@ -16,7 +16,7 @@ class LoginTest extends DuskTestCase
         parent::setUp();
         $this->servant = Servant::factory('servant')->create();
     }
-    
+
     /**
      * A Dusk test login fail.
      *
@@ -30,7 +30,7 @@ class LoginTest extends DuskTestCase
                     ->type('password', 'wrong-password')
                     ->press('Entrar')
                     ->assertPathIs('/servant/login');
-  
+
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Usuário ou senha incorretas.');
             });
@@ -50,7 +50,7 @@ class LoginTest extends DuskTestCase
                     ->type('password', 'password')
                     ->press('Entrar')
                     ->assertPathIs('/servant');
-  
+
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Login efetuado com sucesso.');
             });

@@ -48,12 +48,16 @@ class Edicts extends Command
         $this->info('Populate edicts');
         DB::table('edicts')->delete();
 
+        $currentDay = now()->day;
+        $currentMonth = now()->month;
         $currentYear = now()->year;
+
+        $nextDay = now()->addDays()->day;
 
         for ($i = 0; $i < 5; $i++) {
             $year = $currentYear - $i;
-            $startedAt = "01/10/{$year} 00:00";
-            $endedAt = "01/11/{$year} 23:59";
+            $startedAt = "{$currentDay}/{$currentMonth}/{$year} 00:00";
+            $endedAt = "{$nextDay}/{$currentMonth}/{$year} 23:59";
 
             Edict::factory(rand(5, 10))
                 ->create(['started_at' => $startedAt, 'ended_at' => $endedAt])

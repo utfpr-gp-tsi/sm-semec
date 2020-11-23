@@ -46,6 +46,15 @@ class Servant extends Authenticatable
         'image_path',
     ];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function inscriptions()
+    {
+        return $this->hasMany(Inscription::class, 'servant_id');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -77,23 +86,6 @@ class Servant extends Authenticatable
     {
         return $this->hasManyThrough(License::class, Contract::class, 'servant_id', 'contract_id');
     }
-    /**
-     * @param string $term
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public static function search($term)
-    {
-        if ($term) {
-            $searchTerm = "%{$term}%";
-            return Servant::query()->with(['contracts'])
-                                   ->where('name', 'LIKE', $searchTerm)
-                                   ->orWhere('CPF', 'LIKE', $searchTerm)
-                                   ->orderBy('name', 'asc')
-                                   ->paginate(20);
-        }
-
-        return Servant::with(['contracts'])->paginate(20);
-    }
 
     /**
     * @param string $value
@@ -108,7 +100,7 @@ class Servant extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
-    
+
     /**
     * @return string
     */
@@ -129,5 +121,33 @@ class Servant extends Authenticatable
         return static::withoutEvents(function () use ($options) {
             return $this->save($options);
         });
+    }
+
+
+    /*
+     * TODO: Pegar automaticamente a unidade atual do servidor.
+     * @return \App\Models\Unit
+     */
+    public function currentUnit(): \App\Models\Unit
+    {
+        return Unit::first();
+    }
+
+    /**
+     * @param string $term
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function search($term)
+    {
+        if ($term) {
+            $searchTerm = "%{$term}%";
+            return Servant::query()->with(['contracts'])
+                                   ->where('name', 'LIKE', $searchTerm)
+                                   ->orWhere('CPF', 'LIKE', $searchTerm)
+                                   ->orderBy('name', 'asc')
+                                   ->paginate(20);
+        }
+
+        return Servant::with(['contracts'])->paginate(20);
     }
 }

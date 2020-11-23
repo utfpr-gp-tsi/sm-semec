@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class License extends Model
 {
     use HasFactory;
-    
+
     /**
      * @var array
      */

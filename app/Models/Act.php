@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Act extends Model
 {
     use HasFactory;
-    
+
     /**
     * @var array
     */

@@ -129,5 +129,11 @@ Route::namespace('Servant')->group(function () {
 
 	Route::get('/password/edit',  ['as' => 'password.edit',   'uses' => 'ProfileController@editPassword']);
 	Route::post('/password/edit', ['as' => 'profile.password.update', 'uses' => 'ProfileController@updatePassword']);
+
+
+	/* Edicts Inscriptions
+        |----------------------------------------------------------------------------*/
+	Route::get('/edicts/{edict_id}/inscriptions/new', ['as' => 'new.inscription',   'uses' => 'InscriptionsController@new']);
+        Route::post('/edicts/{edict_id}/inscriptions',    ['as' => 'create.inscription','uses' => 'InscriptionsController@create']);
     });
 });
