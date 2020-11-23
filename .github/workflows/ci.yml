@@ -1,0 +1,52 @@
+name: CI
+on:
+  push:
+    branches:
+      - github-actions
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+  container:
+    image: dmarczal/laravel:ci-laravel
+  services:
+    db:
+      image: mysql:5.7.22
+      ports: ['3306:3306']
+      env:
+        MYSQL_DATABASE: sm_semec
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        MYSQL_ROOT_PASSWORD:
+        SERVICE_TAGS: dev
+        SERVICE_NAME: mysql
+      options: >-
+        --health-cmd='mysqladmin ping'
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 3
+    selenium:
+      image: selenium/standalone-chrome-debug:latest
+      ports: ['4444:4444']
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Copy .env
+      run: |
+        cp .env.ci .env
+
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: |
+        echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+    - name: Cache Composer Downloads
+      uses: actions/cache@v2
+      with:
+        path: vendor/
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+
+    - name: Install dependencies
+      uses: php-actions/composer@v4
