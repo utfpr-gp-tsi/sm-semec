@@ -21,7 +21,7 @@ class ProfileController extends AppController
         $servant = \Auth::guard('servant')->user();
         return view('servant.profile.edit', compact('servant'));
     }
-    
+
     /**
     * Update the specified resource in storage.
     *

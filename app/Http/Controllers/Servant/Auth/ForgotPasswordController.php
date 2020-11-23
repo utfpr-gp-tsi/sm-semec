@@ -11,7 +11,7 @@ use Auth;
 class ForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
-    
+
     /**
      * Only guests for "servant" guard are allowed except
      * for logout.

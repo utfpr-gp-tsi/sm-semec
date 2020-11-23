@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Lang;
 class ResetPasswordNotification extends Notification
 {
     use Queueable;
-    
+
     /**
     * @var string
     */
     public $token;
-    
+
     /**
     * The callback that should be used to create the reset password URL.
     *
@@ -65,12 +65,12 @@ class ResetPasswordNotification extends Notification
         if (static::$createUrlCallback) {
             $url = call_user_func(static::$createUrlCallback, $notifiable, $this->token);
         }
-            
+
         $url = url(route('servant.password.reset', [
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
-        
+
 
         $text = 'You are receiving this email because we received a password reset request for your account.';
         return (new MailMessage())
