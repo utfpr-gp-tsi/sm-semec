@@ -8,8 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       app:
-        image: dmarczal/laravel:php-to-laravel-7x-travis
-        container_name: app
+        image: dmarczal/laravel:ci-laravel
         environment:
           SERVICE_NAME: app
           SERVICE_TAGS: dev
