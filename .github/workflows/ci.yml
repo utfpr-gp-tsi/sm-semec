@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       app:
-        image: dmarczal/laravel:php-to-laravel-7x-travisl
+        image: dmarczal/laravel:php-to-laravel-7x-travis
         volumes:
           - ./:/var/www
       db:
