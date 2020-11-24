@@ -6,9 +6,16 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    container:
-      image: dmarczal/laravel:ci-laravel
     services:
+      app:
+        image: dmarczal/laravel:ci-laravel
+        container_name: app
+        environment:
+          SERVICE_NAME: app
+          SERVICE_TAGS: dev
+        working_dir: /var/www
+        volumes:
+          - ./:/var/www
       db:
         image: mysql:5.7.22
         ports: ['3306:3306']
@@ -34,19 +41,4 @@ jobs:
       - name: Copy .env
         run: |
           cp .env.ci .env
-
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache Composer Downloads
-        uses: actions/cache@v2
-        with:
-          path: vendor/
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-
-      - name: Install dependencies
-        uses: php-actions/composer@v4
+          docker ps
