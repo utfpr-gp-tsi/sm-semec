@@ -9,9 +9,6 @@ jobs:
     services:
       app:
         image: dmarczal/laravel:ci-laravel
-        environment:
-          SERVICE_NAME: app
-          SERVICE_TAGS: dev
         working_dir: /var/www
         volumes:
           - ./:/var/www
