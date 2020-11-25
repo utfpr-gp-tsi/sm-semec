@@ -33,6 +33,7 @@ jobs:
       - name: Prepare app
         run: |
           cp .env.ci .env
+          cat .env
           php artisan key:generate
           php artisan config:clear
           php artisan route:clear
@@ -40,7 +41,7 @@ jobs:
 
       - name: Run migration and schema dump
         run: |
-          php artisan migrate --env=testing
+          php artisan migrate:refresh --env=testing
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
