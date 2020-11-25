@@ -13,6 +13,7 @@ services:
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
+    shm_size: '2gb'
     working_dir: /var/www
     volumes:
       - ./:/var/www
