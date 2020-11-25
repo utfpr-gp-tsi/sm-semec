@@ -48,3 +48,8 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
+      - name: Code analyse
+        run: |
+          vendor/bin/phpcs --standard=phpcs.xml ./
+          vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
+          php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
