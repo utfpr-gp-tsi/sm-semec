@@ -40,13 +40,11 @@ jobs:
           php artisan route:clear
           php artisan cache:clear
 
-      - name: Run migration and schema dump
+      - name: Run migration
         run: |
-          # mysql -h 127.0.0.1 --port 3306 -u root -e "create database sm_semec_test;"
-          # mysql -h 127.0.0.1 --port 3306 -u root -e "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
-          # mysql -h 127.0.0.1 --port 3306 -u root -e "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
           mysql -h 127.0.0.1 --port 3306 -u root -e "show databases;"
-          php artisan migrate:refresh --env=testing
+          php artisan migrate
+          php artisan db:seed
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
