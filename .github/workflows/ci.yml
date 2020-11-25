@@ -8,10 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     services:
       db:
-        image: mysql:8.0
+        image: mysql:8.0.22
         env:
+          MYSQL_DATABASE: sm_semec
+          MYSQL_USER: sm-semec
+          MYSQL_PASSWORD: sm-semec
           MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-          MYSQL_ROOT_PASSWORD:
+          SERVICE_NAME: mysql
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -24,7 +27,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
-          extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, sqlite, pdo_sqlite, tokenizer, xml, xmlwriter, zip
+          extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
 
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
@@ -39,9 +42,9 @@ jobs:
 
       - name: Run migration and schema dump
         run: |
-          mysql -h 127.0.0.1 --port 3306 -u root -e "create database sm_semec_test;"
-          mysql -h 127.0.0.1 --port 3306 -u root -e "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
-          mysql -h 127.0.0.1 --port 3306 -u root -e "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
+          # mysql -h 127.0.0.1 --port 3306 -u root -e "create database sm_semec_test;"
+          # mysql -h 127.0.0.1 --port 3306 -u root -e "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
+          # mysql -h 127.0.0.1 --port 3306 -u root -e "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%' IDENTIFIED BY 'sm-semec'; FLUSH PRIVILEGES;"
           mysql -h 127.0.0.1 --port 3306 -u root -e "show databases;"
           php artisan migrate:refresh --env=testing
         env:
