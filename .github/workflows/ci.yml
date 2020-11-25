@@ -6,22 +6,37 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: sm_semec_test
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Copy .env
-        run: |
-          cp .env.ci .env
-          mysql --help
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, sqlite, pdo_sqlite, tokenizer, xml, xmlwriter, zip
 
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
-      - name: Clear cache
+      - name: Prepare app
         run: |
+          cp .env.ci .env
           php artisan key:generate
           php artisan config:clear
           php artisan route:clear
           php artisan cache:clear
+
+      - name: Run migration and schema dump
+        run: |
+          php artisan migrate --force
