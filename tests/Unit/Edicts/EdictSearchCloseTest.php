@@ -15,7 +15,6 @@ class EdictSearchCloseTest extends TestCase
     /** @var array */
     protected $edicts;
     
-
     public function setUp(): void
     {
         parent::setUp();

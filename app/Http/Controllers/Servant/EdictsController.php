@@ -42,6 +42,8 @@ class EdictsController extends AppController
     public function show($id)
     {
         $edict = Edict::find($id);
-        return view('servant.edicts.show', compact('edict'));
+        return view('servant.edicts.show', [
+            'edict' => $edict
+        ]);
     }
 }
