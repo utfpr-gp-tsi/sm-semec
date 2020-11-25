@@ -77,13 +77,13 @@ class Edict extends Model
         if ($term) {
             $searchTerm = "%{$term}%";
             return Edict::where([
-                ['ended_at', '>=', Carbon::now()->toDateString()],
+                ['ended_at', '>=', Carbon::now()->toDateTimeString()],
                 ['title', 'LIKE', $searchTerm],
                  ])
                 ->orderBy('started_at', 'desc')
                 ->paginate(20);
         }
-        return Edict::where('ended_at', '>=', Carbon::now()->toDateString())
+        return Edict::where('ended_at', '>=', Carbon::now()->toDateTimeString())
                       ->orderBy('started_at', 'desc')
                       ->paginate(20);
     }
@@ -97,12 +97,12 @@ class Edict extends Model
         if ($term) {
             $searchTerm = "%{$term}%";
             return Edict::where([
-                ['ended_at', '<=', Carbon::now()->toDateString()],
+                ['ended_at', '<=', Carbon::now()->toDateTimeString()],
                 ['title', 'LIKE', $searchTerm],])
                 ->orderBy('started_at', 'desc')
                 ->paginate(20);
         }
-        return Edict::where('ended_at', '<=', Carbon::now()->toDateString())
+        return Edict::where('ended_at', '<=', Carbon::now()->toDateTimeString())
                       ->orderBy('started_at', 'desc')
                       ->paginate(20);
     }
