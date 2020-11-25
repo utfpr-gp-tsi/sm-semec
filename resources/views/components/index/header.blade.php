@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="{{ $size_search ?? 'col-sm-12 col-lg-8 mb-2'}}">
+  <div class="{{ $search_class ?? 'col-sm-12 col-lg-8 mb-2'}}">
     <div>
       <div class="input-group input-icon">
         <input id="search_input" type="text" name="term" data-base-url="{{ $base_search_path }}"

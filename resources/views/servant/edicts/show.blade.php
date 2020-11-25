@@ -13,6 +13,7 @@
     <p><strong>Válido até: </strong> {{ $edict->ended_at->toShortDateTime() }}</p>
   </div>
 </div>
+
 @component('components.links.back_and_edit', ['back_url' => route('servant.edicts')]) @endcomponent
 
 @endsection
