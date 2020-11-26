@@ -53,9 +53,9 @@ jobs:
           vendor/bin/phpcs --standard=phpcs.xml ./
           vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
           php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
-      - name: Code analyse
+      - name: Migrate on test
         run: |
-          mysql -h 127.0.0.1 --port 3306 -u root <<< "create database sm_semec_test;"
-          mysql -h 127.0.0.1 --port 3306 -u root <<< "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
-          mysql -h 127.0.0.1 --port 3306 -u root <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'localhost'; FLUSH PRIVILEGES;"
-          mysql -h 127.0.0.1 --port 3306 -usm-semec -psm-semec <<< "show databases;"
+          mysql -h 127.0.0.1 --port 3306 -usm-semec -psm-semec <<< "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+          php artisan migrate:refresh --env=testing
+          php artisan test
+
