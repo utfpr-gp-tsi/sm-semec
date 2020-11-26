@@ -56,6 +56,6 @@ jobs:
       - name: Code analyse
         run: |
           mysql -h 127.0.0.1 --port 3306 -u root <<< "create database sm_semec_test;"
-          mysql -h 127.0.0.1 --port 3306 -u root <<< "CREATE USER 'sm-semec'@'%' IDENTIFIED BY 'sm-semec';"
-          mysql -h 127.0.0.1 --port 3306 -u root <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'%'; FLUSH PRIVILEGES;"
+          mysql -h 127.0.0.1 --port 3306 -u root <<< "CREATE USER 'sm-semec'@'localhost' IDENTIFIED BY 'sm-semec';"
+          mysql -h 127.0.0.1 --port 3306 -u root <<< "GRANT ALL ON sm_semec_test.* TO 'sm-semec'@'localhost'; FLUSH PRIVILEGES;"
           mysql -h 127.0.0.1 --port 3306 -usm-semec -psm-semec <<< "show databases;"
