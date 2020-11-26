@@ -55,7 +55,4 @@ jobs:
           php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
       - name: Migrate on test
         run: |
-          mysql -h 127.0.0.1 --port 3306 -usm-semec -psm-semec <<< "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-          php artisan migrate:refresh --env=testing
-          php artisan test
-
+          mysql -h 127.0.0.1 --port 3306 -usm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
