@@ -59,3 +59,13 @@ jobs:
           mysql -h 127.0.0.1 --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
           php artisan migrate:refresh --env=testing
           php artisan test
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+       - name: Migrate on test
+        run: |
+          npm install
+          npm run production
