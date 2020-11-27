@@ -74,3 +74,6 @@ jobs:
           npm install
           npm run production
           php artisan dusk
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
