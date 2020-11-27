@@ -73,7 +73,9 @@ jobs:
         run: |
           npm install
           npm run production
-          php artisan dusk
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
