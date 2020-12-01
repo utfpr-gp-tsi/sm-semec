@@ -104,10 +104,10 @@ Route::namespace('Admin')->group(function () {
 	/* Servant Completary Data resources
 	|-------------------------------------------------------------------------- */
     Route::get('/servants/{id}/completary-datas',                ['as' => 'admin.index.completary_data',     'uses' => 'ServantCompletaryDataController@index']);
-    Route::get('/servants/{servant_id}/contracts/{id}/completary-data/new',                 ['as' => 'admin.new.completary_data',     'uses' => 'ServantCompletaryDataController@new']);
-	Route::post('/servants/{servant_id}/contracts/{id}/completary-data',                    ['as' => 'admin.create.completary_data',  'uses' => 'ServantCompletaryDataController@create']);
-	Route::get('/servants/{servant_id}/contracts/{contract_id}/completary-data/{id}/edit',  ['as' => 'admin.edit.completary_data',    'uses' => 'ServantCompletaryDataController@edit']);
-    Route::patch('/servants/{servant_id}/contracts/{contract_id}/completary-data/{id}',     ['as' => 'admin.update.completary_data',   'uses' => 'ServantCompletaryDataController@update']);
+    Route::get('/servants/{servant_id}/contracts/{id}/completary-datas/new',                 ['as' => 'admin.new.completary_data',     'uses' => 'ServantCompletaryDataController@new']);
+	Route::post('/servants/{servant_id}/contracts/{id}/completary-datas',                    ['as' => 'admin.create.completary_data',  'uses' => 'ServantCompletaryDataController@create']);
+	Route::get('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}/edit',  ['as' => 'admin.edit.completary_data',    'uses' => 'ServantCompletaryDataController@edit']);
+    Route::patch('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}',     ['as' => 'admin.update.completary_data',   'uses' => 'ServantCompletaryDataController@update']);
     
     });
 });

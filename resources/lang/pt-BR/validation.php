@@ -161,7 +161,7 @@ return [
         'reason' => 'motivo',
         'interested_unit_id' => 'unidade de interesse',
         'contract_id' => 'contrato',
-        'removal_type_id' => 'tipo de remoção'
+        'removal_type_id' => 'tipo de remoção',
         'occupation' => 'função',
         'workload_id' => 'carga horária',
     ],

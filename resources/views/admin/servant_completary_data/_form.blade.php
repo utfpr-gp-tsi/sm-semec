@@ -7,7 +7,7 @@
                                               'model'    => 'servantCompletaryData',
                                               'value'    => $contract->place,
                                               'required' => false,
-                                              'disable_field' => 'readonly',
+                                              'disabled' => 'readonly',
                                               'errors'   => $errors]) @endcomponent
 
     @component('components.form.input_text', ['field'    => 'contract_id',
@@ -15,7 +15,7 @@
                                               'model'    => 'servantCompletaryData',
                                               'value'    => $contract->role,
                                               'required' => false,
-                                              'disable_field' => 'readonly',
+                                              'disabled' => 'readonly',
                                               'errors'   => $errors]) @endcomponent
 
     @component('components.form.input_text', ['field'    => 'contract_id',
@@ -23,7 +23,7 @@
                                               'model'    => 'servantCompletaryData',
                                               'value'    => $contract->place,
                                               'required' => false,
-                                              'disable_field' => 'readonly',
+                                              'disabled' => 'readonly',
                                               'errors'   => $errors]) @endcomponent
 
     @component('components.form.input_text', ['field'    => 'occupation',
@@ -33,15 +33,16 @@
                                               'required' => true,
                                               'errors'   => $errors]) @endcomponent
 
-    @component('components.form.input_select', ['field'    => 'workload_id',
-                                              'label'    => 'Carga Horária',
-                                              'model'    => 'servantCompletaryData',
-                                              'value'    => $completaryData->workload_id,
-                                              'options'  => $workloads,
-                                              'required' => true,
-                                              'default'  => 'Selecione a Carga Horária',
-                                              'errors'   => $errors]) @endcomponent
-
+    @component('components.form.input_select',['field' => 'workload_id',
+                                             'label'    => 'Carga Horária',
+                                             'model'    => 'servantCompletaryData',
+                                             'value'    => $completaryData->workload_id,
+                                             'options'  => $workloads,
+                                             'default' => 'Selecione a carga horária:',
+                                             'value_method' => 'id',
+                                             'label_method' => 'workload',
+                                             'required' => true,
+                                             'errors'   => $errors]) @endcomponent
 
     @component('components.form.input_radio_button', ['field'    => 'period',
                                               'label'    => 'Período',
