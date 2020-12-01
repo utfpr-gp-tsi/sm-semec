@@ -54,6 +54,6 @@
              'required' => true,
              'errors'   => $errors]) @endcomponent
 
-   @component('components.form.input_submit', ['value' => 'Enviar', 'back_url' => route('servant.dashboard')]) @endcomponent
+   @component('components.form.input_submit', ['value' => 'Enviar', 'back_url' => route('servant.edicts')]) @endcomponent
 </form>
 @endsection

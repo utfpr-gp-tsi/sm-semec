@@ -7,10 +7,14 @@
         <!-- Rule to exclude -->
         <exclude name="StaticAccess"/>
     </rule>
-    <rule ref="rulesets/codesize.xml"/>
     <rule ref="rulesets/controversial.xml"/>
     <rule ref="rulesets/design.xml"/>
     <rule ref="rulesets/unusedcode.xml"/>
+    <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+        <properties>
+            <property name="maxmethods" value="12" />
+        </properties>
+    </rule>
 
     <exclude-pattern>app/Console/Kernel.php</exclude-pattern>
     <exclude-pattern>tests/DuskTestCase.php</exclude-pattern>

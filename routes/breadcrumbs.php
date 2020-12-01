@@ -274,7 +274,6 @@ Breadcrumbs::for('admin.search.units.page', function ($trail) {
 });
 
 /* Servant Inscrptions
- * TODO: Após a listagem dos editais adicionar rotas corretas
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('servant.new.inscription', function ($trail, $id) {
     $trail->parent('servant.dashboard');
@@ -288,4 +287,43 @@ Breadcrumbs::for('servant.create.inscription', function ($trail, $id) {
     $trail->push('Editais', '#');
     $trail->push('Edital #' .$id, '#');
     $trail->push('Nova Inscrição', route('servant.create.inscription' , $id));
+});
+
+/* Edicts Servant
+|-------------------------------------------------------------------------- */
+
+Breadcrumbs::for('servant.edicts', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', route('servant.edicts'));
+});
+
+Breadcrumbs::for('servant.show.edict', function ($trail, $id) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', '#');
+    $trail->push('Edital #' .$id, route('servant.show.edict', $id));
+});
+
+Breadcrumbs::for('servant.edicts.page', function ($trail, $term) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', route('servant.edicts.page', $term));
+});
+
+Breadcrumbs::for('servant.edicts.close', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', route('servant.edicts.close'));
+});
+
+Breadcrumbs::for('servant.edicts.close.page', function ($trail, $term) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', route('servant.edicts.close.page', $term));
+});
+
+Breadcrumbs::for('servant.search.edicts', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', route('servant.search.edicts'));
+});
+
+Breadcrumbs::for('servant.search.edicts.close', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Editais', route('servant.search.edicts.close'));
 });
