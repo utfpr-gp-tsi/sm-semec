@@ -9,51 +9,61 @@ use App\Models\ServantCompletaryData;
 use App\Models\Contract;
 use App\Models\Workload;
 use App\Models\Servant;
+use App\Models\Movement;
 
 class ServantCompletaryDataController extends AppController
 {
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \App\Models\Contract $id
+     * @param  \App\Models\Servant $id
      * @return \Illuminate\View\View
      */
     public function index($id)
     {
         $servant =  Servant::find($id);
 
-        $completaryData = ServantCompletaryData::with(['moviments.role', 'moviments.unit', 'moviments'
-        => function ($query) {
-            $query->orderBy('started_at', 'desc');
-        }])->get()->find($servant->contracts[0]->servantCompletaryData);
+        $servantCompletaryData = $servant->contracts->first()->servantCompletaryData;
 
-        return view('admin.servant_completary_data.index', compact('servant', 'completaryData'));
+        $completaryData = ServantCompletaryData::with(['moviments.role', 'moviments.unit', 'moviments'
+            => function ($query) {
+                $query->orderBy('started_at', 'desc');
+            }])->get()->find($servantCompletaryData);
+
+        return view('admin.servant_completary_data.index', [
+            'servant' => $servant,
+            'completaryData' => $completaryData
+        ]);
     }
 
     /**
     * Show the form for creating a new resource.
     *
     * @return \Illuminate\View\View
-     * @param  \App\Models\Contract $id
-     * @param  \App\Models\Contract $servantId
+     * @param  \App\Models\Servant $id
+     * @param  \App\Models\Contract $contractId
     */
-    public function new($id, $servantId)
+    public function new($id, $contractId)
     {
-        $contract = Contract::find($servantId);
-        $workloads = Workload::all();
-        $completaryData = new ServantCompletaryData();
+        $contract = Contract::find($contractId);
         
-        return view('admin.servant_completary_data.new', compact('completaryData', 'contract', 'workloads'));
+        $completaryData = new ServantCompletaryData();
+
+        return view('admin.servant_completary_data.new', [
+            'completaryData' => $completaryData,
+            'workloads' => Workload::all(),
+            'contract' => $contract,
+        ]);
     }
 
     /**
     * Store a newly created resource in storage.
     * @param  \Illuminate\Http\Request  $request
     * @return  \Illuminate\View\View | \Illuminate\Http\RedirectResponse.
-    * @param  \App\Models\Contract $servantId
-    * @param  \App\Models\Contract $id
+    * @param  \App\Models\Contract $contractId
+    * @param  \App\Models\Servant $id
     */
-    public function create(Request $request, $id, $servantId)
+    public function create(Request $request, $id, $contractId)
     {
         $data = $request->all();
 
@@ -65,7 +75,7 @@ class ServantCompletaryDataController extends AppController
         ]);
 
         $completaryData = new ServantCompletaryData($data);
-        $contract = Contract::find($servantId);
+        $contract = Contract::find($contractId);
         $workloads = Workload::all();
 
         if ($validator->fails()) {
@@ -83,50 +93,52 @@ class ServantCompletaryDataController extends AppController
     /**
     * Show the form for editing the specified resource.
     *
-    * @param  \App\Models\ServantCompletaryData  $servantId
+    * @param  \App\Models\Contract  $contractId
     * @param  \App\Models\ServantCompletaryData  $id
-    * @param  \App\Models\ServantCompletaryData  $contractId
     * @return  \Illuminate\View\View
     */
-    public function edit($id, $servantId, $contractId)
+    public function edit($id, $contractId)
     {
-        $completaryData = ServantCompletaryData::find($contractId);
-        $contract = $completaryData->contract;
-        $workloads = Workload::all();
-        
-        return view('admin.servant_completary_data.edit', compact('completaryData', 'contract', 'workloads'));
+        $contract = Contract::find($contractId);
+        $completaryData = $contract->servantCompletaryData;
+
+        return view('admin.servant_completary_data.edit', [
+            'completaryData' => $completaryData,
+            'workloads' => Workload::all(),
+            'contract' => $contract,
+        ]);
     }
 
     /**
     * Update the specified resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\ServantCompletaryData  $servantId
+    * @param  \App\Models\Contract  $contractId
     * @param  \App\Models\ServantCompletaryData  $id
-    * @param  \App\Models\ServantCompletaryData  $contractId
     * @return \Illuminate\View\View | \Illuminate\Http\RedirectResponse
     */
-    public function update(Request $request, $id, $servantId, $contractId)
+    public function update(Request $request, $id, $contractId)
     {
-        $completaryData = ServantCompletaryData::find($contractId);
-        $contract = $completaryData->contract;
+        $contract = Contract::find($contractId);
+        $completaryData = $contract->servantCompletaryData;
+
         $workloads = Workload::all();
 
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'period' => "required",
-            'occupation' => 'required',
-            'contract_id' => 'required',
-            'workload_id' => "required",
+        'period' => "required",
+        'occupation' => 'required',
+        'contract_id' => 'required',
+        'workload_id' => "required",
         ]);
 
         $completaryData->fill($data);
 
         if ($validator->fails()) {
-            $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('admin.servant_completary_data.edit', compact('completaryData', 'contract', 'workloads'))
-            ->withErrors($validator);
+                $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
+                return view('admin.servant_completary_data.edit', compact('completaryData', 'contract', 'workloads'))
+                ->withErrors($validator);
         }
 
         $contract->servantCompletaryData()->save($completaryData);

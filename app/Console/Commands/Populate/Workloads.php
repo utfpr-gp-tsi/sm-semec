@@ -14,8 +14,8 @@ class Workloads extends Command
      * @var string
      */
     protected $signature = 'populate:workloads
-                            {--json} populate from a json file locate at database/data/workload.json
-                            {--clear} erase roles and relationships';
+                            {--json} populate from a json file locate at database/data/workloads.json
+                            {--clear} erase workload and relationships';
 
     /**
      * The console command description.
@@ -62,19 +62,17 @@ class Workloads extends Command
 
         $this->info('Populate Workloads');
         DB::table('workloads')->delete();
-
-        //$categories = Workload::factory()->count(4)->create();
     }
 
     private function populateFromJSON(): void
     {
-        $this->info('Populate Workloads from ./database/data/workload.json');
-        $jsonPath = base_path('./database/data/workload.json');
+        $this->info('Populate Workloads from ./database/data/workloads.json');
+        $jsonPath = base_path('./database/data/workloads.json');
         $jsonString = file_get_contents($jsonPath);
 
         if ($jsonString === false) {
-            $this->info('File workload.json not found');
-            $this->info('You need to create workload.json file in database/data folder');
+            $this->info('File workloads.json not found');
+            $this->info('You need to create workloads.json file in database/data folder');
             return;
         }
 
@@ -83,21 +81,9 @@ class Workloads extends Command
         $workloads = $jsonDecoded->workloads;
 
         foreach ($workloads as $data) {
-            $workloads = $this->createOrUpdateWorkload($data);
+            Workload::updateOrCreate([
+                'workload' => $data->workload
+            ]);
         }
-    }
-
-            /**
-     * Create or update Workload
-     *
-     * @param  object $data
-     */
-    public function createOrUpdateWorkload($data): Workload
-    {
-        return Workload::updateOrCreate(
-            [
-                'workload' => $data->workload,
-            ]
-        );
     }
 }
