@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Inscription extends Model
 {
+    use HasFactory;
+    
     /**
      * @var array
      */
@@ -23,7 +26,7 @@ class Inscription extends Model
      */
     public function servant()
     {
-        return $this->belongsTo(Servant::class, 'inscription_id');
+        return $this->belongsTo(Servant::class, 'servant_id');
     }
 
      /**

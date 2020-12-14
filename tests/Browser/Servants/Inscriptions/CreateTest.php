@@ -121,4 +121,24 @@ class CreateTest extends DuskTestCase
             });
         });
     }
+
+    // public function testDeadlineReached(): void
+    // {
+
+    //     $this->edict = Edict::factory()->create([
+    //         'ended_at'   => '01/03/2022 13:31']);
+
+    //     $this->browse(function ($browser) {
+    //         $browser->loginAs($this->servant, 'servant')
+    //                 ->visit(route('servant.edicts'))
+    //                 ->scrollIntoView('.btn-primary')
+    //                 ->click('.btn-primary');
+
+    //         $browser->assertUrlIs(route('servant.dashboard'));
+
+    //         $browser->with('div.alert', function ($flash) {
+    //             $flash->assertSee('A data limite das inscrições foi atingida!');
+    //         });
+    //     });
+    // }
 }

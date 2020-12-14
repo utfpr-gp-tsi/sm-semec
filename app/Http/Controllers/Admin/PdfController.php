@@ -57,12 +57,14 @@ class PdfController extends AppController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pdf  $id
+     * @param  \App\Models\Pdf $pdfId
+     * @param  \App\Models\Edict $id
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse.
+     * @SuppressWarnings("unused")
      */
-    public function show($id)
+    public function show($id, $pdfId)
     {
-        $pdf = Pdf::find($id);
+        $pdf = Pdf::find($pdfId);
         return response()->file($pdf->pathToFile());
     }
 

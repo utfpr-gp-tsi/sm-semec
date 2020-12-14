@@ -35,7 +35,7 @@ class EdictSearchTest extends TestCase
         $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2020/4 - Permuta',
            'started_at' => '24/11/2020 12:00','ended_at' => '25/11/2020 13:00']);
         $this->edicts[] = Edict::factory()->create(['title' => 'Edital 2020/5 - Permuta',
-            'started_at' => '24/11/2020 12:00', 'ended_at' => '25/11/2020 23:59']);
+            'started_at' => '24/11/2020 12:00', 'ended_at' => '+01 days']);
     }
 
     public function testSearchBySpecifiedName(): void

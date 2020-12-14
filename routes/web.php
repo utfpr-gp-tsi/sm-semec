@@ -66,7 +66,7 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/edicts/{id}/edit', 	['as' => 'admin.edit.edict',    'uses' => 'EdictsController@edit']);
 	Route::patch('/edicts/{id}',		['as' => 'admin.update.edict',  'uses' => 'EdictsController@update']);
 	Route::delete('/edicts/{id}', 		['as' => 'admin.destroy.edict', 'uses' => 'EdictsController@destroy']);
-
+   
 	/* Pdfs resources
 	|-------------------------------------------------------------------------- */
 	Route::get('/edicts/{id}/pdfs', 	['as' => 'admin.index.pdf',     'uses' => 'PdfController@index']);
@@ -100,6 +100,13 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/units/{id}/edit',                 ['as' => 'admin.edit.unit',    'uses' => 'UnitsController@edit']);
 	Route::patch('/units/{id}',                    ['as' => 'admin.update.unit',  'uses' => 'UnitsController@update']);
 	Route::delete('/units/{id}',                   ['as' => 'admin.destroy.unit', 'uses' => 'UnitsController@destroy']);
+
+
+	/* Inscriptions of edicts
+	|---------------------------------------------------------------------------*/
+	Route::get('/edicts/{id}/inscriptions', ['as' => 'admin.inscriptions', 'uses' => 'InscriptionsController@index']);
+	Route::get('/edicts/{edict_id}/inscriptions/{id}', ['as' => 'admin.show.inscription', 'uses' => 'InscriptionsController@show']);
+
     });
 });
 
@@ -135,6 +142,9 @@ Route::namespace('Servant')->group(function () {
         |----------------------------------------------------------------------------*/
 	Route::get('/edicts/{edict_id}/inscriptions/new', ['as' => 'new.inscription',   'uses' => 'InscriptionsController@new']);
     Route::post('/edicts/{edict_id}/inscriptions',    ['as' => 'create.inscription','uses' => 'InscriptionsController@create']);
+
+    Route::get('/inscriptions', ['as' => 'inscriptions', 'uses' => 'InscriptionsController@index']);
+    Route::get('/inscriptions/{id}', ['as' => 'show.inscription', 'uses' => 'InscriptionsController@show']);
  	
 	
 	/* Edicts
@@ -148,6 +158,8 @@ Route::namespace('Servant')->group(function () {
 	Route::get('/edicts/close/search/{term?}', ['as' => 'search.edicts.close', 'uses' => 'EdictsController@indexClose']);
 	Route::get('/edicts/close', ['as' => 'edicts.close', 'uses' => 'EdictsController@indexClose']);
     Route::get('/edicts/{id}', ['as' => 'show.edict', 'uses' => 'EdictsController@show']);
+
+    Route::get('/edicts/{edict_id}/pdf/{id}', ['as' => 'show.edict.pdf', 'uses' => 'EdictsController@showPdf']);
 
     });
 });

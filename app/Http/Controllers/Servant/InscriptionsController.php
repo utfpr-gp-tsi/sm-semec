@@ -27,6 +27,19 @@ class InscriptionsController extends AppController
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $servant = \Auth::guard('servant')->user();
+
+        return view('servant.edicts.inscription.index', [
+            'servant' => $servant->inscriptions]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
      * @return  \Illuminate\View\View | \Illuminate\Http\RedirectResponse.
      */
     public function new()
@@ -82,16 +95,30 @@ class InscriptionsController extends AppController
         return redirect()->route('servant.dashboard')->with('success', 'Inscrição realizada com sucesso!');
     }
 
+    /**
+    * Display the specified resource.
+    *
+    * @param  \App\Models\Inscription  $id
+    * @return \Illuminate\View\View
+    */
+    public function show($id)
+    {
+        $inscription = Inscription::find($id);
+
+        return view('servant.edicts.inscription.show', [
+                    'inscription' => $inscription]);
+    }
+
     private function redirectToDashboardIfExpired(): void
     {
         $this->middleware(function ($request, $next) {
             $this->edict = Edict::find($request->edict_id);
 
-            if (now()->toShortDateTime() > $this->edict->ended_at->toShortDateTime()) {
+            if (now()->gt($this->edict->ended_at)) {
                 \Session::flash('danger', 'A data limite das inscrições foi atingida!');
                 return redirect()->route('servant.dashboard');
             }
             return $next($request);
-        });
+        })->except(['index','show']);
     }
 }
