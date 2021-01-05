@@ -13,7 +13,7 @@ class Workload extends Model
     * @var array
     */
     protected $fillable = [
-        'workload'
+        'hours'
     ];
 
     /**

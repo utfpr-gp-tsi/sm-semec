@@ -4,15 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\DateTimeFormatter;
+use Carbon\Carbon;
 
 class Movement extends Model
 {
+    use DateTimeFormatter;
     use HasFactory;
 
     /**
     * @var array
     */
     protected $fillable = [
+        'period',
+        'occupation',
         'started_at',
         'ended_at',
         'unit_id',

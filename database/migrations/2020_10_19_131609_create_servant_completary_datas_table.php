@@ -15,14 +15,16 @@ class CreateServantCompletaryDatasTable extends Migration
     {
         Schema::create('servant_completary_datas', function (Blueprint $table) {
             $table->id();
-            $table->enum('period', ['morning', 'evening']);
-            $table->string('occupation');
-            $table->unsignedBigInteger('contract_id')->index();
+            $table->string('formation');
+            $table->text('observation')->nullable();
+
+            $table->unsignedBigInteger('contract_id');
             $table->foreign('contract_id')
                     ->references('id')
                     ->on('contracts')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('workload_id')->index();
+            $table->unsignedBigInteger('workload_id');
+
             $table->foreign('workload_id')
                     ->references('id')
                     ->on('workloads')

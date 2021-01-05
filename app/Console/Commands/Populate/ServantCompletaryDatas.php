@@ -4,22 +4,24 @@ namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
 use DB;
+use App\Models\ServantCompletaryData;
+use App\Models\Movement;
 
-class Populate extends Command
+class ServantCompletaryDatas extends Command
 {
-    /**
+   /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'populate';
+    protected $signature = 'populate:servant_completary_datas';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Populate database';
+    protected $description = 'Populate servant_completary_datas';
 
     /**
      * Create a new command instance.
@@ -43,13 +45,16 @@ class Populate extends Command
             return;
         }
 
-        /* Need to be delete before edicts because of restrictions of relationships */
-        DB::table('inscriptions')->delete();
+        $this->info('Populate servant_completary_datas');
+        DB::table('servant_completary_datas')->delete();
 
-        $this->call('populate:servants');
-        $this->call('populate:edicts');
-        $this->call('populate:units');
-        $this->call('populate:removal_types');
-        $this->call('populate:servant_completary_datas');
+        for ($i = 0; $i < 3; $i++) {
+            ServantCompletaryData::factory()
+                ->create()
+                ->each(function ($completaryData) {
+                    $completaryData->moviments()->save(Movement::factory()->make());
+                    $completaryData->moviments()->save(Movement::factory()->make());
+                });
+        }
     }
 }

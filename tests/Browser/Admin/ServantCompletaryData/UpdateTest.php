@@ -28,40 +28,25 @@ class UpdateTest extends DuskTestCase
     public function testFilledFields(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.completary_data', ['servant_id' =>
-            $this->completaryData->contract->servant_id, 'contract_id' =>
-            $this->completaryData->contract_id, 'id' => $this->completaryData->id]))
-            ->driver->executeScript('window.scrollTo(0, 600);');
+            $browser->loginAs($this->user)->visit('admin/servants/1/contracts/1/completary-datas/1/edit');
 
-            $browser->assertInputValue('occupation', $this->completaryData->occupation)
-                    ->assertSelected('workload_id', $this->completaryData->workload_id)
-                    ->assertRadioSelected('period', $this->completaryData->period);
+            $browser->assertInputValue('formation', $this->completaryData->formation)
+            ->assertRadioSelected('workload_id', $this->completaryData->workload_id)
+            ->assertInputValue('observation', $this->completaryData->observation);
         });
     }
 
     public function testSucessfullyUpdate(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.completary_data', ['servant_id' =>
-                $this->completaryData->contract->servant_id, 'contract_id' =>
-                $this->completaryData->contract_id, 'id' => $this->completaryData->id]))
-            ->driver->executeScript('window.scrollTo(0, 600);');
+            $browser->loginAs($this->user)->visit('admin/servants/1/contracts/1/completary-datas/1/edit');
+            ServantCompletaryData::factory()->create();
 
-            $completaryData = ServantCompletaryData::factory()->create();
-
-            $browser->type('occupation', $completaryData->occupation)
-                    ->press('Atualizar Cadastro');
+            $browser->type('formation', 'teste')
+            ->press('Atualizar Cadastro');
 
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Cadastro Complementar atualizado com sucesso');
-            });
-
-            $browser->press('.collapse-completaryData')->assertSee('Servidor:')
-            ->driver->executeScript('window.scrollTo(0, 500);');
-
-            $browser->with('#main-card .completaryData', function ($body) use ($completaryData) {
-                $body->assertSee($completaryData->occupation);
-                $body->assertDontSee($this->completaryData->occupation);
             });
         });
     }
@@ -69,20 +54,17 @@ class UpdateTest extends DuskTestCase
     public function testFailuteUpdate(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit(route('admin.edit.completary_data', ['servant_id' =>
-                $this->completaryData->contract->servant_id, 'contract_id' =>
-                $this->completaryData->contract_id, 'id' => $this->completaryData->id]))
-            ->driver->executeScript('window.scrollTo(0, 600);');
+            $browser->loginAs($this->user)->visit('admin/servants/1/contracts/1/completary-datas/1/edit');
 
-            $browser->type('occupation', '')
-                    ->press('Atualizar Cadastro');
+            $browser->type('formation', '')
+            ->press('Atualizar Cadastro');
 
             $browser->with('div.alert', function ($flash) {
                 $flash->assertSee('Existem dados incorretos! Por favor verifique!');
             });
 
-            $browser->with('div.servantCompletaryData_occupation', function ($flash) {
-                $flash->assertSee('O campo função é obrigatório.');
+            $browser->with('div.servantCompletaryData_formation', function ($flash) {
+                $flash->assertSee('O campo formação é obrigatório.');
             });
         });
     }
@@ -92,22 +74,28 @@ class UpdateTest extends DuskTestCase
         $this->completaryData = ServantCompletaryData::factory()->create();
 
         $this->browse(function ($browser) {
-             $browser->loginAs($this->user)->visit(route('admin.edit.completary_data', ['servant_id' =>
-                $this->completaryData->contract->servant_id, 'contract_id' =>
-                $this->completaryData->contract_id, 'id' => $this->completaryData->id]));
+            $browser->loginAs($this->user)->visit(route('admin.edit.completary_data', ['servant_id' =>
+               $this->completaryData->contract->servant_id, 'contract_id' =>
+               $this->completaryData->contract_id, 'id' => $this->completaryData->id]));
 
             $backLinkSelector = "#main-card a[href='" .
-            route('admin.index.completary_data', $this->completaryData->contract->servant_id) . "']";
+            route('admin.index.completary_datas', ['servant_id' => $this->completaryData->contract->servant_id, 'id' =>
+                $this->completaryData->contract_id]) . "']";
             $browser->assertSeeIn($backLinkSelector, 'Voltar');
 
             $rootBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.dashboard') . "']";
             $secondBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.servants') . "']";
             $thirdBreadcrumbSelector = ".breadcrumb li:nth-child(3)";
             $fourthBreadcrumbSelector = ".breadcrumb li:nth-child(4)";
+            $fifthBreadcrumbSelector = ".breadcrumb li:nth-child(5)";
+            $sixthBreadcrumbSelector = ".breadcrumb li:nth-child(6)";
+
             $browser->assertSeeIn($rootBreadcrumbSelector, 'Página Inicial');
             $browser->assertSeeIn($secondBreadcrumbSelector, 'Servidores');
-            $browser->assertSeeIn($thirdBreadcrumbSelector, "Servidor #{$this->completaryData->contract->servant_id}")
-            ->assertSeeIn($fourthBreadcrumbSelector, "Editar Cadastro Complementar #{$this->completaryData->id}");
+            $browser->assertSeeIn($thirdBreadcrumbSelector, "Servidor #{$this->completaryData->contract->servant_id}");
+            $browser->assertSeeIn($fourthBreadcrumbSelector, 'Cadastro Complementar');
+            $browser->assertSeeIn($fifthBreadcrumbSelector, 'Dados Complementares')
+            ->assertSeeIn($sixthBreadcrumbSelector, "Editar Cadastro Complementar #{$this->completaryData->id}");
         });
     }
 }

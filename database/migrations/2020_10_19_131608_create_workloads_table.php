@@ -15,7 +15,7 @@ class CreateWorkloadsTable extends Migration
     {
         Schema::create('workloads', function (Blueprint $table) {
             $table->id();
-            $table->integer('workload');
+            $table->enum('hours', ['20', '40']);
             $table->timestamps();
         });
     }

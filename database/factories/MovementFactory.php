@@ -25,11 +25,14 @@ class MovementFactory extends Factory
     public function definition()
     {
         return [
+            'period' => $this->faker->randomElement(['morning', 'evening']),
+            'occupation' => $this->faker->name(),
             'started_at' => $this->faker->dateTimeBetween('now', '+01 days'),
             'ended_at' => $this->faker->dateTimeBetween('+02 days', '+04 days'),
             'unit_id' => Unit::factory(),
             'role_id' => Role::factory(),
             'servant_completary_data_id' =>  ServantCompletaryData::factory(),
+
         ];
     }
 }

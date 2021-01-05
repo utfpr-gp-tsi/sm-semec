@@ -22,7 +22,7 @@ class WorkloadFactory extends Factory
     public function definition()
     {
         return [
-            'workload' => $this->faker->randomNumber(), 
+            'hours'  => $this->faker->randomElement(['20', '40']),
         ];
     }
 }
