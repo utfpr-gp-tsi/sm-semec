@@ -26,8 +26,8 @@ class ServantCompletaryDataFactory extends Factory
     public function definition()
     {
         return [
-            'period'  => $this->faker->randomElement(['morning', 'evening']),
-            'occupation' => $this->faker->name(),
+            'formation'  => $this->faker->title(),
+            'observation' => $this->faker->text(),
             'contract_id' => Contract::factory(),
             'workload_id'  => Workload::factory(),
         ];

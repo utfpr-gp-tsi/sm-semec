@@ -17,76 +17,58 @@ class IndexTest extends DuskTestCase
     /** @var \App\Models\ServantCompletaryData */
     protected $completaryData;
 
-    /** @var \App\Models\Servant */
-    protected $servant;
+    /** @var \App\Models\Movement */
+    protected $movement;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
         $this->completaryData = ServantCompletaryData::factory()->create();
+        $this->movement = Movement::factory()->create(['servant_completary_data_id' => 1]);
     }
 
     public function testIndexList(): void
     {
         $this->browse(function ($browser) {
-            $browser->loginAs($this->user)->visit('/admin/servants/1/completary-datas')
-            ->press('.collapse-completaryData')->assertSee('Servidor:')
+            $browser->loginAs($this->user)->visit('/admin/servants/1/contracts/1/completary-datas');
+
+            $browser->assertInputValue('contract_id', $this->completaryData->contract->registration)
             ->driver->executeScript('window.scrollTo(0, 500);');
+            $browser->assertSee('Dados Adicionais')
+            ->assertInputValue('formation', $this->completaryData->formation)
+            ->assertInputValue('workload_id', $this->completaryData->workload->hours)
+            ->assertInputValue('observation', $this->completaryData->observation);
 
-            $browser->with('#main-card .completaryData', function ($body) {
-                $body->assertSee($this->completaryData->contract->servant->name);
-                $body->assertSee($this->completaryData->contract->role);
-                $body->assertSee($this->completaryData->contract->place);
-                $body->assertSee($this->completaryData->occupation);
-                $body->assertSee($this->completaryData->workload->workload);
-            });
-        });
-    }
 
-    public function testIndexListMovements(): void
-    {
-        $movements = Movement::factory()->count(3)->create();
-        $completaryData = ServantCompletaryData::factory()->create();
+            $browser->assertSee('Movimentações');
+            $browser->scrollIntoView('.table');
 
-        $this->browse(function ($browser) use ($completaryData) {
-            $browser->loginAs($this->user)->visit('/admin/servants/2/completary-datas')
-            ->press('.collapse-completaryData')
-            ->assertSee('Servidor:')->driver->executeScript('window.scrollTo(0, 500);');
-
-            $browser->scrollIntoView('table');
-
-            $browser->with("table.completaryData tbody", function ($row) use ($completaryData) {
-                $pos = 0;
-
-                foreach ($completaryData->moviments as $movements) {
-                    $pos += 1;
-                    $baseSelector = "tr:nth-child({$pos}) ";
-
-                    $row->assertSeeIn($baseSelector, $movements->role->name);
-                    $row->assertSeeIn($baseSelector, $movements->unit->name);
-                    $row->assertSeeIn($baseSelector, $movements->started_at->toShortDate());
-                }
+            $browser->with('.table', function ($body) {
+                $body->assertSee($this->movement->servantCompletaryData->contract->registration);
+                $body->assertSee($this->movement->occupation);
+                $body->assertSee(__($this->movement->period));
+                $body->assertSee($this->movement->unit->name);
             });
         });
     }
 
     public function testAssertLinksPresent(): void
     {
-        $this->servant = Servant::factory()->create();
-
         $this->browse(function ($browser) {
-             $browser->loginAs($this->user)->visit('/admin/servants/1/completary-datas');
+            $browser->loginAs($this->user)->visit('/admin/servants/1/contracts/1/completary-datas');
 
             $rootBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.dashboard') . "']";
             $secondBreadcrumbSelector = ".breadcrumb-item a[href='" . route('admin.servants') . "']";
             $thirdBreadcrumbSelector = ".breadcrumb li:nth-child(3)";
             $fourthBreadcrumbSelector = ".breadcrumb li:nth-child(4)";
+            $fifthBreadcrumbSelector = ".breadcrumb li:nth-child(5)";
 
             $browser->assertSeeIn($rootBreadcrumbSelector, 'Página Inicial');
             $browser->assertSeeIn($secondBreadcrumbSelector, 'Servidores');
-            $browser->assertSeeIn($thirdBreadcrumbSelector, "Servidor #1");
+            $browser->assertSeeIn($thirdBreadcrumbSelector, "Servidor #{$this->completaryData->contract->servant_id}");
             $browser->assertSeeIn($fourthBreadcrumbSelector, 'Cadastro Complementar');
+            $browser->assertSeeIn($fifthBreadcrumbSelector, 'Dados Complementares');
         });
     }
 }

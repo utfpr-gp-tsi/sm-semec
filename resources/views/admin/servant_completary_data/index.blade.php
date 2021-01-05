@@ -4,46 +4,41 @@
 @section('content')
 
 @foreach($servant->contracts as $contract)
-<div class="card mb-6" id="accordion">
-	<div class="card-header collapse-completaryData collapsed btn" data-toggle="collapse" data-target="#contract{{$contract->id}}" aria-expanded="false" aria-controls="completaryData" id="completary_data">
-		@include('admin/servant_completary_data/_contracts')
-	</div>
-
-	<!--Card Servant Complemetay Data-->
-	@isset ($contract->servantCompletaryData)
-	<div id="contract{{$contract->id}}" class="collapse" aria-labelledby="completaryData" data-parent="#accordion">
-		<div class="card-body completaryData m-2 border">
-			<p><strong>Servidor:</strong>  {{ $contract->servant->name }}</p>
-			<p><strong>Cargo:</strong>  {{ $contract->role }}</p>
-			<p><strong>Local de Trabalho:</strong>  {{ $contract->place }}</p>
-			<p><strong>Lotação:</strong>  {{ $contract->place }}</p>
-			<p><strong>Função:</strong>  {{ $contract->servantCompletaryData->occupation }}</p>
-			<p><strong>Carga Horária:</strong>  {{ $contract->servantCompletaryData->workload->workload }} Horas</p>
-			<p><strong>Período:</strong>  {{ __($contract->servantCompletaryData->period) }} </p>
+<div class="card mb-6">
+	<div class="card-header" aria-expanded="false" aria-controls="completaryData" id="completary_data">
+		<div class="table-responsive">
+			<table class="table table-striped table-vcenter">
+				<thead>
+					<tr>
+						<th>Mátricula</th>
+						<th>Cargo</th>
+						<th>Secretaria</th>
+						<th>Local</th>
+						<th>Vínculo</th>
+						<th>Data Admissão</th>
+						<th>Data de Rescisão</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ $contract->registration }}</td>
+						<td>{{ $contract->role }}</td>
+						<td>{{ $contract->secretary }}</td>
+						<td>{{ $contract->place }}</td>
+						<td>{{ $contract->link }}</td>
+						<td>{{ $contract->admission_at->toShortDate() }}</td>
+						<td>{{ $contract->termination_at->toShortDate() }}</td>
+						<td>
+							<span class="icon mr-1">
+								<a href="{{route('admin.index.completary_datas', ['servant_id' => $contract->servant_id, 'id' => $contract->id])}}" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus mr-1"></i>Cadastro Complementar</a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-
-		<!--Card Moviments-->
-		<div class="card-body m-2 border">
-			<h3><i>Movimentação:</i></h3>
-			<div class="table-responsive">
-				<table class="table completaryData card-table table-striped table-vcenter table-data">
-					<thead>
-						<tr>
-							<th>Cargo</th>
-							<th>Local de Trabalho</th>
-							<th>Data de Inicio</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						@each('admin.servant_completary_data._movements_row', $completaryData->moviments, 'moviment')
-					</tbody>
-				</table>
-			</div>
-		</div>
-
 	</div>
-	@endisset
 </div>
 @endforeach
 @endsection

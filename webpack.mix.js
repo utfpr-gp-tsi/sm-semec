@@ -31,7 +31,7 @@ mix.version([
    'public/assets/vendor/selectize/js/selectize.min.js',
    'public/assets/vendor/mask/js/mask.min.js'
 
-   
+
 
 ]).options({ processCssUrls: false });
 

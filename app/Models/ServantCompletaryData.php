@@ -14,8 +14,8 @@ class ServantCompletaryData extends Model
     * @var array
     */
     protected $fillable = [
-        'period',
-        'occupation',
+        'observation',
+        'formation',
         'contract_id',
         'workload_id',
     ];

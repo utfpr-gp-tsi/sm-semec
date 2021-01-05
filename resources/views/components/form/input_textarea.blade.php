@@ -7,7 +7,7 @@
 	<textarea class="form-control @if ($required) required @endif @if ($errors->has($field)) is-invalid @endif"
 				 @if ($required) required="required" @endif
 				 autofocus="autofocus" name="{{ $field }}" rows="4"
-				 id="{{ $model }}_{{ $field }}">{{ $value ?? '' }}</textarea>
+				 id="{{ $model }}_{{ $field }}" {{ $disabled ?? '' }}/>{{ $value ?? '' }}</textarea>
 
 	@if ($errors->has($field))
 		<span class="invalid-feedback" role="alert">

@@ -164,5 +164,6 @@ return [
         'removal_type_id' => 'tipo de remoção',
         'occupation' => 'função',
         'workload_id' => 'carga horária',
+        'formation' => 'formação',
     ],
 ];

@@ -15,19 +15,21 @@ class CreateMovementsTable extends Migration
     {
         Schema::create('movements', function (Blueprint $table) {
             $table->id();
+            $table->enum('period', ['morning', 'evening']);
+            $table->string('occupation');
             $table->date('started_at');
-            $table->date('ended_at');
+            $table->date('ended_at')->nullable();
             $table->unsignedBigInteger('unit_id')->index();
             $table->foreign('unit_id')
                     ->references('id')
                     ->on('units')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('servant_completary_data_id')->index();
+            $table->unsignedBigInteger('servant_completary_data_id');
             $table->foreign('servant_completary_data_id')
                     ->references('id')
                     ->on('servant_completary_datas')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('role_id')->index();
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->foreign('role_id')
                     ->references('id')
                     ->on('roles')
