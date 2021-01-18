@@ -4,22 +4,28 @@ namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
 use DB;
+use App\Models\Edict;
+use App\Models\Servant;
+use App\Models\Contract;
+use App\Models\Unit;
+use App\Models\Inscription;
+use App\Models\RemovalType;
 
-class Populate extends Command
+class Inscriptions extends Command
 {
-    /**
+   /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'populate';
+   protected $signature = 'populate:inscriptions';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Populate database';
+    protected $description = 'Populate inscriptions';
 
     /**
      * Create a new command instance.
@@ -43,13 +49,14 @@ class Populate extends Command
             return;
         }
 
-        /* Need to be delete before edicts because of restrictions of relationships */
+        $this->info('Populate inscriptions');
         DB::table('inscriptions')->delete();
 
-        $this->call('populate:servants');
-        $this->call('populate:edicts');
-        $this->call('populate:units');
-        $this->call('populate:removal_types');
-        $this->call('populate:inscriptions');
+        $edicts = Edict::factory()->count(2)->create();
+
+        $edicts->each(function ($edict) {
+            $inscriptions = Inscription::factory()->count(2)->create(['edict_id' => $edict->id]);
+        });
+
     }
 }

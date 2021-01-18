@@ -4,7 +4,7 @@
   <td>{{ $edict->ended_at->toShortDateTime() }}  </td>
   <td >
     <span class="icon mr-1">
-      <a href="{{ route('admin.inscriptions', $edict->id) }}"><i class="fas fa-align-left"></i></a>
+      <a href="{{ route('admin.inscriptions', $edict->id) }}" data-toggle="tooltip" data-placement="top" title="Inscrições"><i class="fas fa-align-left"></i></a>
     </span>
     <span class="icon mr-1">
         <a href="{{ route('admin.index.pdf', $edict->id) }}"><i class="far fa-file-pdf"></i></a>

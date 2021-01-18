@@ -10,6 +10,7 @@
       <tr>
         <th>Edital</th>
         <th>Matrícula</th>
+        <th>Criado em</th>
         <th></th>
       </tr>
     </thead>

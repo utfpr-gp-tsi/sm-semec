@@ -8,7 +8,9 @@
     <thead>
       <tr>
         <th>Servidor</th>
+        <th>Matricula</th>
         <th>Tipo de Remoção</th>
+        <th>Criado em</th>
         <th></th>
       </tr>
     </thead>

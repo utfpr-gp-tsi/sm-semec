@@ -33,7 +33,9 @@ class IndexTest extends DuskTestCase
                 $route = ['edict_id' => $inscription->edict->id, 'id' => $inscription->id];
                 $showSelector = $baseSelector . "a[href='" . route('admin.show.inscription', $route) . "']";
                 $row->assertSeeIn($showSelector, $inscription->servant->name);
+                $row->assertSeeIn($baseSelector, $inscription->contract->registration);
                 $row->assertSeeIn($baseSelector, $inscription->removalType->name);
+                $row->assertSeeIn($baseSelector, $inscription->created_at->toShortDateTime());
             });
         });
     }

@@ -15,7 +15,7 @@ class CreateInscriptionsTable extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('reason');
+            $table->text('reason');
             $table->timestamps();
 
             $table->unsignedBigInteger('servant_id')->index();

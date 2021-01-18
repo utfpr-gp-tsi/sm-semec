@@ -11,7 +11,7 @@ class InscriptionsController extends AppController
 {
     /**
     * Display a listing of the resource.
-    * @param  \App\Models\Edict  $id
+    * @param  \App\Models\Edict $id
     * @return \Illuminate\View\View
     */
     public function index($id)
@@ -24,15 +24,14 @@ class InscriptionsController extends AppController
 
     /**
     * Display the specified resource.
-    *
-    * @param  \App\Models\Edict  $id
-    * @param  \App\Models\Inscription  $inscriptionId
+    * @param  \App\Models\Edict $edictId
+    * @param  \App\Models\Inscription $id
     * @SuppressWarnings("unused")
     * @return \Illuminate\View\View
     */
-    public function show($id, $inscriptionId)
+    public function show($edictId, $id)
     {
-        $inscription = Inscription::find($inscriptionId);
+        $inscription = Inscription::find($id);
 
         return view('admin.inscription.show', [
             'inscription' => $inscription]);
