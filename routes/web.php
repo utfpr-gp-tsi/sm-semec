@@ -105,7 +105,6 @@ Route::namespace('Admin')->group(function () {
 	|-------------------------------------------------------------------------- */
     Route::get('/servants/{id}/completary-datas',                ['as' => 'admin.index.completary_data',     'uses' => 'ServantCompletaryDataController@index']);
 
-    /*-teste de rotas-*/
     Route::get('/servants/{servant_id}/contracts/{id}/completary-datas',                 ['as' => 'admin.index.completary_datas',     'uses' => 'ServantCompletaryDataController@indexCompletaryData']);
 
     Route::get('/servants/{servant_id}/contracts/{id}/completary-datas/new',                 ['as' => 'admin.new.completary_data',     'uses' => 'ServantCompletaryDataController@new']);
@@ -128,6 +127,8 @@ Route::namespace('Admin')->group(function () {
 
     Route::patch('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{completaryData_id}/movement/{id}',     ['as' => 'admin.update.movement',   'uses' => 'MovementController@update']); 
     });
+
+	Route::delete('/servants/{servant_id}/contracts/{contract_id}/completary_datas/{completaryData_id}/movement/{id}',                   ['as' => 'admin.destroy.movement', 'uses' => 'MovementController@destroy']);
 });
 
 /*----------SERVANT AREA----------	*/

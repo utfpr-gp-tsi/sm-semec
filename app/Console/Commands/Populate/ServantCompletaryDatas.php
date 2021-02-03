@@ -47,14 +47,12 @@ class ServantCompletaryDatas extends Command
 
         $this->info('Populate servant_completary_datas');
         DB::table('servant_completary_datas')->delete();
+        DB::table('workloads')->delete();
 
-        for ($i = 0; $i < 3; $i++) {
             ServantCompletaryData::factory()
                 ->create()
                 ->each(function ($completaryData) {
                     $completaryData->moviments()->save(Movement::factory()->make());
-                    $completaryData->moviments()->save(Movement::factory()->make());
                 });
-        }
     }
 }

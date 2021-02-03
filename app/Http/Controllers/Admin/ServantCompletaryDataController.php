@@ -10,7 +10,6 @@ use App\Models\Contract;
 use App\Models\Workload;
 use App\Models\Servant;
 use App\Models\Movement;
-use App\Models\Unit;
 
 class ServantCompletaryDataController extends AppController
 {
@@ -38,7 +37,8 @@ class ServantCompletaryDataController extends AppController
      */
     public function indexCompletaryData($servantId, $id)
     {
-        $contract = Contract::find($id);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($id);
         $completaryData = $contract->servantCompletaryData;
 
         return view('admin.servant_completary_data.completary_datas', [
@@ -56,7 +56,8 @@ class ServantCompletaryDataController extends AppController
     */
     public function new($servantId, $id)
     {
-        $contract = Contract::find($id);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($id);
         $completaryData = new ServantCompletaryData();
         $workloads = Workload::all();
 
@@ -77,7 +78,6 @@ class ServantCompletaryDataController extends AppController
     public function create(Request $request, $servantId, $id)
     {
         $data = $request->all();
-
         $validator = Validator::make($data, [
             'formation'   => 'required',
             'workload_id' => 'required',
@@ -85,8 +85,6 @@ class ServantCompletaryDataController extends AppController
 
         $completaryData = new ServantCompletaryData($data);
         $contract = Contract::find($id);
-
-        $workloads = Workload::all();
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
@@ -113,7 +111,8 @@ class ServantCompletaryDataController extends AppController
     */
     public function edit($servantId, $contractId, $id)
     {
-        $contract = Contract::find($contractId);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($contractId);
         $completaryData = $contract->servantCompletaryData;
 
         return view('admin.servant_completary_data.edit', [
@@ -135,10 +134,9 @@ class ServantCompletaryDataController extends AppController
     */
     public function update(Request $request, $servantId, $contractId, $id)
     {
-        $contract = Contract::find($contractId);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($contractId);
         $completaryData = $contract->servantCompletaryData;
-
-        $workloads = Workload::all();
 
         $data = $request->all();
 
@@ -151,8 +149,10 @@ class ServantCompletaryDataController extends AppController
 
         if ($validator->fails()) {
                 $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-                return view('admin.servant_completary_data.edit', compact('completaryData', 'contract', 'workloads'))
-                ->withErrors($validator);
+                return view('admin.servant_completary_data.edit', [
+                    'completaryData' => $completaryData,
+                    'contract' => $contract,
+                    'workloads' => Workload::all()])->withErrors($validator);
         }
 
         $contract->servantCompletaryData()->save($completaryData);

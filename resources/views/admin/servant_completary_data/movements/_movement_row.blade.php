@@ -10,7 +10,8 @@
   <td>
 
     @component('components.links.edit', ['url' => route('admin.edit.movement', ['servant_id' => $movement->servantCompletaryData->contract->servant_id, 'contract_id' => $movement->servantCompletaryData->contract_id, 'completaryData_id' => $movement->servantCompletaryData->id, 'id' => $movement->id])]) @endcomponent
-  	
+
+    @component('components.links.delete', ['url' => route('admin.destroy.movement', ['servant_id' => $movement->servantCompletaryData->contract->servant_id, 'contract_id' => $movement->servantCompletaryData->contract_id, 'completaryData_id' => $movement->servantCompletaryData->id, 'id' => $movement->id])]) @endcomponent
   </td>
 
 </tr>
