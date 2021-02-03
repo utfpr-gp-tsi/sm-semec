@@ -22,7 +22,5 @@ class DatabaseSeeder extends Seeder
             'CPF' => '00000000000',
             'password' => '123456'
         ]);
-
-        $this->call(WorkloadTableSeeder::class);
     }
 }

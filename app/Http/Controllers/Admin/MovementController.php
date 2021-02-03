@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\AppController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Contract;
 use App\Models\Movement;
 use App\Models\Unit;
-use Illuminate\Support\Facades\Validator;
 use App\Models\ServantCompletaryData;
+use App\Models\Servant;
 
 class MovementController extends AppController
 {
@@ -23,7 +24,8 @@ class MovementController extends AppController
     */
     public function new($servantId, $contractId, $id)
     {
-        $contract = Contract::find($id);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($contractId);
         $movement = new Movement();
         $completaryData = ServantCompletaryData::find($id);
         
@@ -46,7 +48,6 @@ class MovementController extends AppController
     public function create(Request $request, $servantId, $contractId, $id)
     {
         $data = $request->all();
-
         $validator = Validator::make($data, [
             'occupation' => 'required',
             'period' => 'required',
@@ -58,8 +59,6 @@ class MovementController extends AppController
         $completaryData = ServantCompletaryData::find($id);
 
         $movement = new Movement($data);
-
-        $units = Unit::all();
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
@@ -87,14 +86,13 @@ class MovementController extends AppController
      */
     public function edit($servantId, $contractId, $completaryDataId, $id)
     {
-        $movement = Movement::find($id);
         $completaryData = ServantCompletaryData::find($completaryDataId);
-        $units = Unit::all();
+        $movement = $completaryData->moviments->find($id);
 
         return view('admin.servant_completary_data.movements.edit', [
             'movement' => $movement,
             'completaryData' => $completaryData,
-            'units' => $units]);
+            'units' => Unit::all()]);
     }
 
     /**
@@ -112,10 +110,8 @@ class MovementController extends AppController
     {
         $data = $request->all();
      
-        $movement = Movement::find($id);
         $completaryData = ServantCompletaryData::find($completaryDataId);
-        $units = Unit::all();
-        $contract = Contract::find($contractId);
+        $movement = $completaryData->moviments->find($id);
 
         $validator = Validator::make($data, [
         'occupation' => "required",
@@ -135,8 +131,28 @@ class MovementController extends AppController
         }
 
         $movement->save();
-        return redirect()->route('admin.index.completary_datas', ['servant_id' => $contract->servant_id, 'id' =>
-            $contract->id])
+        return redirect()->route('admin.index.completary_datas', ['servant_id' => $servantId, 'id' =>
+            $contractId])
         ->with('success', 'Movimentação atualizada com sucesso');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+    * @param  \App\Models\Contract $contractId
+    * @param  \App\Models\Servant $servantId
+    * @param  \App\Models\Movement $id
+    * @param  \App\Models\ServantCompletaryData $completaryDataId
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     */
+    public function destroy($servantId, $contractId, $completaryDataId, $id)
+    {
+        $servantCompletaryData = ServantCompletaryData::find($completaryDataId);
+        $movement = $servantCompletaryData->moviments->find($id);
+        $movement->delete();
+        return redirect()->route('admin.index.completary_datas', [
+            'servant_id' => $servantId, 'id' => $contractId
+        ])->with('success', 'Movimentação removida com sucesso.');
     }
 }

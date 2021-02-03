@@ -16,9 +16,6 @@ class WorkloadTableSeeder extends Seeder
      */
     public function run()
     {
-
-//      DB::table('workloads')->delete();
-
       Workload::insert([
         ['hours' => '20'],
         ['hours' => '40'],
