@@ -32,7 +32,6 @@ class ShowTest extends DuskTestCase
             $browser->with('#main-card .card-body', function ($body) {
                 $body->assertSee($this->inscription->servant->name);
                 $body->assertSee($this->inscription->contract->registration);
-                $body->assertSee($this->inscription->interestedUnit->name);
                 $body->assertSee($this->inscription->currentUnit->name);
                 $body->assertSee($this->inscription->removalType->name);
                 $body->assertSee($this->inscription->reason);

@@ -28,6 +28,14 @@ class Unit extends Model
         return $this->belongsTo(UnitCategory::class, 'category_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    */
+    public function inscriptions()
+    {
+        return $this->belongsToMany(Inscription::class, 'inscription_units', 'inscription_id', 'unit_id');
+    }
+
      /**
      * @param string $term
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator

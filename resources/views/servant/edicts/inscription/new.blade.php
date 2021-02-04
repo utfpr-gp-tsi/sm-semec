@@ -38,7 +38,7 @@
              'required' => true,
              'errors'   => $errors]) @endcomponent
 
-  @component('components.form.input_select',['field' => 'interested_unit_id',
+  @component('components.form.input_select_multiple',['field' => 'interested_unit_id',
              'label'    => 'Unidade de interesse',
              'model'    => 'inscription',
              'value'    => $inscription->interested_unit_id,

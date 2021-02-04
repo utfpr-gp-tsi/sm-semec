@@ -7,10 +7,13 @@
   <div class="card-body">
   	<p><strong>Servidor: </strong>{{ $inscription->servant->name }}</p>
   	<p><strong>Matrícula: </strong>{{ $inscription->contract->registration }}</p>
-  	<p><strong>Unidade de Interesse: </strong>{{ $inscription->interestedUnit->name }}</p>
+  	@foreach($inscription->units as $unit)
+  	<p><strong>Unidade de Interesse: </strong>{{ $unit->name }}</p>
+  	@endforeach
   	<p><strong>Unidade Atual: </strong>{{ $inscription->currentUnit->name }}</p>
   	<p><strong>Tipo de Remoção: </strong>{{ $inscription->removalType->name }}</p>
   	<p><strong>Motivo: </strong>{!! nl2br($inscription->reason) !!}</p>
+
   </div>
 </div>
 

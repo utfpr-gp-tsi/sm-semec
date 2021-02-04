@@ -17,7 +17,6 @@ class Inscription extends Model
         'servant_id',
         'contract_id',
         'removal_type_id',
-        'interested_unit_id',
         'reason',
     ];
 
@@ -67,5 +66,13 @@ class Inscription extends Model
     public function removalType()
     {
         return $this->belongsTo(RemovalType::class, 'removal_type_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function units()
+    {
+        return $this->belongsToMany(Unit::class, 'inscription_units', 'inscription_id', 'unit_id');
     }
 }

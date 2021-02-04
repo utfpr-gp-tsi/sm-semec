@@ -2,9 +2,9 @@
     <label class="form-control-label string required" for="name">
       {{ $label}} @if ($required) <abbr title="obrigatório">*</abbr> @endif
     </label>
-    <select class="form-control custom-select @if ($required) required @endif"
-            @if ($required) required="required" @endif
-            autofocus="autofocus" name="{{ $field }}" 
+    <select class="form-control custom-select-multiple @if ($required) required @endif"
+            @if ($required) required="required" @endif multiple="" 
+            autofocus="autofocus" name="{{ $field }}[]" 
             id="{{ $model }}_{{ $field }}">
 
         <option value=''> {{$default ?? ''}} </option>

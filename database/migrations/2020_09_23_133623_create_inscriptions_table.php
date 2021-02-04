@@ -33,11 +33,6 @@ class CreateInscriptionsTable extends Migration
                   ->references('id')
                   ->on('units');
 
-            $table->unsignedBigInteger('interested_unit_id')->index();
-            $table->foreign('interested_unit_id')
-                    ->references('id')
-                    ->on('units');
-
             $table->unsignedBigInteger('edict_id')->index();
             $table->foreign('edict_id')
                     ->references('id')

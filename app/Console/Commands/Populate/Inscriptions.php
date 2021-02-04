@@ -9,6 +9,7 @@ use App\Models\Servant;
 use App\Models\Contract;
 use App\Models\Unit;
 use App\Models\Inscription;
+use App\Models\InscriptionUnit;
 use App\Models\RemovalType;
 
 class Inscriptions extends Command
@@ -18,7 +19,7 @@ class Inscriptions extends Command
      *
      * @var string
      */
-   protected $signature = 'populate:inscriptions';
+    protected $signature = 'populate:inscriptions';
 
     /**
      * The console command description.
@@ -39,7 +40,7 @@ class Inscriptions extends Command
 
     /**
      * Execute the console command.
-     *
+     * @SuppressWarnings("unused")
      * @return mixed
      */
     public function handle()
@@ -56,7 +57,7 @@ class Inscriptions extends Command
 
         $edicts->each(function ($edict) {
             $inscriptions = Inscription::factory()->count(2)->create(['edict_id' => $edict->id]);
+            $inscriptions = InscriptionUnit::factory()->count(2)->create();
         });
-
     }
 }

@@ -91,6 +91,7 @@ class InscriptionsController extends AppController
         }
 
         $this->edict->inscriptions()->save($inscription);
+        $inscription->units()->attach($request->interested_unit_id);
 
         return redirect()->route('servant.dashboard')->with('success', 'Inscrição realizada com sucesso!');
     }

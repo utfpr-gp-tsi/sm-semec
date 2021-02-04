@@ -37,7 +37,6 @@ class InscriptionFactory extends Factory
     		'removal_type_id' => RemovalType::factory(),
     		'edict_id' => Edict::factory(),
     		'current_unit_id' => Unit::factory(),
-    		'interested_unit_id' => Unit::factory(),
     		'reason' => $this->faker->text(),
     	];
     }
