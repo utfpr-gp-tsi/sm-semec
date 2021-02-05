@@ -100,6 +100,18 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/units/{id}/edit',                 ['as' => 'admin.edit.unit',    'uses' => 'UnitsController@edit']);
 	Route::patch('/units/{id}',                    ['as' => 'admin.update.unit',  'uses' => 'UnitsController@update']);
 	Route::delete('/units/{id}',                   ['as' => 'admin.destroy.unit', 'uses' => 'UnitsController@destroy']);
+
+	/* Role resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/roles', 			       ['as' => 'admin.roles',        'uses' => 'RoleController@index']);
+	Route::get('/roles/page/{page}', 	       ['as' => 'admin.roles.page',   'uses' => 'RoleController@index']);
+	Route::get('/roles/search/{term?}', 	       ['as' => 'admin.search.roles', 'uses' => 'RoleController@index']);
+	Route::get('/roles/search/{term}/page/{page}', ['as' => 'admin.search.roles.page', 'uses' => 'RoleController@index']);
+	Route::get('/roles/new', 			       ['as' => 'admin.new.role',        'uses' => 'RoleController@new']);
+	Route::post('/roles/new', 			       ['as' => 'admin.create.role',        'uses' => 'RoleController@create']);
+	Route::get('/roles/{id}/edit',                 ['as' => 'admin.edit.role',    'uses' => 'RoleController@edit']);
+	Route::patch('/roles/{id}',                    ['as' => 'admin.update.role',  'uses' => 'RoleController@update']);
+	Route::delete('/roles/{id}',                   ['as' => 'admin.destroy.role', 'uses' => 'RoleController@destroy']);
     });
 });
 
