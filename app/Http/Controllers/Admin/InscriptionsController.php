@@ -18,7 +18,7 @@ class InscriptionsController extends AppController
     {
         $edict = Edict::find($id);
 
-        return view('admin.inscription.index', [
+        return view('admin.inscriptions.index', [
          'edict' => $edict]);
     }
 
@@ -33,7 +33,7 @@ class InscriptionsController extends AppController
     {
         $inscription = Inscription::find($id);
 
-        return view('admin.inscription.show', [
+        return view('admin.inscriptions.show', [
             'inscription' => $inscription]);
     }
 }

@@ -3,8 +3,8 @@
       {{ $label}} @if ($required) <abbr title="obrigatório">*</abbr> @endif
     </label>
     <select class="form-control custom-select-multiple @if ($required) required @endif"
-            @if ($required) required="required" @endif multiple="" 
-            autofocus="autofocus" name="{{ $field }}[]" 
+            @if ($required) required="required" @endif multiple="multiple"
+            autofocus="autofocus" name="{{ $field }}[]"
             id="{{ $model }}_{{ $field }}">
 
         <option value=''> {{$default ?? ''}} </option>
@@ -13,7 +13,7 @@
           {{ $label_method = isset($label_method) ? $label_method : 'name' }}
           @foreach($options as $option)
             <option value="{{ $option->$value_method }}"
-                           {{ $value == $option->$value_method ? 'selected' : '' }} >
+                           {{ in_array($option->$value_method, $values) ? 'selected' : '' }} >
                 {{ $option->$label_method }}
             </option>
           @endforeach

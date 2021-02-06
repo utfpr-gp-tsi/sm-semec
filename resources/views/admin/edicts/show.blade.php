@@ -13,7 +13,7 @@
     <p><strong>Válido até: </strong> {{ $edict->ended_at->toShortDateTime() }}</p>
 
     @foreach($edict->pdfs as $pdf)
-    <p><a href="{{ route('admin.show.pdf', ['edict_id' => $pdf->edict->id, 'id' => $pdf->id]) }}">{{ $pdf->name }}</a></p>
+      <p><a href="{{ route('admin.show.pdf', ['edict_id' => $pdf->edict->id, 'id' => $pdf->id]) }}">{{ $pdf->name }}</a></p>
     @endforeach
 
   </div>

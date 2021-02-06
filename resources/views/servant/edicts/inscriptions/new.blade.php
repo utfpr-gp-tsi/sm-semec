@@ -1,6 +1,6 @@
 @extends('layouts.servant.app')
 
-@section('title', 'Inscreva-se')
+@section('title', 'Inscreva-se no Edital ' . $edict->title)
 
 @section('content')
 
@@ -38,10 +38,10 @@
              'required' => true,
              'errors'   => $errors]) @endcomponent
 
-  @component('components.form.input_select_multiple',['field' => 'interested_unit_id',
+  @component('components.form.input_select_multiple',['field' => 'interested_unit_ids',
              'label'    => 'Unidade de interesse',
              'model'    => 'inscription',
-             'value'    => $inscription->interested_unit_id,
+             'values'   => $inscription->interested_unit_ids,
              'options'  => $units,
              'default'  => 'Selecione uma Unidade:',
              'required' => true,

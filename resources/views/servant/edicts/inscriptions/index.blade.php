@@ -16,7 +16,7 @@
     </thead>
     <tbody>
 
-    @each('servant.edicts.inscription._inscription_row', $servant, 'inscription')    
+    @each('servant.edicts.inscriptions._inscription_row', $servant, 'inscription')
 
     </tbody>
   </table>

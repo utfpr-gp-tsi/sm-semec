@@ -20,6 +20,7 @@ class InscriptionsController extends AppController
      */
     public function __construct()
     {
+        parent::__construct();
         $this->redirectToDashboardIfExpired();
     }
 
@@ -32,7 +33,7 @@ class InscriptionsController extends AppController
     {
         $servant = \Auth::guard('servant')->user();
 
-        return view('servant.edicts.inscription.index', [
+        return view('servant.edicts.inscriptions.index', [
             'servant' => $servant->inscriptions]);
     }
 
@@ -47,8 +48,9 @@ class InscriptionsController extends AppController
         $servant = \Auth::guard('servant')->user();
         $inscription = new Inscription();
         $inscription->current_unit_id = $servant->currentUnit()->id;
+        $inscription->interested_unit_ids = [];
 
-        return view('servant.edicts.inscription.new', [
+        return view('servant.edicts.inscriptions.new', [
             'edict' => $this->edict,
             'servant' => $servant,
             'contracts' => $servant->contracts,
@@ -67,10 +69,10 @@ class InscriptionsController extends AppController
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'contract_id'        => 'required',
-            'removal_type_id'    => 'required',
-            'interested_unit_id' => 'required',
-            'reason'             => 'required',
+            'contract_id'         => 'required',
+            'removal_type_id'     => 'required',
+            'interested_unit_ids' => 'required',
+            'reason'              => 'required',
         ]);
 
         $servant = \Auth::guard('servant')->user();
@@ -80,7 +82,9 @@ class InscriptionsController extends AppController
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('servant.edicts.inscription.new', [
+            $inscription->interested_unit_ids = $request->interested_unit_ids;
+
+            return view('servant.edicts.inscriptions.new', [
                 'edict' => $this->edict,
                 'servant' => $servant,
                 'contracts' => $servant->contracts,
@@ -91,7 +95,7 @@ class InscriptionsController extends AppController
         }
 
         $this->edict->inscriptions()->save($inscription);
-        $inscription->units()->attach($request->interested_unit_id);
+        $inscription->interestedUnits()->attach($request->interested_unit_ids);
 
         return redirect()->route('servant.dashboard')->with('success', 'Inscrição realizada com sucesso!');
     }
@@ -106,7 +110,7 @@ class InscriptionsController extends AppController
     {
         $inscription = Inscription::find($id);
 
-        return view('servant.edicts.inscription.show', [
+        return view('servant.edicts.inscriptions.show', [
                     'inscription' => $inscription]);
     }
 

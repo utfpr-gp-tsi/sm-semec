@@ -10,16 +10,18 @@
         <th>Servidor</th>
         <th>Matricula</th>
         <th>Tipo de Remoção</th>
-        <th>Criado em</th>
+        <th>Realizada em</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-    @each('admin.inscription._inscription_row', $edict->inscriptions, 'inscription')    
+      @each('admin.inscriptions._inscription_row', $edict->inscriptions, 'inscription')
     </tbody>
   </table>
 </div>
+
 <div class="mt-5 float-left flex-wrap">
   @component('components.links.back_and_edit', ['back_url' => route('admin.edicts')]) @endcomponent
 </div>
+
 @endsection

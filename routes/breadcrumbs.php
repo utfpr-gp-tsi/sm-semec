@@ -312,7 +312,7 @@ Breadcrumbs::for('servant.show.inscription', function ($trail, $id) {
 
 Breadcrumbs::for('servant.edicts', function ($trail) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.edicts'));
+    $trail->push('Editais Abertos', route('servant.edicts'));
 });
 
 Breadcrumbs::for('servant.show.edict', function ($trail, $id) {
@@ -322,7 +322,7 @@ Breadcrumbs::for('servant.show.edict', function ($trail, $id) {
 
 Breadcrumbs::for('servant.edicts.page', function ($trail, $term) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.edicts.page', $term));
+    $trail->push('Editais Abertos', route('servant.edicts.page', $term));
 });
 
 Breadcrumbs::for('servant.edicts.close', function ($trail) {
@@ -332,15 +332,15 @@ Breadcrumbs::for('servant.edicts.close', function ($trail) {
 
 Breadcrumbs::for('servant.edicts.close.page', function ($trail, $term) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.edicts.close.page', $term));
+    $trail->push('Editais Fechados', route('servant.edicts.close.page', $term));
 });
 
 Breadcrumbs::for('servant.search.edicts', function ($trail) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.search.edicts'));
+    $trail->push('Editais Abertos', route('servant.search.edicts'));
 });
 
 Breadcrumbs::for('servant.search.edicts.close', function ($trail) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.search.edicts.close'));
+    $trail->push('Editais Fechados', route('servant.search.edicts.close'));
 });
