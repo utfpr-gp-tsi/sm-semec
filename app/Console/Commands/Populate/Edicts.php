@@ -59,12 +59,10 @@ class Edicts extends Command
             $startedAt = "{$currentDay}/{$currentMonth}/{$year} 00:00";
             $endedAt = "{$nextDay}/{$currentMonth}/{$year} 23:59";
 
-            Edict::factory(rand(5, 10))
-                ->create(['started_at' => $startedAt, 'ended_at' => $endedAt])
-                ->each(function ($edict) {
-                    $edict->pdfs()->save(Pdf::factory()->make());
-                    $edict->pdfs()->save(Pdf::factory()->make());
-                });
+            $edict = Edict::factory()->create(['started_at' => $startedAt, 'ended_at' => $endedAt]);
+
+            $edict->pdfs()->save(Pdf::factory()->make(['edict_id' => $edict->id]));
+            $edict->pdfs()->save(Pdf::factory()->make(['edict_id' => $edict->id]));
         }
     }
 }

@@ -13,7 +13,7 @@ class IndexTest extends DuskTestCase
         $pdfs = Pdf::factory()->create();
         $this->browse(function ($browser) use ($pdfs) {
                 $browser->visit('/edicts')
-                ->press('2020')
+                ->press(now()->year)
                 ->press($pdfs->edict->title)
                 ->assertSeeLink($pdfs->name);
         });

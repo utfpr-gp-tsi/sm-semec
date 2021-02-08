@@ -1,6 +1,6 @@
 @extends('layouts.servant.app')
 
-@section('title', 'Editais')
+@section('title', 'Editais Abertos')
 @section('content')
 
   @include('servant.edicts._edict_index', ['each' => 'servant.edicts._edict_open_row',

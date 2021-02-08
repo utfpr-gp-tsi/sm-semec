@@ -18,6 +18,13 @@
       </span>
       Editais
     </a>
+
+    <a class="list-group-item list-group-item-action {{ setActive(['servant/inscriptions*']) }}" href="{{ route('servant.inscriptions') }}">
+      <span class="icon mr-2">
+         <i class="fas fa-align-justify"></i>
+      </span>
+      Minhas Inscrições
+    </a>
   
   </div>
 </div>

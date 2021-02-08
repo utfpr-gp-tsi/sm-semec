@@ -20,7 +20,21 @@ class InscriptionsController extends AppController
      */
     public function __construct()
     {
+        parent::__construct();
         $this->redirectToDashboardIfExpired();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $servant = \Auth::guard('servant')->user();
+
+        return view('servant.edicts.inscriptions.index', [
+            'servant' => $servant->inscriptions]);
     }
 
     /**
@@ -34,8 +48,9 @@ class InscriptionsController extends AppController
         $servant = \Auth::guard('servant')->user();
         $inscription = new Inscription();
         $inscription->current_unit_id = $servant->currentUnit()->id;
+        $inscription->interested_unit_ids = [];
 
-        return view('servant.edicts.inscription.new', [
+        return view('servant.edicts.inscriptions.new', [
             'edict' => $this->edict,
             'servant' => $servant,
             'contracts' => $servant->contracts,
@@ -54,10 +69,10 @@ class InscriptionsController extends AppController
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'contract_id'        => 'required',
-            'removal_type_id'    => 'required',
-            'interested_unit_id' => 'required',
-            'reason'             => 'required',
+            'contract_id'         => 'required',
+            'removal_type_id'     => 'required',
+            'interested_unit_ids' => 'required',
+            'reason'              => 'required',
         ]);
 
         $servant = \Auth::guard('servant')->user();
@@ -67,7 +82,9 @@ class InscriptionsController extends AppController
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            return view('servant.edicts.inscription.new', [
+            $inscription->interested_unit_ids = isset($request->interested_unit_ids) ? interested_unit_ids : [];
+
+            return view('servant.edicts.inscriptions.new', [
                 'edict' => $this->edict,
                 'servant' => $servant,
                 'contracts' => $servant->contracts,
@@ -78,8 +95,23 @@ class InscriptionsController extends AppController
         }
 
         $this->edict->inscriptions()->save($inscription);
+        $inscription->interestedUnits()->attach($request->interested_unit_ids);
 
         return redirect()->route('servant.dashboard')->with('success', 'Inscrição realizada com sucesso!');
+    }
+
+    /**
+    * Display the specified resource.
+    *
+    * @param  \App\Models\Inscription  $id
+    * @return \Illuminate\View\View
+    */
+    public function show($id)
+    {
+        $inscription = Inscription::find($id);
+
+        return view('servant.edicts.inscriptions.show', [
+                    'inscription' => $inscription]);
     }
 
     private function redirectToDashboardIfExpired(): void
@@ -87,11 +119,11 @@ class InscriptionsController extends AppController
         $this->middleware(function ($request, $next) {
             $this->edict = Edict::find($request->edict_id);
 
-            if (now()->toShortDateTime() > $this->edict->ended_at->toShortDateTime()) {
+            if (now()->gt($this->edict->ended_at)) {
                 \Session::flash('danger', 'A data limite das inscrições foi atingida!');
                 return redirect()->route('servant.dashboard');
             }
             return $next($request);
-        });
+        })->except(['index','show']);
     }
 }

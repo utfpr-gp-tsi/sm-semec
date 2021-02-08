@@ -50,5 +50,6 @@ class Populate extends Command
         $this->call('populate:edicts');
         $this->call('populate:units');
         $this->call('populate:removal_types');
+        $this->call('populate:inscriptions');
     }
 }

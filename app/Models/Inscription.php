@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Inscription extends Model
 {
+    use HasFactory;
+
     /**
      * @var array
      */
@@ -14,7 +17,6 @@ class Inscription extends Model
         'servant_id',
         'contract_id',
         'removal_type_id',
-        'interested_unit_id',
         'reason',
     ];
 
@@ -23,7 +25,7 @@ class Inscription extends Model
      */
     public function servant()
     {
-        return $this->belongsTo(Servant::class, 'inscription_id');
+        return $this->belongsTo(Servant::class, 'servant_id');
     }
 
      /**
@@ -45,14 +47,6 @@ class Inscription extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function interestedUnit()
-    {
-        return $this->belongsTo(Unit::class, 'interested_unit_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function edict()
     {
         return $this->belongsTo(Edict::class, 'edict_id');
@@ -64,5 +58,13 @@ class Inscription extends Model
     public function removalType()
     {
         return $this->belongsTo(RemovalType::class, 'removal_type_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function interestedUnits()
+    {
+        return $this->belongsToMany(Unit::class, 'inscription_units', 'inscription_id', 'unit_id');
     }
 }

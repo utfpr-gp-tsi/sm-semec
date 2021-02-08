@@ -15,7 +15,7 @@ class CreateInscriptionsTable extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('reason');
+            $table->text('reason');
             $table->timestamps();
 
             $table->unsignedBigInteger('servant_id')->index();
@@ -32,11 +32,6 @@ class CreateInscriptionsTable extends Migration
             $table->foreign('current_unit_id')
                   ->references('id')
                   ->on('units');
-
-            $table->unsignedBigInteger('interested_unit_id')->index();
-            $table->foreign('interested_unit_id')
-                    ->references('id')
-                    ->on('units');
 
             $table->unsignedBigInteger('edict_id')->index();
             $table->foreign('edict_id')

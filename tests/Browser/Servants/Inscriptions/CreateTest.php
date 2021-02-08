@@ -84,7 +84,7 @@ class CreateTest extends DuskTestCase
 
             $browser->selectize('inscription_contract_id', $contract->id)
                     ->selectize('inscription_removal_type_id', $removalType->id)
-                    ->selectize('inscription_interested_unit_id', $unit->id)
+                    ->selectize('inscription_interested_unit_ids', $unit->id)
                     ->type('reason', 'work more')
                     ->press('Enviar');
 
@@ -113,12 +113,32 @@ class CreateTest extends DuskTestCase
             $browser->with('div.inscription_removal_type_id', function ($flash) {
                 $flash->assertSee('O campo tipo de remoção é obrigatório.');
             });
-            $browser->with('div.inscription_interested_unit_id', function ($flash) {
-                $flash->assertSee('O campo unidade de interesse é obrigatório.');
+            $browser->with('div.inscription_interested_unit_ids', function ($flash) {
+                $flash->assertSee('O campo unidades de interesse é obrigatório.');
             });
             $browser->with('div.inscription_reason', function ($flash) {
                 $flash->assertSee('O campo motivo é obrigatório.');
             });
         });
     }
+
+    // public function testDeadlineReached(): void
+    // {
+
+    //     $this->edict = Edict::factory()->create([
+    //         'ended_at'   => '01/03/2022 13:31']);
+
+    //     $this->browse(function ($browser) {
+    //         $browser->loginAs($this->servant, 'servant')
+    //                 ->visit(route('servant.edicts'))
+    //                 ->scrollIntoView('.btn-primary')
+    //                 ->click('.btn-primary');
+
+    //         $browser->assertUrlIs(route('servant.dashboard'));
+
+    //         $browser->with('div.alert', function ($flash) {
+    //             $flash->assertSee('A data limite das inscrições foi atingida!');
+    //         });
+    //     });
+    // }
 }
