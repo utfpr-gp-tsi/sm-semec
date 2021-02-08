@@ -64,7 +64,8 @@ class PdfController extends AppController
      */
     public function show($id, $pdfId)
     {
-        $pdf = Pdf::find($pdfId);
+        $edict = Edict::find($id);
+        $pdf = $edict->pdfs()->find($pdfId);
         return response()->file($pdf->pathToFile());
     }
 
