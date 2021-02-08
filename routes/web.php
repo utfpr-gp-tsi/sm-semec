@@ -109,9 +109,9 @@ Route::namespace('Admin')->group(function () {
 
     Route::get('/servants/{servant_id}/contracts/{id}/completary-datas/new',                 ['as' => 'admin.new.completary_data',     'uses' => 'ServantCompletaryDataController@new']);
 
-	Route::post('/servants/{servant_id}/contracts/{id}/completary-datas',                    ['as' => 'admin.create.completary_data',  'uses' => 'ServantCompletaryDataController@create']);
+	  Route::post('/servants/{servant_id}/contracts/{id}/completary-datas',                    ['as' => 'admin.create.completary_data',  'uses' => 'ServantCompletaryDataController@create']);
 
-	Route::get('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}/edit',  ['as' => 'admin.edit.completary_data',    'uses' => 'ServantCompletaryDataController@edit']);
+	  Route::get('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}/edit',  ['as' => 'admin.edit.completary_data',    'uses' => 'ServantCompletaryDataController@edit']);
 
     Route::patch('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}',     ['as' => 'admin.update.completary_data',   'uses' => 'ServantCompletaryDataController@update']);    
 
@@ -126,6 +126,12 @@ Route::namespace('Admin')->group(function () {
     Route::get('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{completaryData_id}/movement/{id}/edit',                 ['as' => 'admin.edit.movement', 'uses' => 'MovementController@edit']);
 
     Route::patch('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{completaryData_id}/movement/{id}',     ['as' => 'admin.update.movement',   'uses' => 'MovementController@update']); 
+
+ 	 /* Inscriptions of edicts
+	 |---------------------------------------------------------------------------*/
+	 Route::get('/edicts/{id}/inscriptions', ['as' => 'admin.inscriptions', 'uses' => 'InscriptionsController@index']);
+	 Route::get('/edicts/{edict_id}/inscriptions/{id}', ['as' => 'admin.show.inscription', 'uses' => 'InscriptionsController@show']);
+
     });
 
 	Route::delete('/servants/{servant_id}/contracts/{contract_id}/completary_datas/{completaryData_id}/movement/{id}',                   ['as' => 'admin.destroy.movement', 'uses' => 'MovementController@destroy']);
@@ -162,9 +168,12 @@ Route::namespace('Servant')->group(function () {
 	/* Edicts Inscriptions
         |----------------------------------------------------------------------------*/
 	Route::get('/edicts/{edict_id}/inscriptions/new', ['as' => 'new.inscription',   'uses' => 'InscriptionsController@new']);
-    Route::post('/edicts/{edict_id}/inscriptions',    ['as' => 'create.inscription','uses' => 'InscriptionsController@create']);
- 	
-	
+        Route::post('/edicts/{edict_id}/inscriptions',    ['as' => 'create.inscription','uses' => 'InscriptionsController@create']);
+
+        Route::get('/inscriptions', ['as' => 'inscriptions', 'uses' => 'InscriptionsController@index']);
+        Route::get('/inscriptions/{id}', ['as' => 'show.inscription', 'uses' => 'InscriptionsController@show']);
+
+
 	/* Edicts
 	|----------------------------------------------------------------------------*/
 	Route::get('/edicts/open/page/{page}', ['as' => 'edicts.page', 'uses' => 'EdictsController@indexOpen']);
@@ -175,8 +184,8 @@ Route::namespace('Servant')->group(function () {
 	Route::get('/edicts/close/search/{term}/page/{page}', ['as' => 'search.edicts.close.page', 'uses' => 'EdictsController@indexclose']);
 	Route::get('/edicts/close/search/{term?}', ['as' => 'search.edicts.close', 'uses' => 'EdictsController@indexClose']);
 	Route::get('/edicts/close', ['as' => 'edicts.close', 'uses' => 'EdictsController@indexClose']);
-    Route::get('/edicts/{id}', ['as' => 'show.edict', 'uses' => 'EdictsController@show']);
-
+        Route::get('/edicts/{id}', ['as' => 'show.edict', 'uses' => 'EdictsController@show']);
+        Route::get('/edicts/{edict_id}/pdf/{id}', ['as' => 'show.edict.pdf', 'uses' => 'EdictsController@showPdf']);
     });
 });
 

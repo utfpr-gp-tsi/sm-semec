@@ -273,20 +273,38 @@ Breadcrumbs::for('admin.search.units.page', function ($trail) {
     $trail->push('Unidades', route('admin.units'));
 });
 
+/* Inscription of Edicts
+|---------------------------------------------------------------------------*/
+Breadcrumbs::for('admin.inscriptions', function ($trail, $id) {
+    $trail->parent('admin.edicts');
+    $trail->push('Inscrições no Edital #'. $id, route('admin.inscriptions', $id));
+});
+
+Breadcrumbs::for('admin.show.inscription', function ($trail, $edict, $id) {
+    $trail->parent('admin.inscriptions', $edict);
+    $trail->push('Inscrição #'. $id, route('admin.show.inscription', ['edict_id'=> $edict, 'id' => $id]));
+});
+
 /* Servant Inscrptions
 |-------------------------------------------------------------------------- */
 Breadcrumbs::for('servant.new.inscription', function ($trail, $id) {
-    $trail->parent('servant.dashboard');
-    $trail->push('Editais', '#');
-    $trail->push('Edital #' .$id, '#');
+    $trail->parent('servant.show.edict', $id);
     $trail->push('Nova Inscrição', route('servant.new.inscription' , $id));
 });
 
 Breadcrumbs::for('servant.create.inscription', function ($trail, $id) {
-    $trail->parent('servant.dashboard');
-    $trail->push('Editais', '#');
-    $trail->push('Edital #' .$id, '#');
+    $trail->parent('servant.show.edict', $id);
     $trail->push('Nova Inscrição', route('servant.create.inscription' , $id));
+});
+
+Breadcrumbs::for('servant.inscriptions', function ($trail) {
+    $trail->parent('servant.dashboard');
+    $trail->push('Minhas Inscrições', route('servant.inscriptions'));
+});
+
+Breadcrumbs::for('servant.show.inscription', function ($trail, $id) {
+    $trail->parent('servant.inscriptions');
+    $trail->push('Inscrição #'. $id, route('servant.show.inscription', $id));
 });
 
 /* Edicts Servant
@@ -294,38 +312,37 @@ Breadcrumbs::for('servant.create.inscription', function ($trail, $id) {
 
 Breadcrumbs::for('servant.edicts', function ($trail) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.edicts'));
+    $trail->push('Editais Abertos', route('servant.edicts'));
 });
 
 Breadcrumbs::for('servant.show.edict', function ($trail, $id) {
-    $trail->parent('servant.dashboard');
-    $trail->push('Editais', '#');
+    $trail->parent('servant.edicts');
     $trail->push('Edital #' .$id, route('servant.show.edict', $id));
 });
 
 Breadcrumbs::for('servant.edicts.page', function ($trail, $term) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.edicts.page', $term));
+    $trail->push('Editais Abertos', route('servant.edicts.page', $term));
 });
 
 Breadcrumbs::for('servant.edicts.close', function ($trail) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.edicts.close'));
+    $trail->push('Editais Fechados', route('servant.edicts.close'));
 });
 
 Breadcrumbs::for('servant.edicts.close.page', function ($trail, $term) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.edicts.close.page', $term));
+    $trail->push('Editais Fechados', route('servant.edicts.close.page', $term));
 });
 
 Breadcrumbs::for('servant.search.edicts', function ($trail) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.search.edicts'));
+    $trail->push('Editais Abertos', route('servant.search.edicts'));
 });
 
 Breadcrumbs::for('servant.search.edicts.close', function ($trail) {
     $trail->parent('servant.dashboard');
-    $trail->push('Editais', route('servant.search.edicts.close'));
+    $trail->push('Editais Fechados', route('servant.search.edicts.close'));
 });
 
 /* Servant Completary Data

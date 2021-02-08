@@ -29,9 +29,10 @@ class EdictsController extends Controller
      * @param  \App\Models\Pdf  $id
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse.
      */
-    public function showPdf($id)
+    public function showPdf($id, $pdfId)
     {
-        $pdf = Pdf::find($id);
+        $edict = Edict::find($id);
+        $pdf = $edict->pdfs->find($pdfId);
         return response()->file($pdf->pathToFile());
     }
 }

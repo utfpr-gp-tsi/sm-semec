@@ -37,9 +37,7 @@ class CreateTest extends DuskTestCase
             $browser->type('name', $this->unit->name)
                     ->type('address', $this->unit->address)
                     ->type('phone', $this->unit->phone)
-                    ->waitFor('#unit_category_id-selectized')
-                    ->click('div.unit_category_id #unit_category_id-selectized')
-                    ->click("div.unit_category_id .selectize-dropdown .option[data-value='{$category->id}']")
+                    ->selectize('unit_category_id', $category->id)
                     ->press('Criar Unidade');
 
             $browser->assertUrlIs(route('admin.units'));

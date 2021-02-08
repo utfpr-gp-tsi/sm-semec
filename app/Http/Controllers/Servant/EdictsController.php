@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Servant;
 
 use Illuminate\Support\Facades\Validator;
 use App\Models\Edict;
+use App\Models\Pdf;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Servant\AppController;
 
@@ -43,7 +44,22 @@ class EdictsController extends AppController
     {
         $edict = Edict::find($id);
         return view('servant.edicts.show', [
-            'edict' => $edict
+            'edict' => $edict,
         ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Edict $id
+     * @param  \App\Models\Pdf $pdfId
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse.
+    * @SuppressWarnings("unused")
+     */
+    public function showPdf($id, $pdfId)
+    {
+        $edict = Edict::find($id);
+        $pdf = $edict->pdfs()->find($pdfId);
+        return response()->file($pdf->pathToFile());
     }
 }

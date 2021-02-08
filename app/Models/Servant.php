@@ -52,7 +52,7 @@ class Servant extends Authenticatable
      */
     public function inscriptions()
     {
-        return $this->hasMany(Inscription::class, 'servant_id');
+        return $this->hasMany(Inscription::class, 'servant_id')->orderBy('created_at', 'desc');
     }
 
     /**

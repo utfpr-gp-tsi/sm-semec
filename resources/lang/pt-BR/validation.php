@@ -159,7 +159,7 @@ return [
         'address' => 'endereço',
         'category_id' => 'categoria',
         'reason' => 'motivo',
-        'interested_unit_id' => 'unidade de interesse',
+        'interested_unit_ids' => 'unidades de interesse',
         'contract_id' => 'contrato',
         'removal_type_id' => 'tipo de remoção',
         'occupation' => 'função',
