@@ -38,8 +38,8 @@ jobs:
 
       - name: Prepare app
         run: |
-            cat hostname
-            ping $(hostname)
+            hostname
+            curl $(hostname)
       #     cp .env.ci .env
       #     php artisan key:generate
       #     php artisan config:clear
