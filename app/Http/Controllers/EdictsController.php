@@ -26,7 +26,8 @@ class EdictsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pdf  $id
+     * @param  \App\Models\Edict $id
+     * @param  \App\Models\Pdf $pdfId
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse.
      */
     public function showPdf($id, $pdfId)
