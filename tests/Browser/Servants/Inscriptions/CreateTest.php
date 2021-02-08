@@ -84,7 +84,7 @@ class CreateTest extends DuskTestCase
 
             $browser->selectize('inscription_contract_id', $contract->id)
                     ->selectize('inscription_removal_type_id', $removalType->id)
-                    ->selectize('inscription_interested_unit_id', $unit->id)
+                    ->selectize('inscription_interested_unit_ids', $unit->id)
                     ->type('reason', 'work more')
                     ->press('Enviar');
 
@@ -113,8 +113,8 @@ class CreateTest extends DuskTestCase
             $browser->with('div.inscription_removal_type_id', function ($flash) {
                 $flash->assertSee('O campo tipo de remoção é obrigatório.');
             });
-            $browser->with('div.inscription_interested_unit_id', function ($flash) {
-                $flash->assertSee('O campo unidade de interesse é obrigatório.');
+            $browser->with('div.inscription_interested_unit_ids', function ($flash) {
+                $flash->assertSee('O campo unidades de interesse é obrigatório.');
             });
             $browser->with('div.inscription_reason', function ($flash) {
                 $flash->assertSee('O campo motivo é obrigatório.');
