@@ -12,6 +12,7 @@ jobs:
         options: --network-alias webserver
         volumes:
           - /home/runner/work/sm-semec/sm-semec:/var/www
+          - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
         ports:
           - 80:80
       db:
@@ -60,9 +61,9 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
-      # - name: Access
-      #   run: |
-      #     curl webserver
+      - name: Access
+        run: |
+          curl webserver
       # - name: Code analyse
       #   run: |
       #     vendor/bin/phpcs --standard=phpcs.xml ./
