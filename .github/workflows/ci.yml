@@ -37,7 +37,14 @@ jobs:
 
       - name: Install libs
         run: |
-          ls
+          apt-get update
+          apt-get install -y build-essential
+          apt-get install -y libzip-dev
+          apt-get install -y zip
+          docker-php-ext-install pdo_mysql zip exif pcntl
+          docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
+          docker-php-ext-install gd
+          docker-php-ext-enable xdebug
           curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           # apt-get update
           # apt-get install -y sudo
