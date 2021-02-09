@@ -42,10 +42,15 @@ jobs:
           apt-get install -y libzip-dev
           apt-get install -y zip
           apt-get install -y libpng-dev
+          apt-get install -y libpng-dev
+          apt-get install -y libjpeg62-turbo-dev
+          apt-get install -y libfreetype6-dev
+
           docker-php-ext-install pdo_mysql zip exif pcntl
           docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
           docker-php-ext-install gd
           docker-php-ext-enable xdebug
+
           curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           # apt-get update
           # apt-get install -y sudo
