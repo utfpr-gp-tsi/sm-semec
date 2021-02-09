@@ -37,7 +37,7 @@ jobs:
 
       - name: Install libs
         run: |
-          pwd
+          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           # apt-get update
           # apt-get install -y sudo
 
@@ -46,15 +46,15 @@ jobs:
       #   with:
       #     php-version: 7.4
       #     extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
-      - name: Install dependencies
-        uses: php-actions/composer@v5
-        with:
-          dev: no
-          args: --profile --ignore-platform-reqs
+      # - name: Install dependencies
+      #   uses: php-actions/composer@v5
+      #   with:
+      #     dev: no
+      #     args: --profile --ignore-platform-reqs
 
-      # - name: Install Dependencies
-      #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-      #
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
       - name: Prepare app
         run: |
           cp .env.ci .env
