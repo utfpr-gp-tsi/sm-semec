@@ -34,7 +34,7 @@ jobs:
           # curl webserver
           mkdir -p /var/www
           ls -la /var/www
-          cp -r .* /var/www/
+          cp -ar .* /var/www/
           ls -la /var/www
           curl 127.0.0.1
 
