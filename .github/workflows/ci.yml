@@ -38,22 +38,21 @@ jobs:
 
       - name: Prepare app
         run: |
-            hostname
-            curl $(hostname)
-      #     cp .env.ci .env
-      #     php artisan key:generate
-      #     php artisan config:clear
-      #     php artisan route:clear
-      #     php artisan cache:clear
-      #
-      # - name: Run migration
-      #   run: |
-      #     mysql -h 127.0.0.1 --port 3306 -u root -e "show databases;"
-      #     php artisan migrate
-      #     php artisan db:seed
-      #   env:
-      #     DB_HOST: 127.0.0.1
-      #     DB_PORT: 3306
+          cp .env.ci .env
+          php artisan key:generate
+          php artisan config:clear
+          php artisan route:clear
+          php artisan cache:clear
+
+      - name: Run migration
+        run: |
+          mysql -h 127.0.0.1 --port 3306 -u root -e "show databases;"
+          php artisan migrate
+          php artisan db:seed
+          curl $(hostname)
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
       # - name: Code analyse
       #   run: |
       #     vendor/bin/phpcs --standard=phpcs.xml ./
