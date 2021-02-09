@@ -16,7 +16,7 @@ jobs:
           - /var/www:/var/www
           - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
       db:
-        image: mysql:8.0.22
+        image: mysql:8.0.23
         env:
           MYSQL_DATABASE: sm_semec
           MYSQL_USER: sm-semec
