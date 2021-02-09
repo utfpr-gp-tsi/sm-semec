@@ -39,21 +39,21 @@ jobs:
         run: |
           apt-get update
           apt-get -qq install -y build-essential
-          apt-get -qq install -y libzip-dev
-          apt-get -qq install -y zip
-          apt-get -qq install -y libpng-dev
-          apt-get -qq install -y libpng-dev
-          apt-get -qq install -y libjpeg62-turbo-dev
-          apt-get -qq install -y libfreetype6-dev
-          apt-get -qq install -y libonig-dev
+          # apt-get -qq install -y libzip-dev
+          # apt-get -qq install -y zip
+          # apt-get -qq install -y libpng-dev
+          # apt-get -qq install -y libpng-dev
+          # apt-get -qq install -y libjpeg62-turbo-dev
+          # apt-get -qq install -y libfreetype6-dev
+          # apt-get -qq install -y libonig-dev
           apt-get -qq install -y default-mysql-client
-          apt-get -qq install -y locales
+          # apt-get -qq install -y locales
 
-          docker-php-ext-install pdo_mysql zip exif pcntl
-          docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
-          docker-php-ext-install gd
-
-          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          # docker-php-ext-install pdo_mysql zip exif pcntl
+          # docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
+          # docker-php-ext-install gd
+          #
+          # curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           # apt-get update
           # apt-get install -y sudo
 
@@ -102,9 +102,9 @@ jobs:
           mysql --default-auth=mysql_native_password -h db --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
           # php artisan migrate:fresh --env=testing
 
-      - name: Run dusk tests
-        run: |
-          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+      # - name: Run dusk tests
+      #   run: |
+      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
 
       # - name: Run migration
       #   run: |
