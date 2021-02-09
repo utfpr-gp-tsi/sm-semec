@@ -6,15 +6,17 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    container:
+      image: php:7.4-fpm
     services:
-      # webserver:
-      #   image: nginx:alpine
-      #   options: --network-alias webserver
-      #   volumes:
-      #     - /home/runner/work/sm-semec/sm-semec:/var/www
-      #     - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
-      #   ports:
-      #     - 80:80
+      webserver:
+        image: nginx:alpine
+        options: --network-alias webserver
+        # volumes:
+        #   - /home/runner/work/sm-semec/sm-semec:/var/www
+        #   - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
+        ports:
+          - 80:80
       db:
         image: mysql:8.0.22
         env:
@@ -57,7 +59,6 @@ jobs:
           mysql -h 127.0.0.1 --port 3306 -u root -e "show databases;"
           php artisan migrate
           php artisan db:seed
-          php artisan serve &
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
@@ -87,8 +88,9 @@ jobs:
           npm run production
           php artisan config:clear
           php artisan cache:clear
+          php artisan serve --env=dusk.local &
           php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
         env:
-          # DB_HOST: 127.0.0.1
-          # DB_PORT: 3306
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
           APP_URL: http://git.workflows.live:8000
