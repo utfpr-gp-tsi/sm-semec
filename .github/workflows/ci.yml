@@ -17,6 +17,7 @@ jobs:
           - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
       db:
         image: mysql:8.0.22
+        command: --default-authentication-plugin=mysql_native_password
         env:
           MYSQL_DATABASE: sm_semec
           MYSQL_USER: sm-semec
