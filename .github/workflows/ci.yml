@@ -7,7 +7,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:20.04
+      image: ubuntu:20.04 
       options: --network-alias app
     services:
       webserver:
@@ -34,6 +34,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Install libs
+        run: |
+          apt-get update
+          apt-get install -y build-essential sudo
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
