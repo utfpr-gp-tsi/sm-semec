@@ -31,7 +31,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Nginx
         run: |
-          curl webserver
+          # curl webserver
           ls -la /var/www
           cp -r .* /var/www/
           ls -la /var/www
