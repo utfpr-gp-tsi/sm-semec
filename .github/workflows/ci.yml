@@ -56,7 +56,8 @@ jobs:
       - name: Install Dependencies
         run: |
           rm composer.lock
-          composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+          composer install
+          # composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: Prepare app
         run: |
