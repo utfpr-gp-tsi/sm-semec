@@ -49,7 +49,8 @@ jobs:
           apt-get -qq install -y libjpeg62-turbo-dev
           apt-get -qq install -y libfreetype6-dev
           apt-get -qq install -y libonig-dev
-          apt-get -qq install -y mysql-client
+          apt-get -qq install -y default-mysql-client
+          apt-get -qq install -y locales
 
           docker-php-ext-install pdo_mysql zip exif pcntl
           docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
