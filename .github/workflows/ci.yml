@@ -35,6 +35,7 @@ jobs:
       - name: Nginx
         run: |
           curl webserver
+          docker
 
       # - name: Setup PHP
       #   uses: shivammathur/setup-php@v2
