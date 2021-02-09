@@ -57,6 +57,7 @@ jobs:
           DB_PORT: 3306
       - name: Access
         run: |
+          cat /etc/hosts
           hostname -I | cut -d' ' -f1
           curl $(hostname -I | cut -d' ' -f1):8000
       # - name: Code analyse
