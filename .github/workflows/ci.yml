@@ -41,14 +41,15 @@ jobs:
       - name: Install libs
         run: |
           apt-get update
-          apt-get install -y build-essential
-          apt-get install -y libzip-dev
-          apt-get install -y zip
-          apt-get install -y libpng-dev
-          apt-get install -y libpng-dev
-          apt-get install -y libjpeg62-turbo-dev
-          apt-get install -y libfreetype6-dev
-          apt-get install -y default-mysql-client
+          apt-get -qq install -y build-essential
+          apt-get -qq install -y libzip-dev
+          apt-get -qq install -y zip
+          apt-get -qq install -y libpng-dev
+          apt-get -qq install -y libpng-dev
+          apt-get -qq install -y libjpeg62-turbo-dev
+          apt-get -qq install -y libfreetype6-dev
+          apt-get -qq install -y libonig-dev
+          apt-get -qq install -y default-mysql-client
 
           docker-php-ext-install pdo_mysql zip exif pcntl
           docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
