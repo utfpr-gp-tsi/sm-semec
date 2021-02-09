@@ -49,7 +49,7 @@ jobs:
           mysql -h 127.0.0.1 --port 3306 -u root -e "show databases;"
           php artisan migrate
           php artisan db:seed
-          curl $(hostname)
+          curl $(hostname):8000
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
