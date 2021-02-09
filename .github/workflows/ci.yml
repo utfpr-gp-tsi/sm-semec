@@ -9,6 +9,11 @@ jobs:
     services:
       webserver:
         image: nginx:alpine
+        options: --network-alias testHost
+        volumes:
+          - ./:/var/www
+        ports:
+          - 80:80
       db:
         image: mysql:8.0.22
         env:
@@ -57,7 +62,9 @@ jobs:
           DB_PORT: 3306
       - name: Access
         run: |
-          cat /etc/hosts
+          # cat /etc/hosts
+          curl git.workflows.live:8000
+          curl webserver:80
       # - name: Code analyse
       #   run: |
       #     vendor/bin/phpcs --standard=phpcs.xml ./
