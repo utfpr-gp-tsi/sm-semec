@@ -35,6 +35,9 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: php -i
+        run: |
+          php -i
       - name: Install libs
         run: |
           apt-get update
