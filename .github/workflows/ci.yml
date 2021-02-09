@@ -9,6 +9,7 @@ jobs:
     services:
       webserver:
         image: nginx:alpine
+        options: --network-alias webserver
         volumes:
           - /home/runner/work/sm-semec/sm-semec:/var/www
         ports:
@@ -61,34 +62,32 @@ jobs:
           DB_PORT: 3306
       - name: Access
         run: |
-          # cat /etc/hosts
-          curl git.workflows.live:8000
-          curl webserver:80
-      # - name: Code analyse
-      #   run: |
-      #     vendor/bin/phpcs --standard=phpcs.xml ./
-      #     vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
-      #     php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
-      # - name: Migrate on test
-      #   run: |
-      #     mysql -h 127.0.0.1 --port 3306 -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
-      #     mysql -h 127.0.0.1 --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-      #     php artisan migrate:refresh --env=testing
-      #     # php artisan test
-      #   env:
-      #     DB_HOST: 127.0.0.1
-      #     DB_PORT: 3306
-      # - uses: actions/setup-node@v1
-      #   with:
-      #     node-version: '12'
-      # - name: Migrate on test
-      #   run: |
-      #     npm install
-      #     npm run production
-      #     php artisan config:clear
-      #     php artisan cache:clear
-      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
-      #   env:
-      #     DB_HOST: 127.0.0.1
-      #     DB_PORT: 3306
-      #     APP_URL: http://127.0.0.1:8000
+          curl webserver
+      - name: Code analyse
+        run: |
+          vendor/bin/phpcs --standard=phpcs.xml ./
+          vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
+          php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
+      - name: Migrate on test
+        run: |
+          mysql -h 127.0.0.1 --port 3306 -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
+          mysql -h 127.0.0.1 --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+          php artisan migrate:refresh --env=testing
+          # php artisan test
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Migrate on test
+        run: |
+          npm install
+          npm run production
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          APP_URL: git.workflows.live:8000
