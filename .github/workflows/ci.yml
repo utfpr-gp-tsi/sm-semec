@@ -87,7 +87,7 @@ jobs:
           npm run production
           php artisan config:clear
           php artisan cache:clear
-          php artisan serve --env=dusk.local &
+          php artisan serve &
           php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
         env:
           DB_HOST: 127.0.0.1
