@@ -26,8 +26,8 @@ jobs:
         ports:
           - 3306:3306
         volumes:
-          - /var/www/mysql/my.cnf:/etc/mysql/conf.d
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3 
+          - /var/www/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       selenium:
         image: selenium/standalone-chrome-debug:latest
         ports:
@@ -104,7 +104,7 @@ jobs:
       - name: Create test database
         run: |
           mysql -h db --port 3306 -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
-          # mysql -h db --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+          mysql -h db --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
           php artisan migrate:fresh --env=testing
 
       - name: Run dusk tests
