@@ -25,8 +25,6 @@ jobs:
           SERVICE_NAME: mysql
         ports:
           - 3306:3306
-        volumes:
-          - /var/www/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       selenium:
         image: selenium/standalone-chrome-debug:latest
@@ -37,9 +35,6 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: php -i
-        run: |
-          php -i
       - name: Install libs
         run: |
           apt-get update
@@ -73,39 +68,39 @@ jobs:
       #     dev: no
       #     args: --profile --ignore-platform-reqs
 
-      - name: Install Dependencies
-        run: |
-          rm composer.lock
-          composer install
-          # composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: Prepare app
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
-          php artisan config:clear
-          php artisan route:clear
-          php artisan cache:clear
-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12'
-
-      - name: Install npm dependencies
-        run: |
-          npm install
-          npm run production
-
-      - name: Copy files to /var/www
-        run: |
-          cp -ar . /var/www/
-          ls -la /var/www
+      # - name: Install Dependencies
+      #   run: |
+      #     rm composer.lock
+      #     composer install
+      #     # composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      #
+      # - name: Prepare app
+      #   run: |
+      #     cp .env.ci .env
+      #     php artisan key:generate
+      #     php artisan config:clear
+      #     php artisan route:clear
+      #     php artisan cache:clear
+      #
+      # - uses: actions/setup-node@v1
+      #   with:
+      #     node-version: '12'
+      #
+      # - name: Install npm dependencies
+      #   run: |
+      #     npm install
+      #     npm run production
+      #
+      # - name: Copy files to /var/www
+      #   run: |
+      #     cp -ar . /var/www/
+      #     ls -la /var/www
 
       - name: Create test database
         run: |
-          mysql -h db --port 3306 -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
-          mysql -h db --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-          php artisan migrate:fresh --env=testing
+          mysql --default-auth=mysql_native_password -h db --port 3306 -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
+          mysql --default-auth=mysql_native_password -h db --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+          # php artisan migrate:fresh --env=testing
 
       - name: Run dusk tests
         run: |
