@@ -60,14 +60,14 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
-      - name: Access
-        run: |
-          curl webserver
-      - name: Code analyse
-        run: |
-          vendor/bin/phpcs --standard=phpcs.xml ./
-          vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
-          php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
+      # - name: Access
+      #   run: |
+      #     curl webserver
+      # - name: Code analyse
+      #   run: |
+      #     vendor/bin/phpcs --standard=phpcs.xml ./
+      #     vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
+      #     php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
       - name: Migrate on test
         run: |
           mysql -h 127.0.0.1 --port 3306 -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
