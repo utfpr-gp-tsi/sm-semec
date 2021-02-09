@@ -29,14 +29,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+      - name: Nginx
         run: |
+          curl webserver
+          ls -la /var/www
           cp -r .* /var/www/
           ls -la /var/www
-      # - name: Nginx
-      #   run: |
-      #     curl webserver
-      #     ls -la /var/www
-      #
+
       # - name: Setup PHP
       #   uses: shivammathur/setup-php@v2
       #   with:
