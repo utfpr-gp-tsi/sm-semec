@@ -52,11 +52,13 @@ jobs:
           php artisan migrate
           php artisan db:seed
           php artisan serve &
-          curl http://127.0.0.1:8000
-          curl $(hostname):8000
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
+      - name: Access
+        run: |
+          curl 127.0.0.1:8000
+          curl $(hostname):8000
       # - name: Code analyse
       #   run: |
       #     vendor/bin/phpcs --standard=phpcs.xml ./
