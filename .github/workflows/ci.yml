@@ -32,9 +32,11 @@ jobs:
       - name: Nginx
         run: |
           # curl webserver
+          mkdir -p /var/www
           ls -la /var/www
           cp -r .* /var/www/
           ls -la /var/www
+          curl 127.0.0.1
 
       # - name: Setup PHP
       #   uses: shivammathur/setup-php@v2
