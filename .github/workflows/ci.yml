@@ -9,9 +9,8 @@ jobs:
     services:
       webserver:
         image: nginx:alpine
-        options: --network-alias testHost
         volumes:
-          - ./:/var/www
+          - /home/runner/work/sm-semec/sm-semec:/var/www
         ports:
           - 80:80
       db:
