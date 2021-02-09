@@ -58,8 +58,6 @@ jobs:
       - name: Access
         run: |
           cat /etc/hosts
-          hostname -I | cut -d' ' -f1
-          curl $(hostname -I | cut -d' ' -f1):8000
       # - name: Code analyse
       #   run: |
       #     vendor/bin/phpcs --standard=phpcs.xml ./
