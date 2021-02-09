@@ -7,9 +7,14 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     container:
-      image: nginx:alpine
-      options: --network-alias webserver
+      image: php:7.4-fpm
+      options: --network-alias app
     services:
+      webserver:
+        image: nginx:alpine
+        volumes:
+          - /var/www:/var/www
+          - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
       db:
         image: mysql:8.0.22
         env:
@@ -29,14 +34,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Nginx
+      - name: Copy files to /var/www
         run: |
-          # curl webserver
-          mkdir -p /var/www
           ls -la /var/www
           cp -ar . /var/www/
           ls -la /var/www
-          curl 127.0.0.1
 
       # - name: Setup PHP
       #   uses: shivammathur/setup-php@v2
