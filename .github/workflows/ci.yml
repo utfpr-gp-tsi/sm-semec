@@ -41,7 +41,7 @@ jobs:
           # sudo apt-get install php$version-fpm
           # Copy php-fpm to a directory in PATH
           sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
-          sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 127.0.0.1:9000|g'
+          sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 127.0.0.1:9000|g' /etc/php/7.4/fpm/pool.d/www.conf 
           sudo service php$version-fpm restart
           sudo service php$version-fpm status
       - name: Test php-fpm
