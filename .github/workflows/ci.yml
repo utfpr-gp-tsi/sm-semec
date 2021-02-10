@@ -78,7 +78,8 @@ jobs:
         run: |
           docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
           docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-          php artisan migrate:fresh --env=testing
+          # php artisan migrate:fresh --env=testing
+          php artisan migrate:fresh
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3307
@@ -120,7 +121,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v2
         with:
-          name: laravel
+          name: laravell
           path: /var/www/storage/logs
       # - name: Install libs
       #   run: |
