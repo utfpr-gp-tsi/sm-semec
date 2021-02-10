@@ -84,7 +84,7 @@ jobs:
       - name: Copy files to /var/www
         run: |
           sudo cp -arp . /var/www/
-          sudo ls -la /var/www/
+          # sudo ls -la /var/www/
           docker exec ${{ job.services.webserver.id }} nginx -s reload
           docker exec ${{ job.services.webserver.id }} curl localhost
 
@@ -95,7 +95,7 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_PORT: 3307
 
-     # - name: Install libs
+      # - name: Install libs
       #   run: |
       #     apt-get update
       #     apt-get -qq install -y build-essential
