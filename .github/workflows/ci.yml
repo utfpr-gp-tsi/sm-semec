@@ -83,7 +83,7 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          sudo echo "<?php phpinfo() ?>" > /var/www/index.php
+          sudo bash -c 'echo "<?php phpinfo() ?>" > /var/www/index.php'
           sudo cp -arp nginx /var/www/
 
           # sudo cp -arp . /var/www/
