@@ -92,6 +92,7 @@ jobs:
           # sudo cp -ar . /var/www/
           # sudo ls -la /var/www/
           docker exec ${{ job.services.webserver.id }} nginx -s reload
+          docker exec ${{ job.services.webserver.id }} ls /var/www/
           # curl 127.0.0.1:80
 
       - name: Run dusk tests
