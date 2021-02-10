@@ -41,12 +41,12 @@ jobs:
           # sudo apt-get install php$version-fpm
           # Copy php-fpm to a directory in PATH
           sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
-          # sudo service php$version-fpm start
+          sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 127.0.0.1:9000|g'
+          sudo service php$version-fpm restart
           sudo service php$version-fpm status
       - name: Test php-fpm
         run: |
           php-fpm -v
-          # sudo systemctl status php7.4-fpm
 
       - name: DB access
         run: |
