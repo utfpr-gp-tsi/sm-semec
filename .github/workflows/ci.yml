@@ -6,15 +6,15 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    container:
-      image: php:7.4-fpm
-      options: --network-alias app
+    # container:
+    #   image: php:7.4-fpm
+    #   options: --network-alias app
     services:
-      webserver:
-        image: nginx:alpine
-        volumes:
-          - /var/www:/var/www
-          - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
+      # webserver:
+      #   image: nginx:alpine
+      #   volumes:
+      #     - /var/www:/var/www
+      #     - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
       db:
         image: mysql:5.7.33
         env:
@@ -35,76 +35,80 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Install libs
+      - name: DB access
         run: |
-          apt-get update
-          apt-get -qq install -y build-essential
-          apt-get -qq install -y libzip-dev
-          apt-get -qq install -y zip
-          apt-get -qq install -y libpng-dev
-          apt-get -qq install -y libpng-dev
-          apt-get -qq install -y libjpeg62-turbo-dev
-          apt-get -qq install -y libfreetype6-dev
-          apt-get -qq install -y libonig-dev
-          apt-get -qq install -y default-mysql-client
-          apt-get -qq install -y locales
+          docker exec db mysql -e "SHOW DATABASES;"
 
-          docker-php-ext-install pdo_mysql zip exif pcntl
-          docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
-          docker-php-ext-install gd
-          #
-          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-          # apt-get update
-          # apt-get install -y sudo
-
-      # - name: Setup PHP
-      #   uses: shivammathur/setup-php@v2
+      # - name: Install libs
+      #   run: |
+      #     apt-get update
+      #     apt-get -qq install -y build-essential
+      #     apt-get -qq install -y libzip-dev
+      #     apt-get -qq install -y zip
+      #     apt-get -qq install -y libpng-dev
+      #     apt-get -qq install -y libpng-dev
+      #     apt-get -qq install -y libjpeg62-turbo-dev
+      #     apt-get -qq install -y libfreetype6-dev
+      #     apt-get -qq install -y libonig-dev
+      #     apt-get -qq install -y default-mysql-client
+      #     apt-get -qq install -y locales
+      #
+      #     docker-php-ext-install pdo_mysql zip exif pcntl
+      #     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
+      #     docker-php-ext-install gd
+      #     #
+      #     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+      #     # apt-get update
+      #     # apt-get install -y sudo
+      #
+      # # - name: Setup PHP
+      # #   uses: shivammathur/setup-php@v2
+      # #   with:
+      # #     php-version: 7.4
+      # #     extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
+      # # - name: Install dependencies
+      # #   uses: php-actions/composer@v5
+      # #   with:
+      # #     dev: no
+      # #     args: --profile --ignore-platform-reqs
+      #
+      # - name: Install Dependencies
+      #   run: |
+      #     rm composer.lock
+      #     composer install
+      #     # composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      #
+      # - name: Prepare app
+      #   run: |
+      #     cp .env.ci .env
+      #     php artisan key:generate
+      #     php artisan config:clear
+      #     php artisan route:clear
+      #     php artisan cache:clear
+      #
+      # - uses: actions/setup-node@v1
       #   with:
-      #     php-version: 7.4
-      #     extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
-      # - name: Install dependencies
-      #   uses: php-actions/composer@v5
-      #   with:
-      #     dev: no
-      #     args: --profile --ignore-platform-reqs
-
-      - name: Install Dependencies
-        run: |
-          rm composer.lock
-          composer install
-          # composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: Prepare app
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
-          php artisan config:clear
-          php artisan route:clear
-          php artisan cache:clear
-     
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12'
-
-      - name: Install npm dependencies
-        run: |
-          npm install
-          npm run production
-
-      - name: Copy files to /var/www
-        run: |
-          cp -ar . /var/www/
-          ls -la /var/www
-
-      - name: Create test database
-        run: |
-          mysql -h db --port 3306 -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
-          mysql -h db --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-          php artisan migrate:fresh --env=testing
-
-      - name: Run dusk tests
-        run: |
-          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+      #     node-version: '12'
+      #
+      # - name: Install npm dependencies
+      #   run: |
+      #     npm install
+      #     npm run production
+      #
+      # - name: Copy files to /var/www
+      #   run: |
+      #     cp -ar . /var/www/
+      #     ls -la /var/www
+      #
+      # - name: Create test database
+      #   run: |
+      #     mysql -h db --port 3306 -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
+      #     mysql -h db --port 3306 -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+      #     php artisan migrate:fresh --env=testing
+      #
+      # - name: Run dusk tests
+      #   run: |
+      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
 
       # - name: Run migration
       #   run: |
