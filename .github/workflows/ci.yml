@@ -10,11 +10,11 @@ jobs:
     #   image: php:7.4-fpm
     #   options: --network-alias app
     services:
-      # webserver:
-      #   image: nginx:alpine
-      #   volumes:
-      #     - /var/www:/var/www
-      #     - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
+      webserver:
+        image: nginx:alpine
+        # volumes:
+        #   - /home/sm-semec/www:/var/www
+        #   - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
       db:
         image: mysql:5.7.33
         env:
@@ -23,10 +23,10 @@ jobs:
           MYSQL_PASSWORD: sm-semec
           MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      selenium:
-        image: selenium/standalone-chrome-debug:latest
-        ports:
-          - 4444:4444
+      # selenium:
+      #   image: selenium/standalone-chrome-debug:latest
+      #   ports:
+      #     - 4444:4444
     steps:
       - uses: actions/checkout@v2
         with:
@@ -34,8 +34,14 @@ jobs:
 
       - name: DB access
         run: |
-          docker ps
-          docker exec ${{ job.services.db.id }} mysql -e "SHOW DATABASES;"
+          hostname
+          pwd
+          cat /etc/hots
+          echo ${{ job.tests.name }}
+          hostname app
+          hostname
+          # docker ps
+          # docker exec ${{ job.services.db.id }} mysql -e "SHOW DATABASES;"
           # mysql -h 127.0.0.1 --port 3306 -u root -e "SHOW DATABASES;"
 
       # - name: Install libs
