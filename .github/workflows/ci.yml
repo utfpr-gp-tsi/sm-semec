@@ -27,16 +27,24 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.4
-          extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
+      # - name: Setup PHP
+      #   uses: shivammathur/setup-php@v2
+      #   with:
+      #     php-version: 7.4
+      #     extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
+      #     tools: composer:v2
+      - name: Add php-fpm
+        env:
+          version: 7.4 
+        run: |
+          sudo apt-get install -y php$version-fpm
+          sudo service php$version-fpm start
 
       - name: DB access
         run: |
-          sudo hostname app
-          docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
+          nc -zvw10 $(hostname) 9000
+          # sudo hostname app
+          # docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
 
 
 
