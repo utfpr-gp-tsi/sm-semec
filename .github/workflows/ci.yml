@@ -12,16 +12,16 @@ jobs:
         volumes:
           - /var/www/sm-semec/www:/var/www
           - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
-      # db:
-      #   image: mysql:5.7.33
-      #   env:
-      #     MYSQL_DATABASE: sm_semec
-      #     MYSQL_USER: sm-semec
-      #     MYSQL_PASSWORD: sm-semec
-      #     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      #   options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      # selenium:
-      #   image: selenium/standalone-chrome-debug:latest
+      db:
+        image: mysql:5.7.33
+        env:
+          MYSQL_DATABASE: sm_semec
+          MYSQL_USER: sm-semec
+          MYSQL_PASSWORD: sm-semec
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      selenium:
+        image: selenium/standalone-chrome-debug:latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -38,32 +38,49 @@ jobs:
         env:
           version: 7.4
         run: |
-          # sudo apt-get install php$version-fpm
-          # Copy php-fpm to a directory in PATH
           sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
-          sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|g' /etc/php/7.4/fpm/pool.d/www.conf 
+          sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|g' /etc/php/7.4/fpm/pool.d/www.conf
           sudo service php$version-fpm restart
           sudo service php$version-fpm status
-      - name: Test php-fpm
-        run: |
-          php-fpm -v
 
-      - name: DB access
+      - name: Change hostname
         run: |
-          # cat /etc/php/7.4/fpm/pool.d/www.conf 
-          # nc -zvw10 0.0.0.0 9000
-          # nc -zvw10 127.0.0.1 9000
-          nc -zvw10 $(hostname) 9000
-          # sudo hostname app
+          sudo hostname app
           docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
 
+      - name: Prepare the application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+          php artisan config:clear
+          php artisan route:clear
+          php artisan cache:clear
 
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
 
-          # docker ps
-          # docker exec ${{ job.services.db.id }} mysql -e "SHOW DATABASES;"
-          # mysql -h 127.0.0.1 --port 3306 -u root -e "SHOW DATABASES;"
+      - name: Install npm dependencies
+        run: |
+          npm install
+          npm run production
 
-      # - name: Install libs
+      - name: Create test database and migrate
+        run: |
+          docker exec ${{ job.services.webserver.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
+          docker exec ${{ job.services.webserver.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+          php artisan migrate:fresh --env=testing
+
+      - name: Copy files to /var/www
+        run: |
+          cp -ar . /var/www/
+          ls -la /var/www
+
+      - name: Run dusk tests
+        run: |
+          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+
+     # - name: Install libs
       #   run: |
       #     apt-get update
       #     apt-get -qq install -y build-essential
