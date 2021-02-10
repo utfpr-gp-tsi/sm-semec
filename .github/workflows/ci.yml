@@ -35,7 +35,7 @@ jobs:
       - name: DB access
         run: |
           docker ps
-          echo ${{ job.services.db.id }}
+          docker exec ${{ job.services.db.id }} mysql -e "SHOW DATABASES;"
           # mysql -h 127.0.0.1 --port 3306 -u root -e "SHOW DATABASES;"
 
       # - name: Install libs
