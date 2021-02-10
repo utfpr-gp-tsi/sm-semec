@@ -6,45 +6,37 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    # container:
-    #   image: php:7.4-fpm
-    #   options: --network-alias app
     services:
       webserver:
         image: nginx:alpine
-        ports:
-          - 8080:80
-    #     # volumes:
-    #     #   - /home/sm-semec/www:/var/www
-    #     #   - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
-    #   db:
-    #     image: mysql:5.7.33
-    #     env:
-    #       MYSQL_DATABASE: sm_semec
-    #       MYSQL_USER: sm-semec
-    #       MYSQL_PASSWORD: sm-semec
-    #       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    #     options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    #   selenium:
-    #     image: selenium/standalone-chrome-debug:latest
-    #     ports:
-    #       - 4444:4444
+        volumes:
+          - /var/www/sm-semec/www:/var/www
+          - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
+      # db:
+      #   image: mysql:5.7.33
+      #   env:
+      #     MYSQL_DATABASE: sm_semec
+      #     MYSQL_USER: sm-semec
+      #     MYSQL_PASSWORD: sm-semec
+      #     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      #   options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      # selenium:
+      #   image: selenium/standalone-chrome-debug:latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
+
       - name: DB access
         run: |
-          hostname
-          #pwd
-          #cat /etc/hosts
           sudo hostname app
-          # hostname
-          # sudo sed -i "127.0.0.1  app" /etc/hosts
-          # cat /etc/hosts
-          docker exec ${{ job.services.webserver.id }} curl localhost
-          docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 8080
+          docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
 
 
 
