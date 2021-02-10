@@ -82,19 +82,30 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_PORT: 3307
 
-      - name: Copy files to /var/www
-        run: |
-          sudo cp -arp . /var/www/
-          sudo ls -la
-          docker exec ${{ job.services.webserver.id }} nginx -s reload
-          docker exec ${{ job.services.webserver.id }} curl localhost
-
-      - name: Run dusk tests
-        run: |
-          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+      - name: Upgrade Chrome Driver
+        run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+      - name: Run Laravel Server
+        run: php artisan serve &
+      - name: Run Dusk Tests
         env:
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3307
+          APP_URL: "http://127.0.0.1:8000"
+        run: php artisan dusk
+
+      # - name: Copy files to /var/www
+      #   run: |
+      #     sudo cp -arp . /var/www/
+      #     sudo ls -la
+      #     docker exec ${{ job.services.webserver.id }} nginx -s reload
+      #     docker exec ${{ job.services.webserver.id }} curl localhost
+      #
+      # - name: Run dusk tests
+      #   run: |
+      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+      #   env:
+      #     DB_HOST: 127.0.0.1
+      #     DB_PORT: 3307
 
      # - name: Install libs
       #   run: |
