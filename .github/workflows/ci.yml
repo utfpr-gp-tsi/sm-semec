@@ -88,12 +88,12 @@ jobs:
           docker exec ${{ job.services.webserver.id }} nginx -s reload
           docker exec ${{ job.services.webserver.id }} curl localhost
 
-      # - name: Run dusk tests
-      #   run: |
-      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
-      #   env:
-      #     DB_HOST: 127.0.0.1
-      #     DB_PORT: 3307
+      - name: Run dusk tests
+        run: |
+          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3307
 
      # - name: Install libs
       #   run: |
