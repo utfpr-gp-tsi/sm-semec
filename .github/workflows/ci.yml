@@ -33,7 +33,7 @@ jobs:
         run: |
           pwd
           ls
-          sudo rm -rf sm-semec
+          sudo rm -rf nginx
           ls
       - uses: actions/checkout@v2
         with:
