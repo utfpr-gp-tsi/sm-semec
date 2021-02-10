@@ -50,12 +50,12 @@ jobs:
 
       - name: DB access
         run: |
-          cat /etc/php/7.4/fpm/pool.d/www.conf 
+          # cat /etc/php/7.4/fpm/pool.d/www.conf 
           # nc -zvw10 0.0.0.0 9000
           # nc -zvw10 127.0.0.1 9000
-          nc -zvw10 localhost 9000
+          nc -zvw10 $(hostname) 9000
           # sudo hostname app
-          # docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
+          docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
 
 
 
