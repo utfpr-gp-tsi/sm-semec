@@ -52,44 +52,39 @@ jobs:
           sudo hostname app
           docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
 
-      # - name: Install Dependencies
-      #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-      #
-      # - name: Prepare the application
-      #   run: |
-      #     cp .env.ci .env
-      #     php artisan key:generate
-      #     php artisan config:clear
-      #     php artisan route:clear
-      #     php artisan cache:clear
-      #
-      # - uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '12'
-      #
-      # - name: Install npm dependencies
-      #   run: |
-      #     npm install
-      #     npm run production
-      #
-      # - name: Create test database and migrate
-      #   run: |
-      #     docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
-      #     docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-      #     php artisan migrate:fresh --env=testing
-      #   env:
-      #     DB_HOST: 127.0.0.1
-      #     DB_PORT: 3307
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+      - name: Prepare the application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+          php artisan config:clear
+          php artisan route:clear
+          php artisan cache:clear
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Install npm dependencies
+        run: |
+          npm install
+          npm run production
+
+      - name: Create test database and migrate
+        run: |
+          docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
+          docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+          php artisan migrate:fresh --env=testing
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3307
 
       - name: Copy files to /var/www
         run: |
-          sudo mkdir /var/www/public
-          sudo bash -c 'echo "<?php phpinfo() ?>" > /var/www/public/index.php'
-          sudo cp -arp nginx /var/www/
-
-          # sudo cp -arp . /var/www/
+          sudo cp -arp . /var/www/
           sudo ls -la /var/www/
-          docker exec ${{ job.services.webserver.id }} cat /etc/nginx/conf.d/app.conf
           docker exec ${{ job.services.webserver.id }} nginx -s reload
           docker exec ${{ job.services.webserver.id }} curl localhost
 
