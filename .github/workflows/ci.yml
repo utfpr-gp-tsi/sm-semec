@@ -52,58 +52,51 @@ jobs:
           sudo hostname app
           docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
 
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: Prepare the application
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
-          php artisan config:clear
-          php artisan route:clear
-          php artisan cache:clear
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '12'
-
-      - name: Install npm dependencies
-        run: |
-          npm install
-          npm run production
-
-      - name: Create test database and migrate
-        run: |
-          docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
-          docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-          php artisan migrate:fresh --env=testing
-        env:
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3307
-
-      # - name: Upgrade Chrome Driver
-      #   run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
-      # - name: Start Chrome Driver
-      #   run: ./vendor/laravel/dusk/bin/chromedriver-linux &
-      # - name: Run Laravel Server
-      #   run: php artisan serve &
-      # - name: Run Dusk Tests
+      # - name: Install Dependencies
+      #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      #
+      # - name: Prepare the application
+      #   run: |
+      #     cp .env.ci .env
+      #     php artisan key:generate
+      #     php artisan config:clear
+      #     php artisan route:clear
+      #     php artisan cache:clear
+      #
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '12'
+      #
+      # - name: Install npm dependencies
+      #   run: |
+      #     npm install
+      #     npm run production
+      #
+      # - name: Create test database and migrate
+      #   run: |
+      #     docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
+      #     docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+      #     php artisan migrate:fresh --env=testing
       #   env:
-      #     APP_URL: "http://127.0.0.1:8000"
-      #   run: php artisan dusk
+      #     DB_HOST: 127.0.0.1
+      #     DB_PORT: 3307
+
       - name: Copy files to /var/www
         run: |
-          sudo cp -arp . /var/www/
-          sudo ls -la
+          sudo echo "<?php phpinfo() ?>" > /var/www/index.php
+          sudo cp -arp nginx /var/www/
+
+          # sudo cp -arp . /var/www/
+          sudo ls -la /var/www/
           docker exec ${{ job.services.webserver.id }} nginx -s reload
           docker exec ${{ job.services.webserver.id }} curl localhost
 
-      - name: Run dusk tests
-        run: |
-          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
-        env:
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3307
+      # - name: Run dusk tests
+      #   run: |
+      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+      #   env:
+      #     DB_HOST: 127.0.0.1
+      #     DB_PORT: 3307
 
      # - name: Install libs
       #   run: |
