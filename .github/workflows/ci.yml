@@ -81,13 +81,16 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          sudo cp -ar . /var/www/
+          sudo cp -arp . /var/www/
           sudo ls -la
           docker exec ${{ job.services.webserver.id }} nginx -s reload
 
       - name: Run dusk tests
         run: |
           php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3307
 
      # - name: Install libs
       #   run: |
