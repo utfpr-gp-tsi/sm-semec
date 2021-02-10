@@ -20,6 +20,8 @@ jobs:
           MYSQL_PASSWORD: sm-semec
           MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        ports:
+          - 3307:3306
       selenium:
         image: selenium/standalone-chrome-debug:latest
     steps:
@@ -73,6 +75,9 @@ jobs:
           docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
           docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
           php artisan migrate:fresh --env=testing
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3307
 
       - name: Copy files to /var/www
         run: |
