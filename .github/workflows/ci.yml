@@ -81,8 +81,9 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          cp -ar . /var/www/
-          ls -la /var/www
+          sudo cp -ar . /var/www/
+          sudo ls -la
+          docker exec ${{ job.services.webserver.id }} nginx -s reload
 
       - name: Run dusk tests
         run: |
