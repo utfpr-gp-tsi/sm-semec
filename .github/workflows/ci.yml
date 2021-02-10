@@ -14,30 +14,32 @@ jobs:
           - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
         ports:
           - 80:80
-      # db:
-      #   image: mysql:5.7.33
-      #   env:
-      #     MYSQL_DATABASE: sm_semec
-      #     MYSQL_USER: sm-semec
-      #     MYSQL_PASSWORD: sm-semec
-      #     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      #   options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      #   ports:
-      #     - 3307:3306
-      # selenium:
-      #   image: selenium/standalone-chrome-debug:latest
-      #   ports:
-      #     - 4444:4444
+      db:
+        image: mysql:5.7.33
+        env:
+          MYSQL_DATABASE: sm_semec
+          MYSQL_USER: sm-semec
+          MYSQL_PASSWORD: sm-semec
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        ports:
+          - 3307:3306
+      selenium:
+        image: selenium/standalone-chrome-debug:latest
+        ports:
+          - 4444:4444
     steps:
       - name: Empty
         run: |
-          pwd
-          ls
           sudo rm -rf nginx
-          ls
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+      
+      - name: View
+      - run: |
+        ls
+        pwd
 
       # - name: Setup PHP
       #   uses: shivammathur/setup-php@v2
