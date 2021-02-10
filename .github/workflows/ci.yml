@@ -37,9 +37,9 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       
       - name: View
-      - run: |
-        ls
-        pwd
+        run: |
+          ls
+          pwd
 
       # - name: Setup PHP
       #   uses: shivammathur/setup-php@v2
