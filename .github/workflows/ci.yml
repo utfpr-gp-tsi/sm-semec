@@ -30,7 +30,7 @@ jobs:
       #     - 4444:4444
     steps:
       - name: Empty
-        - run:
+        run:
           sudo rm -rf sm-semec
           ls
       - uses: actions/checkout@v2
