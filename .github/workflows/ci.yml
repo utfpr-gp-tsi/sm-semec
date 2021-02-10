@@ -70,8 +70,8 @@ jobs:
 
       - name: Create test database and migrate
         run: |
-          docker exec ${{ job.services.webserver.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
-          docker exec ${{ job.services.webserver.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+          docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
+          docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
           php artisan migrate:fresh --env=testing
 
       - name: Copy files to /var/www
