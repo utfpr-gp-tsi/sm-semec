@@ -10,7 +10,7 @@ jobs:
       webserver:
         image: nginx:alpine
         volumes:
-          - /var/www/sm-semec/www:/var/www
+          - /var/www/:/var/www
           - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
       db:
         image: mysql:5.7.33
