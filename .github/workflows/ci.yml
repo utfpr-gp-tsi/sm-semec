@@ -13,7 +13,7 @@ jobs:
       webserver:
         image: nginx:alpine
         ports:
-          8080:80
+          - 8080:80
     #     # volumes:
     #     #   - /home/sm-semec/www:/var/www
     #     #   - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
