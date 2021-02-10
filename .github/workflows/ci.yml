@@ -44,10 +44,11 @@ jobs:
           sudo service php$version-fpm start
           sudo service php$version-fpm status
       - name: Test php-fpm
-        run: php-fpm
+        run: php-fpm -v
 
       - name: DB access
         run: |
+          nc -zvw10 0.0.0.0 9000
           nc -zvw10 127.0.0.1 9000
           nc -zvw10 $(hostname) 9000
           # sudo hostname app
