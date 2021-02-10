@@ -46,11 +46,12 @@ jobs:
       - name: Test php-fpm
         run: |
           sudo systemctl restart php7.4-fpm
-          sudo systemctl statu php7.4-fpm
+          sudo systemctl status php7.4-fpm
           php7.4-fpm -v
 
       - name: DB access
         run: |
+          cat /etc/php/7.4/fpm/php.ini
           # nc -zvw10 0.0.0.0 9000
           # nc -zvw10 127.0.0.1 9000
           nc -zvw10 $(hostname) 9000
