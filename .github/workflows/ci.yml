@@ -33,6 +33,10 @@ jobs:
           php-version: 7.4
           extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
           tools: composer:v2
+
+      - name: Setup php-fpm
+        env:
+          version: 7.4
         run: |
           sudo apt-get install php$version-fpm
           # Copy php-fpm to a directory in PATH
