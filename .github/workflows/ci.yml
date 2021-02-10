@@ -38,9 +38,9 @@ jobs:
         env:
           version: 7.4
         run: |
-          sudo apt-get install php$version-fpm
+          # sudo apt-get install php$version-fpm
           # Copy php-fpm to a directory in PATH
-          sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
+          # sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
           sudo service php$version-fpm start
           sudo service php$version-fpm status
       - name: Test php-fpm
@@ -48,6 +48,7 @@ jobs:
 
       - name: DB access
         run: |
+          nc -zvw10 127.0.0.1 9000
           nc -zvw10 $(hostname) 9000
           # sudo hostname app
           # docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
