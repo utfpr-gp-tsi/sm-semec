@@ -9,9 +9,11 @@ jobs:
     # container:
     #   image: php:7.4-fpm
     #   options: --network-alias app
-    # services:
-    #   webserver:
-    #     image: nginx:alpine
+    services:
+      webserver:
+        image: nginx:alpine
+        ports:
+          8080:80
     #     # volumes:
     #     #   - /home/sm-semec/www:/var/www
     #     #   - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
@@ -37,11 +39,14 @@ jobs:
           hostname
           #pwd
           #cat /etc/hosts
-          echo "${{ job.tests.name }}"
           sudo hostname app
-          hostname
-          sudo sed -i "127.0.0.1  app" /etc/hosts
-          cat /etc/hosts
+          # hostname
+          # sudo sed -i "127.0.0.1  app" /etc/hosts
+          # cat /etc/hosts
+          docker exec ${{ job.services.webserver.id }} curl localhost
+          docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 8080
+
+
 
           # docker ps
           # docker exec ${{ job.services.db.id }} mysql -e "SHOW DATABASES;"
