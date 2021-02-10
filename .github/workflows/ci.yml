@@ -40,14 +40,13 @@ jobs:
         run: |
           # sudo apt-get install php$version-fpm
           # Copy php-fpm to a directory in PATH
-          # sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
+          sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
           # sudo service php$version-fpm start
-          # sudo service php$version-fpm status
+          sudo service php$version-fpm status
       - name: Test php-fpm
         run: |
-          sudo systemctl restart php7.4-fpm
-          sudo systemctl status php7.4-fpm
-          php7.4-fpm -v
+          php-fpm -v
+          # sudo systemctl status php7.4-fpm
 
       - name: DB access
         run: |
