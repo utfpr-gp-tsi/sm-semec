@@ -86,7 +86,7 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          sudo cp -arp . /var/www/
+          sudo cp -ar . /var/www/
           # sudo ls -la /var/www/
           docker exec ${{ job.services.webserver.id }} nginx -s reload
           curl 127.0.0.1:80
