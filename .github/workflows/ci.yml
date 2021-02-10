@@ -83,12 +83,13 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          sudo bash -c 'echo "<?php phpinfo() ?>" > /var/www/index.php'
+          sudo mkdir /var/www/public
+          sudo bash -c 'echo "<?php phpinfo() ?>" > /var/www/public/index.php'
           sudo cp -arp nginx /var/www/
 
           # sudo cp -arp . /var/www/
           sudo ls -la /var/www/
-          docker exec ${{ job.services.webserver.id }} ls /etc/nginx/conf.d
+          docker exec ${{ job.services.webserver.id }} cat /etc/nginx/conf.d/app.conf
           docker exec ${{ job.services.webserver.id }} nginx -s reload
           docker exec ${{ job.services.webserver.id }} curl localhost
 
