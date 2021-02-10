@@ -10,19 +10,19 @@ jobs:
     #   image: php:7.4-fpm
     #   options: --network-alias app
     services:
-      webserver:
-        image: nginx:alpine
-        # volumes:
-        #   - /home/sm-semec/www:/var/www
-        #   - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
-      db:
-        image: mysql:5.7.33
-        env:
-          MYSQL_DATABASE: sm_semec
-          MYSQL_USER: sm-semec
-          MYSQL_PASSWORD: sm-semec
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      # webserver:
+      #   image: nginx:alpine
+      #   # volumes:
+      #   #   - /home/sm-semec/www:/var/www
+      #   #   - /var/www/nginx/conf.d/dev/:/etc/nginx/conf.d/
+      # db:
+      #   image: mysql:5.7.33
+      #   env:
+      #     MYSQL_DATABASE: sm_semec
+      #     MYSQL_USER: sm-semec
+      #     MYSQL_PASSWORD: sm-semec
+      #     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      #   options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       # selenium:
       #   image: selenium/standalone-chrome-debug:latest
       #   ports:
@@ -35,11 +35,11 @@ jobs:
       - name: DB access
         run: |
           hostname
-          pwd
-          cat /etc/hosts
+          #pwd
+          #cat /etc/hosts
           echo ${{ job.tests.name }}
-          hostname app
-          hostname
+          sudo hostname app
+          #hostname
           # docker ps
           # docker exec ${{ job.services.db.id }} mysql -e "SHOW DATABASES;"
           # mysql -h 127.0.0.1 --port 3306 -u root -e "SHOW DATABASES;"
