@@ -37,6 +37,7 @@ jobs:
 
       - name: DB access
         run: |
+          docker ps
           docker exec db mysql -e "SHOW DATABASES;"
 
       # - name: Install libs
