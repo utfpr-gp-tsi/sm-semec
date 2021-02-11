@@ -34,7 +34,7 @@ jobs:
           # curl 127.0.0.1
           # docker exec ${{ job.services.webserver.id }} curl localhost
           # sudo rm -rf nginx
-          sudo chown $USER:$USER /home/runner/work/sm-semec
+          sudo chown -R $USER:$USER /home/runner/work/sm-semec
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
