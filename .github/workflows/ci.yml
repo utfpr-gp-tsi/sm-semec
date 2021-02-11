@@ -31,8 +31,8 @@ jobs:
     steps:
       - name: Empty
         run: |
-          sudo rm -rf nginx
           docker exec ${{ job.services.webserver.id }} curl localhost
+          sudo rm -rf nginx
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
