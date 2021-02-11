@@ -14,7 +14,6 @@ jobs:
           - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
         ports:
           - 80:80
-        options: --user 1001
       # db:
       #   image: mysql:5.7.33
       #   env:
@@ -33,6 +32,7 @@ jobs:
       - name: Empty
         run: |
           sudo rm -rf nginx
+          docker exec ${{ job.services.webserver.id }} curl localhost
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
@@ -57,16 +57,16 @@ jobs:
         run: |
           sudo hostname app
           docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
-      
+
       - name: View
         run: |
           docker exec ${{ job.services.webserver.id }} nginx -s reload
           echo "<?php phpinfo(); ?>" > public/index.php
           # cat public/index.php
           # ls -lt
-          # id
+          id
           # docker exec ${{ job.services.webserver.id }} cat /var/www/public/index.php
-          docker exec ${{ job.services.webserver.id }} nginx -t
+          docker exec ${{ job.services.webserver.id }} id
           docker exec ${{ job.services.webserver.id }} curl localhost
 
       # - name: Install Dependencies
