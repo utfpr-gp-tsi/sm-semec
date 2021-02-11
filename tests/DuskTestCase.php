@@ -41,7 +41,7 @@ abstract class DuskTestCase extends BaseTestCase
         $chromeOptions = (new ChromeOptions())->addArguments($opts);
 
         return RemoteWebDriver::create(
-            'http://127.0.0.1:4444/wd/hub',
+            'http://' . env('SELENIUM_HOST', 'selenium') . ':4444/wd/hub',
             DesiredCapabilities::chrome()->setCapability(
                 ChromeOptions::CAPABILITY,
                 $chromeOptions
