@@ -92,43 +92,39 @@ jobs:
           docker restart ${{ job.services.webserver.id }}
           curl 127.0.0.1
 
-      # - name: Run dusk tests
-      #   run: |
-      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
-      #   env:
-      #     DB_HOST: 127.0.0.1
-      #     DB_PORT: 3307
-      #
-      # - name: Upload Screenshots
-      #   if: failure()
-      #   run: |
-      #     docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-access.log
-      #     docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-error.log
-      # - name: Upload Screenshots
-      #   if: failure()
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: screenshots
-      #     path: tests/Browser/screenshots
-      # - name: Upload Console Logs
-      #   if: failure()
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: console
-      #     path: tests/Browser/console
-      - name: Upload Laravel Logs
+      - name: Run dusk tests
+        run: |
+          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3307
+
+      - name: Upload Screenshots
+        if: failure()
+        run: |
+          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-access.log
+          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-error.log
+
+      - name: Upload Screenshots
         if: failure()
         uses: actions/upload-artifact@v2
         with:
-          name: laravel
-          path: storage/logs
+          name: screenshots
+          path: tests/Browser/screenshots
+
+      - name: Upload Console Logs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: console
+          path: tests/Browser/console
 
       - name: Upload Laravel Logs
-        if: failure()
         uses: actions/upload-artifact@v2
         with:
-          name: larawww
+          name: laravel-logs
           path: /var/www/storage/logs
+
       # - name: Install libs
       #   run: |
       #     apt-get update
