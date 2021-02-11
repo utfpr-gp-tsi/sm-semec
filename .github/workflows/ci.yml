@@ -86,9 +86,10 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
+          sudo chown -R $USER:$USER /var/www
           sudo cp -arp . /var/www/
-          sudo chmod -R 777 /var/www/storage
-          sudo chmod -R 777 /var/www/bootstrap/cache
+          # sudo chmod -R 777 /var/www/storage
+          # sudo chmod -R 777 /var/www/bootstrap/cache
           docker restart ${{ job.services.webserver.id }}
           # curl 127.0.0.1
 
