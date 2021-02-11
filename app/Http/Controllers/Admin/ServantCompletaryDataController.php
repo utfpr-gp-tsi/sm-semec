@@ -84,7 +84,8 @@ class ServantCompletaryDataController extends AppController
         ]);
 
         $completaryData = new ServantCompletaryData($data);
-        $contract = Contract::find($id);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($id);
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
@@ -96,7 +97,7 @@ class ServantCompletaryDataController extends AppController
 
         $contract->servantCompletaryData()->save($completaryData);
 
-        return redirect()->route('admin.index.completary_datas', ['servant_id' => $contract->servant_id, 'id' =>
+        return redirect()->route('admin.index.completary_datas', ['servant_id' => $servant->id, 'id' =>
             $contract->id])->with('success', 'Cadastro Complementar adicionado com sucesso');
     }
 
@@ -156,7 +157,7 @@ class ServantCompletaryDataController extends AppController
         }
 
         $contract->servantCompletaryData()->save($completaryData);
-        return redirect()->route('admin.index.completary_datas', ['servant_id' => $servantId, 'id' => $contractId])
+        return redirect()->route('admin.index.completary_datas', ['servant_id' => $servant->id, 'id' => $contract->id])
         ->with('success', 'Cadastro Complementar atualizado com sucesso');
     }
 }

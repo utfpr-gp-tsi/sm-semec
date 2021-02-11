@@ -3,51 +3,6 @@
 @section('title', 'Nova Movimentação')
 @section('content')
 
-<form action="{{ route('admin.create.movement', ['servant_id' => $completaryData->contract->servant_id, 'contract_id' => $completaryData->contract_id, 'id' => $completaryData->id]) }}" method="post" novalidate>
-    @csrf
-
-    @component('components.form.input_text', ['field'    => 'occupation',
-                                              'label'    => 'Função',
-                                              'model'    => 'movement',
-                                              'value'    => $movement->occupation,
-                                              'required' => true,
-                                              'errors'   => $errors]) @endcomponent
-
-    @component('components.form.input_radio_button', ['field'    => 'period',
-                                              'label'    => 'Período',
-                                              'model'    => 'movement',
-                                              'values'   => [0 => 'morning' , 1 => 'evening'],
-                                              'value'    => $movement->period,
-                                              'value_method' => '',
-                                              'required' => true,
-                                              'errors'   => $errors]) @endcomponent
-
-  @component('components.form.input_select', ['field'    => 'unit_id',
-                                              'label'    => 'Lotação',
-                                              'model'    => 'movement',
-                                              'value'    => $movement->unit_id,
-                                              'options'  => $units,
-                                              'required' => true,
-                                              'default'  => 'Selecione uma Lotação',
-                                              'errors'   => $errors]) @endcomponent
-
-    @component('components.form.input_datetimepicker', [
-                                              'field'    => 'started_at',
-                                              'label'    => 'Início',
-                                              'model'    => 'movement',
-                                              'value'    => $movement->started_at,
-                                              'required' => true,
-                                              'errors'   => $errors]) @endcomponent
-
-    @component('components.form.input_datetimepicker', [
-                                              'field'    => 'ended_at',
-                                              'label'    => 'Término',
-                                              'model'    => 'movement',
-                                              'value'    => $movement->ended_at,
-                                              'required' => true,
-                                              'errors'   => $errors]) @endcomponent
-
-   @component('components.form.input_submit', ['value' => 'Criar Movimentação', 'back_url' => route('admin.index.completary_datas', ['servant_id' => $completaryData->contract->servant_id, 'id' => $completaryData->contract_id])]) @endcomponent
-</form>
+@include('admin.servant_completary_data.movements._form', ['route' => route('admin.create.movement', ['servant_id' => $completaryData->contract->servant_id, 'contract_id' => $completaryData->contract_id, 'id' => $completaryData->id]), 'method' => 'POST', 'submit' => 'Criar Movimentação'])
 
 @endsection

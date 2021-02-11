@@ -46,6 +46,11 @@ class Servant extends Authenticatable
         'image_path',
     ];
 
+    protected $dates = [
+        'birthed_at',
+    ];
+
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

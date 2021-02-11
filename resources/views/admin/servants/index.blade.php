@@ -15,17 +15,12 @@
         <th>CPF</th>
         <th>
           <span data-toggle="tooltip" data-placement="top" title="Referente ao último contrato">
-            Matrícula<i class="fas fa-info-circle d-inline ml-1"></i>
+            Email<i class="fas fa-info-circle d-inline ml-1"></i>
           </span>
         </th>
         <th>
           <span data-toggle="tooltip" data-placement="top" title="Referente ao último contrato">
-            Cargo<i class="fas fa-info-circle d-inline ml-1"></i>
-          </span>
-        </th>
-        <th>
-          <span data-toggle="tooltip" data-placement="top" title="Referente ao último contrato">
-            Local de trabalho<i class="fas fa-info-circle d-inline ml-1"></i>
+            Telefone<i class="fas fa-info-circle d-inline ml-1"></i>
           </span>
         </th>
         <th></th>

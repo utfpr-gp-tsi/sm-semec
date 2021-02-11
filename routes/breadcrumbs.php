@@ -395,3 +395,8 @@ Breadcrumbs::for('admin.edit.movement', function ($trail, $servant_id, $contract
     $trail->parent('admin.index.completary_datas', $servant_id, $contract_id);
     $trail->push('Editar Movimentação #'. $id, route('admin.edit.movement', ['servant_id' => $servant_id, 'contract_id' => $contract_id, 'completaryData_id' => $completaryData_id, 'id' => $id]));
 });
+
+Breadcrumbs::for('admin.update.movement', function ($trail, $servant_id, $contract_id, $completaryData_id, $id) {
+    $trail->parent('admin.index.completary_datas', $servant_id, $contract_id);
+    $trail->push('Editar Movimentação #'. $id, route('admin.edit.movement', ['servant_id' => $servant_id, 'contract_id' => $contract_id, 'completaryData_id' => $completaryData_id, 'id' => $id]));
+});

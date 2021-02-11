@@ -165,5 +165,6 @@ return [
         'occupation' => 'função',
         'workload_id' => 'carga horária',
         'formation' => 'formação',
+        'unit_id' => 'unidade',
     ],
 ];

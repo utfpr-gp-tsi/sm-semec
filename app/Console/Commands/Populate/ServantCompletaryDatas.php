@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use DB;
 use App\Models\ServantCompletaryData;
 use App\Models\Movement;
+use App\Models\Contract;
+use App\Models\Unit;
 
 class ServantCompletaryDatas extends Command
 {
@@ -47,12 +49,13 @@ class ServantCompletaryDatas extends Command
 
         $this->info('Populate servant_completary_datas');
         DB::table('servant_completary_datas')->delete();
-        DB::table('workloads')->delete();
+        
+        $contracts = Contract::all();
 
-            ServantCompletaryData::factory()
-                ->create()
-                ->each(function ($completaryData) {
-                    $completaryData->moviments()->save(Movement::factory()->make());
-                });
+        $contracts->each(function ($contract) {
+            $completaryData = ServantCompletaryData::factory()->create(['contract_id' => $contract->id]);
+            $completaryData->moviments()->save(Movement::factory()
+                ->make(['servant_completary_data_id' => $completaryData->id]));
+        });
     }
 }

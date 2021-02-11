@@ -29,11 +29,6 @@ class CreateMovementsTable extends Migration
                     ->references('id')
                     ->on('servant_completary_datas')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->foreign('role_id')
-                    ->references('id')
-                    ->on('roles')
-                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

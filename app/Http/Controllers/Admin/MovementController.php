@@ -56,7 +56,9 @@ class MovementController extends AppController
         ]);
         $this->filterDateTimeFormat($data, ['started_at', 'ended_at']);
 
-        $completaryData = ServantCompletaryData::find($id);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($contractId);
+        $completaryData = $contract->servantCompletaryData->find($id);
 
         $movement = new Movement($data);
 
@@ -70,8 +72,8 @@ class MovementController extends AppController
         
         $completaryData->moviments()->save($movement);
 
-        return redirect()->route('admin.index.completary_datas', ['servant_id' => $completaryData->contract->servant_id,
-            'id' => $completaryData->contract_id])->with('success', 'Movimentação adicionada com sucesso');
+        return redirect()->route('admin.index.completary_datas', ['servant_id' => $servant->id,
+            'id' => $contract->id])->with('success', 'Movimentação adicionada com sucesso');
     }
 
     /**
@@ -86,7 +88,9 @@ class MovementController extends AppController
      */
     public function edit($servantId, $contractId, $completaryDataId, $id)
     {
-        $completaryData = ServantCompletaryData::find($completaryDataId);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($contractId);
+        $completaryData = $contract->servantCompletaryData->find($completaryDataId);
         $movement = $completaryData->moviments->find($id);
 
         return view('admin.servant_completary_data.movements.edit', [
@@ -110,7 +114,9 @@ class MovementController extends AppController
     {
         $data = $request->all();
      
-        $completaryData = ServantCompletaryData::find($completaryDataId);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($contractId);
+        $completaryData = $contract->servantCompletaryData->find($completaryDataId);
         $movement = $completaryData->moviments->find($id);
 
         $validator = Validator::make($data, [
@@ -131,8 +137,8 @@ class MovementController extends AppController
         }
 
         $movement->save();
-        return redirect()->route('admin.index.completary_datas', ['servant_id' => $servantId, 'id' =>
-            $contractId])
+        return redirect()->route('admin.index.completary_datas', ['servant_id' => $servant->id, 'id' =>
+            $contract->id])
         ->with('success', 'Movimentação atualizada com sucesso');
     }
 
@@ -148,11 +154,14 @@ class MovementController extends AppController
      */
     public function destroy($servantId, $contractId, $completaryDataId, $id)
     {
-        $servantCompletaryData = ServantCompletaryData::find($completaryDataId);
-        $movement = $servantCompletaryData->moviments->find($id);
+        $servant = Servant::find($servantId);
+        $contract = $servant->contracts->find($contractId);
+        $completaryData = $contract->servantCompletaryData->find($completaryDataId);
+        $movement = $completaryData->moviments->find($id);
+
         $movement->delete();
         return redirect()->route('admin.index.completary_datas', [
-            'servant_id' => $servantId, 'id' => $contractId
+            'servant_id' => $servant->id, 'id' => $contract->id
         ])->with('success', 'Movimentação removida com sucesso.');
     }
 }
