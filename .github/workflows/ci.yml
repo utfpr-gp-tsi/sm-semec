@@ -62,6 +62,7 @@ jobs:
 
       - name: View
         run: |
+          echo "<?php phpinfo(); ?>" > public/index.php
           docker restart ${{ job.services.webserver.id }}
           curl 127.0.0.1
 
