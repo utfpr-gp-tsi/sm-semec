@@ -92,7 +92,7 @@ jobs:
           # sudo cp -ar . /var/www/
           # sudo ls -la /var/www/
           docker exec ${{ job.services.webserver.id }} nginx -s reload
-          docker exec ${{ job.services.webserver.id }} ls /var/www/
+          docker exec ${{ job.services.webserver.id }} ls -la /var/www/
           # curl 127.0.0.1:80
 
       - name: Run dusk tests
@@ -101,7 +101,11 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3307
-
+      - name: Upload Screenshots
+        if: failure()
+        run: |
+          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx/access.log
+          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx/error.log
       - name: Upload Screenshots
         if: failure()
         uses: actions/upload-artifact@v2
