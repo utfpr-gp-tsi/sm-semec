@@ -38,9 +38,12 @@ jobs:
 
       - name: View
         run: |
-          ls -lt
-          id
-          docker exec ${{ job.services.webserver.id }} ls -lta /var/www/
+          echo "<? phpinfo(); ?>" > public/index.php
+          cat public/index.php
+          # ls -lt
+          # id
+          curl 127.0.0.1
+          # docker exec ${{ job.services.webserver.id }} ls -lta /var/www/
 
       # - name: Setup PHP
       #   uses: shivammathur/setup-php@v2
