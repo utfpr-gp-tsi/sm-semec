@@ -79,19 +79,16 @@ jobs:
           docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
           docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
           php artisan migrate:fresh --env=testing
-          # php artisan migrate
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3307
 
       - name: Copy files to /var/www
         run: |
-          sudo chown -R $USER:$USER /var/www
           sudo cp -arp . /var/www/
-          # sudo chmod -R 777 /var/www/storage
-          # sudo chmod -R 777 /var/www/bootstrap/cache
+          sudo chmod -R 777 /var/www/storage
+          sudo chmod -R 777 /var/www/bootstrap/cache
           docker restart ${{ job.services.webserver.id }}
-          # curl 127.0.0.1
 
       - name: Run dusk tests
         run: |
