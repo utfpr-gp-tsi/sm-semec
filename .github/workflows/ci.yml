@@ -14,20 +14,20 @@ jobs:
           - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
         ports:
           - 80:80
-      db:
-        image: mysql:5.7.33
-        env:
-          MYSQL_DATABASE: sm_semec
-          MYSQL_USER: sm-semec
-          MYSQL_PASSWORD: sm-semec
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-        ports:
-          - 3307:3306
-      selenium:
-        image: selenium/standalone-chrome-debug:latest
-        ports:
-          - 4444:4444
+      # db:
+      #   image: mysql:5.7.33
+      #   env:
+      #     MYSQL_DATABASE: sm_semec
+      #     MYSQL_USER: sm-semec
+      #     MYSQL_PASSWORD: sm-semec
+      #     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      #   options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      #   ports:
+      #     - 3307:3306
+      # selenium:
+      #   image: selenium/standalone-chrome-debug:latest
+      #   ports:
+      #     - 4444:4444
     steps:
       - name: Empty
         run: |
@@ -36,94 +36,100 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.4
-          extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
-          tools: composer:v2
-
-      - name: Setup php-fpm
-        env:
-          version: 7.4
+      - name: View
         run: |
-          sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
-          sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|g' /etc/php/7.4/fpm/pool.d/www.conf
-          sudo service php$version-fpm restart
-          sudo service php$version-fpm status
+          ls -lt
+          id
+          docker exec ${{ job.services.webserver.id }} ls -lta /var/www/
 
-      - name: Change hostname
-        run: |
-          sudo hostname app
-          docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
-
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: Prepare the application
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
-          php artisan config:clear
-          php artisan route:clear
-          php artisan cache:clear
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '12'
-
-      - name: Install npm dependencies
-        run: |
-          npm install
-          npm run production
-
-      - name: Create test database and migrate
-        run: |
-          docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
-          docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-          php artisan migrate:fresh --env=testing
-          # php artisan migrate
-        env:
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3307
-
-      - name: Copy files to /var/www
-        run: |
-          # sudo cp -ar . /var/www/
-          # sudo ls -la /var/www/
-          docker exec ${{ job.services.webserver.id }} nginx -s reload
-          docker exec ${{ job.services.webserver.id }} ls -la /var/www/
-          # curl 127.0.0.1:80
-
-      - name: Run dusk tests
-        run: |
-          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
-        env:
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3307
-      - name: Upload Screenshots
-        if: failure()
-        run: |
-          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-access.log
-          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-error.log
-      - name: Upload Screenshots
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: screenshots
-          path: tests/Browser/screenshots
-      - name: Upload Console Logs
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: console
-          path: tests/Browser/console
-      - name: Upload Laravel Logs
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: laravel
-          path: storage/logs
+      # - name: Setup PHP
+      #   uses: shivammathur/setup-php@v2
+      #   with:
+      #     php-version: 7.4
+      #     extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
+      #     tools: composer:v2
+      #
+      # - name: Setup php-fpm
+      #   env:
+      #     version: 7.4
+      #   run: |
+      #     sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
+      #     sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|g' /etc/php/7.4/fpm/pool.d/www.conf
+      #     sudo service php$version-fpm restart
+      #     sudo service php$version-fpm status
+      #
+      # - name: Change hostname
+      #   run: |
+      #     sudo hostname app
+      #     docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
+      #
+      # - name: Install Dependencies
+      #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      #
+      # - name: Prepare the application
+      #   run: |
+      #     cp .env.ci .env
+      #     php artisan key:generate
+      #     php artisan config:clear
+      #     php artisan route:clear
+      #     php artisan cache:clear
+      #
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '12'
+      #
+      # - name: Install npm dependencies
+      #   run: |
+      #     npm install
+      #     npm run production
+      #
+      # - name: Create test database and migrate
+      #   run: |
+      #     docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
+      #     docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
+      #     php artisan migrate:fresh --env=testing
+      #     # php artisan migrate
+      #   env:
+      #     DB_HOST: 127.0.0.1
+      #     DB_PORT: 3307
+      #
+      # - name: Copy files to /var/www
+      #   run: |
+      #     # sudo cp -ar . /var/www/
+      #     # sudo ls -la /var/www/
+      #     docker exec ${{ job.services.webserver.id }} nginx -s reload
+      #     docker exec ${{ job.services.webserver.id }} ls -la /var/www/
+      #     # curl 127.0.0.1:80
+      #
+      # - name: Run dusk tests
+      #   run: |
+      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+      #   env:
+      #     DB_HOST: 127.0.0.1
+      #     DB_PORT: 3307
+      # - name: Upload Screenshots
+      #   if: failure()
+      #   run: |
+      #     docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-access.log
+      #     docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-error.log
+      # - name: Upload Screenshots
+      #   if: failure()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: screenshots
+      #     path: tests/Browser/screenshots
+      # - name: Upload Console Logs
+      #   if: failure()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: console
+      #     path: tests/Browser/console
+      # - name: Upload Laravel Logs
+      #   if: failure()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: laravel
+      #     path: storage/logs
 
       # - name: Install libs
       #   run: |
