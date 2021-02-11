@@ -65,6 +65,7 @@ jobs:
           docker exec ${{ job.services.webserver.id }} cat /etc/nginx/conf.d/app.conf
           docker exec ${{ job.services.webserver.id }} nginx -s reload
           echo "<?php phpinfo(); ?>" > public/index.php
+          docker exec ${{ job.services.webserver.id }} cat /var/www/public/index.php
           curl 127.0.0.1
           # cat public/index.php
           # ls -lt
