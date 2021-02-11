@@ -94,6 +94,7 @@ jobs:
 
       - name: Run dusk tests
         run: |
+          cd /var/www
           php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
         env:
           DB_HOST: 127.0.0.1
