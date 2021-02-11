@@ -78,40 +78,42 @@ jobs:
         run: |
           docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
           docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
-          php artisan migrate:fresh --env=testing
+          # php artisan migrate:fresh --env=testing
+          php artisan migrate
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3307
 
       - name: Copy files to /var/www
         run: |
-          sudo cp -ar . /var/www/
+          sudo cp -arp . /var/www/
           docker restart ${{ job.services.webserver.id }}
+          curl 127.0.0.1
 
-      - name: Run dusk tests
-        run: |
-          php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
-        env:
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3307
-
-      - name: Upload Screenshots
-        if: failure()
-        run: |
-          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-access.log
-          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-error.log
-      - name: Upload Screenshots
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: screenshots
-          path: tests/Browser/screenshots
-      - name: Upload Console Logs
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: console
-          path: tests/Browser/console
+      # - name: Run dusk tests
+      #   run: |
+      #     php artisan dusk tests/Browser/Admin/UnitCategories/CreateTest.php
+      #   env:
+      #     DB_HOST: 127.0.0.1
+      #     DB_PORT: 3307
+      #
+      # - name: Upload Screenshots
+      #   if: failure()
+      #   run: |
+      #     docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-access.log
+      #     docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-error.log
+      # - name: Upload Screenshots
+      #   if: failure()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: screenshots
+      #     path: tests/Browser/screenshots
+      # - name: Upload Console Logs
+      #   if: failure()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: console
+      #     path: tests/Browser/console
       - name: Upload Laravel Logs
         if: failure()
         uses: actions/upload-artifact@v2
@@ -119,6 +121,12 @@ jobs:
           name: laravel
           path: storage/logs
 
+      - name: Upload Laravel Logs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: larawww
+          path: /var/www/storage/logs
       # - name: Install libs
       #   run: |
       #     apt-get update
