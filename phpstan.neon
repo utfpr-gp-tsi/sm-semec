@@ -3,18 +3,14 @@ includes:
 parameters:
   ignoreErrors:
     - '#Cannot call method [a-zA-Z0-9()]+ on .+|null.#'
-    
-    -
-      message: '#Access to an undefined property#'
-      paths: 
-            - app/Http/Controllers/Servant/Auth/ResetPasswordController.php
-            - app/Http/Controllers/Admin/Auth/ResetPasswordController.php 
+
+    - '#Call to private method toShortDateTime\(\) of parent class Carbon\\Carbon#'
 
   level: max
   paths:
     - app
     - tests
-  excludes_analyse:
+  excludePaths:
     - app/Console/Kernel.php
     - app/Exceptions/Handler.php
     - app/Http/Kernel.php
@@ -23,4 +19,6 @@ parameters:
     - app/Http/Controllers/Admin/Auth/LoginController.php
     - app/Models/User.php
     - app/Http/Controllers/Admin/ProfileController.php
+    - app/Http/Controllers/Admin/Auth/ResetPasswordController.php
+    - app/Http/Controllers/Servant/Auth/ResetPasswordController.php
   checkMissingIterableValueType: false

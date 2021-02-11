@@ -21,11 +21,18 @@ jobs:
       - name: Install composer dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
-      - name: Code analyse
+      - name: Code analyse by PHPCS
         run: |
           vendor/bin/phpcs --standard=phpcs.xml ./
+
+      - name: Code analyse by PHPMD
+        run: |
           vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml
           php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon
+
+      - name: Code analyse by PHPSTAN
+        run: |
+          php -d memory_limit=3G vendor/bin/phpstan analyse -c phpstan.neon
 
   # dusks:
   #   runs-on: ubuntu-latest
