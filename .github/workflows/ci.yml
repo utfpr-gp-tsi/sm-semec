@@ -60,7 +60,7 @@ jobs:
 
       - name: View
         run: |
-          docker exec ${{ job.services.webserver.id }} nginx -s reload
+          docker exec ${{ job.services.webserver.id }} nginx -s stop
           echo "<?php phpinfo(); ?>" > public/index.php
           # cat public/index.php
           # ls -lt
