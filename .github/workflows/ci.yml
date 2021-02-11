@@ -4,7 +4,7 @@ on:
     branches:
       - github-actions
 jobs:
-  tests:
+  dusks:
     runs-on: ubuntu-latest
     services:
       webserver:
@@ -54,10 +54,10 @@ jobs:
           sudo hostname app
           docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
 
-      - name: Install Dependencies
+      - name: Install composer dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
-      - name: Prepare the application
+      - name: Prepare the app
         run: |
           cp .env.ci .env
           php artisan key:generate
@@ -74,7 +74,7 @@ jobs:
           npm install
           npm run production
 
-      - name: Create test database and migrate
+      - name: Setup test database
         run: |
           docker exec ${{ job.services.db.id }} mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sm-semec'@'%' WITH GRANT OPTION;"
           docker exec ${{ job.services.db.id }} mysql -u sm-semec -psm-semec -e "CREATE DATABASE sm_semec_test; SHOW DATABASES;"
@@ -85,11 +85,9 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          sudo chown -R $USER:$USER /var/www
-          sudo chmod 755 -R /var/www
-          cp -arp . /var/www/
-          # sudo chmod -R 777 /var/www/storage
-          # sudo chmod -R 777 /var/www/bootstrap/cache
+          sudo cp -arp . /var/www/
+          sudo chmod -R 666 /var/www/storage
+          sudo chmod -R 666 /var/www/bootstrap/cache
           docker restart ${{ job.services.webserver.id }}
 
       - name: Run dusk tests
@@ -100,21 +98,21 @@ jobs:
         env:
           SELENIUM_HOST: 127.0.0.1
 
-      - name: Upload Screenshots
+      - name: Upload screenshots
         if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: screenshots
           path: tests/Browser/screenshots
 
-      - name: Upload Console Logs
+      - name: Upload console logs
         if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: console
           path: tests/Browser/console
 
-      - name: Upload Laravel Logs
+      - name: Upload laravel logs
         uses: actions/upload-artifact@v2
         if: failure()
         with:
