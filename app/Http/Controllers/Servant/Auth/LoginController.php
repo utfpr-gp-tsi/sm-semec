@@ -24,7 +24,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest:servant')->except('logout');
     }
-    
+
     /**
     *
     * @return \Illuminate\View\View

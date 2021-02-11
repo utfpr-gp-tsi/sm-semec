@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Pdf extends Model
 {
     use HasFactory;
-    
+
     /**
      * @var array
      */

@@ -108,7 +108,7 @@ class Servant extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
-    
+
     /**
     * @return string
     */
