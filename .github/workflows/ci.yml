@@ -85,9 +85,11 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          sudo cp -arp . /var/www/
-          sudo chmod -R 777 /var/www/storage
-          sudo chmod -R 777 /var/www/bootstrap/cache
+          sudo chown -R $USER:$USER /var/www
+          sudo chmod 755 -R /var/www
+          cp -arp . /var/www/
+          # sudo chmod -R 777 /var/www/storage
+          # sudo chmod -R 777 /var/www/bootstrap/cache
           docker restart ${{ job.services.webserver.id }}
 
       - name: Run dusk tests
