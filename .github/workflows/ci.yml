@@ -62,7 +62,7 @@ jobs:
 
       - name: View
         run: |
-          docker exec ${{ job.services.webserver.id }} nginx -s reload
+          # docker exec ${{ job.services.webserver.id }} nginx -s reload
           curl 127.0.0.1
 
           # docker exec ${{ job.services.webserver.id }} nginx
