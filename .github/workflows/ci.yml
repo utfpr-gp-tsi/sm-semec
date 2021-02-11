@@ -122,7 +122,7 @@ jobs:
           path: storage/logs
 
       - name: Upload Laravel Logs
-        if: failure()
+        # if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: larawww
