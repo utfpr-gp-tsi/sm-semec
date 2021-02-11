@@ -104,8 +104,8 @@ jobs:
       - name: Upload Screenshots
         if: failure()
         run: |
-          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx/access.log
-          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx/error.log
+          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-access.log
+          docker exec ${{ job.services.webserver.id }} cat /var/log/nginx-error.log
       - name: Upload Screenshots
         if: failure()
         uses: actions/upload-artifact@v2
