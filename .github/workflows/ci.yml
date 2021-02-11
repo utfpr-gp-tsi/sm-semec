@@ -88,6 +88,7 @@ jobs:
         run: |
           sudo cp -arp . /var/www/
           sudo chmod -R 777 /var/www/storage
+          sudo chmod -R 777 /var/www/bootstrap/cache
           docker restart ${{ job.services.webserver.id }}
           curl 127.0.0.1
 
@@ -123,7 +124,7 @@ jobs:
           path: storage/logs
 
       - name: Upload Laravel Logs
-        # if: failure()
+        if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: larawww
