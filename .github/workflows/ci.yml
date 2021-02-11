@@ -36,6 +36,27 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
+          tools: composer:v2
+
+      - name: Setup php-fpm
+        env:
+          version: 7.4
+        run: |
+          sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
+          sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|g' /etc/php/7.4/fpm/pool.d/www.conf
+          sudo service php$version-fpm restart
+          sudo service php$version-fpm status
+
+      - name: Change hostname
+        run: |
+          sudo hostname app
+          docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
+      
       - name: View
         run: |
           docker exec ${{ job.services.webserver.id }} nginx -s reload
@@ -47,27 +68,6 @@ jobs:
           docker exec ${{ job.services.webserver.id }} nginx -t
           docker exec ${{ job.services.webserver.id }} curl localhost
 
-      # - name: Setup PHP
-      #   uses: shivammathur/setup-php@v2
-      #   with:
-      #     php-version: 7.4
-      #     extensions: curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pcntl, pcre, pdo, simplexml, tokenizer, xml, xmlwriter, zip, pdo_mysql
-      #     tools: composer:v2
-      #
-      # - name: Setup php-fpm
-      #   env:
-      #     version: 7.4
-      #   run: |
-      #     sudo cp /usr/sbin/php-fpm$version /usr/bin/php-fpm
-      #     sudo sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|g' /etc/php/7.4/fpm/pool.d/www.conf
-      #     sudo service php$version-fpm restart
-      #     sudo service php$version-fpm status
-      #
-      # - name: Change hostname
-      #   run: |
-      #     sudo hostname app
-      #     docker exec ${{ job.services.webserver.id }} nc -zvw10 $(hostname) 9000
-      #
       # - name: Install Dependencies
       #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       #
