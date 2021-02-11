@@ -9,9 +9,9 @@ jobs:
     services:
       webserver:
         image: nginx:alpine
-        volumes:
-          # - /home/runner/work/sm-semec/sm-semec/:/var/www/
-          # - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
+        # volumes:
+        #   - /home/runner/work/sm-semec/sm-semec/:/var/www/
+        #   - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
         ports:
           - 80:80
       # db:
