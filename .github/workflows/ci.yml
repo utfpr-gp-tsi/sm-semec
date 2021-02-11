@@ -63,7 +63,8 @@ jobs:
         run: |
           docker cp nginx/conf.d/dev/app.conf ${{ job.services.webserver.id }}:/etc/nginx/conf.d/
           docker exec ${{ job.services.webserver.id }} cat /etc/nginx/conf.d/app.conf
-          docker exec ${{ job.services.webserver.id }} nginx -s reload
+          docker exec ${{ job.services.webserver.id }} nginx -s stop
+          docker exec ${{ job.services.webserver.id }} nginx 
           echo "<?php phpinfo(); ?>" > public/index.php
           docker exec ${{ job.services.webserver.id }} mkdir -p /var/www/public
           docker cp public/index.php ${{ job.services.webserver.id }}:/var/www/public/
