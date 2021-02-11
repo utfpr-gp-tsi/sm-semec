@@ -31,9 +31,9 @@ jobs:
     steps:
       - name: Empty
         run: |
-          curl 127.0.0.1
+          # curl 127.0.0.1
           # docker exec ${{ job.services.webserver.id }} curl localhost
-          sudo rm -rf nginx
+          # sudo rm -rf nginx
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
@@ -61,14 +61,16 @@ jobs:
 
       - name: View
         run: |
-          docker exec ${{ job.services.webserver.id }} nginx -s stop
+          docker cp nginx/conf.d/dev/app.conf ${{ job.services.webserver.id }}:/etc/nginx/conf.d/
+          docker exec ${{ job.services.webserver.id }} nginx -s reload
           echo "<?php phpinfo(); ?>" > public/index.php
+          curl 127.0.0.1
           # cat public/index.php
           # ls -lt
-          id
+          # id
           # docker exec ${{ job.services.webserver.id }} cat /var/www/public/index.php
-          docker exec ${{ job.services.webserver.id }} id
-          docker exec ${{ job.services.webserver.id }} curl localhost
+          # docker exec ${{ job.services.webserver.id }} id
+          # docker exec ${{ job.services.webserver.id }} curl localhost
 
       # - name: Install Dependencies
       #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
