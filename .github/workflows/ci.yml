@@ -31,7 +31,8 @@ jobs:
     steps:
       - name: Empty
         run: |
-          docker exec ${{ job.services.webserver.id }} curl localhost
+          curl 127.0.0.1
+          # docker exec ${{ job.services.webserver.id }} curl localhost
           sudo rm -rf nginx
       - uses: actions/checkout@v2
         with:
