@@ -63,6 +63,9 @@ jobs:
       - name: View
         run: |
           echo "<?php phpinfo(); ?>" > public/index.php
+          sudo mkdir -p /var/www/public
+          sudo cp public/index.php /var/www/public/
+          # echo "<?php phpinfo(); ?>" > public/index.php
           docker restart ${{ job.services.webserver.id }}
           curl 127.0.0.1
 
@@ -145,12 +148,12 @@ jobs:
       #   with:
       #     name: console
       #     path: tests/Browser/console
-      # - name: Upload Laravel Logs
-      #   if: failure()
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: laravel
-      #     path: storage/logs
+      - name: Upload Laravel Logs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: laravel
+          path: storage/logs
 
       # - name: Install libs
       #   run: |
