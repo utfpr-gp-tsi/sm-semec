@@ -87,6 +87,7 @@ jobs:
       - name: Copy files to /var/www
         run: |
           sudo cp -arp . /var/www/
+          sudo chmod -R 777 /var/www/storage
           docker restart ${{ job.services.webserver.id }}
           curl 127.0.0.1
 
