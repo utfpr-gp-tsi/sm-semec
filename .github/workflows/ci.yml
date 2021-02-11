@@ -14,6 +14,7 @@ jobs:
           - /home/runner/work/sm-semec/sm-semec/nginx/conf.d/dev/:/etc/nginx/conf.d/
         ports:
           - 80:80
+        options: --user 1001
       # db:
       #   image: mysql:5.7.33
       #   env:
