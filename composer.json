@@ -76,7 +76,7 @@
             "vendor/bin/phpmd app,config,resources,routes,tests ansi phpmd.xml"
         ],
         "phpstan": [
-            "vendor/bin/phpstan analyse -c phpstan.neon"
+            "php -d memory_limit=3G vendor/bin/phpstan analyse -c phpstan.neon"
         ],
         "analyse": [
             "@phpcs",
