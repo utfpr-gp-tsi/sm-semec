@@ -43,7 +43,7 @@ RUN docker-php-ext-enable xdebug
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # NODEJS NVM ---------------------------------------------------------------------------------------------------------------
-ARG NODE_VERSION=12.16.3
+ARG NODE_VERSION=14.17.0
 ARG NVM_DIR=/usr/local/nvm
 
 # https://github.com/creationix/nvm#install-script
