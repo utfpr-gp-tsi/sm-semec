@@ -28,7 +28,7 @@ class MovementController extends AppController
         $contract = $servant->contracts->find($contractId);
         $movement = new Movement();
         $completaryData = ServantCompletaryData::find($id);
-        
+
         return view('admin.servant_completary_data.movements.new', [
             'contract' => $contract,
             'units' => Unit::all(),
@@ -69,7 +69,7 @@ class MovementController extends AppController
                 'units' => Unit::all(),
                 'completaryData' => $completaryData])->withErrors($validator);
         }
-        
+
         $completaryData->moviments()->save($movement);
 
         return redirect()->route('admin.index.completary_datas', ['servant_id' => $servant->id,
@@ -113,7 +113,7 @@ class MovementController extends AppController
     public function update(Request $request, $servantId, $contractId, $completaryDataId, $id)
     {
         $data = $request->all();
-     
+
         $servant = Servant::find($servantId);
         $contract = $servant->contracts->find($contractId);
         $completaryData = $contract->servantCompletaryData->find($completaryDataId);

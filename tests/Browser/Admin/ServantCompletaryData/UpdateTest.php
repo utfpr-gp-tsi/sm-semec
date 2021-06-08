@@ -17,7 +17,7 @@ class UpdateTest extends DuskTestCase
 
     /** @var \App\Models\ServantCompletaryData */
     protected $completaryData;
-    
+
     public function setUp(): void
     {
         parent::setUp();

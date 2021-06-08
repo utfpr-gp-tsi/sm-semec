@@ -19,7 +19,7 @@ class CreateTest extends DuskTestCase
 
     /** @var \App\Models\Contract */
     protected $contract;
-    
+
     public function setUp(): void
     {
         parent::setUp();

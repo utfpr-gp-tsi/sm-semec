@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ServantCompletaryData extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'servant_completary_datas';
     /**
     * @var array

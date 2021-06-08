@@ -25,7 +25,7 @@ class IndexTest extends DuskTestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->completaryData = ServantCompletaryData::factory()->create();
-        $this->movement = Movement::factory()->create(['servant_completary_data_id' => 1]);
+        $this->movement = Movement::factory()->create(['servant_completary_data_id' => $this->completaryData->id]);
     }
 
     public function testIndexList(): void
@@ -33,12 +33,24 @@ class IndexTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->loginAs($this->user)->visit('/admin/servants/1/contracts/1/completary-datas');
 
-            $browser->assertInputValue('contract_id', $this->completaryData->contract->registration)
-            ->driver->executeScript('window.scrollTo(0, 500);');
-            $browser->assertSee('Dados Adicionais')
-            ->assertInputValue('formation', $this->completaryData->formation)
-            ->assertInputValue('workload_id', $this->completaryData->workload->hours)
-            ->assertInputValue('observation', $this->completaryData->observation);
+            $browser->with('#main-card fieldset:nth-child(1)', function ($div) {
+                $div->assertSee('Dados do Contrato');
+                $div->assertSee($this->completaryData->contract->registration);
+                $div->assertSee($this->completaryData->contract->role);
+                $div->assertSee($this->completaryData->contract->secretary);
+                $div->assertSee($this->completaryData->contract->place);
+                $div->assertSee($this->completaryData->contract->link);
+                $div->assertSee($this->completaryData->contract->admission_at->toShortDate());
+            });
+
+            $browser->scrollIntoView('#main-card fieldset:nth-child(2)');
+            $browser->with('#main-card fieldset:nth-child(2)', function ($div) {
+                $div->assertSee('Dados Adicionais');
+                $div->assertSee($this->completaryData->contract->registration);
+                $div->assertSee($this->completaryData->formation);
+                $div->assertSee($this->completaryData->workload->hours);
+                $div->assertSee($this->completaryData->observation);
+            });
 
 
             $browser->assertSee('Movimentações');

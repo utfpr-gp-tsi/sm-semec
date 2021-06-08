@@ -49,7 +49,7 @@ class ServantCompletaryDatas extends Command
 
         $this->info('Populate servant_completary_datas');
         DB::table('servant_completary_datas')->delete();
-        
+
         $contracts = Contract::all();
 
         $contracts->each(function ($contract) {
