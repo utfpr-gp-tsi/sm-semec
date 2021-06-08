@@ -101,11 +101,22 @@ Route::namespace('Admin')->group(function () {
 	Route::patch('/units/{id}',                    ['as' => 'admin.update.unit',  'uses' => 'UnitsController@update']);
 	Route::delete('/units/{id}',                   ['as' => 'admin.destroy.unit', 'uses' => 'UnitsController@destroy']);
 
-
 	/* Inscriptions of edicts
 	|---------------------------------------------------------------------------*/
 	Route::get('/edicts/{id}/inscriptions', ['as' => 'admin.inscriptions', 'uses' => 'InscriptionsController@index']);
 	Route::get('/edicts/{edict_id}/inscriptions/{id}', ['as' => 'admin.show.inscription', 'uses' => 'InscriptionsController@show']);
+
+	/* Role resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/roles', 			       ['as' => 'admin.roles',        'uses' => 'RoleController@index']);
+	Route::get('/roles/page/{page}', 	       ['as' => 'admin.roles.page',   'uses' => 'RoleController@index']);
+	Route::get('/roles/search/{term?}', 	       ['as' => 'admin.search.roles', 'uses' => 'RoleController@index']);
+	Route::get('/roles/search/{term}/page/{page}', ['as' => 'admin.search.roles.page', 'uses' => 'RoleController@index']);
+	Route::get('/roles/new', 			       ['as' => 'admin.new.role',        'uses' => 'RoleController@new']);
+	Route::post('/roles/new', 			       ['as' => 'admin.create.role',        'uses' => 'RoleController@create']);
+	Route::get('/roles/{id}/edit',                 ['as' => 'admin.edit.role',    'uses' => 'RoleController@edit']);
+	Route::patch('/roles/{id}',                    ['as' => 'admin.update.role',  'uses' => 'RoleController@update']);
+	Route::delete('/roles/{id}',                   ['as' => 'admin.destroy.role', 'uses' => 'RoleController@destroy']);
 
     });
 });
@@ -139,12 +150,11 @@ Route::namespace('Servant')->group(function () {
 
 
 	/* Edicts Inscriptions
-        |----------------------------------------------------------------------------*/
+    |----------------------------------------------------------------------------*/
 	Route::get('/edicts/{edict_id}/inscriptions/new', ['as' => 'new.inscription',   'uses' => 'InscriptionsController@new']);
-        Route::post('/edicts/{edict_id}/inscriptions',    ['as' => 'create.inscription','uses' => 'InscriptionsController@create']);
-
-        Route::get('/inscriptions', ['as' => 'inscriptions', 'uses' => 'InscriptionsController@index']);
-        Route::get('/inscriptions/{id}', ['as' => 'show.inscription', 'uses' => 'InscriptionsController@show']);
+    Route::post('/edicts/{edict_id}/inscriptions',    ['as' => 'create.inscription','uses' => 'InscriptionsController@create']);
+    Route::get('/inscriptions', ['as' => 'inscriptions', 'uses' => 'InscriptionsController@index']);
+    Route::get('/inscriptions/{id}', ['as' => 'show.inscription', 'uses' => 'InscriptionsController@show']);
 
 
 	/* Edicts
@@ -157,8 +167,8 @@ Route::namespace('Servant')->group(function () {
 	Route::get('/edicts/close/search/{term}/page/{page}', ['as' => 'search.edicts.close.page', 'uses' => 'EdictsController@indexclose']);
 	Route::get('/edicts/close/search/{term?}', ['as' => 'search.edicts.close', 'uses' => 'EdictsController@indexClose']);
 	Route::get('/edicts/close', ['as' => 'edicts.close', 'uses' => 'EdictsController@indexClose']);
-        Route::get('/edicts/{id}', ['as' => 'show.edict', 'uses' => 'EdictsController@show']);
-        Route::get('/edicts/{edict_id}/pdf/{id}', ['as' => 'show.edict.pdf', 'uses' => 'EdictsController@showPdf']);
+    Route::get('/edicts/{id}', ['as' => 'show.edict', 'uses' => 'EdictsController@show']);
+    Route::get('/edicts/{edict_id}/pdf/{id}', ['as' => 'show.edict.pdf', 'uses' => 'EdictsController@showPdf']);
     });
 });
 
