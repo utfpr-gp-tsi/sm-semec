@@ -48,7 +48,7 @@ class InscriptionsController extends AppController
         $servant = \Auth::guard('servant')->user();
         $inscription = new Inscription();
         $inscription->current_unit_id = $servant->currentUnit()->id;
-        $inscription->interested_unit_ids = [];
+        $inscription->interested_unit_ids = []; /* @phpstan-ignore-line */
 
         return view('servant.edicts.inscriptions.new', [
             'edict' => $this->edict,
@@ -82,7 +82,9 @@ class InscriptionsController extends AppController
 
         if ($validator->fails()) {
             $request->session()->flash('danger', 'Existem dados incorretos! Por favor verifique!');
-            $inscription->interested_unit_ids = isset($request->interested_unit_ids) ? interested_unit_ids : [];
+
+            $iuids = $request->interested_unit_ids;
+            $inscription->interested_unit_ids = isset($iuids) ? $iuids : []; /* @phpstan-ignore-line */
 
             return view('servant.edicts.inscriptions.new', [
                 'edict' => $this->edict,
