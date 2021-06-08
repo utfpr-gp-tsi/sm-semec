@@ -58,7 +58,7 @@ class Inscriptions extends Command
         $edicts->each(function ($edict) {
             $inscriptions = Inscription::factory()->count(2)->create(['edict_id' => $edict->id]);
             $inscriptions->each(function ($inscription) {
-                Unit::inRandomOrder()->limit(rand(1,3))->get()->each(function($unit) use ($inscription) {
+                Unit::inRandomOrder()->limit(rand(1, 3))->get()->each(function ($unit) use ($inscription) {
                     InscriptionUnit::create(['inscription_id' => $inscription->id, 'unit_id' => $unit->id]);
                 });
             });
