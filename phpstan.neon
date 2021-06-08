@@ -9,7 +9,13 @@ parameters:
         message: '#Call to an undefined method [a-zA-Z0-9():]+#'
         paths:
             - app/Providers/DuskServiceProvider.php
+            - app/Http/Controllers/Admin/PdfController.php
+            - app/Http/Controllers/Servant/EdictsController.php
             - tests/Browser/Servants/Inscriptions/CreateTest.php
+    -
+        message: '#Access to an undefined property [a-zA-Z0-9():]+#'
+        paths:
+            - app/Console/Commands/Populate/Inscriptions.php
   level: 6
   paths:
     - app
