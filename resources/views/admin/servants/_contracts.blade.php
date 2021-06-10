@@ -15,6 +15,7 @@
     </thead>
     <tbody>
       @foreach($servant->contracts as $contract)
+
       <tr>
         <td>{{ $contract->registration }}</td>
         <td>{{ $contract->role }}</td>

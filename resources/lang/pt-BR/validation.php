@@ -161,6 +161,10 @@ return [
         'reason' => 'motivo',
         'interested_unit_ids' => 'unidades de interesse',
         'contract_id' => 'contrato',
-        'removal_type_id' => 'tipo de remoção'
+        'removal_type_id' => 'tipo de remoção',
+        'occupation' => 'função',
+        'workload_id' => 'carga horária',
+        'formation' => 'formação',
+        'unit_id' => 'unidade',
     ],
 ];

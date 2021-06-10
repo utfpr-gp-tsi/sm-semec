@@ -51,4 +51,12 @@ class Unit extends Model
         }
         return Unit::with(['category'])->orderBy('name', 'desc')->paginate(20);
     }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function moviments()
+    {
+        return $this->hasMany(Movement::class, 'unit_id');
+    }
 }

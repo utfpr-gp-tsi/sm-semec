@@ -107,6 +107,22 @@ Route::namespace('Admin')->group(function () {
 	Route::get('/edicts/{id}/inscriptions', ['as' => 'admin.inscriptions', 'uses' => 'InscriptionsController@index']);
 	Route::get('/edicts/{edict_id}/inscriptions/{id}', ['as' => 'admin.show.inscription', 'uses' => 'InscriptionsController@show']);
 
+	/* Servant Completary Data resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/servants/{id}/completary-datas',                		['as' => 'admin.index.completary_data',   'uses' => 'ServantCompletaryDataController@index']);
+	Route::get('/servants/{servant_id}/contracts/{id}/completary-datas',    ['as' => 'admin.index.completary_datas',  'uses' => 'ServantCompletaryDataController@indexCompletaryData']);
+	Route::get('/servants/{servant_id}/contracts/{id}/completary-datas/new',['as' => 'admin.new.completary_data',     'uses' => 'ServantCompletaryDataController@new']);
+	Route::post('/servants/{servant_id}/contracts/{id}/completary-datas',   ['as' => 'admin.create.completary_data',  'uses' => 'ServantCompletaryDataController@create']);
+	Route::get('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}/edit',  ['as' => 'admin.edit.completary_data',   'uses' => 'ServantCompletaryDataController@edit']);
+        Route::patch('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}',     ['as' => 'admin.update.completary_data', 'uses' => 'ServantCompletaryDataController@update']);
+
+        /* Movements resources
+	|-------------------------------------------------------------------------- */
+	Route::get('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}/movement/new',                      ['as' => 'admin.new.movement',     'uses' => 'MovementController@new']);
+	Route::post('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{id}/movement/new',                     ['as' => 'admin.create.movement',  'uses' => 'MovementController@create']);
+        Route::get('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{completaryData_id}/movement/{id}/edit', ['as' => 'admin.edit.movement',    'uses' => 'MovementController@edit']);
+	Route::patch('/servants/{servant_id}/contracts/{contract_id}/completary-datas/{completaryData_id}/movement/{id}',    ['as' => 'admin.update.movement',  'uses' => 'MovementController@update']);
+	Route::delete('/servants/{servant_id}/contracts/{contract_id}/completary_datas/{completaryData_id}/movement/{id}',   ['as' => 'admin.destroy.movement', 'uses' => 'MovementController@destroy']);
     });
 });
 

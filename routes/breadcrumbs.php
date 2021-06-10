@@ -344,3 +344,59 @@ Breadcrumbs::for('servant.search.edicts.close', function ($trail) {
     $trail->parent('servant.dashboard');
     $trail->push('Editais Fechados', route('servant.search.edicts.close'));
 });
+
+/* Servant Completary Data
+|-------------------------------------------------------------------------- */
+
+Breadcrumbs::for('admin.index.completary_data', function ($trail, $id) {
+     $trail->parent('admin.show.servant', $id);
+    $trail->push('Cadastro Complementar', route('admin.index.completary_data', $id));
+});
+
+Breadcrumbs::for('admin.index.completary_datas', function ($trail, $servant_id, $id) {
+     $trail->parent('admin.index.completary_data', $servant_id, $id);
+    $trail->push('Dados Complementares', route('admin.index.completary_datas', ['servant_id' => $servant_id, 'id' => $id]));
+});
+
+Breadcrumbs::for('admin.new.completary_data', function ($trail, $servant_id, $id) {
+    $trail->parent('admin.index.completary_datas', $servant_id, $id);
+    $trail->push('Criar Cadastro Complementar', route('admin.new.completary_data', ['servant_id' => $servant_id, 'id' => $id]));
+});
+
+Breadcrumbs::for('admin.create.completary_data', function ($trail, $servant_id, $id) {
+    $trail->parent('admin.index.completary_datas', $servant_id, $id);
+    $trail->push('Criar Cadastro Complementar', route('admin.create.completary_data', ['servant_id' => $servant_id, 'id' => $id]));
+});
+
+Breadcrumbs::for('admin.edit.completary_data', function ($trail, $servant_id, $contract_id, $completary_data) {
+    $trail->parent('admin.index.completary_datas', $servant_id, $contract_id);
+    $trail->push('Editar Cadastro Complementar #'. $completary_data, route('admin.edit.completary_data', ['servant_id' => $servant_id, 'contract_id' => $contract_id, 'id' => $completary_data]));
+});
+
+Breadcrumbs::for('admin.update.completary_data', function ($trail, $servant_id, $contract_id, $completary_data) {
+      $trail->parent('admin.index.completary_datas', $servant_id, $contract_id);
+    $trail->push('Editar Cadastro Complementar #'. $completary_data, route('admin.update.completary_data', ['servant_id' => $servant_id, 'contract_id' => $contract_id, 'id' => $completary_data]));
+});
+
+/* Movement
+|-------------------------------------------------------------------------- */
+
+Breadcrumbs::for('admin.new.movement', function ($trail, $servant_id, $contract_id, $id) {
+     $trail->parent('admin.index.completary_datas', $servant_id, $contract_id);
+    $trail->push('Nova Movimentação', route('admin.new.movement', ['servant_id' => $servant_id, 'contract_id' => $contract_id, 'id' => $id]));
+});
+
+Breadcrumbs::for('admin.create.movement', function ($trail, $servant_id, $contract_id, $id) {
+     $trail->parent('admin.index.completary_datas', $servant_id, $contract_id);
+    $trail->push('Nova Movimentação', route('admin.create.movement', ['servant_id' => $servant_id, 'contract_id' => $contract_id, 'id' => $id]));
+});
+
+Breadcrumbs::for('admin.edit.movement', function ($trail, $servant_id, $contract_id, $completaryData_id, $id) {
+    $trail->parent('admin.index.completary_datas', $servant_id, $contract_id);
+    $trail->push('Editar Movimentação #'. $id, route('admin.edit.movement', ['servant_id' => $servant_id, 'contract_id' => $contract_id, 'completaryData_id' => $completaryData_id, 'id' => $id]));
+});
+
+Breadcrumbs::for('admin.update.movement', function ($trail, $servant_id, $contract_id, $completaryData_id, $id) {
+    $trail->parent('admin.index.completary_datas', $servant_id, $contract_id);
+    $trail->push('Editar Movimentação #'. $id, route('admin.edit.movement', ['servant_id' => $servant_id, 'contract_id' => $contract_id, 'completaryData_id' => $completaryData_id, 'id' => $id]));
+});
